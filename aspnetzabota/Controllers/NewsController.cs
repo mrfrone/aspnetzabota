@@ -16,10 +16,12 @@ namespace aspnetzabota.Controllers
         }
         public ViewResult List()
         {
-            NewsViewModel obj = new NewsViewModel();
-            obj.AllNews = _allNews.AllNews;
-            obj.CurrentCategory = "Новости вот такие вот";
-            return View(obj);
+            var result = new NewsViewModel
+            {
+                AllNews = _allNews.AllNews,
+                CurrentCategory = "Новости вот такие вот"
+            };
+            return View(result);
         }
     }
 }

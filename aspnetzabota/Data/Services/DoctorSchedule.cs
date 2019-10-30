@@ -15,11 +15,10 @@ namespace aspnetzabota.Data.Services
         {
             get
             {
-                //TODO: add using
-                StreamReader sr = new StreamReader("wwwroot/json/schedule.json");
-                var text = sr.ReadToEnd();
-                sr.Close();
-                return text;
+                using (StreamReader sr = new StreamReader("wwwroot/json/schedule.json"))
+                {
+                    return sr.ReadToEnd();
+                }
             }
         }
 

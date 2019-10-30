@@ -6,7 +6,6 @@ namespace aspnetzabota.Controllers
 {
     public class HomeController : Controller
     {
-        //if field is private name should be like "_name", lower case
         private readonly INews _lastNews;
         private readonly ISlider _slider;
         private readonly IReview _lastReview;
@@ -21,7 +20,6 @@ namespace aspnetzabota.Controllers
         }
         public ViewResult Index()
         {
-            //its more useful
             var result = new HomeViewModel
             {
                 LastNews = _lastNews.LastNews,

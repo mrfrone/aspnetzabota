@@ -18,7 +18,7 @@ namespace aspnetzabota.Data.Repository
 
         public IEnumerable<News> AllNewsFromCategory => appDBContent.News.Include(c => c.Category);
         
-        public IEnumerable<News> LastNews => appDBContent.News.AsNoTracking().TakeLast(3); //todo: if you want to EF generate SQL query, use LINQ like this, not Enumerable
+        public IEnumerable<News> LastNews => appDBContent.News.AsNoTracking().TakeLast(3);
 
         public News getObjectNews(int newsID) => appDBContent.News.FirstOrDefault(p => p.ID == newsID);
     }
