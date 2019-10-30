@@ -2,6 +2,8 @@
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
 using System.Linq;
+using aspnetzabota.Data.Models;
+
 
 namespace aspnetzabota.Controllers
 {
@@ -15,13 +17,19 @@ namespace aspnetzabota.Controllers
         }
         public ViewResult Single(int id)
         {
-            ScheduleViewModel obj = new ScheduleViewModel();
-            obj.SingleSchedule = _DoctorSchedule.AllSchedules.Where(c => c.doctors.id == id.ToString()).FirstOrDefault();
+            ScheduleViewModel obj = new ScheduleViewModel
+            {
+                SingleSchedule = _DoctorSchedule.AllSchedules.Where(c => c.doctors.id == id.ToString()).FirstOrDefault()
+            };
             return View(obj);
         }
-        public ViewResult Doctor()
+        public ViewResult Doctor(int cat_id)
         {
-            return View();
+            ScheduleViewModel obj = new ScheduleViewModel
+            {
+                Schedule = _DoctorSchedule.AllSchedules.Where(c => c.cat_id == cat_id.ToString())
+            };
+            return View(obj);
 
         }
         public ViewResult All()

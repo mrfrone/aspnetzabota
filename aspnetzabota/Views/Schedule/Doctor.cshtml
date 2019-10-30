@@ -4,7 +4,7 @@
             <div class="row justify-content-center mb-5 pb-2">
                 <div class="col-md-8 text-center heading-section ftco-animate">
                     <h2 class="mb-4">Расписание</h2>
-                    <span class="subheading">Расписание доктора: @Model.SingleSchedule.doctors.fio, @Model.SingleSchedule.category</span>
+                    <span class="subheading">Расписание докторов: @Model.Schedule.category</span>
                     @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
                 </div>
             </div>
@@ -23,17 +23,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach (var doc in Model.Schedule)
+                    {
                     <tr>
-                        <td>@Model.SingleSchedule.doctors.fio</td>
-                        <td>@Model.SingleSchedule.doctors.position</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.mon</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.tue</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.wed</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.thu</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.fri</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.sat</td>
-                        <td>@Model.SingleSchedule.doctors.schedule.sun</td>
+                        <td>@doc.fio</td>
+                        <td>@doc.position</td>
+                        <td>@doc.schedule.mon</td>
+                        <td>@doc.schedule.tue</td>
+                        <td>@doc.schedule.wed</td>
+                        <td>@doc.schedule.thu</td>
+                        <td>@doc.schedule.fri</td>
+                        <td>@doc.schedule.sat</td>
+                        <td>@doc.schedule.sun</td>
                     </tr>
+                    }
                 </tbody>
             </table>
         </div>

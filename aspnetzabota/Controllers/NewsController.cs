@@ -16,7 +16,7 @@ namespace aspnetzabota.Controllers
         }
         public ViewResult List()
         {
-            NewsListViewModel obj = new NewsListViewModel();
+            NewsViewModel obj = new NewsViewModel();
             obj.AllNews = _allNews.AllNews;
             obj.CurrentCategory = "Новости вот такие вот";
             return View(obj);
