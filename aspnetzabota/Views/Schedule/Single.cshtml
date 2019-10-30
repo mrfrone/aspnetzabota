@@ -1,0 +1,44 @@
+﻿@model DoctorScheduleModel
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-2">
+                <div class="col-md-8 text-center heading-section ftco-animate">
+                    <h2 class="mb-4">Расписание</h2>
+                    <span class="subheading">Расписание доктора: @Model.doctors.fio, @Model.category</span>
+                    @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">ФИО</th>
+                        <th scope="col"></th>
+                        <th scope="col">Пн</th>
+                        <th scope="col">Вт</th>
+                        <th scope="col">Ср</th>
+                        <th scope="col">Чт</th>
+                        <th scope="col">Пт</th>
+                        <th scope="col">Сб</th>
+                        <th scope="col">Вс</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.doctors.fio</td>
+                        <td>@Model.category</td>
+                        <td>@Model.doctors.schedule.mon</td>
+                        <td>@Model.doctors.schedule.tue</td>
+                        <td>@Model.doctors.schedule.wed</td>
+                        <td>@Model.doctors.schedule.thu</td>
+                        <td>@Model.doctors.schedule.fri</td>
+                        <td>@Model.doctors.schedule.sat</td>
+                        <td>@Model.doctors.schedule.sun</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+
+

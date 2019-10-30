@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota", "aspnetzabota\aspnetzabota.csproj", "{59553C3A-2C77-4564-93B8-F7E8F4756007}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59553C3A-2C77-4564-93B8-F7E8F4756007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59553C3A-2C77-4564-93B8-F7E8F4756007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59553C3A-2C77-4564-93B8-F7E8F4756007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59553C3A-2C77-4564-93B8-F7E8F4756007}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BE8BF93-7D64-4481-85D9-474D1445CBE6}
+	EndGlobalSection
+EndGlobal
