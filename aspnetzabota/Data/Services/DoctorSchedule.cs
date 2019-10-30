@@ -15,7 +15,9 @@ namespace aspnetzabota.Data.Services
             get
             {
                 StreamReader sr = new StreamReader("wwwroot/json/schedule.json");
-                return sr.ReadToEnd();
+                var text = sr.ReadToEnd();
+                sr.Close();
+                return text;
             }
         }
 
