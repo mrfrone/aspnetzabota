@@ -1,6 +1,7 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using aspnetzabota.Data.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace aspnetzabota.Data.Repository
 {
@@ -12,6 +13,8 @@ namespace aspnetzabota.Data.Repository
         {
             this.appDBContent = appDBContent;
         }
-        public IEnumerable<Category> AllCategories => appDBContent.Category;
+        
+        //TODO: use AsNoTracking if you dont want change database entity
+        public IEnumerable<Category> AllCategories => appDBContent.Category.AsNoTracking();
     }
 }

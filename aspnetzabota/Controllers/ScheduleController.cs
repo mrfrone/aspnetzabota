@@ -9,27 +9,28 @@ namespace aspnetzabota.Controllers
 {
     public class ScheduleController : Controller
     {
-        private readonly IDoctorSchedule _DoctorSchedule;
+        private readonly IDoctorSchedule _doctorSchedule;
 
-        public ScheduleController(IDoctorSchedule doctorSchedule)
+        public ScheduleController(IDoctorSchedule idoctorSchedule)
         {
-            _DoctorSchedule = doctorSchedule;
+            _doctorSchedule = idoctorSchedule;
         }
         public ViewResult Single(int id)
         {
-            ScheduleViewModel obj = new ScheduleViewModel
+            var result = new ScheduleViewModel
             {
-                SingleSchedule = _DoctorSchedule.AllSchedules.FirstOrDefault(c => c.doctors.id == id.ToString())
+                //put selecting by id in predicate
+                SingleSchedule = _doctorSchedule.AllSchedules.FirstOrDefault(c => c.doctors.id == id.ToString())
             };
-            return View(obj);
+            return View(result);
         }
         public ViewResult Doctor(int cat_id)
         {
-            ScheduleViewModel obj = new ScheduleViewModel
+            var result = new ScheduleViewModel
             {
-                Schedule = _DoctorSchedule.AllSchedules.Where(c => c.cat_id == cat_id.ToString())
+                Schedule = _doctorSchedule.AllSchedules.Where(c => c.cat_id == cat_id.ToString())
             };
-            return View(obj);
+            return View(result);
 
         }
         public ViewResult All()
