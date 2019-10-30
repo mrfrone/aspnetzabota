@@ -19,7 +19,8 @@ namespace aspnetzabota.Controllers
         {
             ScheduleViewModel obj = new ScheduleViewModel
             {
-                SingleSchedule = _DoctorSchedule.AllSchedules.Where(c => c.doctors.id == id.ToString()).FirstOrDefault()
+                //put selecting by id in predicate
+                SingleSchedule = _DoctorSchedule.AllSchedules.FirstOrDefault(c => c.doctors.id == id.ToString())
             };
             return View(obj);
         }

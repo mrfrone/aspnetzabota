@@ -5,6 +5,7 @@ namespace aspnetzabota.Data.Models
     public class News
     {
         public int ID { get; set; }
+        //TODO: name public property should be camel case "NewsName"
         public string newsName { get; set; }
         public string newsDecription { get; set; }
         public string newsIMG { get; set; }

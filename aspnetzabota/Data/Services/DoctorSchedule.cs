@@ -10,10 +10,12 @@ namespace aspnetzabota.Data.Services
 {
     public class DoctorSchedule : IDoctorSchedule
     {
+        private readonly Random random = new Random();
         private string JsonSchedule
         {
             get
             {
+                //TODO: add using
                 StreamReader sr = new StreamReader("wwwroot/json/schedule.json");
                 return sr.ReadToEnd();
             }
@@ -25,8 +27,8 @@ namespace aspnetzabota.Data.Services
             get 
             {
                 IEnumerable<DoctorScheduleModel> elements = JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(JsonSchedule);
-                Random random = new Random();
-                return Enumerable.TakeLast(elements.OrderBy(x => random.Next()), 4);
+                
+                return elements.OrderBy(x => random.Next()).TakeLast(4);
             } 
         } 
     }
