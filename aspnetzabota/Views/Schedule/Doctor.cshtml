@@ -1,47 +1,45 @@
 ﻿@model ScheduleViewModel
-    <section class="ftco-section bg-light">
-        <div class="container">
-            <div class="row justify-content-center mb-5 pb-2">
-                <div class="col-md-8 text-center heading-section ftco-animate">
-                    <h2 class="mb-4">Расписание</h2>
-                    <span class="subheading">Расписание докторов: @Model.Schedule.category</span>
-                    @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
-                </div>
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <h2 class="mb-4">Расписание</h2>
+                @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
+            </div>
+        </div>
+        @foreach (var schedule in Model.Schedule)
+        {
+            <div>
+                <span class="subheading">Расписание докторов: @schedule.category</span>
             </div>
             <table class="table table-bordered">
                 <thead>
-                    <tr>
-                        <th scope="col">ФИО</th>
-                        <th scope="col">Степень, Звание</th>
-                        <th scope="col">Пн</th>
-                        <th scope="col">Вт</th>
-                        <th scope="col">Ср</th>
-                        <th scope="col">Чт</th>
-                        <th scope="col">Пт</th>
-                        <th scope="col">Сб</th>
-                        <th scope="col">Вс</th>
-                    </tr>
+                <tr>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Степень, Звание</th>
+                    <th scope="col">Пн</th>
+                    <th scope="col">Вт</th>
+                    <th scope="col">Ср</th>
+                    <th scope="col">Чт</th>
+                    <th scope="col">Пт</th>
+                    <th scope="col">Сб</th>
+                    <th scope="col">Вс</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var doc in Model.Schedule)
-                    {
-                    <tr>
-                        <td>@doc.fio</td>
-                        <td>@doc.position</td>
-                        <td>@doc.schedule.mon</td>
-                        <td>@doc.schedule.tue</td>
-                        <td>@doc.schedule.wed</td>
-                        <td>@doc.schedule.thu</td>
-                        <td>@doc.schedule.fri</td>
-                        <td>@doc.schedule.sat</td>
-                        <td>@doc.schedule.sun</td>
-                    </tr>
-                    }
+                <tr>
+                    <td>@schedule.doctors.fio</td>
+                    <td>@schedule.doctors.position</td>
+                    <td>@schedule.doctors.schedule.mon</td>
+                    <td>@schedule.doctors.schedule.tue</td>
+                    <td>@schedule.doctors.schedule.wed</td>
+                    <td>@schedule.doctors.schedule.thu</td>
+                    <td>@schedule.doctors.schedule.fri</td>
+                    <td>@schedule.doctors.schedule.sat</td>
+                    <td>@schedule.doctors.schedule.sun</td>
+                </tr>
                 </tbody>
             </table>
-        </div>
-    </section>
-
-
-
-
+        }
+    </div>
+</section>
