@@ -1,0 +1,59 @@
+﻿@model ScheduleViewModel
+<section class="ftco-section bg-light mt-2">
+    <div class="container">
+        <div class="row justify-content-center mb-1 pb-2">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <h2 class="mb-4">Расписание</h2>
+            </div>
+        </div>
+        <div>
+                <span class="subheading"></span>
+        </div>
+        @*<div>
+            @foreach (var schedule in Model.Schedule)
+            {
+                <span class="subheading">@schedule.category</span>
+                return;
+            }
+            </div>*@
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark text-center">
+                <tr>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Степень, Звание</th>
+                    <th scope="col">Пн</th>
+                    <th scope="col">Вт</th>
+                    <th scope="col">Ср</th>
+                    <th scope="col">Чт</th>
+                    <th scope="col">Пт</th>
+                    <th scope="col">Сб</th>
+                    <th scope="col">Вс</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var post in Model.Posts)
+                        {
+                            <tr>
+                                <td class="text-center" scope="col" colspan="9"><b>@post</b></td>
+                            </tr>
+                            foreach (var schedule in Model.Schedule.Where(c => c.category == post))
+                            {
+                                <tr>
+                                    <td><a href="/Schedule/Single/@schedule.doctors.id">@schedule.doctors.fio</a></td>
+                                    <td>@schedule.doctors.position</td>
+                                    <td class="text-center">@schedule.doctors.schedule.mon</td>
+                                    <td class="text-center">@schedule.doctors.schedule.tue</td>
+                                    <td class="text-center">@schedule.doctors.schedule.wed</td>
+                                    <td class="text-center">@schedule.doctors.schedule.thu</td>
+                                    <td class="text-center">@schedule.doctors.schedule.fri</td>
+                                    <td class="text-center">@schedule.doctors.schedule.sat</td>
+                                    <td class="text-center">@schedule.doctors.schedule.sun</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+    </div>
+</section>

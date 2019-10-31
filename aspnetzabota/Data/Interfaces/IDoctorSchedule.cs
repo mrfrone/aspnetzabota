@@ -9,5 +9,6 @@ namespace aspnetzabota.Data.Interfaces
         IEnumerable<DoctorScheduleModel> RandomSchedules { get; }
         IEnumerable<DoctorScheduleModel> DoctorsSchedule(int cat_id);
         DoctorScheduleModel SingleSchedule(int id);
+        List<string> PostsArray { get; }
     }
 }

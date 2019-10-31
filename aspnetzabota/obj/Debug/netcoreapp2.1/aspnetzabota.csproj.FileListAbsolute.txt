@@ -28,3 +28,4 @@ D:\workspace\aspnetzabota\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\aspn
 D:\workspace\aspnetzabota\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\Razor\Views\Schedule\Single.cshtml.g.cs
 D:\workspace\aspnetzabota\aspnetzabota\aspnetzabota\bin\Debug\netcoreapp2.1\web.config
 D:\workspace\aspnetzabota\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\Razor\Views\Schedule\Doctor.cshtml.g.cs
+D:\workspace\aspnetzabota\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\Razor\Views\Schedule\All.cshtml.g.cs

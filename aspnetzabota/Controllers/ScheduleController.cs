@@ -2,8 +2,6 @@
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
 using System.Linq;
-using aspnetzabota.Data.Models;
-
 
 namespace aspnetzabota.Controllers
 {
@@ -27,14 +25,20 @@ namespace aspnetzabota.Controllers
         {
             var result = new ScheduleViewModel
             {
-                Schedule = _doctorSchedule.DoctorsSchedule(cat_id)
+                Schedule = _doctorSchedule.DoctorsSchedule(cat_id),
+                Posts = _doctorSchedule.PostsArray
             };
             return View(result);
 
         }
         public ViewResult All()
         {
-            return View();
+            var result = new ScheduleViewModel
+            {
+                Schedule = _doctorSchedule.AllSchedules,
+                Posts = _doctorSchedule.PostsArray
+            };
+            return View(result);
 
         }
     }

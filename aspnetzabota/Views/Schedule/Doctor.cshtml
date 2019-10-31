@@ -1,7 +1,7 @@
 ﻿@model ScheduleViewModel
 <section class="ftco-section bg-light">
     <div class="container">
-        <div class="row justify-content-center mb-5 pb-2">
+        <div class="row justify-content-center mb-1 pb-2">
             <div class="col-md-8 text-center heading-section ftco-animate">
                 <h2 class="mb-4">Расписание</h2>
                 @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
@@ -15,7 +15,7 @@
                 return;
             }
             </div>*@
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th scope="col">ФИО</th>
@@ -30,21 +30,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach (var schedule in Model.Schedule)
-                    {
-                        <tr>
-                            <td>@schedule.doctors.fio</td>
-                            <td>@schedule.doctors.position</td>
-                            <td>@schedule.doctors.schedule.mon</td>
-                            <td>@schedule.doctors.schedule.tue</td>
-                            <td>@schedule.doctors.schedule.wed</td>
-                            <td>@schedule.doctors.schedule.thu</td>
-                            <td>@schedule.doctors.schedule.fri</td>
-                            <td>@schedule.doctors.schedule.sat</td>
-                            <td>@schedule.doctors.schedule.sun</td>
-                        </tr>
-                    }
-                    </tbody>
+                @{
+                        @*foreach (var post in Model.Posts)
+                        {
+                            <tr>
+                                <td scope="col" colspan="9"><span>@post</span></td>
+                            </tr>*@
+                            foreach (var schedule in Model.Schedule)
+                            {
+                            <tr>
+                                <td><a href="/Schedule/Single/@schedule.doctors.id">@schedule.doctors.fio</a></td>
+                                <td>@schedule.doctors.position</td>
+                                <td class="text-center">@schedule.doctors.schedule.mon</td>
+                                <td class="text-center">@schedule.doctors.schedule.tue</td>
+                                <td class="text-center">@schedule.doctors.schedule.wed</td>
+                                <td class="text-center">@schedule.doctors.schedule.thu</td>
+                                <td class="text-center">@schedule.doctors.schedule.fri</td>
+                                <td class="text-center">@schedule.doctors.schedule.sat</td>
+                                <td class="text-center">@schedule.doctors.schedule.sun</td>
+                            </tr>
+                            }
+                        @*}*@
+                }
+                </tbody>
             </table>
     </div>
 </section>
