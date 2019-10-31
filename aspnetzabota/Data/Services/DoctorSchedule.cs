@@ -11,26 +11,22 @@ namespace aspnetzabota.Data.Services
     public class DoctorSchedule : IDoctorSchedule
     {
         private readonly Random random = new Random();
-        private string JsonSchedule
+        private IEnumerable<DoctorScheduleModel> JsonSchedule
         {
             get
             {
                 using (StreamReader sr = new StreamReader("wwwroot/json/schedule.json"))
                 {
-                    return sr.ReadToEnd();
+                    return JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(sr.ReadToEnd());
                 }
             }
         }
 
-        public IEnumerable<DoctorScheduleModel> AllSchedules => JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(JsonSchedule);
-        public IEnumerable<DoctorScheduleModel> RandomSchedules 
-        { 
-            get 
-            {
-                IEnumerable<DoctorScheduleModel> elements = JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(JsonSchedule);
-                
-                return elements.OrderBy(x => random.Next()).TakeLast(4);
-            } 
-        } 
+        public IEnumerable<DoctorScheduleModel> AllSchedules => JsonSchedule;
+        public IEnumerable<DoctorScheduleModel> RandomSchedules => JsonSchedule.OrderBy(x => random.Next()).TakeLast(4);
+
+        public IEnumerable<DoctorScheduleModel> DoctorsSchedule(int cat_id) => JsonSchedule.Where(c => c.cat_id == cat_id.ToString());
+
+        public DoctorScheduleModel SingleSchedule(int id) => JsonSchedule.FirstOrDefault(c => c.doctors.id == id.ToString());
     }
 }

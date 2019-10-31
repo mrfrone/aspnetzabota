@@ -16,6 +16,6 @@ namespace aspnetzabota.Data.Repository
         }
         public IEnumerable<Review> AllReviews => appDBContent.Reviews;
 
-        public IEnumerable<Review> LastReviews => appDBContent.Reviews.AsNoTracking().TakeLast(6);
+        public IEnumerable<Review> LastReviews => Enumerable.TakeLast(appDBContent.Reviews, 6);
     }
 }

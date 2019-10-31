@@ -7,11 +7,14 @@
                 @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
             </div>
         </div>
-        @foreach (var schedule in Model.Schedule)
-        {
-            <div>
-                <span class="subheading">Расписание докторов: @schedule.category</span>
-            </div>
+        
+        @*<div>
+            @foreach (var schedule in Model.Schedule)
+            {
+                <span class="subheading">@schedule.category</span>
+                return;
+            }
+            </div>*@
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -27,19 +30,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>@schedule.doctors.fio</td>
-                    <td>@schedule.doctors.position</td>
-                    <td>@schedule.doctors.schedule.mon</td>
-                    <td>@schedule.doctors.schedule.tue</td>
-                    <td>@schedule.doctors.schedule.wed</td>
-                    <td>@schedule.doctors.schedule.thu</td>
-                    <td>@schedule.doctors.schedule.fri</td>
-                    <td>@schedule.doctors.schedule.sat</td>
-                    <td>@schedule.doctors.schedule.sun</td>
-                </tr>
-                </tbody>
+                    @foreach (var schedule in Model.Schedule)
+                    {
+                        <tr>
+                            <td>@schedule.doctors.fio</td>
+                            <td>@schedule.doctors.position</td>
+                            <td>@schedule.doctors.schedule.mon</td>
+                            <td>@schedule.doctors.schedule.tue</td>
+                            <td>@schedule.doctors.schedule.wed</td>
+                            <td>@schedule.doctors.schedule.thu</td>
+                            <td>@schedule.doctors.schedule.fri</td>
+                            <td>@schedule.doctors.schedule.sat</td>
+                            <td>@schedule.doctors.schedule.sun</td>
+                        </tr>
+                    }
+                    </tbody>
             </table>
-        }
     </div>
 </section>

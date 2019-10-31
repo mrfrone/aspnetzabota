@@ -19,7 +19,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ScheduleViewModel
             {
-                SingleSchedule = _doctorSchedule.AllSchedules.FirstOrDefault(c => c.doctors.id == id.ToString())
+                SingleSchedule = _doctorSchedule.SingleSchedule(id)
             };
             return View(result);
         }
@@ -27,7 +27,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ScheduleViewModel
             {
-                Schedule = _doctorSchedule.AllSchedules.Where(c => c.cat_id == cat_id.ToString())
+                Schedule = _doctorSchedule.DoctorsSchedule(cat_id)
             };
             return View(result);
 
