@@ -21,12 +21,11 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
-        public ViewResult Doctor(int cat_id)
+        public ViewResult Doctor(int id)
         {
             var result = new ScheduleViewModel
             {
-                Schedule = _doctorSchedule.DoctorsSchedule(cat_id),
-                Posts = _doctorSchedule.PostsArray
+                Schedule = _doctorSchedule.DoctorsSchedule(id)
             };
             return View(result);
 

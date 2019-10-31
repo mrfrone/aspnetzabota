@@ -7,14 +7,6 @@
                 @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
             </div>
         </div>
-        
-        @*<div>
-            @foreach (var schedule in Model.Schedule)
-            {
-                <span class="subheading">@schedule.category</span>
-                return;
-            }
-            </div>*@
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -31,13 +23,15 @@
                 </thead>
                 <tbody>
                 @{
-                        @*foreach (var post in Model.Posts)
-                        {
+                    foreach (var post in Model.Schedule)
+                    {
                             <tr>
-                                <td scope="col" colspan="9"><span>@post</span></td>
-                            </tr>*@
-                            foreach (var schedule in Model.Schedule)
-                            {
+                                <td class="text-center" scope="col" colspan="9"><b>@post.category</b></td>
+                            </tr>
+                        break;
+                    }
+                    foreach (var schedule in Model.Schedule)
+                    {
                             <tr>
                                 <td><a href="/Schedule/Single/@schedule.doctors.id">@schedule.doctors.fio</a></td>
                                 <td>@schedule.doctors.position</td>
@@ -49,8 +43,8 @@
                                 <td class="text-center">@schedule.doctors.schedule.sat</td>
                                 <td class="text-center">@schedule.doctors.schedule.sun</td>
                             </tr>
-                            }
-                        @*}*@
+                    }
+                        
                 }
                 </tbody>
             </table>
