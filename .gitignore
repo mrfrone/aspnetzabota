@@ -15,6 +15,9 @@ package-lock.json
 *.user
 *.userosscache
 *.sln.docstates
+bin
+obj
+packages
 
 # Build results
 [Dd]ebug/
