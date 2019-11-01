@@ -40,5 +40,14 @@ namespace aspnetzabota.Controllers
             return View(result);
 
         }
+        public ViewResult AllDoctors()
+        {
+            var result = new ScheduleViewModel
+            {
+                Schedule = _doctorSchedule.AllSchedules
+            };
+            return View(result);
+
+        }
     }
 }

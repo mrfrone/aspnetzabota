@@ -12604,27 +12604,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\franc\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\develop\\aspnetzabota\\aspnetzabota\\aspnetzabota.csproj",
+      "projectUniqueName": "D:\\workspace\\aspnetzabota\\aspnetzabota\\aspnetzabota\\aspnetzabota.csproj",
       "projectName": "aspnetzabota",
-      "projectPath": "E:\\develop\\aspnetzabota\\aspnetzabota\\aspnetzabota.csproj",
-      "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-      "outputPath": "E:\\develop\\aspnetzabota\\aspnetzabota\\obj\\",
+      "projectPath": "D:\\workspace\\aspnetzabota\\aspnetzabota\\aspnetzabota\\aspnetzabota.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "D:\\workspace\\aspnetzabota\\aspnetzabota\\aspnetzabota\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"

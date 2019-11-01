@@ -60,3 +60,4 @@ E:\develop\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\aspnetzabota.Views.
 E:\develop\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\aspnetzabota.dll
 E:\develop\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\aspnetzabota.pdb
 E:\develop\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\aspnetzabota.csproj.CopyComplete
+D:\workspace\aspnetzabota\aspnetzabota\aspnetzabota\obj\Debug\netcoreapp2.1\Razor\Views\Schedule\AllDoctors.cshtml.g.cs

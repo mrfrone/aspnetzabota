@@ -1,0 +1,41 @@
+﻿@model ScheduleViewModel
+
+<section class="ftco-section ftco-no-pt mt-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <span class="subheading">Врачи</span>
+                <h2 class="mb-4">Наши квалифицированные специалисты</h2>
+                @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var doctor in Model.Schedule)
+            {
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="staff">
+                        <div class="img-wrap d-flex align-items-stretch">
+                            @{
+                                if (doctor.doctors.sex == "male")
+                                {
+                                    <div class="img align-self-stretch" style="background-image: url(@Url.Content("~/images/staff/male.jpg"));"></div>
+                                }
+                                else
+                                {
+                                    <div class="img align-self-stretch" style="background-image: url(@Url.Content("~/images/staff/female.jpg"));"></div>
+                                }
+                            }
+                        </div>
+                        <div class="text pt-3 text-center">
+                            <h3><a href="/Schedule/Single/@doctor.doctors.id">@doctor.doctors.fio</a></h3>
+                            <a href="/Schedule/Doctor/@doctor.cat_id"><span class="position mb-2">@doctor.category</span></a>
+                            <div class="faded">
+                                <p>@doctor.doctors.position</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

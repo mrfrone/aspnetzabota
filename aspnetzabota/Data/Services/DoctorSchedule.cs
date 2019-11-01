@@ -40,7 +40,7 @@ namespace aspnetzabota.Data.Services
             {
                 using (StreamReader sr = new StreamReader("wwwroot/json/schedule.json"))
                 {
-                    return RemoveNoReception(JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(sr.ReadToEnd()));
+                    return RemoveNoReception(JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(sr.ReadToEnd())).OrderBy(c => c.category);
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace aspnetzabota.Data.Services
         public IEnumerable<DoctorScheduleModel> DoctorsSchedule(int cat_id) => JsonSchedule.Where(c => c.cat_id == cat_id.ToString());
 
         public DoctorScheduleModel SingleSchedule(int id) => JsonSchedule.FirstOrDefault(c => c.doctors.id == id.ToString());
-        public List<string> PostsArray => JsonSchedule.OrderBy(c => c.category).Select(c => c.category).Distinct().ToList();
+        public List<string> PostsArray => JsonSchedule.Select(c => c.category).Distinct().ToList();
         
     }
 }
