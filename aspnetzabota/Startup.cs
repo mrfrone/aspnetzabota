@@ -15,6 +15,7 @@ namespace aspnetzabota
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>();
+            services.AddTransient<IPriceService, PriceService>();
             services.AddTransient<IDoctorSchedule, DoctorSchedule>();
             services.AddTransient<IReview, ReviewRepository>();
             services.AddTransient<ISlider, SliderRepository>();
