@@ -1,6 +1,7 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace aspnetzabota.Controllers
 {
@@ -16,10 +17,20 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.All
+                PriceService = _priceService.All,
+                PriceServiceDep = _priceService.PriceGroupsAndDepartments
             };
             return View(result);
 
+        }
+        public ActionResult GetItems(int id)
+        {
+            var result = new PriceServiceViewModel
+            {
+                PriceService = _priceService.All.Where(c => c.grcode == id),
+                PriceServiceDep = _priceService.PriceGroupsAndDepartments.Where(c => c.grcode == id)
+            };
+            return PartialView(result);
         }
     }
 }

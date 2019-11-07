@@ -6,5 +6,6 @@ namespace aspnetzabota.Data.Interfaces
     public interface IPriceService
     {
         IEnumerable<Price> All { get; }
+        IEnumerable<PriceGroupsAndDepartmentsModel> PriceGroupsAndDepartments { get; }
     }
 }
