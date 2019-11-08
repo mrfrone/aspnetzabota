@@ -8,29 +8,30 @@
             </div>
         </div>
         <div>
-            @Html.DropDownList("Groups", new SelectList(Model.PriceServiceDep.Select(c => c.GroupName), "Id", "Name", 3), new { id = "groups" })
-            @Html.DropDownList("Departments", new SelectList(Model.PriceServiceDep.SelectMany(c => c.DepartName), "Id", "Name", 3), new { id = "departments" })
+            <select id="groups" name="Groups" onchange="getdepartments(this)">
+                <option value="" selected disabled hidden>Выберите категорию...</option>
+                @foreach (var item in Model.PriceServiceDep)
+                {
+                    <option value="@item.grcode">@item.GroupName</option>
+                }
+            </select>
+            <select id="departments" name="Departments">
+                <option value="" selected disabled hidden>Выберите подкатегорию...</option>
+            </select>
         </div>
         @section scripts{
             <script type="text/javascript">
-                $(function () {
-
-                $('#groups').change(function()
+                function getdepartments(val)
                 {
-                    // получаем выбранный id
-                    var id = $(this).val();
+                        var id = val.value;
                         $.ajax({
                             type: 'GET',
                             url: '@Url.Action("GetItems")/' + id,
-                            success: function (data)
-                            {
-
-                                // заменяем содержимое присланным частичным представлением
+                            success: function (data) {
                                 $('#departments').replaceWith(data);
                             }
                         });
-                });
-            })
+                }
             </script>
         }
         <table class="table table-bordered table-hover">

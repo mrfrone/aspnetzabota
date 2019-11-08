@@ -1,7 +1,11 @@
 ﻿@model PriceServiceViewModel
-<select id="departments" name="Departments">
-    @foreach (var item in Model.PriceServiceDep)
-    {
-        <option value="@item.grcode">@item.DepartName</option>
-    }
-</select>
+    <select id="departments" name="Departments">
+        <option value="" selected disabled hidden>Выберите подкатегорию...</option>
+        @foreach (var item in Model.PriceServiceDep)
+        {
+            foreach (var dep in item.DepartName)
+            {
+                <option value="@item.grcode">@dep</option>
+            }
+        }
+    </select>

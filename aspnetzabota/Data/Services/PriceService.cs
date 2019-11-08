@@ -30,7 +30,7 @@ namespace aspnetzabota.Data.Services
                 {
                     grcode = c.Key.grcode,
                     GroupName = c.Key.grname,
-                    DepartName = c.Select(u => u.depart_name)
+                    DepartName = c.Select(u => u.depart_name).Distinct()
                 });
 
     }
