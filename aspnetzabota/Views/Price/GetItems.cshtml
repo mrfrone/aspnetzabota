@@ -1,11 +1,11 @@
 ﻿@model PriceServiceViewModel
-    <select id="departments" name="Departments">
+    <select id="departments" name="Departments" onchange="getprice(this.value)">
         <option value="" selected disabled hidden>Выберите подкатегорию...</option>
         @foreach (var item in Model.PriceServiceDep)
         {
             foreach (var dep in item.DepartName)
             {
-                <option value="@item.grcode">@dep</option>
+                <option value="@dep">@dep</option>
             }
         }
     </select>

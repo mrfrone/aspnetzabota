@@ -1,5 +1,4 @@
-﻿@using System.Linq;
-@model PriceServiceViewModel
+﻿@model PriceServiceViewModel
 <section class="ftco-section bg-light mt-2">
     <div class="container">
         <div class="row justify-content-center mb-1 pb-2">
@@ -8,7 +7,7 @@
             </div>
         </div>
         <div>
-            <select id="groups" name="Groups" onchange="getdepartments(this)">
+            <select id="groups" name="Groups" onchange="getdepartments(this.value)">
                 <option value="" selected disabled hidden>Выберите категорию...</option>
                 @foreach (var item in Model.PriceServiceDep)
                 {
@@ -18,12 +17,16 @@
             <select id="departments" name="Departments">
                 <option value="" selected disabled hidden>Выберите подкатегорию...</option>
             </select>
+            <input type="search" onchange="SearchFromName(this.value)">
         </div>
-        @section scripts{
-            <script type="text/javascript">
+        @await Html.PartialAsync("PriceTable")
+    </div>
+</section>
+@section scripts{
+    <script type="text/javascript">
                 function getdepartments(val)
                 {
-                        var id = val.value;
+                        var id = val;
                         $.ajax({
                             type: 'GET',
                             url: '@Url.Action("GetItems")/' + id,
@@ -31,27 +34,37 @@
                                 $('#departments').replaceWith(data);
                             }
                         });
+                        $.ajax({
+                            type: 'GET',
+                            url: '@Url.Action("PriceTable")/' + id,
+                            success: function (data) {
+                                $('#price').replaceWith(data);
+                            }
+                        });
                 }
-            </script>
-        }
-        <table class="table table-bordered table-hover">
-            <thead class="thead-dark text-center">
-                <tr>
-                    <th scope="col">Наименование</th>
-                    <th scope="col">Цена</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    foreach (var price in Model.PriceService)
-                    {
-                        <tr>
-                            <td>@price.name</td>
-                            <td>@price.price</td>
-                        </tr>
-                    }
+                function getprice(val)
+                {        
+                    var name = val;
+                        $.ajax({
+                            type: 'GET',
+                            url: '@Url.Action("PriceTableAtDepartment")/' + name,
+                            success: function (data) {
+                                $('#price').replaceWith(data);
+                            }
+                        });
                 }
-            </tbody>
-        </table>
-    </div>
-</section>
+                function SearchFromName(val)
+                {
+                    var name = val;
+                    if (name)
+                        $.ajax({
+                            type: 'GET',
+                            url: '@Url.Action("PriceTableAtText")/' + name,
+                            success: function (data) {
+                                $('#price').replaceWith(data);
+                            }
+                        });
+                }
+                
+    </script>
+}
