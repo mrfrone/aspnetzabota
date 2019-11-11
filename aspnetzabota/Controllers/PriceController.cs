@@ -1,6 +1,7 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace aspnetzabota.Controllers
@@ -55,7 +56,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.All.Where(c => c.depart_name.Contains(id))
+                PriceService = _priceService.All.Where(c => c.name.Contains(id, StringComparison.InvariantCultureIgnoreCase))
             };
             return PartialView("PriceTable", result);
         }

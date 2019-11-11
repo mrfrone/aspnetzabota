@@ -1,5 +1,5 @@
 ﻿@model PriceServiceViewModel
-    <select id="departments" name="Departments" onchange="getprice(this.value)">
+    <select class="custom-select my-1 mr-sm-2" id="departments" name="Departments" onchange="getprice(this.value)">
         <option value="" selected disabled hidden>Выберите подкатегорию...</option>
         @foreach (var item in Model.PriceServiceDep)
         {
