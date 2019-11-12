@@ -25,7 +25,7 @@ namespace aspnetzabota.Controllers
 
         }
         [HttpGet]
-        public ActionResult GetItems(int id)
+        public ActionResult GetDepartments(int id)
         {
             var result = new PriceServiceViewModel
             {

@@ -34,10 +34,12 @@
     <script type="text/javascript">
                 function getdepartments(val)
                 {
+                        @*UseAjaxGet(@Url.Action("GetItems"), val, '#departments');
+                        UseAjaxGet(@Url.Action("PriceTable"), val, '#price');*@
                         var id = val;
                         $.ajax({
                             type: 'GET',
-                            url: '@Url.Action("GetItems")/' + id,
+                            url: '@Url.Action("GetDepartments")/' + id,
                             success: function (data) {
                                 $('#departments').replaceWith(data);
                             }
@@ -52,6 +54,7 @@
                 }
                 function getprice(val)
                 {        
+                    @*UseAjaxGet(@Url.Action("PriceTableAtDepartment"), val, '#price');*@
                     var name = val;
                         $.ajax({
                             type: 'GET',
@@ -73,6 +76,17 @@
                             }
                         });
                 }
+                //function UseAjaxGet(cont, id, element)
+                //{
+                //    $.ajax({
+                //            type: 'GET',
+                //            url: cont + '/' + id,
+                //            success: function (data)
+                //            {
+                //                $(element).replaceWith(data);
+                //            }
+                //        });
+                //}
                 
     </script>
 }

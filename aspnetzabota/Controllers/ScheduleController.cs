@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
-using System.Linq;
 
 namespace aspnetzabota.Controllers
 {
