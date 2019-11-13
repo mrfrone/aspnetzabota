@@ -14,12 +14,11 @@ namespace aspnetzabota.Controllers
             _allNews = iAllNews;
             _allserviceCategory = iServiceCat;
         }
-        public ViewResult List()
+        public ViewResult All()
         {
             var result = new NewsViewModel
             {
-                AllNews = _allNews.AllNews,
-                CurrentCategory = "Новости вот такие вот"
+                AllNews = _allNews.Take
             };
             return View(result);
         }

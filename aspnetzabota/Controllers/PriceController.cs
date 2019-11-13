@@ -1,4 +1,5 @@
 ﻿using aspnetzabota.Data.Interfaces;
+using aspnetzabota.Data.Mapping;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,8 +19,8 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.All,
-                PriceServiceDep = _priceService.PriceGroupsAndDepartments
+                PriceService = _priceService.Take,
+                PriceServiceDep = PriceMapping.PriceGroupsAndDepartments(_priceService.Take)
             };
             return View(result);
 
@@ -29,7 +30,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceServiceDep = _priceService.PriceGroupsAndDepartments.Where(c => c.grcode == id)
+                PriceServiceDep = PriceMapping.PriceDepartments(id, PriceMapping.PriceGroupsAndDepartments(_priceService.Take))
             };
             return PartialView(result);
         }
@@ -38,7 +39,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.All.Where(c => c.grcode == id)
+                PriceService = PriceMapping.PriceFromGroup(id, _priceService.Take)
             };
             return PartialView(result);
         }
@@ -47,7 +48,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.All.Where(c => c.depart_name == id)
+                PriceService = PriceMapping.PriceFromDepartment(id, _priceService.Take)
             };
             return PartialView("PriceTable", result);
         }
@@ -56,7 +57,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.All.Where(c => c.name.Contains(id, StringComparison.InvariantCultureIgnoreCase))
+                PriceService = PriceMapping.PriceFromSearch(id, _priceService.Take)
             };
             return PartialView("PriceTable", result);
         }

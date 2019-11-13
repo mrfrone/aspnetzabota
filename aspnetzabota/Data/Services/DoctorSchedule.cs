@@ -11,7 +11,6 @@ namespace aspnetzabota.Data.Services
 {
     public class DoctorSchedule : IDoctorSchedule
     {
-        private readonly Random random = new Random();
         private IEnumerable<DoctorScheduleModel> RemoveNoReception(IEnumerable<DoctorScheduleModel> model)
         {
             string symb = "-";
@@ -45,13 +44,7 @@ namespace aspnetzabota.Data.Services
             }
         }
 
-        public IEnumerable<DoctorScheduleModel> AllSchedules => JsonSchedule;
-        public IEnumerable<DoctorScheduleModel> RandomSchedules => JsonSchedule.OrderBy(x => random.Next()).TakeLast(4);
-
-        public IEnumerable<DoctorScheduleModel> DoctorsSchedule(int cat_id) => JsonSchedule.Where(c => c.cat_id == cat_id.ToString());
-
-        public DoctorScheduleModel SingleSchedule(int id) => JsonSchedule.FirstOrDefault(c => c.doctors.id == id.ToString());
-        public List<string> PostsArray => JsonSchedule.Select(c => c.category).Distinct().ToList();
+        public IEnumerable<DoctorScheduleModel> Take => JsonSchedule;
         
     }
 }

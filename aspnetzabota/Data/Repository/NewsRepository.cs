@@ -14,12 +14,6 @@ namespace aspnetzabota.Data.Repository
         {
             this.appDBContent = appDBContent;
         }
-        public IEnumerable<News> AllNews => appDBContent.News;
-
-        public IEnumerable<News> AllNewsFromCategory => appDBContent.News.Include(c => c.Category);
-        
-        public IEnumerable<News> LastNews => appDBContent.News.AsNoTracking().TakeLast(3);
-
-        public News getObjectNews(int newsID) => appDBContent.News.FirstOrDefault(p => p.ID == newsID);
+        public IEnumerable<News> Take => appDBContent.News;
     }
 }

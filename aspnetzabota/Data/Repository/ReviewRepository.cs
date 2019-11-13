@@ -14,8 +14,6 @@ namespace aspnetzabota.Data.Repository
         {
             this.appDBContent = appDBContent;
         }
-        public IEnumerable<Review> AllReviews => appDBContent.Reviews;
-
-        public IEnumerable<Review> LastReviews => Enumerable.TakeLast(appDBContent.Reviews, 6);
+        public IEnumerable<Review> Take => appDBContent.Reviews;
     }
 }

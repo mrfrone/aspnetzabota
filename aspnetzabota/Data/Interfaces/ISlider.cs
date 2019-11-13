@@ -5,6 +5,6 @@ namespace aspnetzabota.Data.Interfaces
 {
     public interface ISlider
     {
-        IEnumerable<Slider> AllSliders { get; }
+        IEnumerable<Slider> Take { get; }
     }
 }

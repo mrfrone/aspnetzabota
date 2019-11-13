@@ -22,16 +22,7 @@ namespace aspnetzabota.Data.Services
                 }
             }
         }
-        public IEnumerable<Price> All => JsonPrice;
-        public IEnumerable<PriceGroupsAndDepartmentsModel> PriceGroupsAndDepartments =>
-                JsonPrice.GroupBy(u => new { u.grcode, u.grname })
-                .Select(c =>
-                new PriceGroupsAndDepartmentsModel
-                {
-                    grcode = c.Key.grcode,
-                    GroupName = c.Key.grname,
-                    DepartName = c.Select(u => u.depart_name).Distinct()
-                });
+        public IEnumerable<Price> Take => JsonPrice;
 
     }
 }

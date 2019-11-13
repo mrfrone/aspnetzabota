@@ -5,8 +5,6 @@ namespace aspnetzabota.Data.Interfaces
 {
     public interface IReview
     {
-        IEnumerable<Review> AllReviews { get; }
-
-        IEnumerable<Review> LastReviews { get; }
+        IEnumerable<Review> Take { get; }
     }
 }

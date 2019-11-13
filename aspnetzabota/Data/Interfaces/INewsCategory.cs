@@ -5,6 +5,6 @@ namespace aspnetzabota.Data.Interfaces
 {
     public interface INewsCategory
     {
-        IEnumerable<Category> AllCategories { get; }
+        IEnumerable<Category> Take { get; }
     }
 }

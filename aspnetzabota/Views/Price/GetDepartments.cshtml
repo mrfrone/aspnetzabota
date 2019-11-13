@@ -1,0 +1,11 @@
+﻿@model PriceServiceViewModel
+    <select class="custom-select my-1 mr-sm-2" id="departments" name="Departments" onchange="getprice(this.value)">
+        <option value="" selected disabled hidden>Выберите подкатегорию...</option>
+        @foreach (var item in Model.PriceServiceDep)
+        {
+            foreach (var dep in item.DepartName)
+            {
+            <option value="@dep">@dep</option>
+            }
+        }
+    </select>

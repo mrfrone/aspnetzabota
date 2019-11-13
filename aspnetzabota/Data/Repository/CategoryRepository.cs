@@ -14,7 +14,6 @@ namespace aspnetzabota.Data.Repository
             this.appDBContent = appDBContent;
         }
         
-        //TODO: use AsNoTracking if you dont want change database entity
-        public IEnumerable<Category> AllCategories => appDBContent.Category.AsNoTracking();
+        public IEnumerable<Category> Take => appDBContent.Category;
     }
 }

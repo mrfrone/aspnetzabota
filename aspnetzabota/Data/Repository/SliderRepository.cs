@@ -13,6 +13,6 @@ namespace aspnetzabota.Data.Repository
             this.appDBContext = appDBContext;
         }
 
-        public IEnumerable<Slider> AllSliders => appDBContext.Sliders;
+        public IEnumerable<Slider> Take => appDBContext.Sliders;
     }
 }
