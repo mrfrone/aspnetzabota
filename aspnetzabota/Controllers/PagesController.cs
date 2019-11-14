@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetzabota.Controllers
 {
-    public class ContactController : Controller
+    public class PagesController : Controller
     {
-        public ViewResult Us()
+        public ViewResult ContactUs()
         {
             return View();
         }
