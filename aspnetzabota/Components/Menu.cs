@@ -4,11 +4,11 @@ using aspnetzabota.Data.Interfaces;
 
 namespace aspnetzabota.Components
 {
-    public class MenuComponent : ViewComponent
+    public class Menu : ViewComponent
     {
         private readonly IDepartment _departments;
 
-        public MenuComponent(IDepartment departments)
+        public Menu(IDepartment departments)
         {
             _departments = departments;
         }
