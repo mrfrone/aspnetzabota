@@ -8,7 +8,7 @@ using aspnetzabota.Data;
 
 namespace aspnetzabota.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(AppDBContent))]
     [Migration("20191024134246_AddSlider")]
     partial class AddSlider
     {

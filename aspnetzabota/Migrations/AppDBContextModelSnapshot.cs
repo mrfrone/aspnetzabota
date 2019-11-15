@@ -7,7 +7,7 @@ using aspnetzabota.Data;
 
 namespace aspnetzabota.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(AppDBContent))]
     partial class AppDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

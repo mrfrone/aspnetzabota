@@ -8,9 +8,9 @@ namespace aspnetzabota.Data.Repository
 {
     public class NewsRepository : INews
     {
-        private readonly AppDBContext appDBContent;
+        private readonly AppDBContent appDBContent;
 
-        public NewsRepository(AppDBContext appDBContent)
+        public NewsRepository(AppDBContent appDBContent)
         {
             this.appDBContent = appDBContent;
         }

@@ -8,7 +8,7 @@ using aspnetzabota.Data;
 
 namespace aspnetzabota.Migrations
 {
-    [DbContext(typeof(AppDBContext))]
+    [DbContext(typeof(AppDBContent))]
     [Migration("20191025075854_RemDatePubFrReview")]
     partial class RemDatePubFrReview
     {

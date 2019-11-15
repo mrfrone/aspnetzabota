@@ -8,9 +8,9 @@ namespace aspnetzabota.Data.Repository
 {
     public class ReviewRepository : IReview
     {
-        private readonly AppDBContext appDBContent;
+        private readonly AppDBContent appDBContent;
 
-        public ReviewRepository(AppDBContext appDBContent)
+        public ReviewRepository(AppDBContent appDBContent)
         {
             this.appDBContent = appDBContent;
         }
