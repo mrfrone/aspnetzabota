@@ -36,7 +36,7 @@ namespace aspnetzabota
             {
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=HomeController}/{action=Index}/");
+                template: "{controller=Home}/{action=Index}/");
             });
         }
     }

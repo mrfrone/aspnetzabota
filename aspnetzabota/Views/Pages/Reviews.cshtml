@@ -1,0 +1,70 @@
+﻿@model ReviewsViewModel
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="pt-5 mt-5">
+                    <ul class="comment-list">
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <li class="comment">
+                                <div class="vcard bio">
+                                    <img src="~/images/review_people.png">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>@review.author</h3>
+                                    <div class="meta mb-2"><a href="mailto:@review.email">@review.email</a></div>
+                                    <p>@review.text</p>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 ml-auto mr-auto">
+                        <div class="form-group">
+                            <input id="NameReview" type="text" class="form-control" aria-describedby="nameHelp" placeholder="Name...">
+                            <small id="nameHelp" class="form-text text-muted">Просьба вводить Ваше имя в адекватном виде.</small>
+                        </div>
+                        <div class="form-group">
+                            <input id="EmailReview" type="email" class="form-control" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="TextReview" class="form-control" rows="3" placeholder="Text..."></textarea>
+                        </div>
+                        <button id="AddReview" type="submit" class="btn btn-primary mb-2" onclick="Ajax_AddReview()">Отправить отзыв</button>
+                </div>
+            </div>
+        </div>
+</section>
+@section scripts
+{
+    <script type="text/javascript">
+    @*$('#AddReview').click(function (e) {
+        e.preventDefault();
+        $('#AddReview').val('Please Wait');
+        Ajax_AddReview();
+    });*@
+
+    function Ajax_AddReview() {
+
+        var review = {};
+        review.id = 0;
+        review.author = $('#NameReview').val();
+        review.email = $('#EmailReview').val().trim();
+        review.text = $('#TextReview').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Pages/AddReview",
+            data: JSON.stringify(review),
+            contentType: "application/json",
+            dataType: "json"
+        }).done(function (response) {
+            console.log(response);
+        }).fail(function (response) {
+            console.log('Error: ' + response);
+        });
+    }
+    </script>
+}
