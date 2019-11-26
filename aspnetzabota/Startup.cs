@@ -22,7 +22,7 @@ namespace aspnetzabota
             services.AddTransient<ISlider, SliderRepository>();
             services.AddTransient<INews, NewsRepository>();
             services.AddTransient<INewsCategory, CategoryRepository>();
-            services.AddMvcCore().AddRazorViewEngine();
+            services.AddMvcCore().AddJsonFormatters().AddRazorViewEngine();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
