@@ -1,8 +1,10 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using aspnetzabota.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Data.Repository
 {
@@ -15,5 +17,11 @@ namespace aspnetzabota.Data.Repository
             this.appDBContent = appDBContent;
         }
         public IEnumerable<Review> Take => appDBContent.Reviews;
+        public async Task Add(Review review)
+        {
+            review.date = DateTime.Now.ToShortDateString();
+            await appDBContent.AddAsync(review);
+            await appDBContent.SaveChangesAsync();
+        }
     }
 }

@@ -6,6 +6,6 @@ namespace aspnetzabota.Data.Mapping
 {
     public static class ReviewMapping
     {
-        //public static IEnumerable<Review> LastReviews(int num, IEnumerable<Review> Model) => Model.TakeLast(num);
+        public static IEnumerable<Review> Reverse(IEnumerable<Review> Model) => Model.Reverse();
     }
 }

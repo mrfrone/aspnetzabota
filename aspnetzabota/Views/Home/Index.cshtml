@@ -165,7 +165,7 @@
                         {
                             <div class="item">
                                 <div class="testimony-wrap d-flex">
-                                    <div class="user-img mr-4" @*style="background-image: url(images/person_1.jpg)"*@>
+                                    <div class="user-img mr-4" style="background-image: url(@Url.Content("~/images/review_people.png"))">
                                     </div>
                                     <div class="text ml-2 bg-light">
                                         <span class="quote d-flex align-items-center justify-content-center">
@@ -173,26 +173,12 @@
                                         </span>
                                         <p>@review.text</p>
                                         <p class="name">@review.author</p>
-                                        <span class="position">@review.email</span>
+                                        <span class="position">@review.date</span>
                                     </div>
                                 </div>
                             </div>
                         }
                     }
-                    <div class="item">
-                        <div class="testimony-wrap d-flex">
-                            <div class="user-img mr-4" style="background-image: url(images/person_2.jpg)">
-                            </div>
-                            <div class="text ml-2 bg-light">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Henry Dee</p>
-                                <span class="position">Businessman</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

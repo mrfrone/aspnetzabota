@@ -7,6 +7,8 @@ namespace aspnetzabota.Data.Mapping
 {
     public static class GenericMapping<T>
     {
-        public static IEnumerable<T> Last(int num, IEnumerable<T> Model) => Model.TakeLast(num);
+        private static readonly Random random = new Random();
+        public static IEnumerable<T> Last(IEnumerable<T> Model, int num) => Model.TakeLast(num);
+        public static IEnumerable<T> Random(IEnumerable<T> Model, int Count) => Model.OrderBy(x => random.Next()).TakeLast(Count);
     }
 }

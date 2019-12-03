@@ -2,6 +2,7 @@
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Data.Models;
+using aspnetzabota.Data.Mapping;
 
 namespace aspnetzabota.Controllers
 {
@@ -21,7 +22,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ReviewsViewModel
             {
-                Reviews = _reviews.Take
+                Reviews = ReviewMapping.Reverse(_reviews.Take)
             };
             return View(result);
         }
@@ -29,7 +30,14 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public IActionResult AddReview([FromBody] Review data)
         {
-            return Json(Ok());
+            //вообще json(false/ true), какая-то хуйня, лучше http ошику возвращай если что-то не случилось и try catch тут не надо
+            if (data == null)
+                return Json(false);
+
+            _reviews.Add(data);
+
+            return Json(true);
+            
         }
     }
 }

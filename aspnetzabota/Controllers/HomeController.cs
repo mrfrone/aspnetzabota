@@ -24,10 +24,10 @@ namespace aspnetzabota.Controllers
         {
             var result = new HomeViewModel
             {
-                LastNews = GenericMapping<News>.Last(3, _news.Take),
+                LastNews = GenericMapping<News>.Last(_news.Take, 3),
                 Slider = _slider.Take,
-                LastReviews = GenericMapping<Review>.Last(6, _lastReview.Take),
-                Doctors = DoctorsMapping.Random(_doctorSchedule.Take)
+                LastReviews = GenericMapping<Review>.Random(_lastReview.Take, 6),
+                Doctors = GenericMapping<DoctorScheduleModel>.Random(_doctorSchedule.Take, 4)
             };
             return View(result);
         }
