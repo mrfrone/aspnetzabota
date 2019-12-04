@@ -3,6 +3,7 @@ using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Data.Models;
 using aspnetzabota.Data.Mapping;
+using X.PagedList;
 
 namespace aspnetzabota.Controllers
 {
@@ -18,11 +19,13 @@ namespace aspnetzabota.Controllers
         {
             return View();
         }
-        public ViewResult Reviews()
+        public ViewResult Reviews(int? page)
         {
+            var pageNumber = page ?? 1;
             var result = new ReviewsViewModel
             {
-                Reviews = ReviewMapping.Reverse(_reviews.Take)
+                Reviews = ReviewMapping.Reverse(_reviews.Take).ToPagedList(pageNumber, 10),
+                PaginationOptions = PaginationViewModel.PagedListOptions
             };
             return View(result);
         }

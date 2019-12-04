@@ -1,106 +1,87 @@
 ﻿@model ReviewsViewModel
-    <section class="ftco-section bg-light">
-        <div class="container">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Назад</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Вперед</a>
-                </li>
-            </ul>
-            <div class="row">
-                <div class="pt-5 mt-5">
-                    <ul class="comment-list">
-                        @foreach (var review in Model.Reviews)
-                        {
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="~/images/review_people.png">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>@review.author</h3>
-                                    <div class="meta mb-2"><a href="#">@review.date</a></div>
-                                    <p>@review.text</p>
-                                </div>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Назад</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Вперед</a>
-                </li>
-            </ul>
-            <div class="row">
-                <div class="col-12 ml-auto mr-auto">
-                    <form id="reviewForm">
-                        <div class="form-group">
-                            <input id="NameReview" type="text" class="form-control" aria-describedby="nameHelp" placeholder="Name...">
-                            <small id="nameHelp" class="form-text text-muted">Просьба вводить Ваше имя в адекватном виде.</small>
-                        </div>
-                        <div class="form-group">
-                            <input id="EmailReview" type="email" class="form-control" placeholder="name@example.com" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">Ваш e-mail адрес не будет показан.</small>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="TextReview" class="form-control" rows="3" placeholder="Text..."></textarea>
-                        </div>
-                        <button id="AddReview" type="submit" class="btn btn-primary mb-2" onclick="Ajax_AddReview()">Отправить отзыв</button>
-                    </form>
-                </div>
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <span class="subheading">Отзывы</span>
+                <h2 class="mb-4">Наши Пациенты говорят о Нас</h2>
             </div>
         </div>
+        @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("Reviews", new { page }), Model.PaginationOptions)
+        <div class="row">
+            <div class="pt-5 mt-5">
+                <ul class="comment-list">
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="~/images/review_people.png">
+                            </div>
+                            <div class="comment-body">
+                                <h3>@review.author</h3>
+                                <div class="meta mb-2"><a href="#">@review.date</a></div>
+                                <p>@review.text</p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("Reviews", new { page }), Model.PaginationOptions)
+        <div class="row">
+            <div class="col-12 ml-auto mr-auto">
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <input id="NameReview" type="text" class="form-control" aria-describedby="nameHelp" placeholder="Name...">
+                        <small id="nameHelp" class="form-text text-muted">Просьба вводить Ваше имя в адекватном виде.</small>
+                    </div>
+                    <div class="form-group">
+                        <input id="EmailReview" type="email" class="form-control" placeholder="name@example.com" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">Ваш e-mail адрес не будет показан.</small>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="TextReview" class="form-control" rows="3" placeholder="Text..." aria-describedby="textHelp"></textarea>
+                        <small id="textHelp" class="form-text text-muted">Текст Вашего отзыва.</small>
+                    </div>
+                    <button id="AddReview" type="submit" class="btn btn-primary mb-2" onclick="Ajax_AddReview()">Отправить отзыв</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 @section scripts
 {
     <script type="text/javascript">
-    function Ajax_AddReview() {
+        function Ajax_AddReview() {
 
-        var review = {};
-        review.id = null;
-        review.author = $('#NameReview').val();
-        review.email = $('#EmailReview').val().trim();
-        review.text = $('#TextReview').val();
+            var review = {};
+            review.id = null;
+            review.author = $('#NameReview').val();
+            review.email = $('#EmailReview').val().trim();
+            review.text = $('#TextReview').val();
 
-        console.log(JSON.stringify(review));
+            console.log(JSON.stringify(review));
 
-        if (review.author && review.email && review.text) {
-            $.ajax({
-                type: "POST",
-                url: "/Pages/AddReview",
-                data: JSON.stringify(review),
-                contentType: "application/json",
-                dataType: "json"
-            }).done(function (response) {
-                if (response) {
-                    $("#reviewForm")[0].reset();
-                    alert("Отзыв успешно отправлен!");
-                }
-                else
-                    alert("Ошибка при отправке отзыва!");
-            }).fail(function (response) {
-                console.log('Error: ' + response);
-            });       
+            if (review.author && review.email && review.text) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Pages/AddReview",
+                    data: JSON.stringify(review),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (response) {
+                    if (response) {
+                        alert("Отзыв успешно отправлен!");
+                    }
+                    else
+                        alert("Ошибка при отправке отзыва!");
+                }).fail(function (response) {
+                    console.log('Error: ' + response);
+                });
+            }
+            else {
+                alert("Заполнены не все поля!");
+            }
         }
-        else
-        {
-            alert("Заполнены не все поля!");
-        }
-    }
     </script>
 }
