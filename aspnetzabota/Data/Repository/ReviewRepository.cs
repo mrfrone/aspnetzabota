@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace aspnetzabota.Data.Repository
 {
@@ -17,6 +18,11 @@ namespace aspnetzabota.Data.Repository
             this.appDBContent = appDBContent;
         }
         public IEnumerable<Review> Take => appDBContent.Reviews;
+
+        public IEnumerable<Review> GetPagedList(int pageNumber, int pageSize)
+        {
+            return appDBContent.Reviews.Reverse().ToPagedList(pageNumber, pageSize);
+        }
         public async Task Add(Review review)
         {
             review.date = DateTime.Now.ToShortDateString();

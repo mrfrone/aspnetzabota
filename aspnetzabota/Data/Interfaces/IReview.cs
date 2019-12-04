@@ -7,6 +7,7 @@ namespace aspnetzabota.Data.Interfaces
     public interface IReview
     {
         IEnumerable<Review> Take { get; }
+        IEnumerable<Review> GetPagedList(int pageNumber, int pageSize);
         Task Add(Review review);
     }
 }

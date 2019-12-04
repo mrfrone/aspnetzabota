@@ -24,7 +24,7 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new ReviewsViewModel
             {
-                Reviews = ReviewMapping.Reverse(_reviews.Take).ToPagedList(pageNumber, 10),
+                Reviews = _reviews.GetPagedList(pageNumber, 10),
                 PaginationOptions = PaginationViewModel.PagedListOptions
             };
             return View(result);
