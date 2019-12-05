@@ -16,7 +16,7 @@ namespace aspnetzabota
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDBContent>();
+            services.AddDbContext<AppDBContext>();
             services.AddTransient<IDepartment, DepartmentRepository>();
             services.AddTransient<IPriceService, PriceService>();
             services.AddTransient<IDoctorSchedule, DoctorSchedule>();

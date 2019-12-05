@@ -5,12 +5,12 @@ namespace aspnetzabota.Data.Repository
 {
     public class DepartmentRepository : IDepartment
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContext;
 
-        public DepartmentRepository(AppDBContent appDBContent)
+        public DepartmentRepository(AppDBContext appDBContext)
         {
-            this.appDBContent = appDBContent;
+            this.appDBContext = appDBContext;
         }
-        public IEnumerable<Department> Take => appDBContent.Departments;
+        public IEnumerable<Department> Take => appDBContext.Departments;
     }
 }

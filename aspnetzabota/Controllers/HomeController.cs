@@ -1,6 +1,4 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data.Mapping;
-using aspnetzabota.Data.Models;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,24 +8,24 @@ namespace aspnetzabota.Controllers
     {
         private readonly INews _news;
         private readonly ISlider _slider;
-        private readonly IReview _lastReview;
+        private readonly IReview _Reviews;
         private readonly IDoctorSchedule _doctorSchedule;
 
         public HomeController(INews iNews, ISlider slider, IReview review, IDoctorSchedule doctorSchedule)
         {
             _news = iNews;
             _slider = slider;
-            _lastReview = review;
+            _Reviews = review;
             _doctorSchedule = doctorSchedule;
         }
         public ViewResult Index()
         {
             var result = new HomeViewModel
             {
-                LastNews = GenericMapping<News>.Last(_news.Take, 3),
+                LastNews = _news.Last(3),
                 Slider = _slider.Take,
-                LastReviews = GenericMapping<Review>.Random(_lastReview.Take, 6),
-                Doctors = GenericMapping<DoctorScheduleModel>.Random(_doctorSchedule.Take, 4)
+                LastReviews = _Reviews.Random(6),
+                Doctors = _doctorSchedule.Random(4)
             };
             return View(result);
         }

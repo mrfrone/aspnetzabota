@@ -8,7 +8,7 @@ using aspnetzabota.Data;
 
 namespace aspnetzabota.Migrations
 {
-    [DbContext(typeof(AppDBContent))]
+    [DbContext(typeof(AppDBContext))]
     [Migration("20191022075243_EFMigration")]
     partial class EFMigration
     {

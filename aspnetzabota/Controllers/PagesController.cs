@@ -2,8 +2,7 @@
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Data.Models;
-using aspnetzabota.Data.Mapping;
-using X.PagedList;
+using aspnetzabota.ComponentStyles;
 
 namespace aspnetzabota.Controllers
 {
@@ -25,7 +24,7 @@ namespace aspnetzabota.Controllers
             var result = new ReviewsViewModel
             {
                 Reviews = _reviews.GetPagedList(pageNumber, 10),
-                PaginationOptions = PaginationViewModel.PagedListOptions
+                PaginationOptions = PaginationStyle.PagedListOptions
             };
             return View(result);
         }

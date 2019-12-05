@@ -11,23 +11,21 @@ namespace aspnetzabota.Data.Repository
 {
     public class ReviewRepository : IReview
     {
-        private readonly AppDBContent appDBContent;
+        private static readonly Random random = new Random();
+        private readonly AppDBContext appDBContext;
 
-        public ReviewRepository(AppDBContent appDBContent)
+        public ReviewRepository(AppDBContext appDBContext)
         {
-            this.appDBContent = appDBContent;
+            this.appDBContext = appDBContext;
         }
-        public IEnumerable<Review> Take => appDBContent.Reviews;
-
-        public IEnumerable<Review> GetPagedList(int pageNumber, int pageSize)
-        {
-            return appDBContent.Reviews.Reverse().ToPagedList(pageNumber, pageSize);
-        }
+        public IEnumerable<Review> Take => appDBContext.Reviews;
+        public IEnumerable<Review> Random(int Count) => Enumerable.TakeLast(appDBContext.Reviews.OrderBy(x => random.Next()), Count);
+        public IEnumerable<Review> GetPagedList(int pageNumber, int pageSize) => appDBContext.Reviews.OrderByDescending(x => x.date).ToPagedList(pageNumber, pageSize);
         public async Task Add(Review review)
         {
             review.date = DateTime.Now.ToShortDateString();
-            await appDBContent.AddAsync(review);
-            await appDBContent.SaveChangesAsync();
+            await appDBContext.AddAsync(review);
+            await appDBContext.SaveChangesAsync();
         }
     }
 }

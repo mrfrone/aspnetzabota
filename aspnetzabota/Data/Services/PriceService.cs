@@ -23,6 +23,19 @@ namespace aspnetzabota.Data.Services
             }
         }
         public IEnumerable<Price> Take => JsonPrice;
+        public IEnumerable<PriceGroupsAndDepartmentsModel> GroupsAndDepartments =>
+        JsonPrice.GroupBy(u => new { u.grcode, u.grname })
+        .Select(c =>
+        new PriceGroupsAndDepartmentsModel
+        {
+            grcode = c.Key.grcode,
+            GroupName = c.Key.grname,
+            DepartName = c.Select(u => u.depart_name).Distinct()
+        });
+        public  IEnumerable<PriceGroupsAndDepartmentsModel> PriceDepartments(int id) => GroupsAndDepartments.Where(c => c.grcode == id);
+        public  IEnumerable<Price> FromGroup(int id) => JsonPrice.Where(c => c.grcode == id);
+        public  IEnumerable<Price> FromDepartment(string id) => JsonPrice.Where(c => c.depart_name == id);
+        public  IEnumerable<Price> FromSearch(string id) => JsonPrice.Where(c => c.name.Contains(id, StringComparison.InvariantCultureIgnoreCase));
 
     }
 }

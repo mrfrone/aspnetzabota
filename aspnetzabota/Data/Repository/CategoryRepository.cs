@@ -7,13 +7,13 @@ namespace aspnetzabota.Data.Repository
 {
     public class CategoryRepository : INewsCategory
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContext;
 
-        public CategoryRepository(AppDBContent appDBContent)
+        public CategoryRepository(AppDBContext appDBContext)
         {
-            this.appDBContent = appDBContent;
+            this.appDBContext = appDBContext;
         }
         
-        public IEnumerable<Category> Take => appDBContent.Category;
+        public IEnumerable<Category> Take => appDBContext.Category;
     }
 }

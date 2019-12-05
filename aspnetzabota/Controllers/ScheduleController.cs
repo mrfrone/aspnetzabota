@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
-using aspnetzabota.Data.Mapping;
 
 namespace aspnetzabota.Controllers
 {
@@ -17,7 +16,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ScheduleViewModel
             {
-                SingleSchedule = DoctorsMapping.Single(id, _doctorSchedule.Take)
+                SingleSchedule = _doctorSchedule.Single(id)
             };
             return View(result);
         }
@@ -25,7 +24,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ScheduleViewModel
             {
-                Schedule = DoctorsMapping.ScheduleFromSinglePost(id, _doctorSchedule.Take)
+                Schedule = _doctorSchedule.ScheduleFromSinglePost(id)
             };
             return View(result);
 
@@ -35,7 +34,7 @@ namespace aspnetzabota.Controllers
             var result = new ScheduleViewModel
             {
                 Schedule = _doctorSchedule.Take,
-                Posts = DoctorsMapping.Posts(_doctorSchedule.Take)
+                Posts = _doctorSchedule.Posts
             };
             return View(result);
 

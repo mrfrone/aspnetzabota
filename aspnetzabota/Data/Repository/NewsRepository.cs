@@ -8,12 +8,15 @@ namespace aspnetzabota.Data.Repository
 {
     public class NewsRepository : INews
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContext;
 
-        public NewsRepository(AppDBContent appDBContent)
+        public NewsRepository(AppDBContext appDBContext)
         {
-            this.appDBContent = appDBContent;
+            this.appDBContext = appDBContext;
         }
-        public IEnumerable<News> Take => appDBContent.News;
+        public IEnumerable<News> Take => appDBContext.News;
+        public IEnumerable<News> Last(int Count) => Enumerable.TakeLast(appDBContext.News, Count);
+        public IEnumerable<News> TakeFromCategory(int id) => appDBContext.News.Where(c => c.categoryID == id);
+        public News Single(int id) => appDBContext.News.FirstOrDefault(p => p.ID == id);
     }
 }

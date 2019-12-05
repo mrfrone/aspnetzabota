@@ -6,9 +6,9 @@ namespace aspnetzabota.Data.Repository
 {
     public class SliderRepository : ISlider
     {
-        private readonly AppDBContent appDBContext;
+        private readonly AppDBContext appDBContext;
 
-        public SliderRepository(AppDBContent appDBContext)
+        public SliderRepository(AppDBContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

@@ -1,9 +1,6 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data.Mapping;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 
 namespace aspnetzabota.Controllers
 {
@@ -20,7 +17,7 @@ namespace aspnetzabota.Controllers
             var result = new PriceServiceViewModel
             {
                 PriceService = _priceService.Take,
-                PriceServiceDep = PriceMapping.PriceGroupsAndDepartments(_priceService.Take)
+                PriceServiceDep = _priceService.GroupsAndDepartments
             };
             return View(result);
 
@@ -30,7 +27,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceServiceDep = PriceMapping.PriceDepartments(id, PriceMapping.PriceGroupsAndDepartments(_priceService.Take))
+                PriceServiceDep = _priceService.PriceDepartments(id)
             };
             return PartialView(result);
         }
@@ -39,7 +36,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = PriceMapping.PriceFromGroup(id, _priceService.Take)
+                PriceService = _priceService.FromGroup(id)
             };
             return PartialView(result);
         }
@@ -48,7 +45,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = PriceMapping.PriceFromDepartment(id, _priceService.Take)
+                PriceService = _priceService.FromDepartment(id)
             };
             return PartialView("PriceTable", result);
         }
@@ -57,7 +54,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = PriceMapping.PriceFromSearch(id, _priceService.Take)
+                PriceService = _priceService.FromSearch(id)
             };
             return PartialView("PriceTable", result);
         }

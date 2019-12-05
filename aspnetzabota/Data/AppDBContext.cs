@@ -3,7 +3,7 @@ using aspnetzabota.Data.Models;
 
 namespace aspnetzabota.Data
 {
-    public class AppDBContent : DbContext
+    public class AppDBContext : DbContext
     {    
         //todo for future: put conn string in app setting and use IOptionsMonitor
         private const string ConnectionString = "server=mysql-srv53388.hts.ru;user id=srv53388_zabota;password=49274929;database=srv53388_zabtota;persistsecurityinfo=True;charset=utf8";

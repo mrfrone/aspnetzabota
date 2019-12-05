@@ -2,9 +2,9 @@
 using X.PagedList.Mvc.Common;
 using System.Collections.Generic;
 
-namespace aspnetzabota.ViewModels
+namespace aspnetzabota.ComponentStyles
 {
-    public static class PaginationViewModel
+    public static class PaginationStyle
     {
         public static PagedListRenderOptionsBase PagedListOptions => new PagedListRenderOptionsBase() {
                 LiElementClasses = new List<string> { "page-item" },

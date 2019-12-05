@@ -6,5 +6,8 @@ namespace aspnetzabota.Data.Interfaces
     public interface INews
     {
         IEnumerable<News> Take { get; }
+        IEnumerable<News> Last(int Count);
+        IEnumerable<News> TakeFromCategory(int id);
+        News Single(int id);
     }
 }
