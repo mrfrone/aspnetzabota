@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
+using aspnetzabota.ComponentStyles;
 
 namespace aspnetzabota.Controllers
 {
@@ -39,12 +40,15 @@ namespace aspnetzabota.Controllers
             return View(result);
 
         }
-        public ViewResult AllDoctors()
+        public ViewResult AllDoctors(int? page)
         {
+            var pageNumber = page ?? 1;
             var result = new ScheduleViewModel
             {
-                Schedule = _doctorSchedule.Take
+                Schedule = _doctorSchedule.GetPagedList(pageNumber, 8),
+                PaginationOptions = PaginationStyle.PagedListOptions
             };
+
             return View(result);
 
         }

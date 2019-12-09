@@ -10,5 +10,6 @@ namespace aspnetzabota.Data.Interfaces
         DoctorScheduleModel Single(int id);
         IEnumerable<DoctorScheduleModel> ScheduleFromSinglePost(int cat_id);
         IEnumerable<DoctorScheduleModel> Random(int Count);
+        IEnumerable<DoctorScheduleModel> GetPagedList(int pageNumber, int pageSize);
     }
 }

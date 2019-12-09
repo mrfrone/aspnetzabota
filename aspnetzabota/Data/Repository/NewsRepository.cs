@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.Data.Models;
+using X.PagedList;
 
 namespace aspnetzabota.Data.Repository
 {
@@ -18,5 +19,7 @@ namespace aspnetzabota.Data.Repository
         public IEnumerable<News> Last(int Count) => Enumerable.TakeLast(appDBContext.News, Count);
         public IEnumerable<News> TakeFromCategory(int id) => appDBContext.News.Where(c => c.categoryID == id);
         public News Single(int id) => appDBContext.News.FirstOrDefault(p => p.ID == id);
+        public IEnumerable<News> GetPagedList(int pageNumber, int pageSize) => appDBContext.News.ToPagedList(pageNumber, pageSize);
+
     }
 }

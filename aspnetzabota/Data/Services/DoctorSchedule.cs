@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace aspnetzabota.Data.Services
 {
@@ -50,6 +51,7 @@ namespace aspnetzabota.Data.Services
         public DoctorScheduleModel Single(int id) => JsonSchedule.FirstOrDefault(c => c.doctors.id == id.ToString());
         public IEnumerable<DoctorScheduleModel> ScheduleFromSinglePost(int cat_id) => JsonSchedule.Where(c => c.cat_id == cat_id.ToString());
         public IEnumerable<DoctorScheduleModel> Random(int Count) => JsonSchedule.OrderBy(x => random.Next()).TakeLast(Count);
+        public IEnumerable<DoctorScheduleModel> GetPagedList(int pageNumber, int pageSize) => JsonSchedule.ToPagedList(pageNumber, pageSize);
 
     }
 }

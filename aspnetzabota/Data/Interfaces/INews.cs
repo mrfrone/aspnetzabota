@@ -9,5 +9,6 @@ namespace aspnetzabota.Data.Interfaces
         IEnumerable<News> Last(int Count);
         IEnumerable<News> TakeFromCategory(int id);
         News Single(int id);
+        IEnumerable<News> GetPagedList(int pageNumber, int pageSize);
     }
 }
