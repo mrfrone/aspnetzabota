@@ -22,6 +22,10 @@ namespace aspnetzabota.Controllers
         {
             return View();
         }
+        public ViewResult OMS()
+        {
+            return View();
+        }
         public ViewResult Reviews(int? page)
         {
             var pageNumber = page ?? 1;
