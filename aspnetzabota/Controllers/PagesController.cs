@@ -18,6 +18,10 @@ namespace aspnetzabota.Controllers
         {
             return View();
         }
+        public ViewResult RegulatoryOrg()
+        {
+            return View();
+        }
         public ViewResult Reviews(int? page)
         {
             var pageNumber = page ?? 1;
