@@ -1,0 +1,91 @@
+﻿@model FooterViewModel
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-5">
+                    <img class="ftco-heading-2 logo" src="~/images/logo.png" alt="Диагностика в Ростове-на-дону">
+                </div>
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Есть вопрос?</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon icon-map-marker"></span><span class="text">г. Ростов-на-Дону пр. Стачки 137 остановка 6-я кольцевая</span></li>
+                            <li><a href="tel://88633089898"><span class="icon icon-phone"></span><span class="text">+7 (863) 308-98-98</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">zabota.dc@gmail.com</span></a></li>
+                        </ul>
+                    </div>
+
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                        <li class="ftco-animate"><a href="#"><span class="icon-vk"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-5 ml-md-4">
+                    <h2 class="ftco-heading-2">Полезные ссылки</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="/"><span class="ion-ios-arrow-round-forward mr-2"></span>Главная</a></li>
+                        <li><a href="/News/All"><span class="ion-ios-arrow-round-forward mr-2"></span>Новости</a></li>
+                        <li><a href="/Price/All"><span class="ion-ios-arrow-round-forward mr-2"></span>Прайс</a></li>
+                        <li><a href="/Schedule/All"><span class="ion-ios-arrow-round-forward mr-2"></span>Расписание</a></li>
+                        <li><a href="/Pages/ContactUs"><span class="ion-ios-arrow-round-forward mr-2"></span>Связь</a></li>
+                    </ul>
+                </div>
+                <div class="ftco-footer-widget mb-5 ml-md-4">
+                    <h2 class="ftco-heading-2">Отделения</h2>
+                    <ul class="list-unstyled">
+                        @foreach (var depart in Model.Departments) 
+                        {
+                            <li><a href="/Departments/Depart"><span class="ion-ios-arrow-round-forward mr-2"></span>@depart.ShortName</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Недавние новости</h2>
+                    @foreach (var news in Model.News)
+                    {
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(@Url.Content(news.newsIMG));"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">@news.newsDecription</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> @news.newsDate.ToString("MMMM") @news.newsDate.ToString("dd"), @news.newsDate.ToString("yyyy")</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Рабочее время</h2>
+                    <h3 class="open-hours pl-3">
+                        <span class="ion-ios-time mr-3"></span>ПН–ПТ: с 07:00 до 20:00
+                    </h3>
+                    <h3 class="open-hours pl-3">
+                        <span class="ion-ios-time mr-3"></span>МРТ: до 22:00
+                    </h3>
+                    <h3 class="open-hours pl-3">
+                        <span class="ion-ios-time mr-3"></span>СБ-ВС: с 08:00 до 17:00
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+
+                <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
