@@ -1,5 +1,6 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using aspnetzabota.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +15,7 @@ namespace aspnetzabota.Data.Repository
         {
             this.appDBContext = appDBContext;
         }
-        public IEnumerable<Licenses> Take => appDBContext.Licenses;
+        public IEnumerable<Licenses> Take => appDBContext.Licenses.Include(u => u.photo);
     }
 }
 

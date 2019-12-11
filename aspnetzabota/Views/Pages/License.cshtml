@@ -20,7 +20,7 @@
                             <div class="hovereffect w-75">
                                 <img class="img w-100" src="@Url.Content(photo.path)" alt="">
                                 <div class="overlay">
-                                    <a data-fancybox="gallery" class="info" href="@Url.Content(photo.path)">Просмотреть</a>
+                                    <a data-fancybox="@("gallery"+license.id)" class="info" href="@Url.Content(photo.path)">Просмотреть</a>
                                 </div>
                             </div>
                         </div>
