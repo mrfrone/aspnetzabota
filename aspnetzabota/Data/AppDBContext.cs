@@ -19,6 +19,7 @@ namespace aspnetzabota.Data
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Licenses> Licenses { get; set; }
 
     }
 }

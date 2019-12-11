@@ -9,10 +9,12 @@ namespace aspnetzabota.Controllers
     public class PagesController : Controller
     {
         private readonly IReview _reviews;
+        private readonly ILicenses _licenses;
 
-        public PagesController(IReview reviews)
+        public PagesController(IReview reviews, ILicenses licenses)
         {
             _reviews = reviews;
+            _licenses = licenses;
         }
         public ViewResult ContactUs()
         {
@@ -25,6 +27,14 @@ namespace aspnetzabota.Controllers
         public ViewResult OMS()
         {
             return View();
+        }
+        public ViewResult License()
+        {
+            var result = new LicensesViewModel
+            {
+                Licenses = _licenses.Take
+            };
+            return View(result);
         }
         public ViewResult Reviews(int? page)
         {

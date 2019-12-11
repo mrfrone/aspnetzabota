@@ -17,13 +17,14 @@ namespace aspnetzabota
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>();
-            services.AddTransient<IDepartment, DepartmentRepository>();
-            services.AddTransient<IPriceService, PriceService>();
-            services.AddTransient<IDoctorSchedule, DoctorSchedule>();
-            services.AddTransient<IReview, ReviewRepository>();
-            services.AddTransient<ISlider, SliderRepository>();
-            services.AddTransient<INews, NewsRepository>();
-            services.AddTransient<INewsCategory, CategoryRepository>();
+            services.AddScoped<ILicenses, LicensesRepository>();
+            services.AddScoped<IDepartment, DepartmentRepository>();
+            services.AddScoped<IPriceService, PriceService>();
+            services.AddScoped<IDoctorSchedule, DoctorSchedule>();
+            services.AddScoped<IReview, ReviewRepository>();
+            services.AddScoped<ISlider, SliderRepository>();
+            services.AddScoped<INews, NewsRepository>();
+            services.AddScoped<INewsCategory, CategoryRepository>();
             services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
