@@ -10,7 +10,7 @@
         @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("Reviews", new { page }), Model.PaginationOptions)
         <div class="row">
             <div class="pt-5 mt-5">
-                <ul class="comment-list">
+                <ul class="comment-list ftco-animate">
                     @foreach (var review in Model.Reviews)
                     {
                         <li class="comment">

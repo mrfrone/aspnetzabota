@@ -1,23 +1,12 @@
 ﻿@model NewsViewModel
-@{
-    string Method;
-    if (Model.News.FirstOrDefault().categoryID >= 1)
-    {
-        Method = "GetByCategory";
-    }
-    else
-    {
-        Method = "All";
-    }
-}
     <div id="fromCat">
-        @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Method, new { page }), Model.PaginationOptions)
+        @Html.PagedListPager((IPagedList)Model.News, page => Url.Action("GetByCategory", new { page }), Model.PaginationOptions)
         <div class="row">
             @{
                 foreach (var news in Model.News)
                 {
 
-                    <div class="col-md-4 ftco-animate">
+                    <div class="col-4 ftco-animate">
                         <div class="blog-entry">
                             <a href="#" class="block-20" style="background-image: url('@Url.Content("~/images/image_1.jpg")');">
                                 <div class="meta-date text-center p-2">
@@ -39,5 +28,5 @@
                 }
             }
         </div>
-    @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Method, new { page }), Model.PaginationOptions)
+    @Html.PagedListPager((IPagedList)Model.News, page => Url.Action("GetByCategory", new { page }), Model.PaginationOptions)
 </div>
