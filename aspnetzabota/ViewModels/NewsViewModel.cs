@@ -7,7 +7,7 @@ namespace aspnetzabota.ViewModels
     public class NewsViewModel
     {
         public IEnumerable<News> News { get; set; }
-        public string CurrentCategory { get; set; }
+        public IEnumerable<Category> Category { get; set; }
         public PagedListRenderOptionsBase PaginationOptions { get; set; }
     }
 }

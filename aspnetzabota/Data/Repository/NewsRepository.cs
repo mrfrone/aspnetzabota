@@ -15,11 +15,12 @@ namespace aspnetzabota.Data.Repository
         {
             this.appDBContext = appDBContext;
         }
-        public IEnumerable<News> Take => appDBContext.News;
-        public IEnumerable<News> Last(int Count) => Enumerable.TakeLast(appDBContext.News, Count);
-        public IEnumerable<News> TakeFromCategory(int id) => appDBContext.News.Where(c => c.categoryID == id);
+        public IEnumerable<News> Last(int Count) => Enumerable.TakeLast(appDBContext.News.OrderByDescending(x => x.Date), Count);   
         public News Single(int id) => appDBContext.News.FirstOrDefault(p => p.ID == id);
-        public IEnumerable<News> GetPagedList(int pageNumber, int pageSize) => appDBContext.News.ToPagedList(pageNumber, pageSize);
+        public IEnumerable<News> TakeFromCategory(int? id, int pageNumber, int pageSize) => appDBContext.News.Where(c => c.categoryID == id).
+            OrderByDescending(x => x.Date).ToPagedList(pageNumber, pageSize);
+        public IEnumerable<News> GetPagedList(int pageNumber, int pageSize) => appDBContext.News.Include(p => p.Category).
+            OrderByDescending(x => x.Date).ToPagedList(pageNumber, pageSize);
 
     }
 }

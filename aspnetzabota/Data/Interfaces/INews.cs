@@ -5,9 +5,8 @@ namespace aspnetzabota.Data.Interfaces
 {
     public interface INews
     {
-        IEnumerable<News> Take { get; }
         IEnumerable<News> Last(int Count);
-        IEnumerable<News> TakeFromCategory(int id);
+        IEnumerable<News> TakeFromCategory(int? id, int pageNumber, int pageSize);
         News Single(int id);
         IEnumerable<News> GetPagedList(int pageNumber, int pageSize);
     }

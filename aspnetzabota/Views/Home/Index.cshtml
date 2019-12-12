@@ -129,14 +129,14 @@
                         <div class="blog-entry">
                             <a href="#" class="block-20" style="background-image: url('@Url.Content("~/images/image_1.jpg")');">
                                 <div class="meta-date text-center p-2">
-                                    <span class="day">@news.newsDate.ToString("dd")</span>
-                                    <span class="mos">@news.newsDate.ToString("MMMM")</span>
-                                    <span class="yr">@news.newsDate.ToString("yyyy")</span>
+                                    <span class="day">@news.Date.ToString("dd")</span>
+                                    <span class="mos">@news.Date.ToString("MMMM")</span>
+                                    <span class="yr">@news.Date.ToString("yyyy")</span>
                                 </div>
                             </a>
                             <div class="text bg-white p-4">
-                                <h3 class="heading"><a href="#">@news.newsName</a></h3>
-                                <p>@news.newsDecription</p>
+                                <h3 class="heading"><a href="#">@news.Name</a></h3>
+                                <p>@news.Decription</p>
                                 <div class="d-flex align-items-center mt-4">
                                     <p class="mb-0"><a href="#" class="btn btn-primary">Подробнее <span class="ion-ios-arrow-round-forward"></span></a></p>
                                     <p class="ml-auto mb-0"></p>
