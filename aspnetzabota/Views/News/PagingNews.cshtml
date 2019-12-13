@@ -1,12 +1,12 @@
 ﻿@model NewsViewModel
     <div id="fromCat">
-        @Html.PagedListPager((IPagedList)Model.News, page => Url.Action("GetByCategory", new { page }), Model.PaginationOptions)
+        @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { id = Model.News.FirstOrDefault().categoryID, page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
         <div class="row">
             @{
                 foreach (var news in Model.News)
                 {
 
-                    <div class="col-4 ftco-animate">
+                    <div class="col-4">
                         <div class="blog-entry">
                             <a href="#" class="block-20" style="background-image: url('@Url.Content("~/images/image_1.jpg")');">
                                 <div class="meta-date text-center p-2">
@@ -28,5 +28,5 @@
                 }
             }
         </div>
-    @Html.PagedListPager((IPagedList)Model.News, page => Url.Action("GetByCategory", new { page }), Model.PaginationOptions)
+    @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { id = Model.News.FirstOrDefault().categoryID, page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
 </div>

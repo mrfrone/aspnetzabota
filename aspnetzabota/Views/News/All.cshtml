@@ -16,7 +16,7 @@
             }
         </select>
         <div id="fromCat">
-            @Html.PagedListPager((IPagedList)Model.News, page => Url.Action("All", new { page }), Model.PaginationOptions)
+            @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
             <div class="row">
                 @{
                     foreach (var news in Model.News)
@@ -44,7 +44,7 @@
                     }
                 }
             </div>
-            @Html.PagedListPager((IPagedList)Model.News, page => Url.Action("All", new { page }), Model.PaginationOptions)
+            @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
         </div>
     </div>
 </section>
@@ -56,12 +56,18 @@
                     var id = val;
                     if (id == "all")
                     {
-                        location.reload();
+                        $.ajax({
+                            type: 'GET',
+                            url: '@Url.Action("GetAllPaged")',
+                            success: function (data) {
+                            $('#fromCat').replaceWith(data);
+                            }
+                        });
                     }
                     else {
                         $.ajax({
                             type: 'GET',
-                            url: '@Url.Action("GetByCategory")/?id=' + id,
+                            url: '@Url.Action("GetByCategoryPaged")/?id=' + id,
                             success: function (data) {
                             $('#fromCat').replaceWith(data);
                             }

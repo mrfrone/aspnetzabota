@@ -15,7 +15,7 @@ namespace aspnetzabota.Data.Repository
         {
             this.appDBContext = appDBContext;
         }
-        public IEnumerable<News> Last(int Count) => Enumerable.TakeLast(appDBContext.News.OrderByDescending(x => x.Date), Count);   
+        public IEnumerable<News> Last(int Count) => appDBContext.News.OrderByDescending(x => x.Date).Take(Count);   
         public News Single(int id) => appDBContext.News.FirstOrDefault(p => p.ID == id);
         public IEnumerable<News> TakeFromCategory(int? id, int pageNumber, int pageSize) => appDBContext.News.Where(c => c.categoryID == id).
             OrderByDescending(x => x.Date).ToPagedList(pageNumber, pageSize);

@@ -2,6 +2,7 @@
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
 using aspnetzabota.ComponentStyles;
+using System.Collections.Generic;
 
 namespace aspnetzabota.Controllers
 {
@@ -15,29 +16,40 @@ namespace aspnetzabota.Controllers
             _News = iNews;
             _Category = iServiceCat;
         }
-        public ViewResult All(int? page)
+        public ViewResult All()
         {
-            var pageNumber = page ?? 1;
             var result = new NewsViewModel
             {
-                News = _News.GetPagedList(pageNumber, 6),
+                News = _News.GetPagedList(1, 3),
                 Category = _Category.Take,
-                PaginationOptions = PaginationStyle.PagedListOptions
+                PaginationOptions = PaginationStyle.PagedListOptions,
+                PagingMethod = nameof(GetAllPaged)
             };
             return View(result);
         }
-        private int CurrentID = 1;
-        public ActionResult GetByCategory(int? id, int? page)
+        public ActionResult GetByCategoryPaged(int? id, int? page)
         {
-            var ID = id ?? CurrentID;
             var pageNumber = page ?? 1;
             var result = new NewsViewModel
             {
-                News = _News.TakeFromCategory(ID, pageNumber, 6),
-                PaginationOptions = PaginationStyle.PagedListOptions
+                News = _News.TakeFromCategory(id, pageNumber, 3),
+                PaginationOptions = PaginationStyle.PagedListOptions,
+                PagingMethod = nameof(GetByCategoryPaged)
             };
-            CurrentID = ID;
-            return PartialView(result);
+            result.PaginationOptions.UlElementClasses = new List<string> { "pagination" };
+            return PartialView("PagingNews", result);
+        }
+        public ActionResult GetAllPaged(int? page)
+        {
+            var pageNumber = page ?? 1;
+            var result = new NewsViewModel
+            {
+                News = _News.GetPagedList(pageNumber, 3),
+                PaginationOptions = PaginationStyle.PagedListOptions,
+                PagingMethod = nameof(GetAllPaged)
+            };
+            result.PaginationOptions.UlElementClasses = new List<string> { "pagination" };
+            return PartialView("PagingNews", result);
         }
     }
 }

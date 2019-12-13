@@ -7,6 +7,6 @@ namespace aspnetzabota.ViewModels
     public class ReviewsViewModel
     {
         public IEnumerable<Review> Reviews { get; set; }
-        public PagedListRenderOptionsBase PaginationOptions { get; set; }
+        public PagedListRenderOptions PaginationOptions { get; set; }
     }
 }

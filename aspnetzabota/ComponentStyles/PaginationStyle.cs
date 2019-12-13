@@ -6,7 +6,7 @@ namespace aspnetzabota.ComponentStyles
 {
     public static class PaginationStyle
     {
-        public static PagedListRenderOptionsBase PagedListOptions => new PagedListRenderOptionsBase() {
+        public static PagedListRenderOptions PagedListOptions = new PagedListRenderOptions() {
                 LiElementClasses = new List<string> { "page-item" },
                 PageClasses = new string[] { "page-link" },
                 UlElementClasses = new List<string> { "pagination", "ftco-animate" },
@@ -15,6 +15,7 @@ namespace aspnetzabota.ComponentStyles
                 LinkToNextPageFormat = "Вперед",
                 DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
                 DisplayLinkToNextPage = PagedListDisplayMode.Always
+                
             };
     }
 }
