@@ -1,0 +1,24 @@
+﻿@model ReviewsViewModel
+<div id="reviews">
+    @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("PagedReviews", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "reviews" }))
+    <div class="row">
+        <div class="pt-5 mt-5">
+            <ul class="comment-list">
+                @foreach (var review in Model.Reviews)
+                {
+                    <li class="comment">
+                        <div class="vcard bio">
+                            <img src="~/images/review_people.png">
+                        </div>
+                        <div class="comment-body">
+                            <h3>@review.author</h3>
+                            <div class="meta mb-2"><a href="#">@review.date</a></div>
+                            <p>@review.text</p>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("PagedReviews", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "reviews" }))
+</div>

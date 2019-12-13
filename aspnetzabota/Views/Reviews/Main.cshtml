@@ -7,27 +7,7 @@
                 <h2 class="mb-4">Наши Пациенты говорят о Нас</h2>
             </div>
         </div>
-        @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("Reviews", new { page }), Model.PaginationOptions)
-        <div class="row">
-            <div class="pt-5 mt-5">
-                <ul class="comment-list ftco-animate">
-                    @foreach (var review in Model.Reviews)
-                    {
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="~/images/review_people.png">
-                            </div>
-                            <div class="comment-body">
-                                <h3>@review.author</h3>
-                                <div class="meta mb-2"><a href="#">@review.date</a></div>
-                                <p>@review.text</p>
-                            </div>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-        @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("Reviews", new { page }), Model.PaginationOptions)
+        @await Html.PartialAsync("PagedReviews")
         <div class="row">
             <div class="col-12 ml-auto mr-auto">
                 <form id="reviewForm">
@@ -65,7 +45,7 @@
             if (review.author && review.email && review.text) {
                 $.ajax({
                     type: "POST",
-                    url: "/Pages/AddReview",
+                    url: "/Reviews/AddReview",
                     data: JSON.stringify(review),
                     contentType: "application/json",
                     dataType: "json"
