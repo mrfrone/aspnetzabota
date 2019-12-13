@@ -33,10 +33,9 @@ namespace aspnetzabota.Controllers
             var result = new NewsViewModel
             {
                 News = _News.TakeFromCategory(id, pageNumber, 3),
-                PaginationOptions = PaginationStyle.PagedListOptions,
+                PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetByCategoryPaged)
             };
-            result.PaginationOptions.UlElementClasses = new List<string> { "pagination" };
             return PartialView("PagingNews", result);
         }
         public ActionResult GetAllPaged(int? page)
@@ -45,10 +44,9 @@ namespace aspnetzabota.Controllers
             var result = new NewsViewModel
             {
                 News = _News.GetPagedList(pageNumber, 3),
-                PaginationOptions = PaginationStyle.PagedListOptions,
+                PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetAllPaged)
             };
-            result.PaginationOptions.UlElementClasses = new List<string> { "pagination" };
             return PartialView("PagingNews", result);
         }
     }

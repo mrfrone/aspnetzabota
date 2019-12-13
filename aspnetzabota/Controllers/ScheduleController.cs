@@ -30,7 +30,7 @@ namespace aspnetzabota.Controllers
             return View(result);
 
         }
-        public ViewResult All()
+        public ViewResult List()
         {
             var result = new ScheduleViewModel
             {
@@ -40,17 +40,24 @@ namespace aspnetzabota.Controllers
             return View(result);
 
         }
-        public ViewResult AllDoctors(int? page)
+        public ViewResult DoctorsList()
+        {
+            var result = new ScheduleViewModel
+            {
+                Schedule = _doctorSchedule.GetPagedList(1, 8),
+                PaginationOptions = PaginationStyle.PagedListOptions
+            };
+            return View(result);
+        }
+        public ActionResult PagedDoctorsList(int? page)
         {
             var pageNumber = page ?? 1;
             var result = new ScheduleViewModel
             {
                 Schedule = _doctorSchedule.GetPagedList(pageNumber, 8),
-                PaginationOptions = PaginationStyle.PagedListOptions
+                PaginationOptions = PaginationStyle.PagedListOptionsAjax
             };
-
-            return View(result);
-
+            return PartialView(result);
         }
     }
 }

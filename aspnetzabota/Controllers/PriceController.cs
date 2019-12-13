@@ -12,7 +12,7 @@ namespace aspnetzabota.Controllers
         {
             _priceService = ipriceService;
         }
-        public ViewResult All()
+        public ViewResult List()
         {
             var result = new PriceServiceViewModel
             {
