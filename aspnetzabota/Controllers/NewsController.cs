@@ -27,7 +27,7 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
-        public ActionResult GetByCategoryPaged(int? id, int? page)
+        public ActionResult GetByCategoryPaged(int id, int? page)
         {
             var pageNumber = page ?? 1;
             var result = new NewsViewModel

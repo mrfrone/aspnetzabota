@@ -1,0 +1,111 @@
+﻿@model DepartmentsViewModel
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <span class="subheading">Отделения</span>
+                <h2 class="mb-4">Основные отделения<br>Диагностического центра "Забота"</h2>
+            </div>
+        </div>
+        <div class="ftco-departments">
+            <div class="row ftco-animate">
+                <div class="col-md-12 nav-link-wrap">
+                    <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        @foreach (var (index, depart) in Model.Departments.Select((depart, index) => (index, depart)))
+                        {
+                            if (index == 0)
+                            {
+                                <a class="nav-link ftco-animate active" id="v-pills-@depart.ID-tab" data-toggle="pill" href="#v-pills-@depart.ID" role="tab" aria-controls="v-pills-@depart.ID" aria-selected="true">@depart.ShortName</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link ftco-animate" id="v-pills-@depart.ID-tab" data-toggle="pill" href="#v-pills-@depart.ID" role="tab" aria-controls="v-pills-@depart.ID" aria-selected="true">@depart.ShortName</a>
+                            }
+
+                        }
+                    </div>
+                </div>
+                <div class="col-md-12 tab-wrap">
+                    <div class="tab-content bg-light p-4 p-md-5 ftco-animate" id="v-pills-tabContent">
+                        @foreach (var (index, depart) in Model.Departments.Select((depart, index) => (index, depart)))
+                        {
+                            if (index == 0)
+                            {
+                                @Html.Raw("<div class='tab-pane fade show active' id='v-pills-" + depart.ID + "' role='tabpanel' aria-labelledby='day-" + depart.ID + "-tab'>")
+                            }
+                            else
+                            {
+                                @Html.Raw("<div class='tab-pane fade' id='v-pills-" + depart.ID + "' role='tabpanel' aria-labelledby='day-" + depart.ID + "-tab'>")
+                            }
+                            <div class="row departments">
+                                <div class="col-lg-4 order-lg-last d-flex align-items-stretch">
+                                    <div class="img align-self-stretch" style="background-image: url(@Url.Content("~/images/dept-1.jpg"));"></div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <h2>@depart.Name</h2>
+                                    <p>@depart.Description</p>
+                                </div>
+                            </div>
+                            <div class="row departments">
+                                <div class="col-lg-12 mt-3">
+                                    <select class="custom-select my-1 mr-sm-2" id="departments" name="Departments" onchange="@("getprice" + depart.DepartmentPriceID + "(this.value, 'price"+depart.DepartmentPriceID+"')")">
+                                        <option value="" selected disabled hidden>Выберите подкатегорию...</option>
+                                        @foreach (var item in Model.PriceGroupsAndDepartments.Where(x => x.grcode == depart.DepartmentPriceID))
+                                        {
+                                            foreach (var dep in item.DepartName)
+                                            {
+                                                <option value="@dep">@dep</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row departments">
+                                <div class="col-lg-12">
+                                    <table id="@("price"+depart.DepartmentPriceID)" class="table table-bordered table-hover">
+                                        <thead class="thead-dark text-center">
+                                            <tr>
+                                                <th scope="col">Наименование</th>
+                                                <th scope="col">Цена</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            @foreach (var price in Model.Price.Where(x => x.grcode == depart.DepartmentPriceID))
+                                            {
+                                                <tr>
+                                                    <td>@price.name</td>
+                                                    <td>@price.price</td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @Html.Raw("</div>")
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script type="text/javascript">
+        @foreach (var depart in Model.Departments)
+        {
+            @:function @("getprice"+depart.DepartmentPriceID+"(val, tableid)")
+            @:{
+                @: var name = val;
+                @: var id = tableid;
+                    @: $.ajax({
+                        @: type: 'GET',
+                        @: url: '@Url.Action("PriceFromDepartment")/?name=' + name + '&tableid=' + tableid,
+                        @: success: function(data) {
+                            @: $('@("#price"+depart.DepartmentPriceID)').replaceWith(data);
+                                @: }
+                        @: });
+             @:}
+        }
+    </script>
+ }

@@ -1,0 +1,19 @@
+﻿@model DepartmentsViewModel
+<table id="@("price"+Model.DepartmentTableID)" class="table table-bordered table-hover">
+    <thead class="thead-dark text-center">
+        <tr>
+            <th scope="col">Наименование</th>
+            <th scope="col">Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var price in Model.Price)
+        {
+            <tr>
+                <td>@price.name</td>
+                <td>@price.price</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
