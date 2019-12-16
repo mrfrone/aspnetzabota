@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Data.Models;
+using aspnetzabota.Data;
 using X.PagedList.Mvc.Common;
 
 namespace aspnetzabota.ViewModels

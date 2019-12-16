@@ -1,7 +1,7 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.Data.Models;
+using aspnetzabota.Data;
 using aspnetzabota.ComponentStyles;
 
 namespace aspnetzabota.Controllers

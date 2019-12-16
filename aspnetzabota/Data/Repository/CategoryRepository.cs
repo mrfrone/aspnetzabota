@@ -1,7 +1,6 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data.Models;
+using aspnetzabota.Data;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 
 namespace aspnetzabota.Data.Repository
 {

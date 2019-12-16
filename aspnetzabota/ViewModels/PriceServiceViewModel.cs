@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Data.Models;
+﻿using aspnetzabota.Data;
 using System.Collections.Generic;
 
 namespace aspnetzabota.ViewModels

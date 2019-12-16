@@ -1,6 +1,5 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data.Models;
-using Microsoft.EntityFrameworkCore;
+using aspnetzabota.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

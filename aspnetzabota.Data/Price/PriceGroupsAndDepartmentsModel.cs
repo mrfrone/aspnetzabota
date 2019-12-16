@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace aspnetzabota.Data.Models
+namespace aspnetzabota.Data
 {
     public class PriceGroupsAndDepartmentsModel
     {

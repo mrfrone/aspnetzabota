@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data.Models;
+using aspnetzabota.Data;
 using X.PagedList;
 
 namespace aspnetzabota.Data.Repository

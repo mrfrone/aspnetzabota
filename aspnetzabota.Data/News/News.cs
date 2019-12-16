@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace aspnetzabota.Data.Models
+namespace aspnetzabota.Data
 {
     public class News
     {
