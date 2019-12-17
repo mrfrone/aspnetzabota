@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using aspnetzabota.Content.Database.Entities;
 
-namespace aspnetzabota.Data
+namespace aspnetzabota.Content.Database.Context
 {
     public class ContentContext : DbContext
     {    

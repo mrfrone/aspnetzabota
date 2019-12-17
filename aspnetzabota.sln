@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{708E8DD6-9BB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{5A726B7C-B400-4766-86DD-1B7E827A98F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Content.Database.Repository", "aspnetzabota.Content.Database.Repository\aspnetzabota.Content.Database.Repository.csproj", "{93F84B06-C14F-4BFC-A7E4-EE91E6934EC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{9CA0E3BE-5AE9-4C69-B898-FB956103FAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CA0E3BE-5AE9-4C69-B898-FB956103FAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CA0E3BE-5AE9-4C69-B898-FB956103FAC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93F84B06-C14F-4BFC-A7E4-EE91E6934EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F84B06-C14F-4BFC-A7E4-EE91E6934EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F84B06-C14F-4BFC-A7E4-EE91E6934EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F84B06-C14F-4BFC-A7E4-EE91E6934EC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{59553C3A-2C77-4564-93B8-F7E8F4756007} = {708E8DD6-9BBC-4404-A46C-0A1B0E98009C}
 		{9CA0E3BE-5AE9-4C69-B898-FB956103FAC0} = {5A726B7C-B400-4766-86DD-1B7E827A98F2}
+		{93F84B06-C14F-4BFC-A7E4-EE91E6934EC6} = {5A726B7C-B400-4766-86DD-1B7E827A98F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE8BF93-7D64-4481-85D9-474D1445CBE6}
