@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace aspnetzabota.Data
+namespace aspnetzabota.Content.Database.Entities
 {
     public class Licenses
     {

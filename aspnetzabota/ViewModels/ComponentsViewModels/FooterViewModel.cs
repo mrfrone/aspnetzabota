@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 
 namespace aspnetzabota.ViewModels
 {

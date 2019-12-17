@@ -1,14 +1,14 @@
 ﻿using aspnetzabota.Data.Interfaces;
 using System.Collections.Generic;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 
 namespace aspnetzabota.Data.Repository
 {
     public class DepartmentRepository : IDepartment
     {
-        private readonly AppDBContext appDBContext;
+        private readonly ContentContext appDBContext;
 
-        public DepartmentRepository(AppDBContext appDBContext)
+        public DepartmentRepository(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

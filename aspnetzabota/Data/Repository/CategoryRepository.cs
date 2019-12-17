@@ -1,14 +1,14 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 using System.Collections.Generic;
 
 namespace aspnetzabota.Data.Repository
 {
     public class CategoryRepository : INewsCategory
     {
-        private readonly AppDBContext appDBContext;
+        private readonly ContentContext appDBContext;
 
-        public CategoryRepository(AppDBContext appDBContext)
+        public CategoryRepository(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

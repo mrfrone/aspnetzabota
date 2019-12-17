@@ -1,5 +1,5 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;

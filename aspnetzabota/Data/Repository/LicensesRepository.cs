@@ -6,9 +6,9 @@ namespace aspnetzabota.Data.Repository
 {
     public class LicensesRepository : ILicenses
     {
-        private readonly AppDBContext appDBContext;
+        private readonly ContentContext appDBContext;
 
-        public LicensesRepository(AppDBContext appDBContext)
+        public LicensesRepository(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

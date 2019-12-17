@@ -2,16 +2,16 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 using X.PagedList;
 
 namespace aspnetzabota.Data.Repository
 {
     public class NewsRepository : INews
     {
-        private readonly AppDBContext appDBContext;
+        private readonly ContentContext appDBContext;
 
-        public NewsRepository(AppDBContext appDBContext)
+        public NewsRepository(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

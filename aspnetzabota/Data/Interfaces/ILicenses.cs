@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Data;
+﻿using aspnetzabota.Content.Database.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

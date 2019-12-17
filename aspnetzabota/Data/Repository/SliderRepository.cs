@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 
 namespace aspnetzabota.Data.Repository
 {
     public class SliderRepository : ISlider
     {
-        private readonly AppDBContext appDBContext;
+        private readonly ContentContext appDBContext;
 
-        public SliderRepository(AppDBContext appDBContext)
+        public SliderRepository(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

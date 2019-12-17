@@ -1,5 +1,5 @@
 ﻿using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +11,9 @@ namespace aspnetzabota.Data.Repository
     public class ReviewRepository : IReview
     {
         private static readonly Random random = new Random();
-        private readonly AppDBContext appDBContext;
+        private readonly ContentContext appDBContext;
 
-        public ReviewRepository(AppDBContext appDBContext)
+        public ReviewRepository(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

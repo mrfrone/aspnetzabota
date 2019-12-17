@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Data.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Content.Database.csproj" />
   </ItemGroup>
 
 </Project>

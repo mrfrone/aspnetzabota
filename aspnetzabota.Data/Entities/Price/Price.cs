@@ -1,4 +1,4 @@
-﻿namespace aspnetzabota.Data
+﻿namespace aspnetzabota.Content.Database.Entities
 {
     public class Price
     {

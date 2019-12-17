@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Web", "aspnetzabota\aspnetzabota.Web.csproj", "{59553C3A-2C77-4564-93B8-F7E8F4756007}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Data", "aspnetzabota.Data\aspnetzabota.Data.csproj", "{9CA0E3BE-5AE9-4C69-B898-FB956103FAC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Content.Database", "aspnetzabota.Data\aspnetzabota.Content.Database.csproj", "{9CA0E3BE-5AE9-4C69-B898-FB956103FAC0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{708E8DD6-9BBC-4404-A46C-0A1B0E98009C}"
 EndProject

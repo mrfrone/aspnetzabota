@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using aspnetzabota.Data.Interfaces;
 using aspnetzabota.Data.Repository;
-using aspnetzabota.Data;
+using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Data.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
