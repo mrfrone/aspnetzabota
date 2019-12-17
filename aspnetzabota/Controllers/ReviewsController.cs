@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Data.Interfaces;
+﻿using aspnetzabota.Content.Database.Repository.Review;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Database.Entities;

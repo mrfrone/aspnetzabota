@@ -1,8 +1,6 @@
-﻿using aspnetzabota.Data.Interfaces;
+﻿using aspnetzabota.Content.Database.Repository.Licenses;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.ComponentStyles;
-using aspnetzabota.Content.Database.Entities;
 
 namespace aspnetzabota.Controllers
 {

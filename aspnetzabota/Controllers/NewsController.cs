@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.Data.Interfaces;
+﻿using aspnetzabota.Content.Database.Repository.News;
+using aspnetzabota.Content.Database.Repository.Category;
+using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.ViewModels;
 using aspnetzabota.ComponentStyles;
-using System.Collections.Generic;
 
 namespace aspnetzabota.Controllers
 {
     public class NewsController : Controller
     {
         private readonly INews _News;
-        private readonly INewsCategory _Category;
+        private readonly ICategory _Category;
 
-        public NewsController(INews iNews, INewsCategory iServiceCat)
+        public NewsController(INews iNews, ICategory iServiceCat)
         {
             _News = iNews;
             _Category = iServiceCat;

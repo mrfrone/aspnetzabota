@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.ViewModels;
-using aspnetzabota.Data.Interfaces;
+using aspnetzabota.Content.Database.Repository.News;
+using aspnetzabota.Content.Database.Repository.Department;
 
 namespace aspnetzabota.Components
 {

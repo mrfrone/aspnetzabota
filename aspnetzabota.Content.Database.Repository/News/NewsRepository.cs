@@ -6,7 +6,7 @@ using X.PagedList;
 
 namespace aspnetzabota.Content.Database.Repository.News
 {
-    internal class NewsRepository : INews
+    public class NewsRepository : INews
     {
         private readonly ContentContext appDBContext;
 

@@ -1,4 +1,6 @@
-﻿using aspnetzabota.Data.Interfaces;
+﻿using aspnetzabota.Content.Database.Repository.News;
+using aspnetzabota.Content.Database.Repository.Slider;
+using aspnetzabota.Content.Database.Repository.Review;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +11,9 @@ namespace aspnetzabota.Controllers
         private readonly INews _news;
         private readonly ISlider _slider;
         private readonly IReview _Reviews;
-        private readonly IDoctorSchedule _doctorSchedule;
+        private readonly Data.Interfaces.IDoctorSchedule _doctorSchedule;
 
-        public HomeController(INews iNews, ISlider slider, IReview review, IDoctorSchedule doctorSchedule)
+        public HomeController(INews iNews, ISlider slider, IReview review, Data.Interfaces.IDoctorSchedule doctorSchedule)
         {
             _news = iNews;
             _slider = slider;

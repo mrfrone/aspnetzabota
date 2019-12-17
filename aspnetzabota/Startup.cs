@@ -1,22 +1,26 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using aspnetzabota.Data.Interfaces;
-using aspnetzabota.Data.Repository;
-using aspnetzabota.Content.Database.Entities;
-using aspnetzabota.Data.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using aspnetzabota.Content.Database.Context;
+using aspnetzabota.Data.Interfaces;
+using aspnetzabota.Content.Database.Repository.News;
+using aspnetzabota.Content.Database.Repository.Category;
+using aspnetzabota.Content.Database.Repository.Department;
+using aspnetzabota.Content.Database.Repository.Licenses;
+using aspnetzabota.Content.Database.Repository.Review;
+using aspnetzabota.Content.Database.Repository.Slider;
+using aspnetzabota.Data.Services;
 
 namespace aspnetzabota
 {
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDBContext>();
+            services.AddDbContext<ContentContext>();
             services.AddScoped<ILicenses, LicensesRepository>();
             services.AddScoped<IDepartment, DepartmentRepository>();
             services.AddScoped<IPriceService, PriceService>();
@@ -24,7 +28,7 @@ namespace aspnetzabota
             services.AddScoped<IReview, ReviewRepository>();
             services.AddScoped<ISlider, SliderRepository>();
             services.AddScoped<INews, NewsRepository>();
-            services.AddScoped<INewsCategory, CategoryRepository>();
+            services.AddScoped<ICategory, CategoryRepository>();
             services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
