@@ -26,7 +26,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new HomeViewModel
             {
-                LastNews = _news.Last(3).Where(x => x.Decription.Contains("jopa", System.StringComparison.InvariantCultureIgnoreCase)),
+                LastNews = _news.Last(3),
                 Slider = _slider.Take,
                 LastReviews = _Reviews.Random(6),
                 Doctors = _doctorSchedule.Random(4)
