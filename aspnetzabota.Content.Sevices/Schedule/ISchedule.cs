@@ -1,9 +1,9 @@
 ﻿using aspnetzabota.Content.Database.Entities;
 using System.Collections.Generic;
 
-namespace aspnetzabota.Data.Interfaces
+namespace aspnetzabota.Content.Services.Schedule
 {
-    public interface IDoctorSchedule
+    public interface ISchedule
     {
         IEnumerable<DoctorScheduleModel> Take { get; }
         IEnumerable<string> Posts { get; }

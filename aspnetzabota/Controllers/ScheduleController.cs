@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.ViewModels;
 using aspnetzabota.ComponentStyles;
+using aspnetzabota.Content.Services.Schedule;
 
 namespace aspnetzabota.Controllers
 {
     public class ScheduleController : Controller
     {
-        private readonly Data.Interfaces.IDoctorSchedule _doctorSchedule;
+        private readonly ISchedule _doctorSchedule;
 
-        public ScheduleController(Data.Interfaces.IDoctorSchedule idoctorSchedule)
+        public ScheduleController(ISchedule idoctorSchedule)
         {
             _doctorSchedule = idoctorSchedule;
         }

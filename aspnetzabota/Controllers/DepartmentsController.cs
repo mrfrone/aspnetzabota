@@ -1,4 +1,5 @@
 ﻿using aspnetzabota.Content.Database.Repository.Department;
+using aspnetzabota.Content.Services.Price;
 using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,9 @@ namespace aspnetzabota.Controllers
     public class DepartmentsController : Controller
     {
         private readonly IDepartment _departments;
-        private readonly Data.Interfaces.IPriceService _price;
+        private readonly IPrice _price;
 
-        public DepartmentsController(IDepartment departments, Data.Interfaces.IPriceService price)
+        public DepartmentsController(IDepartment departments, IPrice price)
         {
             _departments = departments;
             _price = price;

@@ -4,14 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using aspnetzabota.Content.Database.Context;
-using aspnetzabota.Data.Interfaces;
 using aspnetzabota.Content.Database.Repository.News;
 using aspnetzabota.Content.Database.Repository.Category;
 using aspnetzabota.Content.Database.Repository.Department;
 using aspnetzabota.Content.Database.Repository.Licenses;
 using aspnetzabota.Content.Database.Repository.Review;
 using aspnetzabota.Content.Database.Repository.Slider;
-using aspnetzabota.Data.Services;
+using aspnetzabota.Content.Services.Price;
+using aspnetzabota.Content.Services.Schedule;
 
 namespace aspnetzabota
 {
@@ -23,8 +23,8 @@ namespace aspnetzabota
             services.AddDbContext<ContentContext>();
             services.AddScoped<ILicenses, LicensesRepository>();
             services.AddScoped<IDepartment, DepartmentRepository>();
-            services.AddScoped<IPriceService, PriceService>();
-            services.AddScoped<IDoctorSchedule, DoctorSchedule>();
+            services.AddScoped<IPrice, Price>();
+            services.AddScoped<ISchedule, Schedule>();
             services.AddScoped<IReview, ReviewRepository>();
             services.AddScoped<ISlider, SliderRepository>();
             services.AddScoped<INews, NewsRepository>();

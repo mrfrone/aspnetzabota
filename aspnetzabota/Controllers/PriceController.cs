@@ -1,13 +1,14 @@
 ﻿using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using aspnetzabota.Content.Services.Price;
 
 namespace aspnetzabota.Controllers
 {
     public class PriceController : Controller
     {
-        private readonly Data.Interfaces.IPriceService _priceService;
+        private readonly IPrice _priceService;
 
-        public PriceController(Data.Interfaces.IPriceService ipriceService)
+        public PriceController(IPrice ipriceService)
         {
             _priceService = ipriceService;
         }
