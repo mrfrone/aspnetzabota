@@ -15,18 +15,6 @@
             </div>
         </div>
     }
-    @*<div class="slider-item" style="background-image:url('@Url.Content("~/images/bg_2.jpg")');" data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-                    <div class="col-md-6 text ftco-animate">
-                        <h1 class="mb-4">Мы Заботимся <span>О вашем здоровье</span></h1>
-                        <h3 class="subheading">Ваше здоровье является нашим главным приоритетом благодаря комплексному доступному медицинскому обслуживанию.</h3>
-                        <p><a href="#" class="btn btn-secondary px-4 py-3 mt-3">View our works</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>*@
 </section>
 
 <section class="ftco-intro ftco-services" style="background-image: url(@Url.Content("~/images/bg_3.jpg"));" data-stellar-background-ratio="0.5">
@@ -51,7 +39,6 @@
             <div class="col-md-8 text-center heading-section ftco-animate">
                 <span class="subheading">Врачи</span>
                 <h2 class="mb-4">Наши квалифицированные специалисты</h2>
-                @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
             </div>
         </div>
         <div class="row">
@@ -76,37 +63,11 @@
                             <a href="/Schedule/Doctor/@doctor.cat_id"><span class="position mb-2">@doctor.category</span></a>
                             <div class="faded">
                                 <p>@doctor.doctors.position</p>
-                                @*<ul class="ftco-social text-center">
-                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                    </ul>*@
                             </div>
                         </div>
                     </div>
                 </div>
             }
-            @*<div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
-                        <div class="img-wrap d-flex align-items-stretch">
-                            <div class="img align-self-stretch" style="background-image: url(images/doc-4.jpg);"></div>
-                        </div>
-                        <div class="text pt-3 text-center">
-                            <h3>Dr. Alicia Henderson</h3>
-                            <span class="position mb-2">Pediatrician</span>
-                            <div class="faded">
-                                <p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-                                <ul class="ftco-social text-center">
-                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
         </div>
     </div>
 </section>
@@ -116,10 +77,8 @@
             <div class="col-md-8 text-center heading-section ftco-animate">
                 <span class="subheading">Новости</span>
                 <h2 class="mb-4">Недавние новости</h2>
-                @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
             </div>
         </div>
-        @*<h3>@Model.currCategory</h3>*@
         <div class="row">
             @{
                 foreach (var news in Model.LastNews)
@@ -155,7 +114,6 @@
             <div class="col-md-8 text-center heading-section ftco-animate">
                 <span class="subheading">Отзывы</span>
                 <h2 class="mb-4">Наши Пациенты говорят о Нас</h2>
-                @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
             </div>
         </div>
         <div class="row ftco-animate justify-content-center">

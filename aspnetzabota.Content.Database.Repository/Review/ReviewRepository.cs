@@ -17,7 +17,7 @@ namespace aspnetzabota.Content.Database.Repository.Review
             this.appDBContext = appDBContext;
         }
         public IEnumerable<Entities.Review> Take => appDBContext.Reviews;
-        public IEnumerable<Entities.Review> Random(int Count) => appDBContext.Reviews.OrderBy(x => random.Next()).Take(Count);
+        public IEnumerable<Entities.Review> Last(int Count) => appDBContext.Reviews.OrderByDescending(x => x.date).Take(Count);
         public IEnumerable<Entities.Review> GetPagedList(int pageNumber, int pageSize) => appDBContext.Reviews.OrderByDescending(x => x.date).ToPagedList(pageNumber, pageSize);
         public async Task Add(Entities.Review review)
         {
