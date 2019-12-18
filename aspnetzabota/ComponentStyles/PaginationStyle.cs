@@ -1,5 +1,6 @@
 ﻿using X.PagedList.Mvc.Common;
 using System.Collections.Generic;
+using X.PagedList.Mvc.Core.Common;
 
 namespace aspnetzabota.ComponentStyles
 {

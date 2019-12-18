@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
@@ -21,6 +22,7 @@ namespace aspnetzabota
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ContentContext>();
+            //services.AddDbContext<ContentContext>();
             services.AddScoped<ILicenses, LicensesRepository>();
             services.AddScoped<IDepartment, DepartmentRepository>();
             services.AddScoped<IPrice, Price>();
@@ -29,20 +31,21 @@ namespace aspnetzabota
             services.AddScoped<ISlider, SliderRepository>();
             services.AddScoped<INews, NewsRepository>();
             services.AddScoped<ICategory, CategoryRepository>();
-            services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                options.SerializerSettings.Formatting = Formatting.None;
-                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-                options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-            }).AddRazorViewEngine();
+            //services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
+            //{
+            //    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            //    options.SerializerSettings.Formatting = Formatting.None;
+            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //    options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            //    options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //    //options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+            //}).AddRazorViewEngine();
+            services.AddMvcCore().AddRazorViewEngine().AddMvcOptions(x => x.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();

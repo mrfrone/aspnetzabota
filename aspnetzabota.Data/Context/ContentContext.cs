@@ -10,7 +10,7 @@ namespace aspnetzabota.Content.Database.Context
 
         //public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseMySQL(ConnectionString, options =>
+            optionsBuilder.UseMySql(ConnectionString, options =>
                 options.MigrationsHistoryTable("__EFMigrationsHistory")
             );
 

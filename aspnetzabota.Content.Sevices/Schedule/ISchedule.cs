@@ -5,11 +5,11 @@ namespace aspnetzabota.Content.Services.Schedule
 {
     public interface ISchedule
     {
-        IEnumerable<DoctorScheduleModel> Take { get; }
+        IEnumerable<DoctorSchedule> Take { get; }
         IEnumerable<string> Posts { get; }
-        DoctorScheduleModel Single(int id);
-        IEnumerable<DoctorScheduleModel> ScheduleFromSinglePost(int cat_id);
-        IEnumerable<DoctorScheduleModel> Random(int Count);
-        IEnumerable<DoctorScheduleModel> GetPagedList(int pageNumber, int pageSize);
+        DoctorSchedule Single(int id);
+        IEnumerable<DoctorSchedule> ScheduleFromSinglePost(int cat_id);
+        IEnumerable<DoctorSchedule> Random(int Count);
+        IEnumerable<DoctorSchedule> GetPagedList(int pageNumber, int pageSize);
     }
 }
