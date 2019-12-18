@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using aspnetzabota.Content.Database.Entities;
 
-namespace aspnetzabota.ViewModels
+namespace aspnetzabota.Web.ViewModels
 {
     public class LicensesViewModel
     {
