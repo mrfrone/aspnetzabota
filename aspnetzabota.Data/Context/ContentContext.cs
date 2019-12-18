@@ -5,14 +5,9 @@ namespace aspnetzabota.Content.Database.Context
 {
     public class ContentContext : DbContext
     {    
-        //todo for future: put conn string in app setting and use IOptionsMonitor
-        private const string ConnectionString = "server=mysql-srv53388.hts.ru;user id=srv53388_zabota;password=49274929;database=srv53388_zabtota;persistsecurityinfo=True;charset=utf8";
+        //todo for future: use IOptionsMonitor to connection string
+        public ContentContext(DbContextOptions<ContentContext> options) : base(options) { }
 
-        //public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseMySql(ConnectionString, options =>
-                options.MigrationsHistoryTable("__EFMigrationsHistory")
-            );
 
         public DbSet<News> News { get; set; }
         public DbSet<Category> Category { get; set; }

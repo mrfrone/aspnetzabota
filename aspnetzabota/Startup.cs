@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
@@ -13,16 +12,29 @@ using aspnetzabota.Content.Database.Repository.Review;
 using aspnetzabota.Content.Database.Repository.Slider;
 using aspnetzabota.Content.Services.Price;
 using aspnetzabota.Content.Services.Schedule;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace aspnetzabota
 {
     public class Startup
     {
+        private IConfigurationRoot _config;
+
+        public Startup(IWebHostEnvironment hostEnv)
+        {
+            _config = new ConfigurationBuilder().
+                SetBasePath(hostEnv.ContentRootPath).
+                AddJsonFile("appsettings.json").
+                Build();
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ContentContext>();
-            //services.AddDbContext<ContentContext>();
+            services.AddDbContext<ContentContext>(options => 
+                options.UseMySql(_config.GetConnectionString("DefaultConnection"), options =>
+                           options.MigrationsHistoryTable("__EFMigrationsHistory")));
+
             services.AddScoped<ILicenses, LicensesRepository>();
             services.AddScoped<IDepartment, DepartmentRepository>();
             services.AddScoped<IPrice, Price>();
