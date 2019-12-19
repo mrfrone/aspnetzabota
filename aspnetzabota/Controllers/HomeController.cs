@@ -27,7 +27,7 @@ namespace aspnetzabota.Controllers
             {
                 LastNews = _news.Last(3),
                 Slider = _slider.Take,
-                LastReviews = _Reviews.Last(6),
+                LastReviews = _Reviews.Random(6),
                 Doctors = _doctorSchedule.Random(4)
             };
             return View(result);
