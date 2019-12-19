@@ -19,9 +19,9 @@ namespace aspnetzabota
 {
     public class Startup
     {
-        private readonly IConfigurationRoot _config;
+        private IConfigurationRoot _config;
 
-        public Startup(IHostingEnvironment hostEnv)
+        public Startup(IWebHostEnvironment hostEnv)
         {
             _config = new ConfigurationBuilder().
                 SetBasePath(hostEnv.ContentRootPath).
@@ -32,8 +32,8 @@ namespace aspnetzabota
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ContentContext>(options => 
-                options.UseMySql(_config.GetConnectionString("DefaultConnection"), opt =>
-                           opt.MigrationsHistoryTable("__EFMigrationsHistory")));
+                options.UseMySql(_config.GetConnectionString("DefaultConnection"), options =>
+                           options.MigrationsHistoryTable("__EFMigrationsHistory")));
 
             services.AddScoped<ILicenses, LicensesRepository>();
             services.AddScoped<IDepartment, DepartmentRepository>();
@@ -43,21 +43,21 @@ namespace aspnetzabota
             services.AddScoped<ISlider, SliderRepository>();
             services.AddScoped<INews, NewsRepository>();
             services.AddScoped<ICategory, CategoryRepository>();
-            services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                options.SerializerSettings.Formatting = Formatting.None;
-                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-                options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-            }).AddRazorViewEngine();
-            //services.AddMvcCore().AddRazorViewEngine().AddMvcOptions(x => x.EnableEndpointRouting = false);
+            //services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
+            //{
+            //    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            //    options.SerializerSettings.Formatting = Formatting.None;
+            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //    options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            //    options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //    //options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+            //}).AddRazorViewEngine();
+            services.AddMvcCore().AddRazorViewEngine().AddMvcOptions(x => x.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();

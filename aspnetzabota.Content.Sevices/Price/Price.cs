@@ -33,7 +33,7 @@ namespace aspnetzabota.Content.Services.Price
         public  IEnumerable<Database.Entities.PriceGroupsAndDepartmentsModel> PriceDepartments(int id) => GroupsAndDepartments.Where(c => c.grcode == id);
         public  IEnumerable<Database.Entities.Price> FromGroup(int id) => JsonPrice.Where(c => c.grcode == id);
         public  IEnumerable<Database.Entities.Price> FromDepartment(string id) => JsonPrice.Where(c => c.depart_name == id);
-        public IEnumerable<Database.Entities.Price> FromSearch(string line) => JsonPrice.Where(c => c.name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
+        public IEnumerable<Database.Entities.Price> FromSearch(string line) => JsonPrice.Where(c => c.name.Contains(line, StringComparison.InvariantCultureIgnoreCase));
 
     }
 }
