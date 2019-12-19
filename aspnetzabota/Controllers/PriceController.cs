@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Web.ViewModels;
+﻿using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Services.Price;
 

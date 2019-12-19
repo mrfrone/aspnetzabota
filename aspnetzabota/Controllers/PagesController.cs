@@ -1,5 +1,5 @@
 ﻿using aspnetzabota.Content.Database.Repository.Licenses;
-using aspnetzabota.Web.ViewModels;
+using aspnetzabota.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetzabota.Controllers

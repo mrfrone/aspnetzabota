@@ -1,7 +1,7 @@
 ﻿using aspnetzabota.Content.Database.Entities;
 using System.Collections.Generic;
 
-namespace aspnetzabota.Web.ViewModels
+namespace aspnetzabota.ViewModels
 {
     public class PriceServiceViewModel
     {

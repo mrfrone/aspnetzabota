@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using aspnetzabota.Content.Database.Entities;
-
-namespace aspnetzabota.Web.ViewModels
+namespace aspnetzabota.ViewModels
 {
     public class DepartmentsViewModel
     {

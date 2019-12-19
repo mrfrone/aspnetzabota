@@ -2,7 +2,7 @@
 using aspnetzabota.Content.Database.Entities;
 using X.PagedList.Mvc.Common;
 
-namespace aspnetzabota.Web.ViewModels
+namespace aspnetzabota.ViewModels
 {
     public class ScheduleViewModel
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.Web.ViewModels;
+using aspnetzabota.ViewModels;
 using aspnetzabota.Content.Database.Repository.Department;
 
 namespace aspnetzabota.Components
