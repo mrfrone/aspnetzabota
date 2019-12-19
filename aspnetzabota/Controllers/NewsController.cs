@@ -1,7 +1,7 @@
 ﻿using aspnetzabota.Content.Database.Repository.News;
 using aspnetzabota.Content.Database.Repository.Category;
 using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.ViewModels;
+using aspnetzabota.Web.ViewModels;
 using aspnetzabota.ComponentStyles;
 
 namespace aspnetzabota.Controllers

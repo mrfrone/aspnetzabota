@@ -1,6 +1,6 @@
 ﻿using aspnetzabota.Content.Database.Repository.Department;
 using aspnetzabota.Content.Services.Price;
-using aspnetzabota.ViewModels;
+using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetzabota.Controllers
