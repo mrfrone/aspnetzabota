@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using aspnetzabota.Content.Database.Entities;
-using X.PagedList.Mvc.Core.Common;
+using X.PagedList.Mvc.Common;
 
 namespace aspnetzabota.ViewModels
 {

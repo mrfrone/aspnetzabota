@@ -1,6 +1,6 @@
 ﻿namespace aspnetzabota.Content.Database.Entities
 {
-    public class DoctorSchedule
+    public class DoctorScheduleModel
     {
         public string cat_id { get; set; }
         public string category { get; set; }
