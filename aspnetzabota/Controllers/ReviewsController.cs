@@ -2,7 +2,7 @@
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Database.Entities;
-using aspnetzabota.Web.Style;
+using aspnetzabota.ComponentStyles;
 
 namespace aspnetzabota.Controllers
 {

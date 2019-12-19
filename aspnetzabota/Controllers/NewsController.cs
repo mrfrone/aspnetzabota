@@ -2,7 +2,7 @@
 using aspnetzabota.Content.Database.Repository.Category;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.ViewModels;
-using aspnetzabota.Web.Style;
+using aspnetzabota.ComponentStyles;
 
 namespace aspnetzabota.Controllers
 {
