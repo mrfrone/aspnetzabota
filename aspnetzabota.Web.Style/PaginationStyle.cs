@@ -1,7 +1,7 @@
 ﻿using X.PagedList.Mvc.Common;
 using System.Collections.Generic;
 
-namespace aspnetzabota.ComponentStyles
+namespace aspnetzabota.Web.Style
 {
     public static class PaginationStyle
     {

@@ -21,6 +21,7 @@
     <ProjectReference Include="..\aspnetzabota.Content.Database.Repository\aspnetzabota.Content.Database.Repository.csproj" />
     <ProjectReference Include="..\aspnetzabota.Content.Sevices\aspnetzabota.Content.Services.csproj" />
     <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Content.Database.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Web.Style\aspnetzabota.Web.Style.csproj" />
     <ProjectReference Include="..\aspnetzabota.Web.ViewModels\aspnetzabota.Web.ViewModels.csproj" />
   </ItemGroup>
 

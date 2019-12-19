@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.ViewModels;
-using aspnetzabota.ComponentStyles;
+using aspnetzabota.Web.Style;
 using aspnetzabota.Content.Services.Schedule;
 
 namespace aspnetzabota.Controllers
