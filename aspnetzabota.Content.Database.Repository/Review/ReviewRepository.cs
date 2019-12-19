@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using aspnetzabota.Content.Database.Context;
+using aspnetzabota.Common.EFCore.Extensions;
 
 namespace aspnetzabota.Content.Database.Repository.Review
 {
@@ -16,9 +17,16 @@ namespace aspnetzabota.Content.Database.Repository.Review
         {
             this.appDBContext = appDBContext;
         }
-        public IEnumerable<Entities.Review> Take => appDBContext.Reviews;
-        public IEnumerable<Entities.Review> Random(int Count) => appDBContext.Reviews.OrderBy(x => random.Next()).Take(Count);
-        public IEnumerable<Entities.Review> GetPagedList(int pageNumber, int pageSize) => appDBContext.Reviews.OrderByDescending(x => x.date).ToPagedList(pageNumber, pageSize);
+        public IEnumerable<Entities.Review> Random(int Count, bool trackChanges = false) =>
+            appDBContext.Reviews.
+                HasTracking(trackChanges).
+                OrderBy(x => random.Next()).
+                Take(Count);
+        public IEnumerable<Entities.Review> GetPagedList(int pageNumber, int pageSize, bool trackChanges = false) =>
+            appDBContext.Reviews.
+                HasTracking(trackChanges).
+                OrderByDescending(x => x.date).
+                ToPagedList(pageNumber, pageSize);
         public async Task Add(Entities.Review review)
         {
             review.date = DateTime.Now.ToShortDateString();

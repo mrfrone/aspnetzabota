@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Web.Style", "a
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Web.ViewModels", "aspnetzabota.Web.ViewModels\aspnetzabota.Web.ViewModels.csproj", "{90794A88-32EC-4273-AF89-EA3F1A7FDEBD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Common.EFCore", "aspnetzabota.Common.EFCore\aspnetzabota.Common.EFCore.csproj", "{901C4279-A1E7-4959-A020-ED2447DCBADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{90794A88-32EC-4273-AF89-EA3F1A7FDEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90794A88-32EC-4273-AF89-EA3F1A7FDEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90794A88-32EC-4273-AF89-EA3F1A7FDEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{901C4279-A1E7-4959-A020-ED2447DCBADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{901C4279-A1E7-4959-A020-ED2447DCBADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{901C4279-A1E7-4959-A020-ED2447DCBADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{901C4279-A1E7-4959-A020-ED2447DCBADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,7 @@ Global
 		{ACC00AB7-C420-43B2-ACD0-2E4A885ED409} = {5A726B7C-B400-4766-86DD-1B7E827A98F2}
 		{CC37A5A4-1200-4B81-A0C7-614F6F95D5BF} = {708E8DD6-9BBC-4404-A46C-0A1B0E98009C}
 		{90794A88-32EC-4273-AF89-EA3F1A7FDEBD} = {708E8DD6-9BBC-4404-A46C-0A1B0E98009C}
+		{901C4279-A1E7-4959-A020-ED2447DCBADA} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE8BF93-7D64-4481-85D9-474D1445CBE6}

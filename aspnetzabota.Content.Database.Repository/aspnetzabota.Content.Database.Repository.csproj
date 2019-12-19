@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aspnetzabota.Common.EFCore\aspnetzabota.Common.EFCore.csproj" />
     <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Content.Database.csproj" />
   </ItemGroup>
 

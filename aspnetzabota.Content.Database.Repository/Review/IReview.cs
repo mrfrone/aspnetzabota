@@ -5,9 +5,8 @@ namespace aspnetzabota.Content.Database.Repository.Review
 {
     public interface IReview
     {
-        IEnumerable<Entities.Review> Take { get; }
-        IEnumerable<Entities.Review> Random(int Count);
-        IEnumerable<Entities.Review> GetPagedList(int pageNumber, int pageSize);
+        IEnumerable<Entities.Review> Random(int Count, bool trackChanges = false);
+        IEnumerable<Entities.Review> GetPagedList(int pageNumber, int pageSize, bool trackChanges = false);
         Task Add(Entities.Review review);
     }
 }
