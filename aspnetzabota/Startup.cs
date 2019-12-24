@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using aspnetzabota.Admin.Services.Extentions;
 using aspnetzabota.Content.Services.Extensions;
 using aspnetzabota.Admin.Datamodel.Tokens;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +32,8 @@ namespace aspnetzabota
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddContentRepository(connectionString);
+            services.AddAdminServices(connectionString);
+            services.AddContentServices(connectionString);   
 
             var jwtOptions = Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

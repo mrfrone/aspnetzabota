@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using aspnetzabota.Admin.Database.Repository.Extentions;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace aspnetzabota.Admin.Database.Repository.Extentions
+namespace aspnetzabota.Admin.Services.Extentions
 {
     public static class ServiceCollectionExtensions
     {

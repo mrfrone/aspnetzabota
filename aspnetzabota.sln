@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Database
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Forms", "aspnetzabota.Admin.Forms\aspnetzabota.Admin.Forms.csproj", "{D947A635-CB25-49FB-8C42-E055B6580839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Service", "aspnetzabota.Admin.Service\aspnetzabota.Admin.Service.csproj", "{7A3DAD9F-383A-4068-B18C-009C474F1634}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Services", "aspnetzabota.Admin.Service\aspnetzabota.Admin.Services.csproj", "{7A3DAD9F-383A-4068-B18C-009C474F1634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
