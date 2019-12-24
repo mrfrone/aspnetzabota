@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+<div class="form-login">
+    <form class="form" method="POST">
+        <div class="bf-account-header">
+            <p>Ты можешь войти, либо <a href="~/">вернуться на главную</a>.</p>
+        </div>
+        <div class="text-danger"></div>
+        <input class="form-control form-control form-control-top" placeholder="Username" autofocus>
+        <input class="form-control form-control form-control-bottom" placeholder="Password">
+        <div class="my-3">
+            <label class="custom-control custom-checkbox my-auto pr-0 mr-2">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-label">Remember me</span>
+            </label>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
+    </form>
+
+
+    @*<div class="bf-account-header mb-0">
+            <div class="h5 mb-4">You are already signed in!</div>
+            <div class="btn-group d-flex">
+                <a href="~/" class="btn btn-outline-primary w-100">Blog</a>
+                <a href="~/admin" class="btn btn-outline-primary w-100">Admin</a>
+            </div>
+        </div>*@
+</div>
+

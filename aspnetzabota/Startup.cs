@@ -4,26 +4,59 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using aspnetzabota.Content.Services.Extensions;
+using aspnetzabota.Admin.Datamodel.Tokens;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace aspnetzabota
 {
     public class Startup
     {
-        private readonly IConfigurationRoot _config;
-
+        public IConfiguration Configuration { get; }
+        private readonly IHostingEnvironment _environment;
         public Startup(IHostingEnvironment hostEnv)
         {
-            _config = new ConfigurationBuilder().
-                SetBasePath(hostEnv.ContentRootPath).
-                AddJsonFile("appsettings.json").
-                Build();
+             var _config = new ConfigurationBuilder().
+                SetBasePath(hostEnv.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{hostEnv.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = _config.Build();
+            _environment = hostEnv;
+
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = _config.GetConnectionString("DefaultConnection");
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddContentRepository(connectionString);
+
+            var jwtOptions = Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            // укзывает, будет ли валидироваться издатель при валидации токена
+                            ValidateIssuer = true,
+                            // строка, представляющая издателя
+                            ValidIssuer = jwtOptions.Issuer,
+
+                            // будет ли валидироваться потребитель токена
+                            ValidateAudience = true,
+                            // установка потребителя токена
+                            ValidAudience = jwtOptions.Audience,
+                            // будет ли валидироваться время существования
+                            ValidateLifetime = true,
+                            // установка ключа безопасности
+                            IssuerSigningKey = jwtOptions.GetSecurityKey(),
+                            // валидация ключа безопасности
+                            ValidateIssuerSigningKey = true,
+                        };
+                    });
 
             services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
             {

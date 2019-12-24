@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\aspnetzabota.Admin.Database\aspnetzabota.Admin.Database.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Common.EFCore\aspnetzabota.Common.EFCore.csproj" />
+  </ItemGroup>
+
+</Project>

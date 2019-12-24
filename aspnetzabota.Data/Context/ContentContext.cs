@@ -5,13 +5,7 @@ namespace aspnetzabota.Content.Database.Context
 {
     public class ContentContext : DbContext
     {    
-        //todo for future: use IOptionsMonitor to connection string
         public ContentContext(DbContextOptions<ContentContext> options) : base(options) { }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        //    optionsBuilder.UseMySQL(ConnectionString, options =>
-        //        options.MigrationsHistoryTable("__EFMigrationsHistory")
-        //    );
 
         public DbSet<News> News { get; set; }
         public DbSet<Category> Category { get; set; }
