@@ -27,9 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{D1B133A2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Database", "aspnetzabota.Admin.Database\aspnetzabota.Admin.Database.csproj", "{4D405965-E00A-4A98-9447-E0C09DD2A48D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Datamodel", "aspnetzabota.Admin.Datamodel\aspnetzabota.Admin.Datamodel.csproj", "{193AF8A7-9584-46E3-80AA-77499840C287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Datamodel", "aspnetzabota.Admin.Datamodel\aspnetzabota.Admin.Datamodel.csproj", "{193AF8A7-9584-46E3-80AA-77499840C287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Database.Repository", "aspnetzabota.Admin.Database.Repository\aspnetzabota.Admin.Database.Repository.csproj", "{33488241-2296-412F-8183-D13E5B66FD3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Database.Repository", "aspnetzabota.Admin.Database.Repository\aspnetzabota.Admin.Database.Repository.csproj", "{33488241-2296-412F-8183-D13E5B66FD3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Forms", "aspnetzabota.Admin.Forms\aspnetzabota.Admin.Forms.csproj", "{D947A635-CB25-49FB-8C42-E055B6580839}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Service", "aspnetzabota.Admin.Service\aspnetzabota.Admin.Service.csproj", "{7A3DAD9F-383A-4068-B18C-009C474F1634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,14 @@ Global
 		{33488241-2296-412F-8183-D13E5B66FD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33488241-2296-412F-8183-D13E5B66FD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33488241-2296-412F-8183-D13E5B66FD3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D947A635-CB25-49FB-8C42-E055B6580839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D947A635-CB25-49FB-8C42-E055B6580839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D947A635-CB25-49FB-8C42-E055B6580839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D947A635-CB25-49FB-8C42-E055B6580839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +104,8 @@ Global
 		{4D405965-E00A-4A98-9447-E0C09DD2A48D} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
 		{193AF8A7-9584-46E3-80AA-77499840C287} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
 		{33488241-2296-412F-8183-D13E5B66FD3D} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
+		{D947A635-CB25-49FB-8C42-E055B6580839} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
+		{7A3DAD9F-383A-4068-B18C-009C474F1634} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE8BF93-7D64-4481-85D9-474D1445CBE6}

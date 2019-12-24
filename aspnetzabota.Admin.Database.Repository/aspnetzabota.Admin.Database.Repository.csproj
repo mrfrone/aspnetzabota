@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aspnetzabota.Admin.Database\aspnetzabota.Admin.Database.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Admin.Forms\aspnetzabota.Admin.Forms.csproj" />
     <ProjectReference Include="..\aspnetzabota.Common.EFCore\aspnetzabota.Common.EFCore.csproj" />
   </ItemGroup>
 
