@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\aspnetzabota.Admin.Datamodel\aspnetzabota.Admin.Datamodel.csproj" />
     <ProjectReference Include="..\aspnetzabota.Admin.Service\aspnetzabota.Admin.Services.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Common.PasswordHashCalculator\aspnetzabota.Common.PasswordService.csproj" />
     <ProjectReference Include="..\aspnetzabota.Content.Database.Repository\aspnetzabota.Content.Database.Repository.csproj" />
     <ProjectReference Include="..\aspnetzabota.Content.Sevices\aspnetzabota.Content.Services.csproj" />
     <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Content.Database.csproj" />

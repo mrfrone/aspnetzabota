@@ -31,9 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Datamode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Database.Repository", "aspnetzabota.Admin.Database.Repository\aspnetzabota.Admin.Database.Repository.csproj", "{33488241-2296-412F-8183-D13E5B66FD3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Forms", "aspnetzabota.Admin.Forms\aspnetzabota.Admin.Forms.csproj", "{D947A635-CB25-49FB-8C42-E055B6580839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Forms", "aspnetzabota.Admin.Forms\aspnetzabota.Admin.Forms.csproj", "{D947A635-CB25-49FB-8C42-E055B6580839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Admin.Services", "aspnetzabota.Admin.Service\aspnetzabota.Admin.Services.csproj", "{7A3DAD9F-383A-4068-B18C-009C474F1634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Admin.Services", "aspnetzabota.Admin.Service\aspnetzabota.Admin.Services.csproj", "{7A3DAD9F-383A-4068-B18C-009C474F1634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Common.PasswordService", "aspnetzabota.Common.PasswordHashCalculator\aspnetzabota.Common.PasswordService.csproj", "{562B8AB2-4665-47D6-B255-4CFB9337D5FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Common.Datamodel", "aspnetzabota.Common.Datamodel\aspnetzabota.Common.Datamodel.csproj", "{C45A62E1-8246-43DA-B4D6-3782160B6D37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +93,14 @@ Global
 		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A3DAD9F-383A-4068-B18C-009C474F1634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562B8AB2-4665-47D6-B255-4CFB9337D5FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562B8AB2-4665-47D6-B255-4CFB9337D5FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562B8AB2-4665-47D6-B255-4CFB9337D5FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562B8AB2-4665-47D6-B255-4CFB9337D5FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +118,8 @@ Global
 		{33488241-2296-412F-8183-D13E5B66FD3D} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
 		{D947A635-CB25-49FB-8C42-E055B6580839} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
 		{7A3DAD9F-383A-4068-B18C-009C474F1634} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
+		{562B8AB2-4665-47D6-B255-4CFB9337D5FC} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
+		{C45A62E1-8246-43DA-B4D6-3782160B6D37} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE8BF93-7D64-4481-85D9-474D1445CBE6}

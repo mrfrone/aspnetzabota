@@ -45,5 +45,19 @@ namespace aspnetzabota.Admin.Database.Repository.Tokens
                 .HasTracking(trackChanges)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
+        public async Task<bool> RevokeByTokenId(int actorId, int tokenId)
+        {
+            var activeToken = await _ac.Jwts.FirstOrDefaultAsync(u => u.Id == tokenId);
+            if (activeToken == null)
+                return false;
+
+            activeToken.Deleted = DateTimeOffset.UtcNow;
+            activeToken.DeletedById = actorId;
+            activeToken.IsDeleted = true;
+
+            await _ac.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

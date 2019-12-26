@@ -5,6 +5,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using aspnetzabota.Admin.Services.Extentions;
 using aspnetzabota.Content.Services.Extensions;
+using aspnetzabota.Common.PasswordService.Extensions;
 using aspnetzabota.Admin.Datamodel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,7 +34,8 @@ namespace aspnetzabota
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddAdminServices(connectionString);
-            services.AddContentServices(connectionString);   
+            services.AddContentServices(connectionString);
+            services.AddPasswordHashing();
 
             var jwtOptions = Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
