@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\aspnetzabota.Admin.Database\aspnetzabota.Admin.Database.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Common.AutoMapper\aspnetzabota.Common.AutoMapper.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,12 +4,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using aspnetzabota.Admin.Services.Extentions;
+using aspnetzabota.Admin.Datamodel.Mapping;
 using aspnetzabota.Content.Services.Extensions;
 using aspnetzabota.Common.PasswordService.Extensions;
 using aspnetzabota.Admin.Datamodel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using aspnetzabota.Common.Datamodel.PasswordHashing;
+using aspnetzabota.Common.AutoMapper.Extensions;
 
 namespace aspnetzabota
 {
@@ -32,10 +35,18 @@ namespace aspnetzabota
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<JwtSettings>(Configuration.GetSection(nameof(JwtSettings)));
+            services.Configure<PasswordHashingSettings>(Configuration.GetSection(nameof(PasswordHashingSettings)));
+
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddAdminServices(connectionString);
             services.AddContentServices(connectionString);
             services.AddPasswordHashing();
+
+            services.AddMiMapping(
+                //typeof(Content.Datamodel.Mapping.MappingProfile),
+                typeof(Admin.Datamodel.Mapping.MappingProfile)
+                );
 
             var jwtOptions = Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
