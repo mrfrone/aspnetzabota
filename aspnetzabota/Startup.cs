@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using aspnetzabota.Common.Datamodel.PasswordHashing;
 using aspnetzabota.Common.AutoMapper.Extensions;
+using aspnetzabota.Web.Common;
+using aspnetzabota.Web.Common.Filters;
 
 namespace aspnetzabota
 {
@@ -42,6 +44,9 @@ namespace aspnetzabota
             services.AddAdminServices(connectionString);
             services.AddContentServices(connectionString);
             services.AddPasswordHashing();
+            services.AddScoped<IIdentityRequestStorage, IdentityRequestStorage>();
+
+
 
             services.AddMiMapping(
                 //typeof(Content.Datamodel.Mapping.MappingProfile),
@@ -73,7 +78,11 @@ namespace aspnetzabota
                         };
                     });
 
-            services.AddMvcCore().AddJsonFormatters().AddJsonOptions(options =>
+            services.AddMvcCore(options =>
+            {
+                options.Filters.Add<IdentityStorageFilterAttribute>();
+            })
+                .AddJsonFormatters().AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 options.SerializerSettings.Formatting = Formatting.None;
@@ -92,6 +101,7 @@ namespace aspnetzabota
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+            app.UseAuthentication();    
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

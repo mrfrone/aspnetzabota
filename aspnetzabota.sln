@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Common.Result"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Common.AutoMapper", "aspnetzabota.Common.AutoMapper\aspnetzabota.Common.AutoMapper.csproj", "{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Web.Common", "aspnetzabota.Web.Common\aspnetzabota.Web.Common.csproj", "{58F92B1E-2C74-4DCE-B366-1C968832C707}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58F92B1E-2C74-4DCE-B366-1C968832C707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58F92B1E-2C74-4DCE-B366-1C968832C707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58F92B1E-2C74-4DCE-B366-1C968832C707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58F92B1E-2C74-4DCE-B366-1C968832C707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,6 +140,7 @@ Global
 		{C45A62E1-8246-43DA-B4D6-3782160B6D37} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 		{46720DAB-04ED-40C3-B970-65A2CF7FD7FF} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
+		{58F92B1E-2C74-4DCE-B366-1C968832C707} = {708E8DD6-9BBC-4404-A46C-0A1B0E98009C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE8BF93-7D64-4481-85D9-474D1445CBE6}

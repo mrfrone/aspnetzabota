@@ -2,6 +2,7 @@
 using aspnetzabota.Admin.Database.Entities;
 using aspnetzabota.Admin.Datamodel.Tokens;
 using aspnetzabota.Common.AutoMapper.Extensions;
+using aspnetzabota.Admin.Datamodel.Identities;
 
 namespace aspnetzabota.Admin.Datamodel.Mapping
 {
@@ -15,11 +16,10 @@ namespace aspnetzabota.Admin.Datamodel.Mapping
                 .ForMember(u => u.Token, opts => opts.MapFrom(u => u.Token))
                 .ForMember(u => u.Expires, opts => opts.MapFrom(u => u.Expires));
 
-            //CreateMap<Database.Entities.Identities, LazuritIdentity>()
-            //    .IgnoreOther()
-            //    .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
-            //    .ForMember(u => u.Login, opts => opts.MapFrom(u => u.Login))
-            //    .ForMember(u => u.IsBanned, opts => opts.MapFrom(u => u.IsBanned));
+            CreateMap<Database.Entities.Identities, ZabotaIdentity>()
+                .IgnoreOther()
+                .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
+                .ForMember(u => u.Login, opts => opts.MapFrom(u => u.Login));
 
             //CreateMap<Database.Entities.UsersProfiles, LazuritUserProfile>()
             //    .IgnoreOther()
