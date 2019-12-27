@@ -1,5 +1,4 @@
-﻿using aspnetzabota.Admin.Database.Entities;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aspnetzabota.Admin.Database.Entities

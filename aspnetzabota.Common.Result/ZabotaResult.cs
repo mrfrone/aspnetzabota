@@ -48,7 +48,7 @@ namespace aspnetzabota.Common.Result
         public T Result { get; set; }
 
         public static implicit operator ZabotaResult<T>(ZabotaErrorCodes error) => new ZabotaResult<T>(ZabotaError.FromCode(error));
-        public static implicit operator ZabotaResult<T>(ZabotaError lazuritError) => new ZabotaResult<T>(lazuritError);
+        public static implicit operator ZabotaResult<T>(ZabotaError zabotaError) => new ZabotaResult<T>(zabotaError);
 
         public static ZabotaResult<T> FromCode(ZabotaErrorCodes code, string message = null)
         {
