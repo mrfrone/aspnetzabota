@@ -8,9 +8,19 @@ namespace aspnetzabota.Admin.Database.Extensions
     {
         public static IServiceCollection AddAdminDatabase(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<AdminContext>(options =>
-                options.UseMySql(connectionString, opt =>
-                           opt.MigrationsHistoryTable("__EFMigrationsHistory")));
+            //services.AddDbContext<AdminContext>(options =>
+            //    options.UseMySql(connectionString, opt =>
+            //               opt.MigrationsHistoryTable("__EFMigrationsHistory")));
+
+            services.AddDbContext<AdminContext>(builder =>
+            {
+                builder.UseNpgsql(connectionString, options =>
+                {
+                    options.MigrationsAssembly("aspnetzabota.Web");
+                    options.EnableRetryOnFailure();
+                    options.MigrationsHistoryTable("__EFMigrationsHistory", AdminContext.SchemaName);
+                });
+            });
 
             return services;
         }

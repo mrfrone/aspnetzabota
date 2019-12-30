@@ -6,6 +6,8 @@ using aspnetzabota.Common.Result;
 using aspnetzabota.Web.Common;
 using aspnetzabota.Web.Common.Filters;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace aspnetzabota.Controllers
 {
@@ -21,16 +23,26 @@ namespace aspnetzabota.Controllers
         {
             return View();
         }
-        [ValidModelState]
-        public async Task<IActionResult> Login([FromBody]LoginForm form)
+        [Authorize]
+        public ViewResult Main()
         {
-            var result = await _loginService.Login(new aspnetzabota.Admin.Forms.Login.LoginForm
+            return View();
+        }
+        [ValidModelState]
+        public async Task<IActionResult> LoginPost([FromBody]LoginForm form)
+        {
+            var result = await _loginService.Login(new LoginForm
             {
                 Login = form.Login,
                 Password = form.Password
             });
+            HttpContext.Response.Cookies.Append(".zabota.app.core", result.Result.Token,
+                new CookieOptions
+                {
+                    MaxAge = TimeSpan.FromMinutes(10080)
+                });
 
-            return ZabotaResult(result);
+            return Redirect("~/Admin/Main");
         }
 
         [Authorize]
@@ -42,6 +54,8 @@ namespace aspnetzabota.Controllers
                 TokenId = CurrentTokenId
             };
             var result = await _loginService.Logout(form);
+
+            HttpContext.Response.Cookies.Delete(".zabota.app.core");
 
             return ZabotaResult(result);
         }

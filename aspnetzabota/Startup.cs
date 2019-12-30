@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using aspnetzabota.Admin.Services.Extentions;
-using aspnetzabota.Admin.Datamodel.Mapping;
 using aspnetzabota.Content.Services.Extensions;
 using aspnetzabota.Common.PasswordService.Extensions;
 using aspnetzabota.Admin.Datamodel.Tokens;
@@ -15,6 +14,9 @@ using aspnetzabota.Common.Datamodel.PasswordHashing;
 using aspnetzabota.Common.AutoMapper.Extensions;
 using aspnetzabota.Web.Common;
 using aspnetzabota.Web.Common.Filters;
+using aspnetzabota.Common.EFCore.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace aspnetzabota
 {
@@ -33,16 +35,17 @@ namespace aspnetzabota
             Configuration = _config.Build();
             _environment = hostEnv;
 
+
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<JwtSettings>(Configuration.GetSection(nameof(ConnectionStrings)));
             services.Configure<JwtSettings>(Configuration.GetSection(nameof(JwtSettings)));
             services.Configure<PasswordHashingSettings>(Configuration.GetSection(nameof(PasswordHashingSettings)));
 
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddAdminServices(connectionString);
-            services.AddContentServices(connectionString);
+            services.AddAdminServices(Configuration.GetConnectionString("PostgreSQL"));
+            services.AddContentServices(Configuration.GetConnectionString("MySQL"));
             services.AddPasswordHashing();
             services.AddScoped<IIdentityRequestStorage, IdentityRequestStorage>();
 
@@ -54,10 +57,16 @@ namespace aspnetzabota
                 );
 
             var jwtOptions = Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                     .AddJwtBearer(options =>
                     {
                         options.RequireHttpsMetadata = false;
+                        options.SaveToken = true;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             // укзывает, будет ли валидироваться издатель при валидации токена
@@ -101,12 +110,26 @@ namespace aspnetzabota
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+            app.Use(async (context, next) =>
+            {
+                var token = context.Request.Cookies[".zabota.app.core"];
+                if (!string.IsNullOrEmpty(token))
+                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+
+                await next();
+            });
             app.UseAuthentication();    
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                 name: "default",
                 template: "{controller=Home}/{action=Index}/");
+            });
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+                HttpOnly = HttpOnlyPolicy.Always,
+                Secure = CookieSecurePolicy.Always
             });
         }
     }

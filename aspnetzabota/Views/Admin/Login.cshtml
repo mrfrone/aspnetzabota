@@ -7,15 +7,9 @@
             <p>Ты можешь войти, либо <a href="~/">вернуться на главную</a>.</p>
         </div>
         <div class="text-danger"></div>
-        <input class="form-control form-control form-control-top" placeholder="Username" autofocus>
-        <input class="form-control form-control form-control-bottom" placeholder="Password">
-        <div class="my-3">
-            <label class="custom-control custom-checkbox my-auto pr-0 mr-2">
-                <input type="checkbox" class="custom-control-input">
-                <span class="custom-control-label">Remember me</span>
-            </label>
-        </div>
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
+        <input id="log" class="form-control form-control form-control-top" placeholder="Username" autofocus>
+        <input id="pass" class="form-control form-control form-control-bottom" placeholder="Password">
+        <button id="logbutt" type="submit" class="btn btn-lg btn-primary btn-block" onclick="Ajax_Login()">Войти</button>
     </form>
 
 
@@ -27,4 +21,34 @@
             </div>
         </div>*@
 </div>
+@section scripts
+{
+    <script type="text/javascript">
+        function Ajax_Login() {
+
+            var logform = {};
+            logform.Login = $('#log').val();
+            logform.Password = $('#pass').val();
+
+            console.log(JSON.stringify(logform));
+
+            if (logform.Login && logform.Password) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/LoginPost",
+                    data: JSON.stringify(logform),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (response) {
+                    alert("Авторизация успешна!");
+                }).fail(function (response) {
+                    console.log('Error: ' + response);
+                });
+            }
+            else {
+                alert("Заполнены не все поля!");
+            }
+        }
+    </script>
+}
 
