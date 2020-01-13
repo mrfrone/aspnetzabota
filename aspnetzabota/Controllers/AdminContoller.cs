@@ -36,13 +36,16 @@ namespace aspnetzabota.Controllers
                 Login = form.Login,
                 Password = form.Password
             });
-            HttpContext.Response.Cookies.Append(".zabota.app.core", result.Result.Token,
-                new CookieOptions
-                {
-                    MaxAge = TimeSpan.FromMinutes(10080)
-                });
 
-            return Redirect("~/Admin/Main");
+            if (result.IsCorrect)
+                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", result.Result.Token);
+
+            //new CookieOptions
+            //{
+            //    MaxAge = TimeSpan.FromMinutes(60)
+            //});
+
+            return ZabotaResult(result.IsCorrect);
         }
 
         [Authorize]
@@ -55,7 +58,8 @@ namespace aspnetzabota.Controllers
             };
             var result = await _loginService.Logout(form);
 
-            HttpContext.Response.Cookies.Delete(".zabota.app.core");
+            if (result.IsCorrect)
+                HttpContext.Response.Cookies.Delete(".AspNetCore.Application.Id");
 
             return ZabotaResult(result);
         }

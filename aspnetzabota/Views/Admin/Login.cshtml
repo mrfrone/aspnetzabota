@@ -9,7 +9,7 @@
         <div class="text-danger"></div>
         <input id="log" class="form-control form-control form-control-top" placeholder="Username" autofocus>
         <input id="pass" class="form-control form-control form-control-bottom" placeholder="Password">
-        <button id="logbutt" type="submit" class="btn btn-lg btn-primary btn-block" onclick="Ajax_Login()">Войти</button>
+        <button id="logbutt" class="btn btn-lg btn-primary btn-block" onclick="Ajax_Login()">Войти</button>
     </form>
 
 
@@ -24,6 +24,7 @@
 @section scripts
 {
     <script type="text/javascript">
+
         function Ajax_Login() {
 
             var logform = {};
@@ -39,10 +40,14 @@
                     data: JSON.stringify(logform),
                     contentType: "application/json",
                     dataType: "json"
-                }).done(function (response) {
-                    alert("Авторизация успешна!");
-                }).fail(function (response) {
-                    console.log('Error: ' + response);
+                }).done(function (data) {
+                    console.log(data.result + "huy");
+                    //if (data.result)
+                    //    document.location.replace = "/Main";
+                    //else
+                    //    alert("Ошибка!");
+                }).fail(function () {
+                    console.log('Error');
                 });
             }
             else {

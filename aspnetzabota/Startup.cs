@@ -15,8 +15,8 @@ using aspnetzabota.Common.AutoMapper.Extensions;
 using aspnetzabota.Web.Common;
 using aspnetzabota.Web.Common.Filters;
 using aspnetzabota.Common.EFCore.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.Http;
 
 namespace aspnetzabota
 {
@@ -110,26 +110,28 @@ namespace aspnetzabota
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-            app.Use(async (context, next) =>
-            {
-                var token = context.Request.Cookies[".zabota.app.core"];
-                if (!string.IsNullOrEmpty(token))
-                    context.Request.Headers.Add("Authorization", "Bearer " + token);
 
-                await next();
-            });
-            app.UseAuthentication();    
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                name: "default",
-                template: "{controller=Home}/{action=Index}/");
-            });
             app.UseCookiePolicy(new CookiePolicyOptions
             {
                 MinimumSameSitePolicy = SameSiteMode.Strict,
                 HttpOnly = HttpOnlyPolicy.Always,
                 Secure = CookieSecurePolicy.Always
+            });
+            app.Use(async (context, next) =>
+            {
+                var token = context.Request.Cookies[".AspNetCore.Application.Id"];
+                if (!string.IsNullOrEmpty(token))
+                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+
+                await next();
+            });
+            app.UseAuthentication();
+            
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/");
             });
         }
     }
