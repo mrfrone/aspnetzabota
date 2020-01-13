@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using aspnetzabota.Common.EFCore.Extensions;
 using aspnetzabota.Content.Database.Context;
@@ -41,6 +40,7 @@ namespace aspnetzabota.Content.Database.Repository.Department
         public Task Delete(int id)
         {
             _appDBContext.Departments
+                .AsQueryable()
                 .Where(d => d.Id == id)
                 .Delete();
 

@@ -2,7 +2,9 @@
 using aspnetzabota.Content.Database.Context;
 using aspnetzabota.Content.Datamodel.Price;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
+using Z.EntityFramework.Plus;
 
 namespace aspnetzabota.Content.Database.Repository.PriceArticles
 {
@@ -24,7 +26,8 @@ namespace aspnetzabota.Content.Database.Repository.PriceArticles
         }
         public Task Add(ZabotaPriceArticles model)
         {
-            _appDBContext.Add(new Entities.PriceArticles
+            _appDBContext.PriceArticles
+                .Add(new Entities.PriceArticles
             {
                 Id = model.Id,
                 PriceId = model.PriceId,
@@ -34,9 +37,10 @@ namespace aspnetzabota.Content.Database.Repository.PriceArticles
         }
         public Task Delete(int id)
         {
-            var PriceArticle = new Entities.PriceArticles { Id = id };
-            _appDBContext.PriceArticles.Attach(PriceArticle);
-            _appDBContext.PriceArticles.Remove(PriceArticle);
+            _appDBContext.PriceArticles
+                .AsQueryable()
+                .Where(x => x.Id == id)
+                .Delete();
             return _appDBContext.SaveChangesAsync();
         }
     }

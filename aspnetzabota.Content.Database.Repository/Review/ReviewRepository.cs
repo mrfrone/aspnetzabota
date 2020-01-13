@@ -47,7 +47,8 @@ namespace aspnetzabota.Content.Database.Repository.Review
         }
         public Task Add(ZabotaReview review)
         {
-            _appDBContext.Add(new Entities.Review
+            _appDBContext.Reviews
+                .Add(new Entities.Review
             {
                 Id = review.Id,
                 Author = review.Author,

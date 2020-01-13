@@ -26,7 +26,8 @@ namespace aspnetzabota.Content.Database.Repository.Slider
         }
         public async Task Add(ZabotaSlider model)
         {
-            await _appDBContext.Sliders.AddAsync(new Entities.Slider 
+            await _appDBContext.Sliders
+                .AddAsync(new Entities.Slider 
             {
                 Image = "~/images/Slider/" + model.Image
             });
