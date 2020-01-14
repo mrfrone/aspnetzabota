@@ -40,11 +40,6 @@ namespace aspnetzabota.Controllers
             if (result.IsCorrect)
                 HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", result.Result.Token);
 
-            //new CookieOptions
-            //{
-            //    MaxAge = TimeSpan.FromMinutes(60)
-            //});
-
             return ZabotaResult(result.IsCorrect);
         }
 

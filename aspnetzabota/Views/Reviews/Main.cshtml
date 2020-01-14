@@ -23,7 +23,7 @@
                         <textarea id="TextReview" class="form-control" rows="3" placeholder="Text..." aria-describedby="textHelp"></textarea>
                         <small id="textHelp" class="form-text text-muted">Текст Вашего отзыва.</small>
                     </div>
-                    <button id="AddReview" type="submit" class="btn btn-primary mb-2" onclick="Ajax_AddReview()">Отправить отзыв</button>
+                    <button id="AddReview" type="button" class="btn btn-primary mb-2" onclick="Ajax_AddReview()">Отправить отзыв</button>
                 </form>
             </div>
         </div>
@@ -49,10 +49,9 @@
                     data: JSON.stringify(review),
                     contentType: "application/json",
                     dataType: "json"
-                }).done(function (response) {
-                    if (response) {
+                }).done(function (data) {
+                    if (data) 
                         alert("Отзыв успешно отправлен!");
-                    }
                     else
                         alert("Ошибка при отправке отзыва!");
                 }).fail(function (response) {
