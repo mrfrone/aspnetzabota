@@ -86,12 +86,11 @@ namespace aspnetzabota
                             ValidateIssuerSigningKey = true,
                         };
                     });
-
-            services.AddMvcCore(options =>
+            
+            services.AddMvc(options =>
             {
                 options.Filters.Add<IdentityStorageFilterAttribute>();
-            })
-                .AddJsonFormatters().AddJsonOptions(options =>
+            }).AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 options.SerializerSettings.Formatting = Formatting.None;
@@ -100,7 +99,7 @@ namespace aspnetzabota
                 options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 //options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-            }).AddRazorViewEngine();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
