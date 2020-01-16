@@ -30,7 +30,7 @@ namespace aspnetzabota.Content.Database.Repository.Review
         public async Task Add(Entities.Review review)
         {
             review.date = DateTime.Now.ToShortDateString();
-            await appDBContext.AddAsync(review);
+            appDBContext.Add(review);
             await appDBContext.SaveChangesAsync();
         }
     }

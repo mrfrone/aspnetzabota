@@ -3,6 +3,7 @@ using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Web.Style;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Controllers
 {
@@ -35,13 +36,13 @@ namespace aspnetzabota.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddReview([FromBody] Review data)
+        public async Task<IActionResult> AddReview([FromBody] Review data)
         {
             //вообще json(false/ true), какая-то хуйня, лучше http ошику возвращай если что-то не случилось и try catch тут не надо
             if (data == null)
                 return Json(false);
 
-            _reviews.Add(data);
+            await _reviews.Add(data);
 
             return Json(true);
             

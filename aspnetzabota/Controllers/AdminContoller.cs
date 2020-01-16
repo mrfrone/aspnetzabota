@@ -2,15 +2,14 @@
 using aspnetzabota.Admin.Services.Login;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using aspnetzabota.Common.Result;
 using aspnetzabota.Web.Common;
 using aspnetzabota.Web.Common.Filters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace aspnetzabota.Controllers
 {
+    [Authorize]
     public class AdminController : BaseController
     {
         private readonly ILoginService _loginService;
@@ -19,16 +18,19 @@ namespace aspnetzabota.Controllers
         {
             _loginService = loginService;
         }
+        [AllowAnonymous]
         public ViewResult Login()
         {
             return View();
         }
-        [Authorize]
         public ViewResult Main()
         {
             return View();
         }
+
+
         [ValidModelState]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginPost([FromBody]LoginForm form)
         {
             var result = await _loginService.Login(new LoginForm
@@ -39,11 +41,10 @@ namespace aspnetzabota.Controllers
 
             if (result.IsCorrect)
                 HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", result.Result.Token);
+            
 
             return ZabotaResult(result.IsCorrect);
         }
-
-        [Authorize]
         public async Task<IActionResult> Logout()
         {
             var form = new LogoutForm
@@ -56,7 +57,7 @@ namespace aspnetzabota.Controllers
             if (result.IsCorrect)
                 HttpContext.Response.Cookies.Delete(".AspNetCore.Application.Id");
 
-            return ZabotaResult(result);
+            return ZabotaResult(result.IsCorrect);
         }
     }
 }

@@ -13,10 +13,10 @@ using Microsoft.IdentityModel.Tokens;
 using aspnetzabota.Common.Datamodel.PasswordHashing;
 using aspnetzabota.Common.AutoMapper.Extensions;
 using aspnetzabota.Web.Common;
-using aspnetzabota.Web.Common.Filters;
 using aspnetzabota.Common.EFCore.Entities;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
+using aspnetzabota.Web.Common.Filters;
 
 namespace aspnetzabota
 {
@@ -86,7 +86,7 @@ namespace aspnetzabota
                             ValidateIssuerSigningKey = true,
                         };
                     });
-            
+
             services.AddMvc(options =>
             {
                 options.Filters.Add<IdentityStorageFilterAttribute>();
@@ -108,8 +108,7 @@ namespace aspnetzabota
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-
+            
             app.UseCookiePolicy(new CookiePolicyOptions
             {
                 MinimumSameSitePolicy = SameSiteMode.Strict,
@@ -125,7 +124,7 @@ namespace aspnetzabota
                 await next();
             });
             app.UseAuthentication();
-            
+            app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
