@@ -52,7 +52,7 @@ namespace aspnetzabota
 
 
             services.AddMiMapping(
-                //typeof(Content.Datamodel.Mapping.MappingProfile),
+                typeof(Content.Datamodel.Mapping.MappingProfile),
                 typeof(Admin.Datamodel.Mapping.MappingProfile)
                 );
 
