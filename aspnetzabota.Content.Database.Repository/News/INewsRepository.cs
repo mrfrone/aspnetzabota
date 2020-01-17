@@ -2,7 +2,7 @@
 
 namespace aspnetzabota.Content.Database.Repository.News
 {
-    public interface INews
+    public interface INewsRepository
     {
         IEnumerable<Entities.News> Last(int Count, bool trackChanges = false);
         IEnumerable<Entities.News> TakeFromCategory(int id, int pageNumber, int pageSize, bool trackChanges = false);

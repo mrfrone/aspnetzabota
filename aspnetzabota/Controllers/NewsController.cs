@@ -8,10 +8,10 @@ namespace aspnetzabota.Controllers
 {
     public class NewsController : Controller
     {
-        private readonly INews _News;
+        private readonly INewsRepository _News;
         private readonly ICategory _Category;
 
-        public NewsController(INews iNews, ICategory iServiceCat)
+        public NewsController(INewsRepository iNews, ICategory iServiceCat)
         {
             _News = iNews;
             _Category = iServiceCat;

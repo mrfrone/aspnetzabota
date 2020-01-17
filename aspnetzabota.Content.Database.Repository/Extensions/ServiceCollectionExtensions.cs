@@ -18,8 +18,8 @@ namespace aspnetzabota.Content.Repository.Extensions
             services.AddScoped<ILicenses, LicensesRepository>();
             services.AddScoped<IDepartment, DepartmentRepository>();
             services.AddScoped<IReview, ReviewRepository>();
-            services.AddScoped<ISlider, SliderRepository>();
-            services.AddScoped<INews, NewsRepository>();
+            services.AddScoped<ISliderRepository, SliderRepository>();
+            services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<ICategory, CategoryRepository>();
             return services;
         }

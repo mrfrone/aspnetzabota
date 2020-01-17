@@ -7,11 +7,11 @@ using aspnetzabota.Common.EFCore.Extensions;
 
 namespace aspnetzabota.Content.Database.Repository.News
 {
-    public class NewsRepository : INewsRepository
+    public class News
     {
         private readonly ContentContext appDBContext;
 
-        public NewsRepository(ContentContext appDBContext)
+        public News(ContentContext appDBContext)
         {
             this.appDBContext = appDBContext;
         }

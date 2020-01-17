@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using aspnetzabota.Content.Database.Context;
+using aspnetzabota.Common.EFCore.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace aspnetzabota.Content.Database.Repository.Slider
 {
-    public class SliderRepository : ISlider
+    public class SliderRepository : ISliderRepository
     {
         private readonly ContentContext appDBContext;
 
@@ -12,6 +14,11 @@ namespace aspnetzabota.Content.Database.Repository.Slider
             this.appDBContext = appDBContext;
         }
 
-        public IEnumerable<Entities.Slider> Take => appDBContext.Sliders;
+        public Task<Entities.Slider[]> Get(bool trackChanges = false) 
+        {
+            return appDBContext.Sliders
+                .HasTracking(trackChanges)
+                .ToArrayAsync();
+        }
     }
 }

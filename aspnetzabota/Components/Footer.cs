@@ -8,9 +8,9 @@ namespace aspnetzabota.Components
     public class Footer : ViewComponent
     {
         private readonly IDepartment _departments;
-        private readonly INews _news;
+        private readonly INewsRepository _news;
 
-        public Footer(IDepartment departments, INews news)
+        public Footer(IDepartment departments, INewsRepository news)
         {
             _departments = departments;
             _news = news;
