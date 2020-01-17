@@ -3,15 +3,16 @@ using aspnetzabota.Content.Database.Repository.Category;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.ViewModels;
 using aspnetzabota.Web.Style;
+using aspnetzabota.Content.Services.News;
 
 namespace aspnetzabota.Controllers
 {
     public class NewsController : Controller
     {
-        private readonly INewsRepository _News;
+        private readonly INews _News;
         private readonly ICategory _Category;
 
-        public NewsController(INewsRepository iNews, ICategory iServiceCat)
+        public NewsController(INews iNews, ICategory iServiceCat)
         {
             _News = iNews;
             _Category = iServiceCat;
@@ -20,7 +21,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new NewsViewModel
             {
-                News = _News.GetPagedList(1, 3),
+                News = _News.GetPagedNewsList(1, 3).Result,
                 Category = _Category.Take,
                 PaginationOptions = PaginationStyle.PagedListOptions,
                 PagingMethod = nameof(GetAllPaged)
@@ -32,7 +33,7 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new NewsViewModel
             {
-                News = _News.TakeFromCategory(id, pageNumber, 3),
+                News = _News.GetFromNewsCategory(id, pageNumber, 3).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetByCategoryPaged)
             };
@@ -43,7 +44,7 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new NewsViewModel
             {
-                News = _News.GetPagedList(pageNumber, 3),
+                News = _News.GetPagedNewsList(pageNumber, 3).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetAllPaged)
             };

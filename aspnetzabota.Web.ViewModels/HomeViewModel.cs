@@ -9,7 +9,7 @@ namespace aspnetzabota.Web.ViewModels
 {
     public class HomeViewModel
     {
-        public IEnumerable<News> LastNews { get; set; }
+        public IEnumerable<ZabotaNews> LastNews { get; set; }
         public IEnumerable<ZabotaSlider> Slider { get; set; }
         public IEnumerable<Review> LastReviews { get; set; }
         public IEnumerable<DoctorScheduleModel> Doctors { get; set; }

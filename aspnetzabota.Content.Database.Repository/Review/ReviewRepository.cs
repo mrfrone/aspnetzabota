@@ -8,7 +8,7 @@ using aspnetzabota.Common.EFCore.Extensions;
 
 namespace aspnetzabota.Content.Database.Repository.Review
 {
-    public class ReviewRepository : IReview
+    public class ReviewRepository : IReviewRepository
     {
         private static readonly Random random = new Random();
         private readonly ContentContext appDBContext;

@@ -9,9 +9,9 @@ namespace aspnetzabota.Controllers
 {
     public class ReviewsController : Controller
     {
-        private readonly IReview _reviews;
+        private readonly IReviewRepository _reviews;
 
-        public ReviewsController(IReview reviews)
+        public ReviewsController(IReviewRepository reviews)
         {
             _reviews = reviews;
         }
