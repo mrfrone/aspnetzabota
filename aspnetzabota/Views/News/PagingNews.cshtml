@@ -1,6 +1,6 @@
 ﻿@model NewsViewModel
     <div id="fromCat">
-        @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { id = Model.News.FirstOrDefault().categoryID, page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
+        @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { id = Model.News.FirstOrDefault().CategoryID, page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
         <div class="row">
             @{
                 foreach (var news in Model.News)
@@ -28,5 +28,5 @@
                 }
             }
         </div>
-    @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { id = Model.News.FirstOrDefault().categoryID, page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
+    @Html.PagedListPager((IPagedList)Model.News, page => Url.Action(Model.PagingMethod, new { id = Model.News.FirstOrDefault().CategoryID, page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions(){  HttpMethod = "GET", UpdateTargetId = "fromCat"}))
 </div>

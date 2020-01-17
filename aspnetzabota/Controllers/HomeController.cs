@@ -4,6 +4,7 @@ using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Services.Sliders;
 using aspnetzabota.Content.Services.News;
+using aspnetzabota.Content.Services.Review;
 
 namespace aspnetzabota.Controllers
 {
@@ -11,10 +12,10 @@ namespace aspnetzabota.Controllers
     {
         private readonly INews _news;
         private readonly ISlider _slider;
-        private readonly IReviewRepository _Reviews;
+        private readonly IReview _Reviews;
         private readonly ISchedule _doctorSchedule;
 
-        public HomeController(INews iNews, ISlider slider, IReviewRepository review, ISchedule doctorSchedule)
+        public HomeController(INews iNews, ISlider slider, IReview review, ISchedule doctorSchedule)
         {
             _news = iNews;
             _slider = slider;
@@ -27,7 +28,7 @@ namespace aspnetzabota.Controllers
             {
                 LastNews = _news.GetLastNews(3).Result,
                 Slider = _slider.GetSliders().Result,
-                LastReviews = _Reviews.Random(6),
+                LastReviews = _Reviews.RandomReviews(6).Result,
                 Doctors = _doctorSchedule.Random(4)
             };
 

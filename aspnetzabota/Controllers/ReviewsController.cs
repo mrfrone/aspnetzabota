@@ -1,17 +1,18 @@
-﻿using aspnetzabota.Content.Database.Repository.Review;
-using aspnetzabota.Web.ViewModels;
+﻿using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Web.Style;
 using System.Threading.Tasks;
+using aspnetzabota.Content.Services.Review;
+using aspnetzabota.Content.Datamodel.Review;
 
 namespace aspnetzabota.Controllers
 {
     public class ReviewsController : Controller
     {
-        private readonly IReviewRepository _reviews;
+        private readonly IReview _reviews;
 
-        public ReviewsController(IReviewRepository reviews)
+        public ReviewsController(IReview reviews)
         {
             _reviews = reviews;
         }
@@ -19,7 +20,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ReviewsViewModel
             {
-                Reviews = _reviews.GetPagedList(1, 5),
+                Reviews = _reviews.GetPagedReviewsList(1, 5).Result,
                 PaginationOptions = PaginationStyle.PagedListOptions
             };
             return View(result);
@@ -29,14 +30,14 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new ReviewsViewModel
             {
-                Reviews = _reviews.GetPagedList(pageNumber, 5),
+                Reviews = _reviews.GetPagedReviewsList(pageNumber, 5).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax
             };
             return PartialView(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddReview([FromBody] Review data)
+        public async Task<IActionResult> AddReview([FromBody] ZabotaReview data)
         {
             //вообще json(false/ true), какая-то хуйня, лучше http ошику возвращай если что-то не случилось и try catch тут не надо
             if (data == null)
