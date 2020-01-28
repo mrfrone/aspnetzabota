@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.ViewModels;
-using aspnetzabota.Content.Database.Repository.News;
-using aspnetzabota.Content.Database.Repository.Department;
 using aspnetzabota.Content.Services.News;
+using aspnetzabota.Content.Services.Department;
 
 namespace aspnetzabota.Components
 {
@@ -20,7 +19,7 @@ namespace aspnetzabota.Components
         {
             var result = new FooterViewModel
             {
-                Departments = _departments.Take,
+                Departments = _departments.GetDepartments().Result,
                 News = _news.GetLastNews(2).Result
             };
             return View(result);

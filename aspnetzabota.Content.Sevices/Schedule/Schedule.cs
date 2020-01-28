@@ -8,7 +8,7 @@ using X.PagedList;
 
 namespace aspnetzabota.Content.Services.Schedule
 {
-    public class Schedule : ISchedule
+    internal class Schedule : ISchedule
     {
         private static readonly Random random = new Random();
         private IEnumerable<DoctorScheduleModel> RemoveNoReception(IEnumerable<DoctorScheduleModel> model)

@@ -5,22 +5,22 @@
             @foreach (var license in Model.Licenses)
              {
             <div class="card">
-                <div class="card-header" id="@("heading"+license.id)">
+                <div class="card-header" id="@("heading"+license.Id)">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse"+license.id)" aria-expanded="false" aria-controls="@("collapse"+license.id)">
-                            @license.name
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse"+license.Id)" aria-expanded="false" aria-controls="@("collapse"+license.Id)">
+                            @license.Name
                         </button>
                     </h5>
                 </div>
-                <div id="@("collapse"+license.id)" class="collapse" aria-labelledby="@("heading"+license.id)" data-parent="#accordionExample">
+                <div id="@("collapse"+license.Id)" class="collapse" aria-labelledby="@("heading"+license.Id)" data-parent="#accordionExample">
                     <div class="row">
-                        @foreach (var photo in license.photo)
+                        @foreach (var photo in license.Photo)
                         {
                         <div class="col-lg-6 col-md-6 col-6 thumb d-flex justify-content-center">
                             <div class="hovereffect w-75">
-                                <img class="img w-100" src="@Url.Content(photo.path)" alt="">
+                                <img class="img w-100" src="@Url.Content(photo.Path)" alt="">
                                 <div class="overlay">
-                                    <a data-fancybox="@("gallery"+license.id)" class="info" href="@Url.Content(photo.path)">Просмотреть</a>
+                                    <a data-fancybox="@("gallery"+license.Id)" class="info" href="@Url.Content(photo.Path)">Просмотреть</a>
                                 </div>
                             </div>
                         </div>

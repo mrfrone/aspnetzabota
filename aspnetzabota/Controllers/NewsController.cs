@@ -1,9 +1,8 @@
-﻿using aspnetzabota.Content.Database.Repository.News;
-using aspnetzabota.Content.Database.Repository.Category;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.ViewModels;
 using aspnetzabota.Web.Style;
 using aspnetzabota.Content.Services.News;
+using aspnetzabota.Content.Services.Category;
 
 namespace aspnetzabota.Controllers
 {
@@ -22,7 +21,7 @@ namespace aspnetzabota.Controllers
             var result = new NewsViewModel
             {
                 News = _News.GetPagedNewsList(1, 3).Result,
-                Category = _Category.Take,
+                Category = _Category.GetCategory().Result,
                 PaginationOptions = PaginationStyle.PagedListOptions,
                 PagingMethod = nameof(GetAllPaged)
             };

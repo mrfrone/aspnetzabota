@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace aspnetzabota.Content.Services.Sliders
+namespace aspnetzabota.Content.Services.Slider
 {
     public interface ISlider
     {

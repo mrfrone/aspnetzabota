@@ -1,10 +1,11 @@
 ﻿using aspnetzabota.Content.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Database.Repository.Licenses
 {
-    public class LicensesRepository : ILicenses
+    internal class LicensesRepository : ILicensesRepository
     {
         private readonly ContentContext appDBContext;
 
@@ -12,7 +13,13 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
         {
             this.appDBContext = appDBContext;
         }
-        public IEnumerable<Entities.Licenses> Take => appDBContext.Licenses.Include(u => u.photo);
+        public async Task<Entities.Licenses[]> Get() 
+        { 
+            return await appDBContext
+                .Licenses
+                .Include(u => u.photo)
+                .ToArrayAsync(); 
+        }
     }
 }
 

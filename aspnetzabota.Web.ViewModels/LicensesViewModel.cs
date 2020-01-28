@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Content.Database.Entities;
+using aspnetzabota.Content.Datamodel.License;
 
 namespace aspnetzabota.Web.ViewModels
 {
     public class LicensesViewModel
     {
-        public IEnumerable<Licenses> Licenses { get; set; }
+        public IEnumerable<ZabotaLicenses> Licenses { get; set; }
     }
 }

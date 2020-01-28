@@ -15,12 +15,12 @@ namespace aspnetzabota.Content.Repository.Extensions
         public static IServiceCollection AddContentRepository(this IServiceCollection services, string connectionString)
         {
             services.AddContentDatabase(connectionString);
-            services.AddScoped<ILicenses, LicensesRepository>();
-            services.AddScoped<IDepartment, DepartmentRepository>();
+            services.AddScoped<ILicensesRepository, LicensesRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<ISliderRepository, SliderRepository>();
             services.AddScoped<INewsRepository, NewsRepository>();
-            services.AddScoped<ICategory, CategoryRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             return services;
         }
     }

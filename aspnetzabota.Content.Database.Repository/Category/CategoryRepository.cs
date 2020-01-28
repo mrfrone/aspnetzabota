@@ -1,9 +1,10 @@
 ﻿using aspnetzabota.Content.Database.Context;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Database.Repository.Category
 {
-    public class CategoryRepository : ICategory
+    internal class CategoryRepository : ICategoryRepository
     {
         private readonly ContentContext appDBContext;
 
@@ -11,7 +12,12 @@ namespace aspnetzabota.Content.Database.Repository.Category
         {
             this.appDBContext = appDBContext;
         }
-        
-        public IEnumerable<Entities.Category> Take => appDBContext.Category;
+
+        public async Task<Entities.Category[]> Get() 
+        { 
+            return await appDBContext
+                .Category
+                .ToArrayAsync(); 
+        }
     }
 }

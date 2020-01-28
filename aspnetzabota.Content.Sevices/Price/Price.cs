@@ -6,7 +6,7 @@ using System;
 
 namespace aspnetzabota.Content.Services.Price
 {
-    public class Price : IPrice
+    internal class Price : IPrice
     {
         private IEnumerable<Database.Entities.Price> JsonPrice
         {

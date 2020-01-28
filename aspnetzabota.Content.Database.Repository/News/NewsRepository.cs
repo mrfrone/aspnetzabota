@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Database.Repository.News
 {
-    public class NewsRepository : INewsRepository
+    internal class NewsRepository : INewsRepository
     {
         private readonly ContentContext _appDBContext;
 

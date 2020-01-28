@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Content.Database.Repository.Licenses;
+﻿using aspnetzabota.Content.Services.Licenses;
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +28,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new LicensesViewModel
             {
-                Licenses = _licenses.Take
+                Licenses = _licenses.GetLicenses().Result
             };
             return View(result);
         }

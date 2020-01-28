@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.ViewModels;
-using aspnetzabota.Content.Database.Repository.Department;
+using aspnetzabota.Content.Services.Department;
 
 namespace aspnetzabota.Components
 {
@@ -16,7 +16,7 @@ namespace aspnetzabota.Components
         {
             var result = new MenuViewModel
             {
-                Departments = _departments.Take
+                Departments = _departments.GetDepartments().Result
             };
             return View(result);
         }

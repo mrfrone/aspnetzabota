@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Content.Database.Repository.Department;
+﻿using aspnetzabota.Content.Services.Department;
 using aspnetzabota.Content.Services.Price;
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +19,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new DepartmentsViewModel
             {
-                Departments = _departments.Take,
+                Departments = _departments.GetDepartments().Result,
                 Price = _price.Take,
                 PriceGroupsAndDepartments = _price.GroupsAndDepartments
             };

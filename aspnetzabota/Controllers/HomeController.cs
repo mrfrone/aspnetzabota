@@ -1,10 +1,9 @@
-﻿using aspnetzabota.Content.Database.Repository.Review;
-using aspnetzabota.Content.Services.Schedule;
+﻿using aspnetzabota.Content.Services.Schedule;
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.Content.Services.Sliders;
 using aspnetzabota.Content.Services.News;
 using aspnetzabota.Content.Services.Review;
+using aspnetzabota.Content.Services.Slider;
 
 namespace aspnetzabota.Controllers
 {

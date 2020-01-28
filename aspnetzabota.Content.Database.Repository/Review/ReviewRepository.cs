@@ -8,7 +8,7 @@ using aspnetzabota.Content.Datamodel.Review;
 
 namespace aspnetzabota.Content.Database.Repository.Review
 {
-    public class ReviewRepository : IReviewRepository
+    internal class ReviewRepository : IReviewRepository
     {
         private static readonly Random random = new Random();
         private readonly ContentContext _appDBContext;

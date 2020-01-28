@@ -4,9 +4,9 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace aspnetzabota.Content.Services.Sliders
+namespace aspnetzabota.Content.Services.Slider
 {
-    public class Slider : ISlider
+    internal class Slider : ISlider
     {
         private readonly IMapper _mapper;
         private readonly ISliderRepository _sliderRepository;

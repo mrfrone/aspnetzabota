@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Database.Repository.Licenses
 {
-    public interface ILicenses
+    public interface ILicensesRepository
     {
-        IEnumerable<Entities.Licenses> Take { get; }
+        Task<Entities.Licenses[]> Get();
     }
 }

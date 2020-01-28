@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace aspnetzabota.Content.Database.Repository.Slider
 {
-    public class SliderRepository : ISliderRepository
+    internal class SliderRepository : ISliderRepository
     {
         private readonly ContentContext appDBContext;
 

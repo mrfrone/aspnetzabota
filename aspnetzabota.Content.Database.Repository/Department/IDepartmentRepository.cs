@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Database.Repository.Department
 {
-    public interface IDepartment
+    public interface IDepartmentRepository
     {
-        IEnumerable<Entities.Department> Take { get; }
+        Task<Entities.Department[]> Get();
     }
 }

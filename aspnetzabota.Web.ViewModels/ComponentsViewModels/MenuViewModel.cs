@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Content.Database.Entities;
+using aspnetzabota.Content.Datamodel.Department;
 
 namespace aspnetzabota.Web.ViewModels
 {
     public class MenuViewModel
     {
-        public IEnumerable<Department> Departments { get; set; }
+        public IEnumerable<ZabotaDepartment> Departments { get; set; }
     }
 }
