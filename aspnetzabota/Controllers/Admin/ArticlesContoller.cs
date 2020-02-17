@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using aspnetzabota.Content.Datamodel.News;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Content.Services.Upload;
+using aspnetzabota.Content.Services.News;
 
 namespace aspnetzabota.Controllers
 {
@@ -16,10 +17,12 @@ namespace aspnetzabota.Controllers
     {
         private readonly IUpload _upload;
         private readonly ICategory _category;
-        public ArticlesController(ICategory category, IUpload upload)
+        private readonly INews _news;
+        public ArticlesController(ICategory category, IUpload upload, INews news)
         {
             _category = category;
             _upload = upload;
+            _news = news;
         }
         public ViewResult List()
         {
@@ -37,9 +40,11 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] ZabotaNews data)
         {
-            
-            return ZabotaResult(true);
+            var result = await _news.AddNews(data);
+
+            return ZabotaResult(result.IsCorrect);
         }
+        [HttpPost]
         public async Task<IActionResult> AddImage()
         {
             IFormFile image = Request.Form.Files["fileInput"];

@@ -9,5 +9,6 @@ namespace aspnetzabota.Content.Database.Repository.News
         Task<Entities.News> GetSingle(int id, bool trackChanges = false);
         Task<Entities.News[]> GetFromCategory(int id, bool trackChanges = false);
         Task<Entities.News[]> GetList(bool trackChanges = false);
+        Task Add(Entities.News news);
     }
 }

@@ -43,6 +43,11 @@ namespace aspnetzabota.Content.Database.Repository.News
             .OrderByDescending(x => x.Date)
             .ToArrayAsync();
         }
+        public async Task Add(Entities.News news)
+        {
+            _appDBContext.News.Add(news);
+            await _appDBContext.SaveChangesAsync();
+        }
 
     }
 }

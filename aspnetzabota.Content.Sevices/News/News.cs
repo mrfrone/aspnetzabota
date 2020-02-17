@@ -3,7 +3,11 @@ using X.PagedList;
 using System.Threading.Tasks;
 using AutoMapper;
 using aspnetzabota.Content.Datamodel.News;
+using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Database.Repository.News;
+using aspnetzabota.Common.Result;
+using System.IO;
+using System;
 
 namespace aspnetzabota.Content.Services.News
 {
@@ -36,6 +40,18 @@ namespace aspnetzabota.Content.Services.News
             var result = await _newsRepository.GetList();
             return _mapper.Map<IEnumerable<ZabotaNews>>(result).ToPagedList(pageNumber, pageSize);
         }
+        public async Task<ZabotaResult> AddNews(ZabotaNews news)
+        {
+            await _newsRepository.Add(new Database.Entities.News
+            {
+                Name = news.Name,
+                Description = news.Description,
+                IMG = Path.Combine("~/images/Articles", news.IMG),
+                Date = DateTimeOffset.UtcNow,
+                categoryID = news.CategoryID
+            });
 
+            return new ZabotaResult();
+        }
     }
 }
