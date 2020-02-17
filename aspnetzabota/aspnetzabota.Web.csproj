@@ -32,4 +32,8 @@
     <ProjectReference Include="..\aspnetzabota.Web.ViewModels\aspnetzabota.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Articles\" />
+  </ItemGroup>
+
 </Project>

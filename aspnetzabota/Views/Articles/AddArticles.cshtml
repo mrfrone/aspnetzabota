@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-
+@model AddArticleViewModel
 <div class="contents-inner">
     <div class="row">
         <div class="col-md-12">
@@ -13,20 +13,21 @@
                     <article class="post type-post">
                         <div class="form-group">
                             <label for="company" class=" form-control-label">Название</label>
-                            <input type="text" id="name" placeholder="Название статьи" class="form-control">
+                            <input type="text" id="Name" placeholder="Название статьи" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Категория</label>
-                            <select class="form-control select2">
-                                <option selected="selected">Все</option>
-                                <option>Новости</option>
-                                <option>Акции</option>
-                                <option>Статьи</option>
+                            <select id="Cat" class="form-control select2">
+                                <option selected="selected" hidden disabled>Выберите категорию...</option>
+                                @foreach (var cat in Model.Category)
+                                {
+                                    <option value="@cat.Id">@cat.Name</option>
+                                }
                             </select>
                         </div>
                         <div class=" row form-group">
                             <div class="col col-md-3"><label for="file-input" class=" form-control-label">Изображение</label></div>
-                            <div class="col-12 col-md-9"><input type="file" id="file" name="file" class="form-control-file" accept="image/jpeg,image/png"></div>
+                            <div class="col-12 col-md-9"><input type="file" id="fileInput" name="file" class="form-control-file" accept="image/jpeg,image/png"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -36,7 +37,7 @@
                         <div id="editor">
                         </div>
                         <div>
-                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                            <button id="payment-button" type="button" onclick="Add_Article()" class="btn btn-lg btn-info btn-block">
                                 <span id="payment-button-amount">Добавить</span>
                             </button>
                         </div>
@@ -47,7 +48,10 @@
     </div>
 </div><!-- /.contents-inner -->
 
+
+<!--Text Editor-->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <script type="text/javascript">
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -76,13 +80,74 @@
       reader.readAsDataURL(f);
     }
   }
-
-document.getElementById('file').addEventListener('change', handleFileSelect, false);
+    document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
 </script>
-<script>
+<script type="text/javascript">
     var quill = new Quill('#editor', {
         theme: 'snow'
     });
+
+    function Add_Article()
+    {
+        //random name from img
+        var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        console.log(r);
+
+        //article model
+        var article = {};
+        article.Id = null;
+        article.Name = $('#Name').val();
+        article.Description = quill.root.innerHTML;
+        article.CategoryID = $('#Cat').val();
+        article.Img = r;
+
+        //get img file
+        var formData = new FormData();
+        var file = document.getElementById("fileInput").files[0];
+
+        //file extension
+        var fe = /(?:\.([^.]+))?$/;
+        var ext = fe.exec(file.name)[1];
+
+        formData.append("fileInput", file, r + "." + ext);
+
+
+        console.log(JSON.stringify(article));
+
+        if (article.Name != null && article.Description != null && article.CategoryID != null && file.name != null) {
+
+            $.ajax({
+                url: '/admin/articles/addimage',
+                type: "POST",
+                data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function () {
+                        alert("URA");
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/articles/add",
+                    data: JSON.stringify(article),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data) {
+                        alert("Статья успешно добавлена");
+                        location.reload();
+                    }
+                    else
+                        alert("Ошибка при отправке статьи!");
+                }).fail(function (response) {
+                    console.log('Error: ' + response);
+                });
+            }
+            else {
+                alert("Заполнены не все поля!");
+            }
+        }
 </script>
 
 <style>

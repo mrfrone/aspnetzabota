@@ -25,7 +25,7 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
-        public ActionResult PagedReviews(int? page)
+        public IActionResult PagedReviews(int? page)
         {
             var pageNumber = page ?? 1;
             var result = new ReviewsViewModel

@@ -27,7 +27,7 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
-        public ActionResult GetByCategoryPaged(int id, int? page)
+        public IActionResult GetByCategoryPaged(int id, int? page)
         {
             var pageNumber = page ?? 1;
             var result = new NewsViewModel
@@ -38,7 +38,7 @@ namespace aspnetzabota.Controllers
             };
             return PartialView("PagingNews", result);
         }
-        public ActionResult GetAllPaged(int? page)
+        public IActionResult GetAllPaged(int? page)
         {
             var pageNumber = page ?? 1;
             var result = new NewsViewModel

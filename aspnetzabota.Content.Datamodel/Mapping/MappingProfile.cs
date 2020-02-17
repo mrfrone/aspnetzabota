@@ -36,7 +36,7 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.ID))
                 .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))
-                .ForMember(u => u.Decription, opts => opts.MapFrom(u => u.Decription))
+                .ForMember(u => u.Description, opts => opts.MapFrom(u => u.Description))
                 .ForMember(u => u.IMG, opts => opts.MapFrom(u => u.IMG))
                 .ForMember(u => u.Date, opts => opts.MapFrom(u => u.Date))
                 .ForMember(u => u.CategoryID, opts => opts.MapFrom(u => u.categoryID))
@@ -54,6 +54,11 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.ID))
                 .ForMember(u => u.Image, opts => opts.MapFrom(u => u.image));
+            CreateMap<Database.Entities.Category, ZabotaCategory>()
+                .IgnoreOther()
+                .ForMember(u => u.Id, opts => opts.MapFrom(u => u.ID))
+                .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))
+                .ForMember(u => u.News, opts => opts.MapFrom(u => u.news));
         }
     }
 }
