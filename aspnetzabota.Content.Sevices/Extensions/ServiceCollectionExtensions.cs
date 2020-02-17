@@ -8,6 +8,7 @@ using aspnetzabota.Content.Services.Review;
 using aspnetzabota.Content.Services.Department;
 using aspnetzabota.Content.Services.Licenses;
 using aspnetzabota.Content.Services.Category;
+using aspnetzabota.Content.Services.Upload;
 
 namespace aspnetzabota.Content.Services.Extensions
 {
@@ -24,6 +25,7 @@ namespace aspnetzabota.Content.Services.Extensions
             services.AddScoped<IDepartment, Department.Department>();
             services.AddScoped<ILicenses, Licenses.Licenses>();
             services.AddScoped<ICategory, Category.Category>();
+            services.AddScoped<IUpload, Upload.Upload>();
             return services;
         }
     }

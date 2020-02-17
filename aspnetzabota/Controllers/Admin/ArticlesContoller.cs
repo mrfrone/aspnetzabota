@@ -6,8 +6,7 @@ using aspnetzabota.Content.Services.Category;
 using System.Threading.Tasks;
 using aspnetzabota.Content.Datamodel.News;
 using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+using aspnetzabota.Content.Services.Upload;
 
 namespace aspnetzabota.Controllers
 {
@@ -15,12 +14,12 @@ namespace aspnetzabota.Controllers
     [Authorize]
     public class ArticlesController : BaseController
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUpload _upload;
         private readonly ICategory _category;
-        public ArticlesController(ICategory category, IHostingEnvironment hostingEnvironment)
+        public ArticlesController(ICategory category, IUpload upload)
         {
             _category = category;
-            _hostingEnvironment = hostingEnvironment;
+            _upload = upload;
         }
         public ViewResult List()
         {
@@ -28,7 +27,8 @@ namespace aspnetzabota.Controllers
         }
         public ViewResult AddArticles()
         {
-            var result = new AddArticleViewModel {
+            var result = new AddArticleViewModel 
+            {
                 Category = _category.GetCategory().Result
             };
 
@@ -43,15 +43,9 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddImage()
         {
             IFormFile image = Request.Form.Files["fileInput"];
-            if (image != null)
-            {
-                using (var fileStream = new FileStream(Path.Combine(_hostingEnvironment.WebRootPath, "images", "Articles", image.FileName), FileMode.Create))
-                {
-                    await image.CopyToAsync(fileStream);
-                }
-            } 
+            var result = await _upload.UploadImage(image, "images/Articles");
 
-            return ZabotaResult(true);
+            return ZabotaResult(result.IsCorrect);
         }
     }
 }

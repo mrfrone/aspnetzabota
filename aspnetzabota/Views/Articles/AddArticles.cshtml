@@ -123,7 +123,7 @@
                     contentType: false,
                     processData: false,
                     success: function () {
-                        alert("URA");
+                        
                     }
                 });
 
@@ -136,7 +136,7 @@
                 }).done(function (data) {
                     if (data) {
                         alert("Статья успешно добавлена");
-                        location.reload();
+                        document.location.href = "List";
                     }
                     else
                         alert("Ошибка при отправке статьи!");
