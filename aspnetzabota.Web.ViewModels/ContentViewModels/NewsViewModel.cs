@@ -11,5 +11,6 @@ namespace aspnetzabota.Web.ViewModels
         public IEnumerable<ZabotaCategory> Category { get; set; }
         public PagedListRenderOptions PaginationOptions { get; set; }
         public string PagingMethod { get; set; }
-    }
+        public ZabotaNews SingleNews { get; set; }
+}
 }

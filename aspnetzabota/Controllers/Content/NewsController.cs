@@ -20,7 +20,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new NewsViewModel
             {
-                News = _News.GetPagedNewsList(1, 3).Result,
+                News = _News.GetPagedNewsList(1, 6).Result,
                 Category = _Category.GetCategory().Result,
                 PaginationOptions = PaginationStyle.PagedListOptions,
                 PagingMethod = nameof(GetAllPaged)
@@ -32,7 +32,7 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new NewsViewModel
             {
-                News = _News.GetFromNewsCategory(id, pageNumber, 3).Result,
+                News = _News.GetFromNewsCategory(id, pageNumber, 6).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetByCategoryPaged)
             };
@@ -43,11 +43,19 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new NewsViewModel
             {
-                News = _News.GetPagedNewsList(pageNumber, 3).Result,
+                News = _News.GetPagedNewsList(pageNumber, 6).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetAllPaged)
             };
             return PartialView("PagingNews", result);
+        }
+        public ViewResult Single(int id)
+        {
+            var result = new NewsViewModel 
+            {
+                SingleNews = _News.GetSingleNews(id).Result
+            };
+            return View(result);
         }
     }
 }

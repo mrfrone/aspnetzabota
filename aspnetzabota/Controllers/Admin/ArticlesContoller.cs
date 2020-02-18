@@ -8,6 +8,7 @@ using aspnetzabota.Content.Datamodel.News;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Content.Services.Upload;
 using aspnetzabota.Content.Services.News;
+using aspnetzabota.Web.Style;
 
 namespace aspnetzabota.Controllers
 {
@@ -24,9 +25,40 @@ namespace aspnetzabota.Controllers
             _upload = upload;
             _news = news;
         }
+        #region Views
         public ViewResult List()
         {
-            return View();
+            var result = new ArticlesListViewModel 
+            {
+                Articles = _news.GetPagedNewsList(1, 6).Result,
+                Category = _category.GetCategory().Result,
+                PaginationOptions = PaginationStyle.PagedListOptions,
+                PagingMethod = nameof(GetAllPaged)
+            };
+
+            return View(result);
+        }
+        public IActionResult GetByCategoryPaged(int id, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var result = new ArticlesListViewModel
+            {
+                Articles = _news.GetFromNewsCategory(id, pageNumber, 6).Result,
+                PaginationOptions = PaginationStyle.PagedListOptionsAjax,
+                PagingMethod = nameof(GetByCategoryPaged)
+            };
+            return PartialView("PagedList", result);
+        }
+        public IActionResult GetAllPaged(int? page)
+        {
+            var pageNumber = page ?? 1;
+            var result = new ArticlesListViewModel
+            {
+                Articles = _news.GetPagedNewsList(pageNumber, 6).Result,
+                PaginationOptions = PaginationStyle.PagedListOptionsAjax,
+                PagingMethod = nameof(GetAllPaged)
+            };
+            return PartialView("PagedList", result);
         }
         public ViewResult AddArticles()
         {
@@ -37,6 +69,9 @@ namespace aspnetzabota.Controllers
 
             return View(result);
         }
+        #endregion
+
+        #region Methods
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] ZabotaNews data)
         {
@@ -52,5 +87,6 @@ namespace aspnetzabota.Controllers
 
             return ZabotaResult(result.IsCorrect);
         }
+        #endregion
     }
 }

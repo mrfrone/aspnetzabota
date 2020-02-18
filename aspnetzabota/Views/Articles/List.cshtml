@@ -1,95 +1,87 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-
+@model ArticlesListViewModel
     <div class="contents-inner">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Категории статей</label>
-                    <select class="form-control select2">
-                        <option selected="selected">Все</option>
-                        <option>Новости</option>
-                        <option>Акции</option>
-                        <option>Статьи</option>
+                    <select class="form-control select2" onchange="getbycat(this.value)">
+                        <option value="" selected disabled hidden>Выберите категорию...</option>
+                        <option value="all">Все</option>
+                        @foreach (var category in Model.Category)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
                     </select>
                 </div>
             </div>
-                <div class="col-md-6">
-                    <div class="section-content">
-                        <div class="content-head">
-                            <h4 class="content-title">Post sample</h4><!-- /.content-title -->
-                            <div class="corner-content float-right">
-                                <button class="content-refresh" data-toggle="tooltip" data-placement="top" title="Редактировать"><i class="fa fa-refresh"></i></button>
-                                <button class="content-settings" data-toggle="tooltip" data-placement="top" title="Перейти"><i class="fa fa-angle-up"></i></button>
-                                <button class="content-collapse" data-toggle="tooltip" data-placement="top" title="Скрыть"><i class="fa fa-angle-down"></i></button>
-                                <button class="content-close" data-toggle="tooltip" data-placement="top" title="Удалить"><i class="fa fa-close"></i></button>
-                            </div><!-- /.corner-content -->
-                        </div><!-- /.content-head -->
-
-                        <div class="content-details show">
-                            <article class="post type-post">
-                                <div class="entry-thumbnail mb-4"><img src="~/admin/images/blog/1.jpg" alt="Zabota"></div><!-- /.entry-thimbnail -->
-                                <div class="entry-content">
-                                    <div class="entry-meta mt-2 mb-3">
-                                        <span class="author"><a href="#">John Doe</a></span>
-                                        <span class="time">Jan 31</span>
-                                    </div><!-- /.entry-meta -->
-                                </div><!-- /.entry-content -->
-                            </article><!-- /.post -->
-                        </div><!-- /.content-details -->
+            <div id="fromCat">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "fromCat" }))
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="section-content">
-                        <div class="content-head">
-                            <h4 class="content-title">Post sample</h4><!-- /.content-title -->
-                            <div class="corner-content float-right">
-                                <button class="content-refresh" data-toggle="tooltip" data-placement="top" title="Редактировать"><i class="fa fa-refresh"></i></button>
-                                <button class="content-settings" data-toggle="tooltip" data-placement="top" title="Перейти"><i class="fa fa-angle-up"></i></button>
-                                <button class="content-collapse" data-toggle="tooltip" data-placement="top" title="Скрыть"><i class="fa fa-angle-down"></i></button>
-                                <button class="content-close" data-toggle="tooltip" data-placement="top" title="Удалить"><i class="fa fa-close"></i></button>
-                            </div><!-- /.corner-content -->
-                        </div><!-- /.content-head -->
+                <div class="row">
+                    @foreach (var article in Model.Articles)
+                    {
+                        <div class="col-md-6">
+                            <div class="section-content">
+                                <div class="content-head">
+                                    <h4 class="content-title">@article.Name</h4><!-- /.content-title -->
+                                    <div class="corner-content float-right">
+                                        <a href="#"><i class="fa fa-refresh"></i> Редактировать</a> |
+                                        <a href="/Single/News/@article.Id"><i class="fa fa-angle-up"></i> Перейти</a> |
+                                        <a href="#"><i class="fa fa-close"></i> Удалить</a>
+                                    </div><!-- /.corner-content -->
+                                </div><!-- /.content-head -->
 
-                        <div class="content-details show">
-                            <article class="post type-post">
-                                <div class="entry-thumbnail mb-4"><img src="~/admin/images/blog/1.jpg" alt="Zabota"></div><!-- /.entry-thimbnail -->
-                                <div class="entry-content">
-                                    <div class="entry-meta mt-2 mb-3">
-                                        <span class="author"><a href="#">John Doe</a></span>
-                                        <span class="time">Jan 31</span>
-                                    </div><!-- /.entry-meta -->
-                                </div><!-- /.entry-content -->
-                            </article><!-- /.post -->
-                        </div><!-- /.content-details -->
+                                <div class="content-details show">
+                                    <article class="post type-post">
+                                        <div class="entry-thumbnail mb-4"><img src="@Url.Content(article.IMG)" alt="Zabota"></div><!-- /.entry-thimbnail -->
+                                        <div class="entry-content">
+                                            <div class="entry-meta mt-2 mb-3">
+                                                <span class="time">@article.Date.ToString("dd") @article.Date.ToString("MMMM") @article.Date.ToString("yyyy")</span>
+                                            </div><!-- /.entry-meta -->
+                                        </div><!-- /.entry-content -->
+                                    </article><!-- /.post -->
+                                </div><!-- /.content-details -->
+                            </div>
+                        </div>
+                    }
+                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "fromCat" }))
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="section-content">
-                        <div class="content-head">
-                            <h4 class="content-title">Post sample</h4><!-- /.content-title -->
-                            <div class="corner-content float-right">
-                                <button class="content-refresh" data-toggle="tooltip" data-placement="top" title="Редактировать"><i class="fa fa-refresh"></i></button>
-                                <button class="content-settings" data-toggle="tooltip" data-placement="top" title="Перейти"><i class="fa fa-angle-up"></i></button>
-                                <button class="content-collapse" data-toggle="tooltip" data-placement="top" title="Скрыть"><i class="fa fa-angle-down"></i></button>
-                                <button class="content-close" data-toggle="tooltip" data-placement="top" title="Удалить"><i class="fa fa-close"></i></button>
-                            </div><!-- /.corner-content -->
-                        </div><!-- /.content-head -->
-
-                        <div class="content-details show">
-                            <article class="post type-post">
-                                <div class="entry-thumbnail mb-4"><img src="~/admin/images/blog/1.jpg" alt="Zabota"></div><!-- /.entry-thimbnail -->
-                                <div class="entry-content">
-                                    <div class="entry-meta mt-2 mb-3">
-                                        <span class="author"><a href="#">John Doe</a></span>
-                                        <span class="time">Jan 31</span>
-                                    </div><!-- /.entry-meta -->
-                                </div><!-- /.entry-content -->
-                            </article><!-- /.post -->
-                        </div><!-- /.content-details -->
-                    </div>
-                </div>
-
             </div>
         </div><!-- /.contents-inner -->
+
+    <script type="text/javascript">
+        function getbycat(val)
+                {
+                    var id = val;
+                    if (id == "all")
+                    {
+                        $.ajax({
+                            type: 'GET',
+                            url: '@Url.Action("GetAllPaged")',
+                            success: function (data) {
+                            $('#fromCat').replaceWith(data);
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type: 'GET',
+                            url: '@Url.Action("GetByCategoryPaged")/?id=' + id,
+                            success: function (data) {
+                            $('#fromCat').replaceWith(data);
+                            }
+                        });
+                    }
+                }
+    </script>
