@@ -25,8 +25,8 @@ namespace aspnetzabota.Controllers
         {
             var result = new HomeViewModel
             {
-                LastNews = _news.GetLastNews(3).Result,
                 Slider = _slider.GetSliders().Result,
+                LastNews = _news.GetLastNews(3).Result,
                 LastReviews = _Reviews.RandomReviews(6).Result,
                 Doctors = _doctorSchedule.Random(4)
             };
