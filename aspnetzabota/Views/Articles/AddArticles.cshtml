@@ -99,7 +99,7 @@
         article.Name = $('#Name').val();
         article.Description = quill.root.innerHTML;
         article.CategoryID = $('#Cat').val();
-        article.Img = r;
+        
 
         //get img file
         var formData = new FormData();
@@ -108,9 +108,10 @@
         //file extension
         var fe = /(?:\.([^.]+))?$/;
         var ext = fe.exec(file.name)[1];
-
         formData.append("fileInput", file, r + "." + ext);
 
+        //file extension to db
+        article.Img = r + "." + ext;
 
         console.log(JSON.stringify(article));
 

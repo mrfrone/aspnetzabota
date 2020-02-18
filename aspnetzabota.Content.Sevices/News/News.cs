@@ -8,6 +8,7 @@ using aspnetzabota.Content.Database.Repository.News;
 using aspnetzabota.Common.Result;
 using System.IO;
 using System;
+using Microsoft.AspNetCore.Hosting;
 
 namespace aspnetzabota.Content.Services.News
 {
@@ -46,7 +47,7 @@ namespace aspnetzabota.Content.Services.News
             {
                 Name = news.Name,
                 Description = news.Description,
-                IMG = Path.Combine("~/images/Articles", news.IMG),
+                IMG = "~/images/Articles/" + news.IMG,
                 Date = DateTimeOffset.UtcNow,
                 categoryID = news.CategoryID
             });
