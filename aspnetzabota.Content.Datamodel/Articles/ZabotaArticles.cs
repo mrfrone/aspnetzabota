@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace aspnetzabota.Content.Datamodel.News
+namespace aspnetzabota.Content.Datamodel.Articles
 {
-    public class ZabotaNews
+    public class ZabotaArticles
     {
         public int Id { get; set; }
         public string Name { get; set; }

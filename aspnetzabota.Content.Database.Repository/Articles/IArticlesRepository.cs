@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace aspnetzabota.Content.Database.Repository.News
+namespace aspnetzabota.Content.Database.Repository.Articles
 {
-    public interface INewsRepository
+    public interface IArticlesRepository
     {
         Task<Entities.Articles[]> GetLast(int Count, bool trackChanges = false);
         Task<Entities.Articles> GetSingle(int id, bool trackChanges = false);

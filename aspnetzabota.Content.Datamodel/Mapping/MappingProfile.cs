@@ -2,7 +2,7 @@
 using aspnetzabota.Common.AutoMapper.Extensions;
 using aspnetzabota.Content.Datamodel.Department;
 using aspnetzabota.Content.Datamodel.License;
-using aspnetzabota.Content.Datamodel.News;
+using aspnetzabota.Content.Datamodel.Articles;
 using aspnetzabota.Content.Datamodel.Review;
 using aspnetzabota.Content.Datamodel.Slider;
 
@@ -32,7 +32,7 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.Path, opts => opts.MapFrom(u => u.Path));
 
-            CreateMap<Database.Entities.Articles, ZabotaNews>()
+            CreateMap<Database.Entities.Articles, ZabotaArticles>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))

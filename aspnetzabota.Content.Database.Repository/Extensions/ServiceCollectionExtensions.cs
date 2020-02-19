@@ -1,7 +1,7 @@
 ﻿using aspnetzabota.Content.Database.Repository.Category;
 using aspnetzabota.Content.Database.Repository.Department;
 using aspnetzabota.Content.Database.Repository.Licenses;
-using aspnetzabota.Content.Database.Repository.News;
+using aspnetzabota.Content.Database.Repository.Articles;
 using aspnetzabota.Content.Database.Repository.Review;
 using aspnetzabota.Content.Database.Repository.Slider;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +19,7 @@ namespace aspnetzabota.Content.Repository.Extensions
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<ISliderRepository, SliderRepository>();
-            services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<IArticlesRepository, ArticlesRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             return services;
         }

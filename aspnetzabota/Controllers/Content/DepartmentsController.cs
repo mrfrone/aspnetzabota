@@ -1,5 +1,5 @@
 ﻿using aspnetzabota.Content.Services.Department;
-using aspnetzabota.Content.Services.News;
+using aspnetzabota.Content.Services.Articles;
 using aspnetzabota.Content.Services.Price;
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +10,9 @@ namespace aspnetzabota.Controllers
     {
         private readonly IDepartment _departments;
         private readonly IPrice _price;
-        private readonly INews _news;
+        private readonly IArticles _news;
 
-        public DepartmentsController(IDepartment departments, IPrice price, INews news)
+        public DepartmentsController(IDepartment departments, IPrice price, IArticles news)
         {
             _departments = departments;
             _price = price;

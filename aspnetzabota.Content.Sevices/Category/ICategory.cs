@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using aspnetzabota.Content.Datamodel.News;
+using aspnetzabota.Content.Datamodel.Articles;
 
 namespace aspnetzabota.Content.Services.Category
 {

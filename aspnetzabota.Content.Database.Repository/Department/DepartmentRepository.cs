@@ -16,6 +16,7 @@ namespace aspnetzabota.Content.Database.Repository.Department
         { 
             return await appDBContext
                 .Departments
+                .Include(u => u.Articles)
                 .ToArrayAsync(); 
         }
     }

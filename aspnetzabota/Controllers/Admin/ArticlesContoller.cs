@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using aspnetzabota.Web.ViewModels;
 using aspnetzabota.Content.Services.Category;
 using System.Threading.Tasks;
-using aspnetzabota.Content.Datamodel.News;
+using aspnetzabota.Content.Datamodel.Articles;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Content.Services.Upload;
-using aspnetzabota.Content.Services.News;
+using aspnetzabota.Content.Services.Articles;
 using aspnetzabota.Web.Style;
 
 namespace aspnetzabota.Controllers
@@ -18,12 +18,12 @@ namespace aspnetzabota.Controllers
     {
         private readonly IUpload _upload;
         private readonly ICategory _category;
-        private readonly INews _news;
-        public ArticlesController(ICategory category, IUpload upload, INews news)
+        private readonly IArticles _articles;
+        public ArticlesController(ICategory category, IUpload upload, IArticles articles)
         {
             _category = category;
             _upload = upload;
-            _news = news;
+            _articles = articles;
         }
 
         #region Views
@@ -31,7 +31,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new ArticlesListViewModel 
             {
-                Articles = _news.GetPagedNewsList(1, 6).Result,
+                Articles = _articles.GetPagedArticlesList(1, 6).Result,
                 Category = _category.GetCategory().Result,
                 PaginationOptions = PaginationStyle.PagedListOptions,
                 PagingMethod = nameof(GetAllPaged)
@@ -44,7 +44,7 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new ArticlesListViewModel
             {
-                Articles = _news.GetFromNewsCategory(id, pageNumber, 6).Result,
+                Articles = _articles.GetFromArticleCategory(id, pageNumber, 6).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetByCategoryPaged)
             };
@@ -55,7 +55,7 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new ArticlesListViewModel
             {
-                Articles = _news.GetPagedNewsList(pageNumber, 6).Result,
+                Articles = _articles.GetPagedArticlesList(pageNumber, 6).Result,
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetAllPaged)
             };
@@ -74,9 +74,9 @@ namespace aspnetzabota.Controllers
 
         #region Methods
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] ZabotaNews data)
+        public async Task<IActionResult> Add([FromBody] ZabotaArticles data)
         {
-            var result = await _news.AddNews(data);
+            var result = await _articles.AddArticle(data);
 
             return ZabotaResult(result.IsCorrect);
         }
@@ -91,7 +91,7 @@ namespace aspnetzabota.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)
         {
-            var result = await _news.DeleteByID(id);
+            var result = await _articles.DeleteArticleByID(id);
 
             return Redirect("/admin/articles/list");
         }

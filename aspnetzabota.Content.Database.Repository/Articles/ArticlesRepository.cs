@@ -4,13 +4,13 @@ using aspnetzabota.Content.Database.Context;
 using aspnetzabota.Common.EFCore.Extensions;
 using System.Threading.Tasks;
 
-namespace aspnetzabota.Content.Database.Repository.News
+namespace aspnetzabota.Content.Database.Repository.Articles
 {
-    internal class NewsRepository : INewsRepository
+    internal class ArticlesRepository : IArticlesRepository
     {
         private readonly ContentContext _appDBContext;
 
-        public NewsRepository(ContentContext appDBContext)
+        public ArticlesRepository(ContentContext appDBContext)
         {
             this._appDBContext = appDBContext;
         }

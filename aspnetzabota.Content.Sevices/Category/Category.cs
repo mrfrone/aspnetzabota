@@ -1,6 +1,5 @@
-﻿using aspnetzabota.Content.Database.Context;
-using aspnetzabota.Content.Database.Repository.Category;
-using aspnetzabota.Content.Datamodel.News;
+﻿using aspnetzabota.Content.Database.Repository.Category;
+using aspnetzabota.Content.Datamodel.Articles;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;

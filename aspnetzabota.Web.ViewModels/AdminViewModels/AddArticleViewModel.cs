@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Content.Datamodel.News;
+using aspnetzabota.Content.Datamodel.Articles;
 
 namespace aspnetzabota.Web.ViewModels
 {
