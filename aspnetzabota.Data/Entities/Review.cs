@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 
 namespace aspnetzabota.Content.Database.Entities
 {
     public class Review
     {
-        public int? id { get; set; }
-        public string author { get; set; }
-        [EmailAddress(ErrorMessage = "Некорректный адрес")]
-        public string email { get; set; }
-        public string text { get; set; }
-        public string date { get; set; }
+        public int? Id { get; set; }
+        public string Author { get; set; }
+        public string Email { get; set; }
+        public string Text { get; set; }
+        public DateTimeOffset Date { get; set; }
     }
 }

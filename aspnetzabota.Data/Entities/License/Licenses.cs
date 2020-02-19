@@ -5,8 +5,8 @@ namespace aspnetzabota.Content.Database.Entities
 {
     public class Licenses
     {
-        public int? id { get; set; }
-        public string name { get; set; }
-        public IEnumerable<LicensesPhoto> photo { get; set; }
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<LicensesPhoto> Photo { get; set; }
     }
 }

@@ -43,13 +43,13 @@ namespace aspnetzabota.Content.Services.News
         }
         public async Task<ZabotaResult> AddNews(ZabotaNews news)
         {
-            await _newsRepository.Add(new Database.Entities.News
+            await _newsRepository.Add(new Database.Entities.Articles
             {
                 Name = news.Name,
                 Description = news.Description,
-                IMG = "~/images/Articles/" + news.IMG,
+                Img = "~/images/Articles/" + news.IMG,
                 Date = DateTimeOffset.UtcNow,
-                categoryID = news.CategoryID
+                CategoryID = news.CategoryID
             });
 
             return new ZabotaResult();

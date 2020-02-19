@@ -45,7 +45,7 @@ namespace aspnetzabota
             services.Configure<PasswordHashingSettings>(Configuration.GetSection(nameof(PasswordHashingSettings)));
 
             services.AddAdminServices(Configuration.GetConnectionString("PostgreSQL"));
-            services.AddContentServices(Configuration.GetConnectionString("MySQL"));
+            services.AddContentServices(Configuration.GetConnectionString("PostgreSQL"));
             services.AddPasswordHashing();
             services.AddScoped<IIdentityRequestStorage, IdentityRequestStorage>();
 

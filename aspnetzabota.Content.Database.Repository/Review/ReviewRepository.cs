@@ -29,18 +29,18 @@ namespace aspnetzabota.Content.Database.Repository.Review
         {
             return _appDBContext.Reviews
                 .HasTracking(trackChanges)
-                .OrderByDescending(x => x.date)
+                .OrderByDescending(x => x.Date)
                 .ToArrayAsync();
         }
         public async Task Add(ZabotaReview review)
         {
             _appDBContext.Add(new Entities.Review
             {
-                id = review.Id,
-                author = review.Author,
-                date = review.Date,
-                email = review.Email,
-                text = review.Text
+                Id = review.Id,
+                Author = review.Author,
+                Date = review.Date,
+                Email = review.Email,
+                Text = review.Text
             });
             await _appDBContext.SaveChangesAsync();
         }

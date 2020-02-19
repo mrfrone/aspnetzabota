@@ -8,9 +8,6 @@ namespace aspnetzabota.Admin.Database.Extensions
     {
         public static IServiceCollection AddAdminDatabase(this IServiceCollection services, string connectionString)
         {
-            //services.AddDbContext<AdminContext>(options =>
-            //    options.UseMySql(connectionString, opt =>
-            //               opt.MigrationsHistoryTable("__EFMigrationsHistory")));
 
             services.AddDbContext<AdminContext>(builder =>
             {

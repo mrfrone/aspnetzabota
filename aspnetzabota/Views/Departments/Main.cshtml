@@ -38,12 +38,26 @@
                                 @Html.Raw("<div class='tab-pane fade' id='v-pills-" + depart.Id + "' role='tabpanel' aria-labelledby='day-" + depart.Id + "-tab'>")
                             }
                             <div class="row departments">
-                                <div class="col-lg-4 order-lg-last d-flex align-items-stretch">
-                                    <div class="img align-self-stretch" style="background-image: url(@Url.Content("~/images/dept-1.jpg"));"></div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <h2>@depart.Name</h2>
-                                    <p>@depart.Description</p>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="blog-entry">
+                                            <a href="#" class="block-20" @*style="background-image: url(@Url.Content(news.IMG));"*@>
+                                                <div class="meta-date text-center p-2">
+                                                    <span class="day">@*@news.Date.ToString("dd")*@</span>
+                                                    <span class="mos">@*@news.Date.ToString("MMMM")*@</span>
+                                                    <span class="yr">@*@news.Date.ToString("yyyy")*@</span>
+                                                </div>
+                                            </a>
+                                            <div class="text bg-white p-4">
+                                                <h3 class="heading"><a href="#">@*@news.Name*@</a></h3>
+                                                <div class="d-flex align-items-center mt-4">
+                                                    <p class="mb-0"><a href="/news/single/#" class="btn btn-primary">Подробнее<span class="ion-ios-arrow-round-forward"></span></a></p>
+                                                    <p class="ml-auto mb-0"></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row departments">

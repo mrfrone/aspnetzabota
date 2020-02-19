@@ -14,28 +14,28 @@ namespace aspnetzabota.Content.Database.Repository.News
         {
             this._appDBContext = appDBContext;
         }
-        public Task<Entities.News[]> GetLast(int Count, bool trackChanges = false)
+        public Task<Entities.Articles[]> GetLast(int Count, bool trackChanges = false)
         {
             return _appDBContext.News
                 .HasTracking(trackChanges)
                 .OrderByDescending(x => x.Date)
                 .Take(Count).ToArrayAsync();
         }
-        public Task<Entities.News> GetSingle(int id, bool trackChanges = false) 
+        public Task<Entities.Articles> GetSingle(int id, bool trackChanges = false) 
         { 
             return _appDBContext.News
                 .HasTracking(trackChanges)
-                .FirstOrDefaultAsync(p => p.ID == id); 
+                .FirstOrDefaultAsync(p => p.Id == id); 
         }
-        public Task<Entities.News[]> GetFromCategory(int id, bool trackChanges = false)
+        public Task<Entities.Articles[]> GetFromCategory(int id, bool trackChanges = false)
         {
             return _appDBContext.News
                 .HasTracking(trackChanges)
-                .Where(c => c.categoryID == id)
+                .Where(c => c.CategoryID == id)
                 .OrderByDescending(x => x.Date)
                 .ToArrayAsync();
         }
-        public Task<Entities.News[]> GetList(bool trackChanges = false)
+        public Task<Entities.Articles[]> GetList(bool trackChanges = false)
         {
             return _appDBContext.News
             .HasTracking(trackChanges)
@@ -43,14 +43,14 @@ namespace aspnetzabota.Content.Database.Repository.News
             .OrderByDescending(x => x.Date)
             .ToArrayAsync();
         }
-        public async Task Add(Entities.News news)
+        public async Task Add(Entities.Articles news)
         {
             _appDBContext.News.Add(news);
             await _appDBContext.SaveChangesAsync();
         }
         public async Task Delete(int id)
         {
-            var article = new Entities.News { ID = id };
+            var article = new Entities.Articles { Id = id };
             _appDBContext.News.Attach(article);
             _appDBContext.News.Remove(article);
             await _appDBContext.SaveChangesAsync();

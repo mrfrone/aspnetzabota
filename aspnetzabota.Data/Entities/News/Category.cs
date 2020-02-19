@@ -8,6 +8,6 @@ namespace aspnetzabota.Content.Database.Entities
         public int ID { get; set; }
         [Column("categoryName")]
         public string Name{ get; set; }
-        public List<News> news { get; set; }
+        public List<Articles> news { get; set; }
     }
 }

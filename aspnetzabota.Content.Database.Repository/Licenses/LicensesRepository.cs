@@ -17,7 +17,7 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
         { 
             return await appDBContext
                 .Licenses
-                .Include(u => u.photo)
+                .Include(u => u.Photo)
                 .ToArrayAsync(); 
         }
     }

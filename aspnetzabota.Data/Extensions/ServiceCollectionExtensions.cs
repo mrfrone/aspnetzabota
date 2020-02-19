@@ -8,9 +8,15 @@ namespace aspnetzabota.Content.Database.Extensions
     {
         public static IServiceCollection AddContentDatabase(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<ContentContext>(options =>
-                options.UseMySql(connectionString, opt =>
-                           opt.MigrationsHistoryTable("__EFMigrationsHistory")));
+            services.AddDbContext<ContentContext>(builder =>
+            {
+                builder.UseNpgsql(connectionString, options =>
+                {
+                    options.MigrationsAssembly("aspnetzabota.Web");
+                    options.EnableRetryOnFailure();
+                    options.MigrationsHistoryTable("__EFMigrationsHistory", ContentContext.SchemaName);
+                });
+            });
 
             return services;
         }

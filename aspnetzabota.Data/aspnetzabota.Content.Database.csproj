@@ -5,8 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200219104304_AddNewsToDepartments.cs" />
+    <Compile Remove="Migrations\20200219104304_AddNewsToDepartments.Designer.cs" />
+    <Compile Remove="Migrations\20200219104508_AddNewsToDepartments.cs" />
+    <Compile Remove="Migrations\20200219104508_AddNewsToDepartments.Designer.cs" />
+    <Compile Remove="Migrations\20200219104545_AddNewsToDepartmentsMethod.cs" />
+    <Compile Remove="Migrations\20200219104545_AddNewsToDepartmentsMethod.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

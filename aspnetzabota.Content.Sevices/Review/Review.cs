@@ -30,7 +30,7 @@ namespace aspnetzabota.Content.Services.Review
         }
         public async Task Add(ZabotaReview review)
         {
-            review.Date = DateTime.Now.ToShortDateString();
+            review.Date = DateTime.UtcNow;
             await _reviewRepository.Add(review);
         }
     }
