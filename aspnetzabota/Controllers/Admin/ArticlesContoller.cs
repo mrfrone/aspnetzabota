@@ -25,6 +25,7 @@ namespace aspnetzabota.Controllers
             _upload = upload;
             _news = news;
         }
+
         #region Views
         public ViewResult List()
         {
@@ -86,6 +87,13 @@ namespace aspnetzabota.Controllers
             var result = await _upload.UploadImage(image, "images/Articles");
 
             return ZabotaResult(result.IsCorrect);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteArticle(int id)
+        {
+            var result = await _news.DeleteByID(id);
+
+            return Redirect("/admin/articles/list");
         }
         #endregion
     }

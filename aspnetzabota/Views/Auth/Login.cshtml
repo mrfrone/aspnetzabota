@@ -69,7 +69,7 @@
                                 <p>
                                     Вы уже авторизованы.
                                 </p>
-                                <a href="/admin/articles/list"class="btn btn-primary btn-flat mb-3 mt-3">Админ-панель</a>
+                                <a href="/admin/articles/list" class="btn btn-primary btn-flat mb-3 mt-3">Админ-панель</a>
                                 <a href="/" class="btn btn-primary btn-flat mb-3 mt-3">На главную</a>
                             }
                         </div>
@@ -88,34 +88,50 @@
 
 <script type="text/javascript">
 
-        function Ajax_Login() {
+    function Ajax_Login() {
 
-            var logform = {};
-            logform.Login = $('#log').val();
-            logform.Password = $('#pass').val();
+        var logform = {};
+        logform.Login = $('#log').val();
+        logform.Password = $('#pass').val();
 
-            console.log(JSON.stringify(logform));
+        console.log(JSON.stringify(logform));
 
-            if (logform.Login && logform.Password) {
-                $.ajax({
-                    type: "POST",
-                    url: "/admin/auth/loginPost",
-                    data: JSON.stringify(logform),
-                    contentType: "application/json",
-                    dataType: "json"
-                }).done(function (data) {
-                    if (data.result)
-                        document.location.href = "../list";
+        if (logform.Login && logform.Password) {
+            $.ajax({
+                type: "POST",
+                url: "/admin/auth/loginPost",
+                data: JSON.stringify(logform),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (data) {
+                if (data.result) {
+                    Swal.fire(
+                        'Отлично!',
+                        'Вы авторизовались!',
+                        'success'
+                    );
+                    document.location.href = "../articles/list";
+                }
 
-                    else
-                        alert("Ошибка!");
-                }).fail(function () {
-                    console.log('Error');
-                });
-            }
-            else {
-                alert("Заполнены не все поля!");
-            }
+                else
+                    Swal.fire(
+                        'Упс...',
+                        'Данные введены неправильно!',
+                        'error'
+                    );
+            }).fail(function () {
+                console.log('Error');
+            });
         }
-    </script>
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Упс...',
+                text: 'Заполнены не все поля!'
+                })
+        }
+    }
+</script>
+<!--alerts-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 

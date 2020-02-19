@@ -103,19 +103,18 @@
 
         //get img file
         var formData = new FormData();
-        var file = document.getElementById("fileInput").files[0];
-
-        //file extension
-        var fe = /(?:\.([^.]+))?$/;
-        var ext = fe.exec(file.name)[1];
-        formData.append("fileInput", file, r + "." + ext);
-
-        //file extension to db
-        article.Img = r + "." + ext;
+        var file = document.getElementById("fileInput").files[0];        
 
         console.log(JSON.stringify(article));
 
         if (article.Name != null && article.Description != null && article.CategoryID != null && file.name != null) {
+            //file extension
+            var fe = /(?:\.([^.]+))?$/;
+            var ext = fe.exec(file.name)[1];
+            formData.append("fileInput", file, r + "." + ext);
+
+            //file extension to db
+            article.Img = r + "." + ext;
 
             $.ajax({
                 url: '/admin/articles/addimage',
@@ -136,17 +135,29 @@
                     dataType: "json"
                 }).done(function (data) {
                     if (data) {
-                        alert("Статья успешно добавлена");
+                        Swal.fire(
+                            'Отлично!',
+                            'Статья успешно добавлена!',
+                            'success'
+                        );
                         document.location.href = "List";
                     }
                     else
-                        alert("Ошибка при отправке статьи!");
+                        Swal.fire(
+                        'Упс...',
+                        'Ошибка при добавлении статьи',
+                        'error'
+                    );
                 }).fail(function (response) {
                     console.log('Error: ' + response);
                 });
             }
             else {
-                alert("Заполнены не все поля!");
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Упс...',
+                  text: 'Заполнены не все поля!'
+                });
             }
         }
 </script>

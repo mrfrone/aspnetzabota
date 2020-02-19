@@ -12,5 +12,6 @@ namespace aspnetzabota.Content.Services.News
         Task<IEnumerable<ZabotaNews>> GetFromNewsCategory(int id, int pageNumber, int pageSize);
         Task<IEnumerable<ZabotaNews>> GetPagedNewsList(int pageNumber, int pageSize);
         Task<ZabotaResult> AddNews(ZabotaNews news);
+        Task<ZabotaResult> DeleteByID(int id);
     }
 }

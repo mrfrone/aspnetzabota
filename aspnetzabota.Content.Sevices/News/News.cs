@@ -54,5 +54,10 @@ namespace aspnetzabota.Content.Services.News
 
             return new ZabotaResult();
         }
+        public async Task<ZabotaResult> DeleteByID(int id)
+        {
+            await _newsRepository.Delete(id);
+            return new ZabotaResult();
+        }
     }
 }

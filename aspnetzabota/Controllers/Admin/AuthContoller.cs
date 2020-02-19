@@ -6,6 +6,7 @@ using aspnetzabota.Web.Common;
 using aspnetzabota.Web.Common.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace aspnetzabota.Controllers
 {
@@ -53,7 +54,7 @@ namespace aspnetzabota.Controllers
             if (result.IsCorrect)
                 HttpContext.Response.Cookies.Delete(".AspNetCore.Application.Id");
 
-            return ZabotaResult(result.IsCorrect);
+            return Redirect("/admin/auth/login");
         }
     }
 }

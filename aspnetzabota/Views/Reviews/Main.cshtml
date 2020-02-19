@@ -51,17 +51,29 @@
                     dataType: "json"
                 }).done(function (data) {
                     if (data) {
-                        alert("Отзыв успешно отправлен!");
+                        Swal.fire(
+                            'Отлично!',
+                            'Ваш отзыв отправлен на проверку!',
+                            'success'
+                        )
                         location.reload();
                     }
                     else
-                        alert("Ошибка при отправке отзыва!");
+                        Swal.fire(
+                            'Упс...',
+                            'Ошибка при добавлении отзыва!',
+                            'error'
+                        );
                 }).fail(function (response) {
                     console.log('Error: ' + response);
                 });
             }
             else {
-                alert("Заполнены не все поля!");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Заполнены не все поля!'
+                })
             }
         }
     </script>

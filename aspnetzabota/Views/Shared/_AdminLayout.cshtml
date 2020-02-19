@@ -37,90 +37,17 @@
 
 
 <body>
-
-
-    <header class="top-header media">
-        <div class="top-left mr-3">
-            <a class="navbar-brand" href="#"><img src="~/admin/images/logo.png" alt="Zabota"></a><!-- /.navbar-brand -->
-        </div><!-- /.top-left -->
-
-        <div class="top-right media-body">
-            <div class="left-content float-left">
-                <button class="sidenav-toggle mr-2"><i class="fa fa-bars"></i></button><!-- /.sidenav-toggle -->
-            </div><!-- /.left-content -->
-
-            <div class="right-content float-right">
-                <div class="dropdown user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="~/admin/images/avatar/1.jpg" class="rounded-circle float-left mr-2" alt="User Image">
-                        <span class="status"></span>
-                        <h4 class="name">Jonathon Doe</h4>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-user"></i> Профиль</a></li>
-                        <li><a href="#"><i class="fa fa-power-off"></i>Выйти</a></li>
-                    </ul>
+    @await Component.InvokeAsync("AdminMenu")
+    <div class="dashboard-contents">
+        @RenderBody()
+        <footer class="site-footer">
+            <div class="copyright">
+                <div class="float-left">
+                    Copyright © 2020 <a href="https://zabotarnd.ru/" target="_blank">Диагностический центр "Забота"</a>
                 </div>
-
-            </div><!-- /.right-content -->
-        </div><!-- /.top-right -->
-    </header><!-- /.top-header -->
-    <div class="content-wrapper container-fluid">
-        <aside class="left-panel">
-            <div class="user-card">
-                <a href="#">
-                    <div class="avatar mr-3 float-left"><img class="rounded-circle" src="~/admin/images/avatar/4.jpg" alt="Avatar"></div><!-- /.avatar -->
-                    <div class="details">
-                        <h4 class="name">Bobby Payne</h4><!-- /.name -->
-                        <span class="designation">Admin</span><!-- /.designation -->
-                    </div><!-- /.details -->
-                </a>
-            </div>
-            <nav class="navbar">
-                <ul class="navbar-nav">
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-newspaper-o"></i> <span class="menu-title">Статьи</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/admin/articles/list">Список статей</a>
-                            <a class="dropdown-item" href="/admin/articles/addarticles">Добавить статью</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-university"></i> <span class="menu-title">Отделения</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-asterisk"></i> <span class="menu-title">Врачи</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-address-card"></i> <span class="menu-title">Модерация отзывов</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-file-text-o"></i> <span class="menu-title">Лицензии</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside><!-- /.left-panel -->
-        <div class="dashboard-contents">
-            @RenderBody()
-            <footer class="site-footer">
-                <div class="copyright">
-                    <div class="float-left">
-                        Copyright © 2020 <a href="https://zabotarnd.ru/" target="_blank">Диагностический центр "Забота"</a>
-                    </div>
-                </div><!-- /.copyright -->
-            </footer><!-- /.site-footer -->
-        </div><!-- /.dashboard-contents -->
+            </div><!-- /.copyright -->
+        </footer><!-- /.site-footer -->
+    </div><!-- /.dashboard-contents -->
     </div><!-- /.content-wrapper -->
 
 
@@ -133,31 +60,34 @@
     <script src="~/admin/assets/js/main.js"></script>
     <script src="~/admin/assets/js/jquery.magnific-popup.min.js"></script>
 
+    <!--alerts-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     @*<script type="text/javascript">
-        $(document).ready(function () {
-            'use strict';
+            $(document).ready(function () {
+                'use strict';
 
-            $('.pop-video').magnificPopup({
-                type: 'iframe',
+                $('.pop-video').magnificPopup({
+                    type: 'iframe',
 
 
-                iframe: {
-                    markup: '<div class="mfp-iframe-scaler">' +
-                        '<div class="mfp-close"></div>' +
-                        '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
-                        '<div class="mfp-title">Some caption</div>' +
-                        '</div>'
-                },
-                callbacks: {
-                    markupParse: function (template, values, item) {
-                        values.title = item.el.attr('title');
+                    iframe: {
+                        markup: '<div class="mfp-iframe-scaler">' +
+                            '<div class="mfp-close"></div>' +
+                            '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
+                            '<div class="mfp-title">Some caption</div>' +
+                            '</div>'
+                    },
+                    callbacks: {
+                        markupParse: function (template, values, item) {
+                            values.title = item.el.attr('title');
+                        }
                     }
-                }
+
+                });
 
             });
-
-        });
-    </script>*@
+        </script>*@
 
 
 </body>

@@ -48,6 +48,13 @@ namespace aspnetzabota.Content.Database.Repository.News
             _appDBContext.News.Add(news);
             await _appDBContext.SaveChangesAsync();
         }
+        public async Task Delete(int id)
+        {
+            var article = new Entities.News { ID = id };
+            _appDBContext.News.Attach(article);
+            _appDBContext.News.Remove(article);
+            await _appDBContext.SaveChangesAsync();
+        }
 
     }
 }
