@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Content.Database.Entities;
+﻿using aspnetzabota.Content.Datamodel.Doctors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

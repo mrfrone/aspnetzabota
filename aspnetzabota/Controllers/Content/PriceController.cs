@@ -16,7 +16,7 @@ namespace aspnetzabota.Controllers
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.Take,
+                PriceService = _priceService.Get,
                 PriceServiceDep = _priceService.GroupsAndDepartments
             };
             return View(result);

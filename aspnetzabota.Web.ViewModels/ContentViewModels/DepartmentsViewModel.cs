@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Datamodel.Department;
 using aspnetzabota.Content.Datamodel.Articles;
+using aspnetzabota.Content.Datamodel.Price;
 
 namespace aspnetzabota.Web.ViewModels
 {
@@ -9,8 +9,8 @@ namespace aspnetzabota.Web.ViewModels
     {
         public IEnumerable<ZabotaDepartment> Departments { get; set; }
         public IEnumerable<ZabotaArticles> Articles { get; set; }
-        public IEnumerable<Price> Price { get; set; }
-        public IEnumerable<PriceGroupsAndDepartmentsModel> PriceGroupsAndDepartments { get; set; }
+        public IEnumerable<ZabotaPrice> Price { get; set; }
+        public IEnumerable<ZabotaPriceGroupsAndDepartments> PriceGroupsAndDepartments { get; set; }
         public string DepartmentTableID { get; set; }
 
     }

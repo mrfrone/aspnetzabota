@@ -1,4 +1,4 @@
-﻿namespace aspnetzabota.Content.Database.Entities
+﻿namespace aspnetzabota.Content.Datamodel.Doctors
 {
     public class DoctorScheduleModel
     {

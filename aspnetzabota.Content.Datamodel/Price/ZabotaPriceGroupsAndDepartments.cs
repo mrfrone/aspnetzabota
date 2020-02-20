@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace aspnetzabota.Content.Database.Entities
+namespace aspnetzabota.Content.Datamodel.Price
 {
-    public class PriceGroupsAndDepartmentsModel
+    public class ZabotaPriceGroupsAndDepartments
     {
         public int grcode { get; set; }
         public string GroupName { get; set; }

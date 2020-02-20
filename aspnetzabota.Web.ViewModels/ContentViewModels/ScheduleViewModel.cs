@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using aspnetzabota.Content.Database.Entities;
+using aspnetzabota.Content.Datamodel.Doctors;
 using X.PagedList.Mvc.Common;
 
 namespace aspnetzabota.Web.ViewModels

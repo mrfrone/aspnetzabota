@@ -1,4 +1,4 @@
-﻿using aspnetzabota.Content.Database.Entities;
+﻿using aspnetzabota.Content.Datamodel.Doctors;
 using System.Collections.Generic;
 
 namespace aspnetzabota.Content.Services.Schedule

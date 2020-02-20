@@ -1,5 +1,5 @@
-﻿using aspnetzabota.Content.Database.Entities;
-using aspnetzabota.Content.Datamodel.Articles;
+﻿using aspnetzabota.Content.Datamodel.Articles;
+using aspnetzabota.Content.Datamodel.Doctors;
 using aspnetzabota.Content.Datamodel.Review;
 using aspnetzabota.Content.Datamodel.Slider;
 using System.Collections.Generic;

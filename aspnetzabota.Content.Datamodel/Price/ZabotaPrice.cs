@@ -1,6 +1,6 @@
-﻿namespace aspnetzabota.Content.Database.Entities
+﻿namespace aspnetzabota.Content.Datamodel.Price
 {
-    public class Price
+    public class ZabotaPrice
     {
             public int code { get; set; }
             public string depart_name { get; set; }
