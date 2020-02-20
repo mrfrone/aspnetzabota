@@ -19,7 +19,8 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.ShortName, opts => opts.MapFrom(u => u.ShortName))
                 .ForMember(u => u.IMG, opts => opts.MapFrom(u => u.Img))
                 .ForMember(u => u.Description, opts => opts.MapFrom(u => u.Description))
-                .ForMember(u => u.DepartmentPriceID, opts => opts.MapFrom(u => u.DepartmentPriceID));
+                .ForMember(u => u.DepartmentPriceID, opts => opts.MapFrom(u => u.DepartmentPriceID))
+                .ForMember(u => u.Articles, opts => opts.MapFrom(u => u.Articles));
 
             CreateMap<Database.Entities.Licenses, ZabotaLicenses>()
                 .IgnoreOther()
@@ -40,7 +41,8 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.IMG, opts => opts.MapFrom(u => u.Img))
                 .ForMember(u => u.Date, opts => opts.MapFrom(u => u.Date))
                 .ForMember(u => u.CategoryID, opts => opts.MapFrom(u => u.CategoryID))
-                .ForMember(u => u.Category, opts => opts.MapFrom(u => u.Category));
+                .ForMember(u => u.Category, opts => opts.MapFrom(u => u.Category))
+                .ForMember(u => u.DepartmentId, opts => opts.MapFrom(u => u.DepartmentId));
 
             CreateMap<Database.Entities.Review, ZabotaReview>()
                 .IgnoreOther()
@@ -54,6 +56,7 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.Image, opts => opts.MapFrom(u => u.Image));
+
             CreateMap<Database.Entities.Category, ZabotaCategory>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.ID))

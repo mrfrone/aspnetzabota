@@ -11,5 +11,6 @@ namespace aspnetzabota.Content.Database.Entities
         public DateTimeOffset Date { get; set; }
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
+        public int? DepartmentId { get; set; }
     }
 }

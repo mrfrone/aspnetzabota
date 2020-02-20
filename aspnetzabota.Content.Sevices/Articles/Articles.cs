@@ -47,7 +47,8 @@ namespace aspnetzabota.Content.Services.Articles
                 Description = news.Description,
                 Img = "~/images/Articles/" + news.IMG,
                 Date = DateTimeOffset.UtcNow,
-                CategoryID = news.CategoryID
+                CategoryID = news.CategoryID,
+                DepartmentId = news.DepartmentId
             });
 
             return new ZabotaResult();

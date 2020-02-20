@@ -25,6 +25,17 @@
                                 }
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Отделение для статьи (если имеется):</label>
+                            <select id="Dep" class="form-control select2">
+                                <option selected="selected" hidden disabled>Выберите отделение...</option>
+                                <option value="">Нет</option>
+                                @foreach (var dep in Model.Department)
+                                {
+                                    <option value="@dep.Id">@dep.Name</option>
+                                }
+                            </select>
+                        </div>
                         <div class=" row form-group">
                             <div class="col col-md-3"><label for="file-input" class=" form-control-label">Изображение</label></div>
                             <div class="col-12 col-md-9"><input type="file" id="fileInput" name="file" class="form-control-file" accept="image/jpeg,image/png"></div>
@@ -87,8 +98,7 @@
         theme: 'snow'
     });
 
-    function Add_Article()
-    {
+    function Add_Article() {
         //random name from img
         var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         console.log(r);
@@ -99,7 +109,17 @@
         article.Name = $('#Name').val();
         article.Description = quill.root.innerHTML;
         article.CategoryID = $('#Cat').val();
-        
+        article.DepartmentId = $('#Dep').val();
+
+        if (article.CategoryID != 3 && article.DepartmentId > 0)
+        {
+            Swal.fire({
+                  icon: 'error',
+                  title: 'Упс...',
+                  text: 'К отделению можно привязать только статью!'
+            });
+            return;
+        }
 
         //get img file
         var formData = new FormData();

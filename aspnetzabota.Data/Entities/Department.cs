@@ -1,4 +1,6 @@
-﻿namespace aspnetzabota.Content.Database.Entities
+﻿using System.Collections.Generic;
+
+namespace aspnetzabota.Content.Database.Entities
 {
     public class Department
     {
@@ -8,6 +10,6 @@
         public string Img { get; set; }
         public string Description { get; set; }
         public int DepartmentPriceID { get; set; }
-        public Articles[] Articles { get; set; }
+        public IEnumerable<Articles> Articles { get; set; }
     }
 }

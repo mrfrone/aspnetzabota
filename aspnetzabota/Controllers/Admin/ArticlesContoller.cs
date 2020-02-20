@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using aspnetzabota.Content.Services.Upload;
 using aspnetzabota.Content.Services.Articles;
 using aspnetzabota.Web.Style;
+using aspnetzabota.Content.Services.Department;
 
 namespace aspnetzabota.Controllers
 {
@@ -19,11 +20,13 @@ namespace aspnetzabota.Controllers
         private readonly IUpload _upload;
         private readonly ICategory _category;
         private readonly IArticles _articles;
-        public ArticlesController(ICategory category, IUpload upload, IArticles articles)
+        private readonly IDepartment _department; 
+        public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department)
         {
             _category = category;
             _upload = upload;
             _articles = articles;
+            _department = department;
         }
 
         #region Views
@@ -65,7 +68,8 @@ namespace aspnetzabota.Controllers
         {
             var result = new AddArticleViewModel 
             {
-                Category = _category.GetCategory().Result
+                Category = _category.GetCategory().Result,
+                Department = _department.GetDepartments().Result
             };
 
             return View(result);

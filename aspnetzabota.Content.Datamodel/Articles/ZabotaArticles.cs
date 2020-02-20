@@ -11,5 +11,6 @@ namespace aspnetzabota.Content.Datamodel.Articles
         public DateTimeOffset Date { get; set; }
         public int CategoryID { get; set; }
         public virtual ZabotaCategory Category { get; set; }
+        public int? DepartmentId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using aspnetzabota.Content.Database.Context;
 namespace aspnetzabota.Web.Migrations.Content
 {
     [DbContext(typeof(ContentContext))]
-    [Migration("20200219110536_NewDatabase")]
+    [Migration("20200220064454_NewDatabase")]
     partial class NewDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace aspnetzabota.Web.Migrations.Content
 
                     b.Property<DateTimeOffset>("Date");
 
-                    b.Property<int?>("DepartmentId");
+                    b.Property<int>("DepartmentId");
 
                     b.Property<string>("Description");
 
@@ -44,7 +44,7 @@ namespace aspnetzabota.Web.Migrations.Content
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("News");
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("aspnetzabota.Content.Database.Entities.Category", b =>
@@ -147,7 +147,8 @@ namespace aspnetzabota.Web.Migrations.Content
 
                     b.HasOne("aspnetzabota.Content.Database.Entities.Department")
                         .WithMany("Articles")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("aspnetzabota.Content.Database.Entities.LicensesPhoto", b =>

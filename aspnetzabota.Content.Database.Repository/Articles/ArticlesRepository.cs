@@ -16,20 +16,20 @@ namespace aspnetzabota.Content.Database.Repository.Articles
         }
         public Task<Entities.Articles[]> GetLast(int Count, bool trackChanges = false)
         {
-            return _appDBContext.News
+            return _appDBContext.Articles
                 .HasTracking(trackChanges)
                 .OrderByDescending(x => x.Date)
                 .Take(Count).ToArrayAsync();
         }
         public Task<Entities.Articles> GetSingle(int id, bool trackChanges = false) 
         { 
-            return _appDBContext.News
+            return _appDBContext.Articles
                 .HasTracking(trackChanges)
                 .FirstOrDefaultAsync(p => p.Id == id); 
         }
         public Task<Entities.Articles[]> GetFromCategory(int id, bool trackChanges = false)
         {
-            return _appDBContext.News
+            return _appDBContext.Articles
                 .HasTracking(trackChanges)
                 .Where(c => c.CategoryID == id)
                 .OrderByDescending(x => x.Date)
@@ -37,7 +37,7 @@ namespace aspnetzabota.Content.Database.Repository.Articles
         }
         public Task<Entities.Articles[]> GetList(bool trackChanges = false)
         {
-            return _appDBContext.News
+            return _appDBContext.Articles
             .HasTracking(trackChanges)
             .Include(p => p.Category)
             .OrderByDescending(x => x.Date)
@@ -45,14 +45,14 @@ namespace aspnetzabota.Content.Database.Repository.Articles
         }
         public async Task Add(Entities.Articles news)
         {
-            _appDBContext.News.Add(news);
+            _appDBContext.Articles.Add(news);
             await _appDBContext.SaveChangesAsync();
         }
         public async Task Delete(int id)
         {
             var article = new Entities.Articles { Id = id };
-            _appDBContext.News.Attach(article);
-            _appDBContext.News.Remove(article);
+            _appDBContext.Articles.Attach(article);
+            _appDBContext.Articles.Remove(article);
             await _appDBContext.SaveChangesAsync();
         }
 

@@ -81,7 +81,7 @@ namespace aspnetzabota.Web.Migrations.Content
                 });
 
             migrationBuilder.CreateTable(
-                name: "News",
+                name: "Articles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -91,23 +91,23 @@ namespace aspnetzabota.Web.Migrations.Content
                     Img = table.Column<string>(nullable: true),
                     Date = table.Column<DateTimeOffset>(nullable: false),
                     CategoryID = table.Column<int>(nullable: false),
-                    DepartmentId = table.Column<int>(nullable: true)
+                    DepartmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_News", x => x.Id);
+                    table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_News_Category_CategoryID",
+                        name: "FK_Articles_Category_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Category",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_News_Departments_DepartmentId",
+                        name: "FK_Articles_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -131,28 +131,28 @@ namespace aspnetzabota.Web.Migrations.Content
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LicensesPhoto_LicensesId",
-                table: "LicensesPhoto",
-                column: "LicensesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_News_CategoryID",
-                table: "News",
+                name: "IX_Articles_CategoryID",
+                table: "Articles",
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_News_DepartmentId",
-                table: "News",
+                name: "IX_Articles_DepartmentId",
+                table: "Articles",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LicensesPhoto_LicensesId",
+                table: "LicensesPhoto",
+                column: "LicensesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "LicensesPhoto");
+                name: "Articles");
 
             migrationBuilder.DropTable(
-                name: "News");
+                name: "LicensesPhoto");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
@@ -161,13 +161,13 @@ namespace aspnetzabota.Web.Migrations.Content
                 name: "Sliders");
 
             migrationBuilder.DropTable(
-                name: "Licenses");
-
-            migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "Licenses");
         }
     }
 }
