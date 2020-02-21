@@ -4,11 +4,21 @@ using System.IO;
 using System.Linq;
 using System;
 using aspnetzabota.Content.Datamodel.Price;
+using AutoMapper;
+using aspnetzabota.Content.Database.Repository.PriceArticles;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Services.Price
 {
     internal class Price : IPrice
     {
+        private readonly IPriceArticlesRepository _priceArticles;
+        private readonly IMapper _mapper;
+        public Price(IPriceArticlesRepository priceArticles, IMapper mapper)
+        {
+            _priceArticles = priceArticles;
+            _mapper = mapper;
+        }
         private IEnumerable<ZabotaPrice> JsonPrice
         {
             get
@@ -17,16 +27,27 @@ namespace aspnetzabota.Content.Services.Price
                 {
                     return JsonConvert
                         .DeserializeObject<IEnumerable<ZabotaPrice>>(sr.ReadToEnd())
-                        .OrderBy(c => c.depart_name)
-                        .Where(c => !String.IsNullOrEmpty(c.depart_name));
+                        .OrderBy(c => c.DepartName)
+                        .Where(c => !String.IsNullOrEmpty(c.DepartName));
                 }
             }
+        }
+        private async Task<IEnumerable<ZabotaPrice>> PriceAtArticles()
+        {
+                var articles = await _priceArticles.Get();
+                var mappedarticles =  _mapper.Map<IEnumerable<ZabotaPriceArticles>>(articles);
+                var price = JsonPrice;
+                foreach (var article in mappedarticles)
+                {
+                    price.FirstOrDefault(c => c.Id == article.PriceId).Article = article.Article;
+                }
+                return price;
         }
         public IEnumerable<ZabotaPrice> Get
         {
             get
             {
-                return JsonPrice;
+                return PriceAtArticles().Result;
             }
         }
 
@@ -35,31 +56,31 @@ namespace aspnetzabota.Content.Services.Price
             get
             {
                 return JsonPrice
-                    .GroupBy(u => new { u.grcode, u.grname })
+                    .GroupBy(u => new { u.GroupCode, u.GroupName })
                     .Select(c => new ZabotaPriceGroupsAndDepartments
                         {
-                            grcode = c.Key.grcode,
-                            GroupName = c.Key.grname,
-                            DepartName = c.Select(u => u.depart_name).Distinct()
+                            GroupCode = c.Key.GroupCode,
+                            GroupName = c.Key.GroupName,
+                            DepartName = c.Select(u => u.DepartName).Distinct()
                         });
             }
         }
 
         public IEnumerable<ZabotaPriceGroupsAndDepartments> PriceDepartments(int id) 
         { 
-            return GroupsAndDepartments.Where(c => c.grcode == id); 
+            return GroupsAndDepartments.Where(c => c.GroupCode == id); 
         }
         public IEnumerable<ZabotaPrice> FromGroup(int id) 
         { 
-            return JsonPrice.Where(c => c.grcode == id); 
+            return PriceAtArticles().Result.Where(c => c.GroupCode == id); 
         }
         public IEnumerable<ZabotaPrice> FromDepartment(string id) 
         { 
-            return JsonPrice.Where(c => c.depart_name == id); 
+            return PriceAtArticles().Result.Where(c => c.DepartName == id); 
         }
         public IEnumerable<ZabotaPrice> FromSearch(string line)
         {
-            return JsonPrice.Where(c => c.name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            return PriceAtArticles().Result.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
     }
 }

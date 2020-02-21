@@ -1,8 +1,6 @@
-﻿using aspnetzabota.Content.Database.Entities;
-
-namespace aspnetzabota.Content.Datamodel.Price
+﻿namespace aspnetzabota.Content.Database.Entities
 {
-    public class ZabotaPriceArticles
+    public class PriceArticles
     {
         public int? Id { get; set; }
         public int? PriceId { get; set; }

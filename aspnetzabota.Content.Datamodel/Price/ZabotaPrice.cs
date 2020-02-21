@@ -1,14 +1,18 @@
-﻿namespace aspnetzabota.Content.Datamodel.Price
+﻿using aspnetzabota.Content.Datamodel.Articles;
+
+namespace aspnetzabota.Content.Datamodel.Price
 {
     public class ZabotaPrice
     {
-            public int code { get; set; }
-            public string depart_name { get; set; }
-            public string gr_seo { get; set; }
-            public int grcode { get; set; }
-            public string grname { get; set; }
-            public string name { get; set; }
-            public string price { get; set; }
-            public string tags { get; set; }
+            public int Id { get; set; }
+            public int Code { get; set; }
+            public string DepartName { get; set; }
+            public string GroupSeo { get; set; }
+            public int GroupCode { get; set; }
+            public string GroupName { get; set; }
+            public string Name { get; set; }
+            public string Price { get; set; }
+            public string Tags { get; set; }
+            public ZabotaArticles Article { get; set; }
     }
 }

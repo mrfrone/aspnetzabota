@@ -1,8 +1,6 @@
-﻿using aspnetzabota.Content.Database.Context;
-using aspnetzabota.Content.Database.Repository.Licenses;
+﻿using aspnetzabota.Content.Database.Repository.Licenses;
 using aspnetzabota.Content.Datamodel.License;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

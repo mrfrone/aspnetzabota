@@ -66,7 +66,7 @@
                                 <div class="col-lg-12 mt-3">
                                     <select class="custom-select my-1 mr-sm-2" id="departments" name="Departments" onchange="@("getprice" + depart.DepartmentPriceID + "(this.value, 'price"+depart.DepartmentPriceID+"')")">
                                         <option value="" selected disabled hidden>Выберите подкатегорию...</option>
-                                        @foreach (var item in Model.PriceGroupsAndDepartments.Where(x => x.grcode == depart.DepartmentPriceID))
+                                        @foreach (var item in Model.PriceGroupsAndDepartments.Where(x => x.GroupCode == depart.DepartmentPriceID))
                                         {
                                             foreach (var dep in item.DepartName)
                                             {
@@ -86,11 +86,11 @@
                                             </tr>
                                         </thead>
                                         <tbody >
-                                            @foreach (var price in Model.Price.Where(x => x.grcode == depart.DepartmentPriceID))
+                                            @foreach (var price in Model.Price.Where(x => x.GroupCode == depart.DepartmentPriceID))
                                             {
                                                 <tr>
-                                                    <td>@price.name</td>
-                                                    <td>@price.price</td>
+                                                    <td>@price.Name</td>
+                                                    <td>@price.Price</td>
                                                 </tr>
 
                                             }

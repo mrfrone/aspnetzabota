@@ -1,6 +1,5 @@
 ﻿using aspnetzabota.Content.Database.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Database.Repository.Licenses

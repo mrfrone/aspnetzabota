@@ -6,7 +6,7 @@ using aspnetzabota.Content.Database.Repository.Review;
 using aspnetzabota.Content.Database.Repository.Slider;
 using Microsoft.Extensions.DependencyInjection;
 using aspnetzabota.Content.Database.Extensions;
-
+using aspnetzabota.Content.Database.Repository.PriceArticles;
 
 namespace aspnetzabota.Content.Repository.Extensions
 {
@@ -15,12 +15,13 @@ namespace aspnetzabota.Content.Repository.Extensions
         public static IServiceCollection AddContentRepository(this IServiceCollection services, string connectionString)
         {
             services.AddContentDatabase(connectionString);
-            services.AddScoped<ILicensesRepository, LicensesRepository>();
+            services.AddScoped<IPriceArticlesRepository, PriceArticlesRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<ISliderRepository, SliderRepository>();
             services.AddScoped<IArticlesRepository, ArticlesRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ILicensesRepository, LicensesRepository>();
             return services;
         }
     }

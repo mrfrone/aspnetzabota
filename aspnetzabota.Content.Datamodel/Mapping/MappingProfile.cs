@@ -5,6 +5,7 @@ using aspnetzabota.Content.Datamodel.License;
 using aspnetzabota.Content.Datamodel.Articles;
 using aspnetzabota.Content.Datamodel.Review;
 using aspnetzabota.Content.Datamodel.Slider;
+using aspnetzabota.Content.Datamodel.Price;
 
 namespace aspnetzabota.Content.Datamodel.Mapping
 {
@@ -62,6 +63,12 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.ID))
                 .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))
                 .ForMember(u => u.News, opts => opts.MapFrom(u => u.news));
+
+            CreateMap<Database.Entities.PriceArticles, ZabotaPriceArticles>()
+                .IgnoreOther()
+                .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
+                .ForMember(u => u.PriceId, opts => opts.MapFrom(u => u.PriceId))
+                .ForMember(u => u.Article, opts => opts.MapFrom(u => u.Article));
         }
     }
 }
