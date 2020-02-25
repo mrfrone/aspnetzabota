@@ -5,16 +5,15 @@ using System.Linq;
 using System;
 using aspnetzabota.Content.Datamodel.Price;
 using AutoMapper;
-using aspnetzabota.Content.Database.Repository.PriceArticles;
 using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Services.Price
 {
     internal class Price : IPrice
     {
-        private readonly IPriceArticlesRepository _priceArticles;
+        private readonly IPriceArticles _priceArticles;
         private readonly IMapper _mapper;
-        public Price(IPriceArticlesRepository priceArticles, IMapper mapper)
+        public Price(IPriceArticles priceArticles, IMapper mapper)
         {
             _priceArticles = priceArticles;
             _mapper = mapper;
@@ -34,12 +33,14 @@ namespace aspnetzabota.Content.Services.Price
         }
         private async Task<IEnumerable<ZabotaPrice>> PriceAtArticles()
         {
-                var articles = await _priceArticles.Get();
-                var mappedarticles =  _mapper.Map<IEnumerable<ZabotaPriceArticles>>(articles);
+                var articles = await _priceArticles.GetPriceArticles(); 
                 var price = JsonPrice;
-                foreach (var article in mappedarticles)
+                foreach (var article in articles)
                 {
-                    price.FirstOrDefault(c => c.Id == article.PriceId).Article = article.Article;
+                    if (price.FirstOrDefault(c => c.Id == article.PriceId).Article != null) 
+                    {
+                        price.FirstOrDefault(c => c.Id == article.PriceId).Article = article.Article;
+                    }
                 }
                 return price;
         }
@@ -72,15 +73,15 @@ namespace aspnetzabota.Content.Services.Price
         }
         public IEnumerable<ZabotaPrice> FromGroup(int id) 
         { 
-            return PriceAtArticles().Result.Where(c => c.GroupCode == id); 
+            return Get.Where(c => c.GroupCode == id); 
         }
         public IEnumerable<ZabotaPrice> FromDepartment(string id) 
         { 
-            return PriceAtArticles().Result.Where(c => c.DepartName == id); 
+            return Get.Where(c => c.DepartName == id); 
         }
         public IEnumerable<ZabotaPrice> FromSearch(string line)
         {
-            return PriceAtArticles().Result.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            return Get.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
     }
 }

@@ -19,6 +19,11 @@ namespace aspnetzabota.Content.Database.Repository.PriceArticles
                 .Include(c => c.Article)
                 .ToArrayAsync();
         }
+        public async Task Add(Entities.PriceArticles price)
+        {
+            _appDBContext.Add(price);
+            await _appDBContext.SaveChangesAsync();
+        }
     }
 }
 

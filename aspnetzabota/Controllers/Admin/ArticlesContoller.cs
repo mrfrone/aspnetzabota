@@ -20,6 +20,7 @@ namespace aspnetzabota.Controllers
         private readonly IUpload _upload;
         private readonly ICategory _category;
         private readonly IArticles _articles;
+        //private readonly 
         private readonly IDepartment _department; 
         public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department)
         {

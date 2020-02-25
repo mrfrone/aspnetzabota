@@ -6,6 +6,7 @@ namespace aspnetzabota.Content.Datamodel.Price
     {
         public int? Id { get; set; }
         public int? PriceId { get; set; }
+        public int? ArticleId { get; set; }
         public ZabotaArticles Article { get; set; }
     }
 }
