@@ -1,11 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System;
+﻿using System.Collections.Generic;
 using aspnetzabota.Content.Datamodel.Price;
 using AutoMapper;
-using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Database.Repository.PriceArticles;
 using System.Threading.Tasks;
 using aspnetzabota.Common.Result;

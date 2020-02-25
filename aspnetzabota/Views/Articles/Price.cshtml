@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model PriceArticlesViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Привязывание статьи к услуге</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Номер услуги:</label>
+                            <input type="text" id="PriceId" />
+                            <label><a href="PriceHelp" target="_blank"><i class="fa fa-question"></i></a></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var article in Model.Articles) 
+                                    {
+                                    <tr>
+                                        <td>@article.Name</td>
+                                        <td>
+                                            <div class="radio">
+                                                <label class="form-check-label ">
+                                                    <input type="radio" id="radio" name="radios" value="@article.Id" class="form-check-input">Выбрать
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" onclick="Add_PriceArticle()" class="btn btn-lg btn-block btn-success">Привязать</button>
+                        </div>
+                    </div>
+                </div><!-- /.content-details -->
+                    </div>
+        </div>
+    </div>
+</div><!-- /.contents-inner -->
+
+<script type="text/javascript">
+
+    function Add_PriceArticle() {
+
+        var PriceArticle = {};
+        PriceArticle.Id = null;
+        PriceArticle.PriceId = $('#PriceId').val();
+        PriceArticle.ArticleId = $('#radio').val();
+
+        console.log(JSON.stringify(PriceArticle));
+
+        if (PriceArticle.PriceId != null && PriceArticle.ArticleId != null) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/articles/addlink",
+                    data: JSON.stringify(PriceArticle),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data) {
+                        Swal.fire(
+                            'Отлично!',
+                            'Связь успешно добавлена!',
+                            'success'
+                        );
+                        document.location.href = "List";
+                    }
+                    else
+                        Swal.fire(
+                        'Упс...',
+                        'Ошибка при добавлении связи!',
+                        'error'
+                    );
+                }).fail(function (response) {
+                    console.log('Error: ' + response);
+                });
+            }
+            else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Упс...',
+                  text: 'Заполнены не все поля!'
+                });
+            }
+        }
+</script>

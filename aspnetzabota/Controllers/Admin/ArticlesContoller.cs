@@ -10,6 +10,8 @@ using aspnetzabota.Content.Services.Upload;
 using aspnetzabota.Content.Services.Articles;
 using aspnetzabota.Web.Style;
 using aspnetzabota.Content.Services.Department;
+using aspnetzabota.Content.Datamodel.Price;
+using aspnetzabota.Content.Services.Price;
 
 namespace aspnetzabota.Controllers
 {
@@ -20,14 +22,17 @@ namespace aspnetzabota.Controllers
         private readonly IUpload _upload;
         private readonly ICategory _category;
         private readonly IArticles _articles;
-        //private readonly 
-        private readonly IDepartment _department; 
-        public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department)
+        private readonly IDepartment _department;
+        private readonly IPriceArticles _priceArticles;
+        private readonly IPrice _price;
+        public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPriceArticles priceArticles, IPrice price)
         {
             _category = category;
             _upload = upload;
             _articles = articles;
             _department = department;
+            _priceArticles = priceArticles;
+            _price = price;
         }
 
         #region Views
@@ -75,6 +80,22 @@ namespace aspnetzabota.Controllers
 
             return View(result);
         }
+        public ViewResult Price()
+        {
+            var result = new PriceArticlesViewModel
+            {
+                Articles = _articles.GetAllArticlesList().Result
+            };
+            return View(result);
+        }
+        public ViewResult PriceHelp()
+        {
+            var result = new PriceHelpViewModel
+            {
+                Price = _price.Get
+            };
+            return View(result);
+        }
         #endregion
 
         #region Methods
@@ -96,9 +117,13 @@ namespace aspnetzabota.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)
         {
-            var result = await _articles.DeleteArticleByID(id);
-
-            return Redirect("/admin/articles/list");
+            await _articles.DeleteArticleByID(id);
+            return Redirect("/admin/articles/"+nameof(List));
+        }
+        public async Task<IActionResult> AddLink([FromBody] ZabotaPriceArticles data)
+        {
+            var result = await _priceArticles.AddPriceArticle(data);
+            return ZabotaResult(result.IsCorrect);
         }
         #endregion
     }

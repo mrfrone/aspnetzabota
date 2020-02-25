@@ -39,6 +39,11 @@ namespace aspnetzabota.Content.Services.Articles
             var result = await _newsRepository.GetList();
             return _mapper.Map<IEnumerable<ZabotaArticles>>(result).ToPagedList(pageNumber, pageSize);
         }
+        public async Task<IEnumerable<ZabotaArticles>> GetAllArticlesList()
+        {
+            var result = await _newsRepository.GetList();
+            return _mapper.Map<IEnumerable<ZabotaArticles>>(result).Where(a => a.CategoryID == 3);
+        }
         public async Task<ZabotaResult> AddArticle(ZabotaArticles news)
         {
             await _newsRepository.Add(new Database.Entities.Articles

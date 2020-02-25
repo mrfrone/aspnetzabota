@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model PriceHelpViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Номера услуг</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th style="width: 10%;">Номер</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var price in Model.Price)
+                                    {
+                                        <tr>
+                                            <td>@price.Name</td>
+                                            <td>@price.Id</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.content-details -->
+            </div>
+        </div>
+    </div>
+</div><!-- /.contents-inner -->

@@ -37,10 +37,9 @@ namespace aspnetzabota.Content.Services.Price
                 var price = JsonPrice;
                 foreach (var article in articles)
                 {
-                    if (price.FirstOrDefault(c => c.Id == article.PriceId).Article != null) 
-                    {
-                        price.FirstOrDefault(c => c.Id == article.PriceId).Article = article.Article;
-                    }
+                    //todo: make a void price check
+                    //if (price.FirstOrDefault(c => c.Id == article.PriceId).Article != null) 
+                    price.FirstOrDefault(c => c.Id == article.PriceId).Article = article.Article;
                 }
                 return price;
         }
