@@ -24,6 +24,13 @@ namespace aspnetzabota.Content.Database.Repository.PriceArticles
             _appDBContext.Add(price);
             await _appDBContext.SaveChangesAsync();
         }
+        public async Task Delete(int id)
+        {
+            var PriceArticle = new Entities.PriceArticles { Id = id };
+            _appDBContext.PriceArticles.Attach(PriceArticle);
+            _appDBContext.PriceArticles.Remove(PriceArticle);
+            await _appDBContext.SaveChangesAsync();
+        }
     }
 }
 

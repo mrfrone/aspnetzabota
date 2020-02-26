@@ -18,7 +18,6 @@ namespace aspnetzabota.Content.Services.Extensions
         {
             services.AddContentRepository(connectionString);
             services.AddScoped<IPrice, Price.Price>();
-            services.AddScoped<IPriceArticles, PriceArticles>();
             services.AddScoped<ISchedule, Schedule.Schedule>();
             services.AddScoped<ISlider, Slider.Slider>();
             services.AddScoped<IArticles, Articles.Articles>();

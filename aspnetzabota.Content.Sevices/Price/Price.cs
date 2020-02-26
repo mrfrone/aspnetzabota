@@ -6,14 +6,17 @@ using System;
 using aspnetzabota.Content.Datamodel.Price;
 using AutoMapper;
 using System.Threading.Tasks;
+using aspnetzabota.Common.Result;
+using aspnetzabota.Content.Database.Repository.PriceArticles;
+using aspnetzabota.Common.Result.ErrorCodes;
 
 namespace aspnetzabota.Content.Services.Price
 {
     internal class Price : IPrice
     {
-        private readonly IPriceArticles _priceArticles;
+        private readonly IPriceArticlesRepository _priceArticles;
         private readonly IMapper _mapper;
-        public Price(IPriceArticles priceArticles, IMapper mapper)
+        public Price(IPriceArticlesRepository priceArticles, IMapper mapper)
         {
             _priceArticles = priceArticles;
             _mapper = mapper;
@@ -33,12 +36,11 @@ namespace aspnetzabota.Content.Services.Price
         }
         private async Task<IEnumerable<ZabotaPrice>> PriceAtArticles()
         {
-                var articles = await _priceArticles.GetPriceArticles(); 
+                var articles = await GetPriceArticles(); 
                 var price = JsonPrice;
                 foreach (var article in articles)
                 {
-                    //todo: make a void price check
-                    //if (price.FirstOrDefault(c => c.Id == article.PriceId).Article != null) 
+                   if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == article.PriceId).Name))
                     price.FirstOrDefault(c => c.Id == article.PriceId).Article = article.Article;
                 }
                 return price;
@@ -81,6 +83,33 @@ namespace aspnetzabota.Content.Services.Price
         public IEnumerable<ZabotaPrice> FromSearch(string line)
         {
             return Get.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
+        }
+        public async Task<ZabotaResult> AddPriceArticle(ZabotaPriceArticles article)
+        {
+            var price = JsonPrice;
+            if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == article.PriceId).Name))
+            {
+                await _priceArticles.Add(new Database.Entities.PriceArticles
+                {
+                    Id = article.Id,
+                    PriceId = article.PriceId,
+                    ArticleId = article.ArticleId
+                });
+                return new ZabotaResult();
+            }
+            else
+            {
+                return ZabotaErrorCodes.IdNotFound;
+            }
+        }
+        public async Task<IEnumerable<ZabotaPriceArticles>> GetPriceArticles()
+        {
+            var result = await _priceArticles.Get();
+            return _mapper.Map<IEnumerable<ZabotaPriceArticles>>(result);
+        }
+        public async Task DeletePriceArticle(int id)
+        {
+            await _priceArticles.Delete(id);
         }
     }
 }

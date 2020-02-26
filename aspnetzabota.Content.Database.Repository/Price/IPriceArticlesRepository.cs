@@ -7,5 +7,6 @@ namespace aspnetzabota.Content.Database.Repository.PriceArticles
     {
         Task<Entities.PriceArticles[]> Get();
         Task Add(Entities.PriceArticles price);
+        Task Delete(int id);
     }
 }

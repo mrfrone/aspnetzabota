@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model PriceArticlesViewModel
+@model AddPriceArticlesViewModel
 <div class="contents-inner">
     <div class="row">
         <div class="col-md-12">
@@ -81,7 +81,7 @@
                             'Связь успешно добавлена!',
                             'success'
                         );
-                        document.location.href = "List";
+                        document.location.href = "PriceList";
                     }
                     else
                         Swal.fire(
@@ -91,6 +91,11 @@
                     );
                 }).fail(function (response) {
                     console.log('Error: ' + response);
+                    Swal.fire(
+                        'Упс...',
+                        'Ошибка при добавлении связи!',
+                        'error'
+                    );
                 });
             }
             else {

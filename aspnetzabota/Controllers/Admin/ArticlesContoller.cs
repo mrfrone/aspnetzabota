@@ -23,15 +23,13 @@ namespace aspnetzabota.Controllers
         private readonly ICategory _category;
         private readonly IArticles _articles;
         private readonly IDepartment _department;
-        private readonly IPriceArticles _priceArticles;
         private readonly IPrice _price;
-        public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPriceArticles priceArticles, IPrice price)
+        public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPrice price)
         {
             _category = category;
             _upload = upload;
             _articles = articles;
             _department = department;
-            _priceArticles = priceArticles;
             _price = price;
         }
 
@@ -80,9 +78,9 @@ namespace aspnetzabota.Controllers
 
             return View(result);
         }
-        public ViewResult Price()
+        public ViewResult AddPrice()
         {
-            var result = new PriceArticlesViewModel
+            var result = new AddPriceArticlesViewModel
             {
                 Articles = _articles.GetAllArticlesList().Result
             };
@@ -93,6 +91,14 @@ namespace aspnetzabota.Controllers
             var result = new PriceHelpViewModel
             {
                 Price = _price.Get
+            };
+            return View(result);
+        }
+        public ViewResult PriceList()
+        {
+            var result = new PriceArticlesListViewModel
+            {
+                PriceArticles = _price.GetPriceArticles().Result
             };
             return View(result);
         }
@@ -119,10 +125,18 @@ namespace aspnetzabota.Controllers
         {
             await _articles.DeleteArticleByID(id);
             return Redirect("/admin/articles/"+nameof(List));
+
         }
+        [HttpGet]
+        public async Task<IActionResult> DeletePriceArticle(int id)
+        {
+            await _price.DeletePriceArticle(id);
+            return Redirect("/admin/articles/" + nameof(PriceList));
+        }
+        [HttpPost]
         public async Task<IActionResult> AddLink([FromBody] ZabotaPriceArticles data)
         {
-            var result = await _priceArticles.AddPriceArticle(data);
+            var result = await _price.AddPriceArticle(data);
             return ZabotaResult(result.IsCorrect);
         }
         #endregion
