@@ -40,7 +40,7 @@
             @foreach (var doctor in Model.Doctors)
             {
                 <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="staff">
+                    <div class="staff border shadow">
                         <div class="img-wrap d-flex align-items-stretch">
                             @{
                                 if (doctor.doctors.sex == "male")
@@ -53,12 +53,10 @@
                                 }
                             }
                         </div>
-                        <div class="text pt-3 text-center">
+                        <div class="text pt-3 text-center pb-3">
                             <h3><a href="/Schedule/Single/@doctor.doctors.id">@doctor.doctors.fio</a></h3>
-                            <a href="/Schedule/Doctor/@doctor.cat_id"><span class="position mb-2">@doctor.category</span></a>
-                            <div class="faded">
-                                <p>@doctor.doctors.position</p>
-                            </div>
+                            <a href="/Schedule/Doctor/@doctor.cat_id"><span class="position">@doctor.category</span></a>
+                               @doctor.doctors.position
                         </div>
                     </div>
                 </div>

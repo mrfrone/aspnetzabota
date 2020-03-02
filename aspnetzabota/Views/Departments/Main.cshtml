@@ -1,5 +1,5 @@
 ﻿@model DepartmentsViewModel
-<section class="ftco-section">
+<section class="ftco-section bg-light pt-5">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-2">
             <div class="col-md-8 text-center heading-section ftco-animate">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 tab-wrap">
-                    <div class="tab-content bg-light p-4 p-md-5 ftco-animate" id="v-pills-tabContent">
+                    <div class="tab-content border shadow bg-light p-4 p-md-5 ftco-animate" id="v-pills-tabContent">
                         @foreach (var (index, depart) in Model.Departments.Select((depart, index) => (index, depart)))
                         {
                             if (index == 0)
