@@ -2,23 +2,29 @@
 
     <section class="ftco-section bg-light pt-2">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
-                    <h2 class="mb-3">@Model.SingleNews.Name</h2>
-                    <p>
-                        <img src="@Url.Content(Model.SingleNews.IMG)" alt="" class="img-fluid">
-                    </p>
-                    @Html.Raw(Model.SingleNews.Description)
-                    @*<div class="tag-widget post-tag-container mb-5 mt-5">
-                        <div class="tagcloud">
-                            <a href="#" class="tag-cloud-link">Life</a>
-                            <a href="#" class="tag-cloud-link">Sport</a>
-                            <a href="#" class="tag-cloud-link">Tech</a>
-                            <a href="#" class="tag-cloud-link">Travel</a>
+            <div class="container shadow mt-5">
+                <div class="row">
+                    <div class="col-md-12 ftco-animate">
+                        <h2 class="mb-5 mt-5 text-center">@Model.SingleNews.Name</h2>
+                        <div class="row mb-5">
+                            <div class="col-md-5">
+                                <img src="@Url.Content(Model.SingleNews.IMG)" alt="" class="img-fluid">
+                            </div>
+                            <div class="col-md-7">
+                                @Html.Raw(Model.SingleNews.Description)
+                            </div>
+                            @*<div class="tag-widget post-tag-container mb-5 mt-5">
+                                <div class="tagcloud">
+                                    <a href="#" class="tag-cloud-link">Life</a>
+                                    <a href="#" class="tag-cloud-link">Sport</a>
+                                    <a href="#" class="tag-cloud-link">Tech</a>
+                                    <a href="#" class="tag-cloud-link">Travel</a>
+                                </div>
+                          </div>*@
                         </div>
-                    </div>*@
-                </div> <!-- .col-md-12 -->
+                    </div> <!-- .col-md-12 -->
+                </div>
             </div>
         </div>
-    </section>
+</section>
 
