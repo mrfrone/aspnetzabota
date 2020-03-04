@@ -1,0 +1,222 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model LicenseSettingsViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Добавление лицензии</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <article class="post type-post">
+                                <div class="form-group">
+                                    <label for="company" class=" form-control-label">Заголовок лицензии</label>
+                                    <input type="text" id="Name" placeholder="Заголовок лицензии" class="form-control">
+                                </div>
+                                <div>
+                                    <button type="button" onclick="Add_License()" class="btn btn-lg btn-info btn-block">
+                                        <span id="payment-button-amount">Добавить</span>
+                                    </button>
+                                </div>
+                            </article><!-- /.post -->
+                        </div>
+                    </div>
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Добавление изображения лицензии</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <article class="post type-post">
+                                <div class="form-group">
+                                    <label>Лицензии</label>
+                                    <select id="Cat" class="form-control select2">
+                                        <option selected="selected" hidden disabled>Выберите лицензию...</option>
+                                        @foreach (var cat in Model.Licenses)
+                                        {
+                                            <option value="@cat.Id">@cat.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class=" row form-group">
+                                    <div class="col col-md-3"><label for="file-input" class=" form-control-label">Изображение</label></div>
+                                    <div class="col-12 col-md-9"><input type="file" id="fileInput" name="file" class="form-control-file" accept="image/jpeg,image/png"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="entry-thumbnail mb-4"><span id="output"></span></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" onclick="Add_Photo()" class="btn btn-lg btn-info btn-block">
+                                        <span id="payment-button-amount">Добавить</span>
+                                    </button>
+                                </div>
+                            </article><!-- /.post -->
+                        </div>
+                    </div>
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="thumb" id="output" src="', e.target.result, '" title="', theFile.name, '"/>'].join('');
+
+                    document.getElementById('output').replaceWith(span);
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+    }
+    document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
+</script>
+<script type="text/javascript">
+    function Add_License() {
+        var license = {};
+        license.Id = null;
+        license.Name = $('#Name').val();
+
+        if (license.Name)
+        {
+            $.ajax({
+                type: "POST",
+                url: "/admin/LicenseSettings/AddLicense",
+                data: JSON.stringify(license),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (data) {
+                if (data) {
+                    Swal.fire(
+                        'Отлично!',
+                        'Лицензия успешно добавлена!',
+                        'success'
+                    );
+                    document.location.href = "List";
+                }
+                else
+                    Swal.fire(
+                        'Упс...',
+                        'Ошибка при добавлении лицензии',
+                        'error'
+                    );
+            }).fail(function (response) {
+                console.log('Error: ' + response);
+            });
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Упс...',
+                text: 'Заполнены не все поля!'
+            });
+        }
+    }
+    
+    function Add_Photo() {
+        //random name from img
+        var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        console.log(r);
+
+        //article model
+        var photo = {};
+        photo.Id = null;
+        photo.LicensesId = $('#Cat').val();
+
+        //get img file
+        var formData = new FormData();
+        var file = document.getElementById("fileInput").files[0];
+
+
+        console.log(JSON.stringify(photo));
+
+        if (photo.LicensesId != null && file.name != null) {
+
+            //file extension
+            var fe = /(?:\.([^.]+))?$/;
+            var ext = fe.exec(file.name)[1];
+            formData.append("fileInput", file, r + "." + ext);
+
+            //file extension to db
+            photo.Path = r + "." + ext;
+
+            $.ajax({
+                url: '/admin/LicenseSettings/addimage',
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function () {
+
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/LicenseSettings/AddPhoto",
+                data: JSON.stringify(photo),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (data) {
+                if (data) {
+                    Swal.fire(
+                        'Отлично!',
+                        'Фото для лицензии успешно добавлена!',
+                        'success'
+                    );
+                }
+                else
+                    Swal.fire(
+                        'Упс...',
+                        'Ошибка при добавлении фото для лицензии',
+                        'error'
+                    );
+            }).fail(function (response) {
+                console.log('Error: ' + response);
+            });
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Упс...',
+                text: 'Заполнены не все поля!'
+            });
+        }
+    }
+</script>
+<style>
+    .thumb {
+        height: 300px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+    }
+</style>

@@ -1115,3 +1115,83 @@ footer.site-footer {
   padding: .3em 0; }
   .changelog .log-items li span {
     margin-right: 10px; }
+
+.thumb img {
+    -webkit-filter: grayscale(0);
+    filter: none;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+    .thumb img:hover {
+        -webkit-filter: grayscale(1);
+        filter: grayscale(1);
+    }
+
+.thumb {
+    padding: 5px;
+}
+
+.hovereffect {
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: default;
+}
+
+    .hovereffect .overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        border-radius: 5px;
+        top: 0;
+        left: 0;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .hovereffect:hover .overlay {
+        background-color: rgba(43, 138, 252, 0.3);
+    }
+
+    .hovereffect img {
+        display: block;
+        position: relative;
+    }
+
+    .hovereffect a.info {
+        display: inline-block;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: transparent;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+        transform: scale(0);
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        font-weight: normal;
+        margin: 5% auto;
+        padding: 30% 20%;
+    }
+
+    .hovereffect:hover a.info {
+        opacity: 1;
+        filter: alpha(opacity=100);
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+
+    .hovereffect a.info:hover {
+        box-shadow: 0 0 5px #fff;
+    }
