@@ -4,6 +4,7 @@ using aspnetzabota.Content.Services.Price;
 
 namespace aspnetzabota.Controllers
 {
+    //do this async
     public class PriceController : Controller
     {
         private readonly IPrice _priceService;

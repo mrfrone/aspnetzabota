@@ -34,58 +34,59 @@ namespace aspnetzabota.Controllers
         }
 
         #region Views
-        public ViewResult List()
+        public async Task<ViewResult> List()
         {
             var result = new ArticlesListViewModel 
             {
-                Articles = _articles.GetPagedArticlesList(1, 6).Result,
-                Category = _category.GetCategory().Result,
+                Articles = await _articles.GetPagedArticlesList(1, 6),
+                Category = await _category.GetCategory(),
                 PaginationOptions = PaginationStyle.PagedListOptions,
                 PagingMethod = nameof(GetAllPaged)
             };
 
             return View(result);
         }
-        public IActionResult GetByCategoryPaged(int id, int? page)
+        public async Task<IActionResult> GetByCategoryPaged(int id, int? page)
         {
             var pageNumber = page ?? 1;
             var result = new ArticlesListViewModel
             {
-                Articles = _articles.GetFromArticleCategory(id, pageNumber, 6).Result,
+                Articles = await _articles.GetFromArticleCategory(id, pageNumber, 6),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetByCategoryPaged)
             };
             return PartialView("PagedList", result);
         }
-        public IActionResult GetAllPaged(int? page)
+        public async Task<IActionResult> GetAllPaged(int? page)
         {
             var pageNumber = page ?? 1;
             var result = new ArticlesListViewModel
             {
-                Articles = _articles.GetPagedArticlesList(pageNumber, 6).Result,
+                Articles = await _articles.GetPagedArticlesList(pageNumber, 6),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetAllPaged)
             };
             return PartialView("PagedList", result);
         }
-        public ViewResult AddArticles()
+        public async Task<ViewResult> AddArticles()
         {
             var result = new AddArticleViewModel 
             {
-                Category = _category.GetCategory().Result,
-                Department = _department.GetDepartments().Result
+                Category = await _category.GetCategory(),
+                Department = await _department.GetDepartments()
             };
 
             return View(result);
         }
-        public ViewResult AddPrice()
+        public async Task<ViewResult> AddPrice()
         {
             var result = new AddPriceArticlesViewModel
             {
-                Articles = _articles.GetAllArticlesList().Result
+                Articles = await _articles.GetAllArticlesList()
             };
             return View(result);
         }
+        // do this async
         public ViewResult PriceHelp()
         {
             var result = new PriceHelpViewModel
@@ -94,11 +95,11 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
-        public ViewResult PriceList()
+        public async Task<ViewResult> PriceList()
         {
             var result = new PriceArticlesListViewModel
             {
-                PriceArticles = _price.GetPriceArticles().Result
+                PriceArticles =  await _price.GetPriceArticles()
             };
             return View(result);
         }

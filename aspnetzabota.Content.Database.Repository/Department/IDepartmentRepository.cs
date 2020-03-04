@@ -5,6 +5,6 @@ namespace aspnetzabota.Content.Database.Repository.Department
 {
     public interface IDepartmentRepository
     {
-        Task<Entities.Department[]> Get();
+        Task<Entities.Department[]> Get(bool trackChanges = false);
     }
 }

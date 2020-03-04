@@ -7,16 +7,16 @@ namespace aspnetzabota.Content.Database.Repository.Slider
 {
     internal class SliderRepository : ISliderRepository
     {
-        private readonly ContentContext appDBContext;
+        private readonly ContentContext _appDBContext;
 
         public SliderRepository(ContentContext appDBContext)
         {
-            this.appDBContext = appDBContext;
+            _appDBContext = appDBContext;
         }
 
-        public Task<Entities.Slider[]> Get(bool trackChanges = false) 
+        public async Task<Entities.Slider[]> Get(bool trackChanges = false) 
         {
-            return appDBContext.Sliders
+            return await _appDBContext.Sliders
                 .HasTracking(trackChanges)
                 .ToArrayAsync();
         }

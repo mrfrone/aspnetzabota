@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Services.Articles;
 using aspnetzabota.Content.Services.Review;
 using aspnetzabota.Content.Services.Slider;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Controllers
 {
@@ -22,13 +23,13 @@ namespace aspnetzabota.Controllers
             _doctorSchedule = doctorSchedule;
         }
         [Route("/")]
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
             var result = new HomeViewModel
             {
-                Slider = _slider.GetSliders().Result,
-                LastNews = _articles.GetLastNews(3).Result,
-                LastReviews = _Reviews.RandomReviews(6).Result,
+                Slider = await _slider.GetSliders(),
+                LastNews = await _articles.GetLastNews(3),
+                LastReviews = await _Reviews.RandomReviews(6),
                 Doctors = _doctorSchedule.Random(4)
             };
 

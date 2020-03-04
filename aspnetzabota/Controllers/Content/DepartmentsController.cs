@@ -2,6 +2,7 @@
 using aspnetzabota.Content.Services.Price;
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Controllers
 {
@@ -15,16 +16,17 @@ namespace aspnetzabota.Controllers
             _departments = departments;
             _price = price;
         }
-        public ViewResult Main()
+        public async Task<ViewResult> Main()
         {
             var result = new DepartmentsViewModel
             {
-                Departments = _departments.GetDepartments().Result,
+                Departments = await _departments.GetDepartments(),
                 Price = _price.Get,
                 PriceGroupsAndDepartments = _price.GroupsAndDepartments
             };
             return View(result);
         }
+        //do this async
         public IActionResult PriceFromDepartment(string name, string tableid)
         {
             var result = new DepartmentsViewModel

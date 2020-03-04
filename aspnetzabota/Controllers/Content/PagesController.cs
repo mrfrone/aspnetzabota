@@ -1,6 +1,7 @@
 ﻿using aspnetzabota.Content.Services.Licenses;
 using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Controllers
 {
@@ -24,11 +25,11 @@ namespace aspnetzabota.Controllers
         {
             return View();
         }
-        public ViewResult License()
+        public async Task<ViewResult> License()
         {
             var result = new LicensesViewModel
             {
-                Licenses = _licenses.GetLicenses().Result
+                Licenses = await _licenses.GetLicenses()
             };
             return View(result);
         }

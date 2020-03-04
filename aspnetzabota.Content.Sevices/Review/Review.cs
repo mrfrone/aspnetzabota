@@ -5,6 +5,7 @@ using aspnetzabota.Content.Datamodel.Review;
 using System.Threading.Tasks;
 using X.PagedList;
 using System;
+using aspnetzabota.Common.Result;
 
 namespace aspnetzabota.Content.Services.Review
 {
@@ -28,10 +29,12 @@ namespace aspnetzabota.Content.Services.Review
             var result = await _reviewRepository.GetList();
             return _mapper.Map<IEnumerable<ZabotaReview>>(result).ToPagedList(pageNumber, pageSize);
         }
-        public async Task Add(ZabotaReview review)
+        public async Task<ZabotaResult> Add(ZabotaReview review)
         {
             review.Date = DateTimeOffset.UtcNow;
             await _reviewRepository.Add(review);
+
+            return new ZabotaResult();
         }
     }
 }

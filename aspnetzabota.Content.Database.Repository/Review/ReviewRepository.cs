@@ -17,22 +17,22 @@ namespace aspnetzabota.Content.Database.Repository.Review
         {
             this._appDBContext = appDBContext;
         }
-        public Task<Entities.Review[]> Random(int Count, bool trackChanges = false)
+        public async Task<Entities.Review[]> Random(int Count, bool trackChanges = false)
         {
-            return _appDBContext.Reviews
+            return await _appDBContext.Reviews
                 .HasTracking(trackChanges)
                 .OrderBy(x => random.Next())
                 .Take(Count)
                 .ToArrayAsync();
         }
-        public Task<Entities.Review[]> GetList(bool trackChanges = false)
+        public async Task<Entities.Review[]> GetList(bool trackChanges = false)
         {
-            return _appDBContext.Reviews
+            return await _appDBContext.Reviews
                 .HasTracking(trackChanges)
                 .OrderByDescending(x => x.Date)
                 .ToArrayAsync();
         }
-        public async Task Add(ZabotaReview review)
+        public Task Add(ZabotaReview review)
         {
             _appDBContext.Add(new Entities.Review
             {
@@ -42,7 +42,7 @@ namespace aspnetzabota.Content.Database.Repository.Review
                 Email = review.Email,
                 Text = review.Text
             });
-            await _appDBContext.SaveChangesAsync();
+            return _appDBContext.SaveChangesAsync();
         }
     }
 }

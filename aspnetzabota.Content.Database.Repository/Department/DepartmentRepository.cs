@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using aspnetzabota.Common.EFCore.Extensions;
 using aspnetzabota.Content.Database.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,11 @@ namespace aspnetzabota.Content.Database.Repository.Department
         {
             this.appDBContext = appDBContext;
         }
-        public async Task<Entities.Department[]> Get() 
+        public async Task<Entities.Department[]> Get(bool trackChanges = false)
         { 
             return await appDBContext
                 .Departments
+                .HasTracking(trackChanges)
                 .Include(u => u.Articles)
                 .ToArrayAsync(); 
         }

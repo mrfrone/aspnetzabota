@@ -1,4 +1,5 @@
-﻿using aspnetzabota.Content.Database.Context;
+﻿using aspnetzabota.Common.EFCore.Extensions;
+using aspnetzabota.Content.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -13,11 +14,12 @@ namespace aspnetzabota.Content.Database.Repository.Category
             this.appDBContext = appDBContext;
         }
 
-        public async Task<Entities.Category[]> Get() 
+        public async Task<Entities.Category[]> Get(bool trackChanges = false) 
         { 
             return await appDBContext
                 .Category
-                .ToArrayAsync(); 
+                .HasTracking(trackChanges)
+                .ToArrayAsync();
         }
     }
 }

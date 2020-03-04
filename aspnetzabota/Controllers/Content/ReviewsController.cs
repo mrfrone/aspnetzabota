@@ -1,14 +1,14 @@
 ﻿using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Web.Style;
 using System.Threading.Tasks;
 using aspnetzabota.Content.Services.Review;
 using aspnetzabota.Content.Datamodel.Review;
+using aspnetzabota.Web.Common;
 
 namespace aspnetzabota.Controllers
 {
-    public class ReviewsController : Controller
+    public class ReviewsController : BaseController
     {
         private readonly IReview _reviews;
 
@@ -16,21 +16,21 @@ namespace aspnetzabota.Controllers
         {
             _reviews = reviews;
         }
-        public ViewResult Main()
+        public async Task<ViewResult> Main()
         {
             var result = new ReviewsViewModel
             {
-                Reviews = _reviews.GetPagedReviewsList(1, 5).Result,
+                Reviews = await _reviews.GetPagedReviewsList(1, 5),
                 PaginationOptions = PaginationStyle.PagedListOptions
             };
             return View(result);
         }
-        public IActionResult PagedReviews(int? page)
+        public async Task<IActionResult> PagedReviews(int? page)
         {
             var pageNumber = page ?? 1;
             var result = new ReviewsViewModel
             {
-                Reviews = _reviews.GetPagedReviewsList(pageNumber, 5).Result,
+                Reviews = await _reviews.GetPagedReviewsList(pageNumber, 5),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax
             };
             return PartialView(result);
@@ -39,14 +39,8 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReview([FromBody] ZabotaReview data)
         {
-            //вообще json(false/ true), какая-то хуйня, лучше http ошику возвращай если что-то не случилось и try catch тут не надо
-            if (data == null)
-                return Json(false);
-
             await _reviews.Add(data);
-
-            return Json(true);
-            
+            return ZabotaResult(true);
         }
     }
 }

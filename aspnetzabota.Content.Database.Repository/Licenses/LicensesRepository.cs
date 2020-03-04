@@ -28,14 +28,13 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
             _appDBContext.Licenses.Add(license);
             return _appDBContext.SaveChangesAsync();
         }
-        //todo: check this async
-        public async Task AddPhoto(Entities.LicensesPhoto photo)
+        public Task AddPhoto(Entities.LicensesPhoto photo)
         {
             _appDBContext.LicensesPhoto.Add(photo);
-            await _appDBContext.SaveChangesAsync();
+            return _appDBContext.SaveChangesAsync();
         }
         // todo: take this delete method to all repositories
-        public async Task Delete(int id)
+        public Task Delete(int id)
         {
             _appDBContext.LicensesPhoto
                  .AsQueryable()
@@ -46,15 +45,15 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
                  .AsQueryable()
                  .Where(p => p.Id == id)
                  .Delete();
-            await _appDBContext.SaveChangesAsync();
+            return _appDBContext.SaveChangesAsync();
         }
-        public async Task DeletePhoto(int id)
+        public Task DeletePhoto(int id)
         {
             _appDBContext.LicensesPhoto
                  .AsQueryable()
                  .Where(p => p.Id == id)
                  .Delete();
-            await _appDBContext.SaveChangesAsync();
+            return _appDBContext.SaveChangesAsync();
         }
     }
 }

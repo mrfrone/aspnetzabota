@@ -4,6 +4,6 @@ namespace aspnetzabota.Content.Database.Repository.Category
 {
     public interface ICategoryRepository
     {
-        Task<Entities.Category[]> Get();
+        Task<Entities.Category[]> Get(bool trackChanges = false);
     }
 }
