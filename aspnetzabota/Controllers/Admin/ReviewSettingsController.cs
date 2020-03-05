@@ -3,24 +3,26 @@ using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.Style;
 using System.Threading.Tasks;
 using aspnetzabota.Content.Services.Review;
-using aspnetzabota.Content.Datamodel.Review;
 using aspnetzabota.Web.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace aspnetzabota.Controllers
 {
-    public class ReviewsController : BaseController
+    [Route("admin/[controller]/[action]")]
+    [Authorize]
+    public class ReviewSettingsController : BaseController
     {
         private readonly IReview _reviews;
 
-        public ReviewsController(IReview reviews)
+        public ReviewSettingsController(IReview reviews)
         {
             _reviews = reviews;
         }
-        public async Task<ViewResult> Main()
+        public async Task<ViewResult> List()
         {
             var result = new ReviewsViewModel
             {
-                Reviews = await _reviews.GetPagedReviewsList(1, 5, true),
+                Reviews = await _reviews.GetPagedReviewsList(1, 10),
                 PaginationOptions = PaginationStyle.PagedListOptions
             };
             return View(result);
@@ -30,17 +32,25 @@ namespace aspnetzabota.Controllers
             var pageNumber = page ?? 1;
             var result = new ReviewsViewModel
             {
-                Reviews = await _reviews.GetPagedReviewsList(pageNumber, 5, true),
+                Reviews = await _reviews.GetPagedReviewsList(pageNumber, 10),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax
             };
             return PartialView(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddReview([FromBody] ZabotaReview data)
+        [HttpGet]
+        public async Task<IActionResult> ModerateReview(int id)
         {
-            await _reviews.Add(data);
-            return ZabotaResult(true);
+            await _reviews.ModerateReview(id);
+
+            return Redirect("/admin/ReviewSettings/"+nameof(List));
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteReview(int id)
+        {
+            await _reviews.DeleteReview(id);
+
+            return Redirect("/admin/ReviewSettings/" + nameof(List));
         }
     }
 }

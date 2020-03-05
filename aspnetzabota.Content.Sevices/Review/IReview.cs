@@ -10,8 +10,10 @@ namespace aspnetzabota.Content.Services.Review
     public interface IReview
     {
         Task<IEnumerable<ZabotaReview>> RandomReviews(int Count);
-        Task<IEnumerable<ZabotaReview>> GetPagedReviewsList(int pageNumber, int pageSize);
+        Task<IEnumerable<ZabotaReview>> GetPagedReviewsList(int pageNumber, int pageSize, bool Moderated = false);
         Task<ZabotaResult> Add(ZabotaReview review);
+        Task<ZabotaResult> ModerateReview(int id);
+        Task<ZabotaResult> DeleteReview(int id);
 
-    }
+        }
 }

@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model ReviewsViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Модерация отзывов</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <article class="post type-post">
+                                @await Html.PartialAsync("PagedReviews")
+                            </article><!-- /.post -->
+                        </div>
+                    </div>
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+    </div>
+</div>

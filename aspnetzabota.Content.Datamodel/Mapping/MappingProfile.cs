@@ -51,7 +51,8 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.Author, opts => opts.MapFrom(u => u.Author))
                 .ForMember(u => u.Email, opts => opts.MapFrom(u => u.Email))
                 .ForMember(u => u.Text, opts => opts.MapFrom(u => u.Text))
-                .ForMember(u => u.Date, opts => opts.MapFrom(u => u.Date));
+                .ForMember(u => u.Date, opts => opts.MapFrom(u => u.Date))
+                .ForMember(u => u.IsModerated, opts => opts.MapFrom(u => u.IsModerated));
 
             CreateMap<Database.Entities.Slider, ZabotaSlider>()
                 .IgnoreOther()

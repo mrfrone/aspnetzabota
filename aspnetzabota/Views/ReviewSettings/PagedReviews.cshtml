@@ -1,0 +1,35 @@
+﻿@model ReviewsViewModel
+<div id="reviews">
+    @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("PagedReviews", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "reviews" }))
+
+
+    <table id="price" class="table table-bordered table-hover">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th scope="col">Автор</th>
+                <th scope="col">Содержание</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Удаление</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model.Reviews)
+            {
+            <tr>
+                <td>@review.Author</td>
+                <td>@review.Text</td>
+                @if (review.IsModerated)
+                {
+                    <td><span class="text-success">Разрешено</span></td>
+                }
+                else
+                {
+                    <td><a href="/admin/ReviewSettings/ModerateReview/?id=@review.Id">Разрешить</a></td>
+                }
+                <td><a href="/admin/ReviewSettings/DeleteReview/?id=@review.Id">Удалить</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("PagedReviews", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "reviews" }))
+</div>

@@ -9,5 +9,6 @@ namespace aspnetzabota.Content.Datamodel.Review
         public string Email { get; set; }
         public string Text { get; set; }
         public DateTimeOffset Date { get; set; }
+        public bool IsModerated { get; set; }
     }
 }
