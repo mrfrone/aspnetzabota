@@ -1,15 +1,16 @@
 ﻿using aspnetzabota.Content.Datamodel.Doctors;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Services.Schedule
 {
     public interface ISchedule
     {
-        IEnumerable<DoctorScheduleModel> Take { get; }
-        IEnumerable<string> Posts { get; }
-        DoctorScheduleModel Single(int id);
-        IEnumerable<DoctorScheduleModel> ScheduleFromSinglePost(int cat_id);
-        IEnumerable<DoctorScheduleModel> Random(int Count);
-        IEnumerable<DoctorScheduleModel> GetPagedList(int pageNumber, int pageSize);
+        Task<IEnumerable<DoctorScheduleModel>> Get();
+        Task<IEnumerable<string>> Posts();
+        Task<DoctorScheduleModel>Single(int id);
+        Task<IEnumerable<DoctorScheduleModel>> ScheduleFromSinglePost(int cat_id);
+        Task<IEnumerable<DoctorScheduleModel>> Random(int Count);
+        Task<IEnumerable<DoctorScheduleModel>> GetPagedList(int pageNumber, int pageSize);
     }
 }

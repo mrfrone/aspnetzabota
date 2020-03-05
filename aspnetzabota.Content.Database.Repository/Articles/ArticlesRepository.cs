@@ -18,6 +18,7 @@ namespace aspnetzabota.Content.Database.Repository.Articles
         {
             return await _appDBContext.Articles
                 .HasTracking(trackChanges)
+                .Where(n => n.CategoryID != 3)
                 .OrderByDescending(x => x.Date)
                 .Take(Count).ToArrayAsync();
         }

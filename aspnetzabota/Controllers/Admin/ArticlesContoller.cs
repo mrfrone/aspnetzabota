@@ -86,12 +86,11 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
-        // do this async
-        public ViewResult PriceHelp()
+        public async Task<ViewResult> PriceHelp()
         {
             var result = new PriceHelpViewModel
             {
-                Price = _price.Get
+                Price = await _price.Get()
             };
             return View(result);
         }

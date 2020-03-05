@@ -21,17 +21,16 @@ namespace aspnetzabota.Controllers
             var result = new DepartmentsViewModel
             {
                 Departments = await _departments.GetDepartments(),
-                Price = _price.Get,
-                PriceGroupsAndDepartments = _price.GroupsAndDepartments
+                Price = await _price.Get(),
+                PriceGroupsAndDepartments = await _price.GroupsAndDepartments()
             };
             return View(result);
         }
-        //do this async
-        public IActionResult PriceFromDepartment(string name, string tableid)
+        public async Task<IActionResult> PriceFromDepartment(string name, string tableid)
         {
             var result = new DepartmentsViewModel
             {
-                Price = _price.FromDepartment(name),
+                Price = await _price.FromDepartment(name),
                 DepartmentTableID = tableid
             };
             return PartialView(result);

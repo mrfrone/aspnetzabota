@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using X.PagedList;
 
 namespace aspnetzabota.Content.Services.Schedule
@@ -34,23 +35,47 @@ namespace aspnetzabota.Content.Services.Schedule
             }
             return model;
         }
-        private IEnumerable<DoctorScheduleModel> JsonSchedule
+        private async Task<IEnumerable<DoctorScheduleModel>> JsonSchedule()
         {
-            get
-            {
                 using (StreamReader sr = new StreamReader("wwwroot/json/schedule.json"))
                 {
-                    return RemoveNoReception(JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(sr.ReadToEnd())).OrderBy(c => c.category);
+                    return RemoveNoReception(JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(await sr.ReadToEndAsync())).OrderBy(c => c.category);
                 }
-            }
         }
 
-        public IEnumerable<DoctorScheduleModel> Take => JsonSchedule;
-        public IEnumerable<string> Posts => JsonSchedule.Select(c => c.category).Distinct().ToList();
-        public DoctorScheduleModel Single(int id) => JsonSchedule.FirstOrDefault(c => c.doctors.id == id.ToString());
-        public IEnumerable<DoctorScheduleModel> ScheduleFromSinglePost(int cat_id) => JsonSchedule.Where(c => c.cat_id == cat_id.ToString());
-        public IEnumerable<DoctorScheduleModel> Random(int Count) => JsonSchedule.OrderBy(x => random.Next()).Take(Count);
-        public IEnumerable<DoctorScheduleModel> GetPagedList(int pageNumber, int pageSize) => JsonSchedule.ToPagedList(pageNumber, pageSize);
+        public async Task<IEnumerable<DoctorScheduleModel>> Get()
+        {
+            return await JsonSchedule();
+        }
 
+        public async Task<IEnumerable<string>> Posts()
+        {
+            var schedule = await Get();
+            return schedule.Select(c => c.category).Distinct().ToList();
+        }
+
+        public async Task<DoctorScheduleModel> Single(int id)
+        {
+            var schedule = await Get();
+            return schedule.FirstOrDefault(c => c.doctors.id == id.ToString());
+        }
+
+        public async Task<IEnumerable<DoctorScheduleModel>> ScheduleFromSinglePost(int cat_id)
+        {
+            var schedule = await Get();
+            return schedule.Where(c => c.cat_id == cat_id.ToString());
+        }
+
+        public async Task<IEnumerable<DoctorScheduleModel>> Random(int Count)
+        {
+            var schedule = await Get();
+            return schedule.OrderBy(x => random.Next()).Take(Count);
+        }
+
+        public async Task<IEnumerable<DoctorScheduleModel>> GetPagedList(int pageNumber, int pageSize)
+        {
+            var schedule = await JsonSchedule();
+            return await schedule.ToPagedListAsync(pageNumber, pageSize);
+        }
     }
 }

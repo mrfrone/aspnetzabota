@@ -21,23 +21,20 @@ namespace aspnetzabota.Content.Services.Price
             _priceArticles = priceArticles;
             _mapper = mapper;
         }
-        private IEnumerable<ZabotaPrice> JsonPrice
+        private async Task<IEnumerable<ZabotaPrice>> JsonPrice()
         {
-            get
-            {
                 using (StreamReader sr = new StreamReader("wwwroot/json/price.json"))
                 {
                     return JsonConvert
-                        .DeserializeObject<IEnumerable<ZabotaPrice>>(sr.ReadToEnd())
+                        .DeserializeObject<IEnumerable<ZabotaPrice>>(await sr.ReadToEndAsync())
                         .OrderBy(c => c.DepartName)
                         .Where(c => !String.IsNullOrEmpty(c.DepartName));
                 }
-            }
         }
         private async Task<IEnumerable<ZabotaPrice>> PriceAtArticles()
         {
                 var articles = await GetPriceArticles(); 
-                var price = JsonPrice;
+                var price = await JsonPrice();
                 foreach (var article in articles)
                 {
                    if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == article.PriceId).Name))
@@ -45,48 +42,47 @@ namespace aspnetzabota.Content.Services.Price
                 }
                 return price;
         }
-        public IEnumerable<ZabotaPrice> Get
+        public async Task<IEnumerable<ZabotaPrice>> Get()
         {
-            get
-            {
-                return PriceAtArticles().Result;
-            }
+                return await PriceAtArticles();
         }
 
-        public IEnumerable<ZabotaPriceGroupsAndDepartments> GroupsAndDepartments
+        public async Task<IEnumerable<ZabotaPriceGroupsAndDepartments>> GroupsAndDepartments()
         {
-            get
-            {
-                return JsonPrice
-                    .GroupBy(u => new { u.GroupCode, u.GroupName })
-                    .Select(c => new ZabotaPriceGroupsAndDepartments
-                        {
-                            GroupCode = c.Key.GroupCode,
-                            GroupName = c.Key.GroupName,
-                            DepartName = c.Select(u => u.DepartName).Distinct()
-                        });
-            }
+            var price = await JsonPrice();
+                return price
+                .GroupBy(u => new { u.GroupCode, u.GroupName })
+                .Select(c => new ZabotaPriceGroupsAndDepartments
+                    {
+                        GroupCode = c.Key.GroupCode,
+                        GroupName = c.Key.GroupName,
+                        DepartName = c.Select(u => u.DepartName).Distinct()
+                    });
         }
 
-        public IEnumerable<ZabotaPriceGroupsAndDepartments> PriceDepartments(int id) 
-        { 
-            return GroupsAndDepartments.Where(c => c.GroupCode == id); 
-        }
-        public IEnumerable<ZabotaPrice> FromGroup(int id) 
-        { 
-            return Get.Where(c => c.GroupCode == id); 
-        }
-        public IEnumerable<ZabotaPrice> FromDepartment(string id) 
-        { 
-            return Get.Where(c => c.DepartName == id); 
-        }
-        public IEnumerable<ZabotaPrice> FromSearch(string line)
+        public async Task<IEnumerable<ZabotaPriceGroupsAndDepartments>> PriceDepartments(int id) 
         {
-            return Get.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            var groups = await GroupsAndDepartments();
+            return groups.Where(c => c.GroupCode == id); 
+        }
+        public async Task<IEnumerable<ZabotaPrice>> FromGroup(int id) 
+        {
+            var price = await JsonPrice();
+            return price.Where(c => c.GroupCode == id); 
+        }
+        public async Task<IEnumerable<ZabotaPrice>> FromDepartment(string id) 
+        {
+            var price = await JsonPrice();
+            return price.Where(c => c.DepartName == id); 
+        }
+        public async Task<IEnumerable<ZabotaPrice>> FromSearch(string line)
+        {
+            var price = await JsonPrice();
+            return price.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
         public async Task<ZabotaResult> AddPriceArticle(ZabotaPriceArticles article)
         {
-            var price = JsonPrice;
+            var price = await JsonPrice();
             if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == article.PriceId).Name))
             {
                 await _priceArticles.Add(new Database.Entities.PriceArticles

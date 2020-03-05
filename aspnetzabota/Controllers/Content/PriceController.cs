@@ -1,61 +1,61 @@
 ﻿using aspnetzabota.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Content.Services.Price;
+using System.Threading.Tasks;
 
 namespace aspnetzabota.Controllers
 {
-    //do this async
     public class PriceController : Controller
     {
-        private readonly IPrice _priceService;
+        private readonly IPrice _price;
 
-        public PriceController(IPrice ipriceService)
+        public PriceController(IPrice price)
         {
-            _priceService = ipriceService;
+            _price = price;
         }
-        public ViewResult List()
+        public async Task<ViewResult> List()
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.Get,
-                PriceServiceDep = _priceService.GroupsAndDepartments
+                PriceService = await _price.Get(),
+                PriceServiceDep = await _price.GroupsAndDepartments()
             };
             return View(result);
 
         }
         [HttpGet]
-        public ActionResult GetDepartments(int id)
+        public async Task<IActionResult> GetDepartments(int id)
         {
             var result = new PriceServiceViewModel
             {
-                PriceServiceDep = _priceService.PriceDepartments(id)
+                PriceServiceDep = await _price.PriceDepartments(id)
             };
             return PartialView(result);
         }
         [HttpGet]
-        public ActionResult PriceTable(int id)
+        public async Task<IActionResult> PriceTable(int id)
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.FromGroup(id)
+                PriceService = await _price.FromGroup(id)
             };
             return PartialView(result);
         }
         [HttpGet]
-        public ActionResult PriceTableAtDepartment(string id)
+        public async Task<IActionResult> PriceTableAtDepartment(string id)
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.FromDepartment(id)
+                PriceService =  await _price.FromDepartment(id)
             };
             return PartialView("PriceTable", result);
         }
         [HttpGet]
-        public ActionResult PriceTableAtText(string id)
+        public async Task<IActionResult> PriceTableAtText(string id)
         {
             var result = new PriceServiceViewModel
             {
-                PriceService = _priceService.FromSearch(id)
+                PriceService = await _price.FromSearch(id)
             };
             return PartialView("PriceTable", result);
         }

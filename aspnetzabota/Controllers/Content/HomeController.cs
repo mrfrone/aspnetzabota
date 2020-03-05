@@ -30,7 +30,7 @@ namespace aspnetzabota.Controllers
                 Slider = await _slider.GetSliders(),
                 LastNews = await _articles.GetLastNews(3),
                 LastReviews = await _Reviews.RandomReviews(6),
-                Doctors = _doctorSchedule.Random(4)
+                Doctors = await _doctorSchedule.Random(4)
             };
 
             return View(result);

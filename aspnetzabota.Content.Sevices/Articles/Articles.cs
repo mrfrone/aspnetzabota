@@ -22,7 +22,7 @@ namespace aspnetzabota.Content.Services.Articles
         public async Task<IEnumerable<ZabotaArticles>> GetLastNews(int Count)
         {
             var result = await _newsRepository.GetLast(Count);
-            return _mapper.Map<IEnumerable<ZabotaArticles>>(result).Where(n => n.CategoryID != 3);
+            return _mapper.Map<IEnumerable<ZabotaArticles>>(result);
         }
         public async Task<ZabotaArticles> GetSingleArticle(int id) 
         {
