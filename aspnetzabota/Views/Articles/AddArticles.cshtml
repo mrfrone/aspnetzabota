@@ -156,12 +156,17 @@
                     dataType: "json"
                 }).done(function (data) {
                     if (data) {
-                        Swal.fire(
-                            'Отлично!',
-                            'Статья успешно добавлена!',
-                            'success'
-                        );
-                        document.location.href = "List";
+                        Swal.fire({
+                        title: 'Отлично!',
+                        text: "Статья добавлено успешно!",
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок'
+                    }).then((result) => {
+                        if (result.value) {
+                            document.location.href = "List";
+                        }
+                    });    
                     }
                     else
                         Swal.fire(

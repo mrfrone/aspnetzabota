@@ -76,12 +76,17 @@
                     dataType: "json"
                 }).done(function (data) {
                     if (data) {
-                        Swal.fire(
-                            'Отлично!',
-                            'Связь успешно добавлена!',
-                            'success'
-                        );
-                        document.location.href = "PriceList";
+                        Swal.fire({
+                            title: 'Отлично!',
+                            text: "Связь успешно добавлена!",
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок'
+                        }).then((result) => {
+                            if (result.value) {
+                                document.location.href = "PriceList";
+                            }
+                        });
                     }
                     else
                         Swal.fire(

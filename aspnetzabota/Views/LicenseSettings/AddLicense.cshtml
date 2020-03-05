@@ -116,12 +116,17 @@
                 dataType: "json"
             }).done(function (data) {
                 if (data) {
-                    Swal.fire(
-                        'Отлично!',
-                        'Лицензия успешно добавлена!',
-                        'success'
-                    );
-                    document.location.href = "List";
+                    Swal.fire({
+                        title: 'Отлично!',
+                        text: "Лицензия успешно добавлена!",
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок'
+                    }).then((result) => {
+                        if (result.value) {
+                            document.location.reload();
+                        }
+                    });
                 }
                 else
                     Swal.fire(
@@ -188,11 +193,13 @@
                 dataType: "json"
             }).done(function (data) {
                 if (data) {
-                    Swal.fire(
-                        'Отлично!',
-                        'Фото для лицензии успешно добавлена!',
-                        'success'
-                    );
+                    Swal.fire({
+                        title: 'Отлично!',
+                        text: "Фото для лицензии успешно добавлено!",
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок'
+                    });
                 }
                 else
                     Swal.fire(
