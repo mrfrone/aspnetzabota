@@ -38,8 +38,15 @@
                                 @Html.Raw("<div class='tab-pane fade' id='v-pills-" + depart.Id + "' role='tabpanel' aria-labelledby='day-" + depart.Id + "-tab'>")
                             }
                             <div class="row departments">
-                                @foreach (var article in depart.Articles) {
-                                
+                                @if (!String.IsNullOrEmpty(depart.Description))
+                                {
+                                    <div class="col-md-12">
+                                        @Html.Raw(depart.Description)
+                                    </div>
+                                }
+                                @foreach (var article in depart.Articles)
+                                {
+
                                     <div class="col-md-6">
                                         <div class="blog-entry">
                                             <a href="#" class="block-20" style="background-image: url(@Url.Content(article.IMG));">
@@ -59,7 +66,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                
+
                                 }
                             </div>
                             <div class="row departments">
@@ -85,7 +92,7 @@
                                                 <th scope="col">Цена</th>
                                             </tr>
                                         </thead>
-                                        <tbody >
+                                        <tbody>
                                             @foreach (var price in Model.Price.Where(x => x.GroupCode == depart.DepartmentPriceID))
                                             {
                                                 <tr>

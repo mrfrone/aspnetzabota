@@ -3,7 +3,7 @@
     @Html.PagedListPager((IPagedList)Model.Reviews, page => Url.Action("PagedReviews", new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "reviews" }))
 
 
-    <table id="price" class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover">
         <thead class="thead-dark text-center">
             <tr>
                 <th scope="col">Автор</th>

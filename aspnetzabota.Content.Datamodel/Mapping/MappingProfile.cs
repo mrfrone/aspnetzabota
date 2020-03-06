@@ -16,9 +16,7 @@ namespace aspnetzabota.Content.Datamodel.Mapping
             CreateMap<Database.Entities.Department, ZabotaDepartment>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
-                .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))
                 .ForMember(u => u.ShortName, opts => opts.MapFrom(u => u.ShortName))
-                .ForMember(u => u.IMG, opts => opts.MapFrom(u => u.Img))
                 .ForMember(u => u.Description, opts => opts.MapFrom(u => u.Description))
                 .ForMember(u => u.DepartmentPriceID, opts => opts.MapFrom(u => u.DepartmentPriceID))
                 .ForMember(u => u.Articles, opts => opts.MapFrom(u => u.Articles));
