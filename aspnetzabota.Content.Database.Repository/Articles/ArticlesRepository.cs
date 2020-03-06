@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using aspnetzabota.Content.Database.Context;
 using aspnetzabota.Common.EFCore.Extensions;
 using System.Threading.Tasks;
+using aspnetzabota.Content.Datamodel.Articles;
+using System;
 
 namespace aspnetzabota.Content.Database.Repository.Articles
 {
@@ -44,9 +46,17 @@ namespace aspnetzabota.Content.Database.Repository.Articles
             .OrderByDescending(x => x.Date)
             .ToArrayAsync();
         }
-        public Task Add(Entities.Articles news)
+        public Task Add(ZabotaArticles model)
         {
-            _appDBContext.Articles.Add(news);
+            _appDBContext.Articles.Add(new Entities.Articles
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Img = "~/images/Articles/" + model.IMG,
+                Date = DateTimeOffset.UtcNow,
+                CategoryID = model.CategoryID,
+                DepartmentId = model.DepartmentId
+            });
             return _appDBContext.SaveChangesAsync();
         }
         public Task Delete(int id)

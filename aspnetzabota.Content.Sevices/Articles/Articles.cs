@@ -44,23 +44,16 @@ namespace aspnetzabota.Content.Services.Articles
             var result = await _newsRepository.GetList();
             return _mapper.Map<IEnumerable<ZabotaArticles>>(result).Where(a => a.CategoryID == 3);
         }
-        public async Task<ZabotaResult> AddArticle(ZabotaArticles news)
+        public async Task<ZabotaResult> AddArticle(ZabotaArticles model)
         {
-            await _newsRepository.Add(new Database.Entities.Articles
-            {
-                Name = news.Name,
-                Description = news.Description,
-                Img = "~/images/Articles/" + news.IMG,
-                Date = DateTimeOffset.UtcNow,
-                CategoryID = news.CategoryID,
-                DepartmentId = news.DepartmentId
-            });
+            await _newsRepository.Add(model);
 
             return new ZabotaResult();
         }
         public async Task<ZabotaResult> DeleteArticleByID(int id)
         {
             await _newsRepository.Delete(id);
+
             return new ZabotaResult();
         }
     }

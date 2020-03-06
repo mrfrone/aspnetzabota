@@ -1,5 +1,6 @@
 ﻿using aspnetzabota.Common.EFCore.Extensions;
 using aspnetzabota.Content.Database.Context;
+using aspnetzabota.Content.Datamodel.Price;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -21,9 +22,14 @@ namespace aspnetzabota.Content.Database.Repository.PriceArticles
                 .Include(c => c.Article)
                 .ToArrayAsync();
         }
-        public Task Add(Entities.PriceArticles price)
+        public Task Add(ZabotaPriceArticles model)
         {
-            _appDBContext.Add(price);
+            _appDBContext.Add(new Entities.PriceArticles
+            {
+                Id = model.Id,
+                PriceId = model.PriceId,
+                ArticleId = model.ArticleId
+            });
             return _appDBContext.SaveChangesAsync();
         }
         public Task Delete(int id)

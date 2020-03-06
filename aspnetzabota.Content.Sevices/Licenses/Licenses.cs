@@ -22,22 +22,14 @@ namespace aspnetzabota.Content.Services.Licenses
             var result = await _licensesRepository.Get();
             return _mapper.Map<IEnumerable<ZabotaLicenses>>(result);
         }
-        public async Task<ZabotaResult> AddLicense(ZabotaLicenses license)
+        public async Task<ZabotaResult> AddLicense(ZabotaLicenses model)
         {
-            await _licensesRepository.Add(new Database.Entities.Licenses
-            {
-                Id = license.Id,
-                Name = license.Name
-            });
+            await _licensesRepository.Add(model);
             return new ZabotaResult();
         }
-        public async Task<ZabotaResult> AddPhoto(ZabotaLicensesPhoto photo)
+        public async Task<ZabotaResult> AddPhoto(ZabotaLicensesPhoto model)
         {
-             await _licensesRepository.AddPhoto(new Database.Entities.LicensesPhoto
-            {
-                Path = "~/images/Licenses/" + photo.Path,
-                LicensesId = photo.LicensesId
-            });
+            await _licensesRepository.AddPhoto(model);
             return new ZabotaResult();
         }
         public async Task<ZabotaResult> DeleteLicense(int id)

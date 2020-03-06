@@ -80,17 +80,12 @@ namespace aspnetzabota.Content.Services.Price
             var price = await JsonPrice();
             return price.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
-        public async Task<ZabotaResult> AddPriceArticle(ZabotaPriceArticles article)
+        public async Task<ZabotaResult> AddPriceArticle(ZabotaPriceArticles model)
         {
             var price = await JsonPrice();
-            if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == article.PriceId).Name))
+            if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == model.PriceId).Name))
             {
-                await _priceArticles.Add(new Database.Entities.PriceArticles
-                {
-                    Id = article.Id,
-                    PriceId = article.PriceId,
-                    ArticleId = article.ArticleId
-                });
+                await _priceArticles.Add(model);
                 return new ZabotaResult();
             }
             else

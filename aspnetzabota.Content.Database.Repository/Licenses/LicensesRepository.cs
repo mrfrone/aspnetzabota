@@ -1,5 +1,6 @@
 ﻿using aspnetzabota.Common.EFCore.Extensions;
 using aspnetzabota.Content.Database.Context;
+using aspnetzabota.Content.Datamodel.License;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,14 +24,22 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
                 .Include(u => u.Photo)
                 .ToArrayAsync(); 
         }
-        public Task Add(Entities.Licenses license)
+        public Task Add(ZabotaLicenses model)
         {
-            _appDBContext.Licenses.Add(license);
+            _appDBContext.Licenses.Add(new Entities.Licenses
+            {
+                Id = model.Id,
+                Name = model.Name
+            });
             return _appDBContext.SaveChangesAsync();
         }
-        public Task AddPhoto(Entities.LicensesPhoto photo)
+        public Task AddPhoto(ZabotaLicensesPhoto model)
         {
-            _appDBContext.LicensesPhoto.Add(photo);
+            _appDBContext.LicensesPhoto.Add(new Entities.LicensesPhoto
+            {
+                Path = "~/images/Licenses/" + model.Path,
+                LicensesId = model.LicensesId
+            });
             return _appDBContext.SaveChangesAsync();
         }
         // todo: take this delete method to all repositories
