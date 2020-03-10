@@ -5,37 +5,46 @@
                 <div class="col-md-8 text-center heading-section ftco-animate">
                     <h2 class="mb-4">Расписание</h2>
                     <span class="subheading">@Model.SingleSchedule.doctors.fio, <a href="/Schedule/Doctor/@Model.SingleSchedule.cat_id">@Model.SingleSchedule.category</a></span>
-                    @*<p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>*@
                 </div>
             </div>
-            <table class="table table-bordered table-hover ftco-animate">
-                <thead class="thead-dark text-center">
-                    <tr>
-                        <th scope="col">ФИО</th>
-                        <th scope="col">Степень, Звание</th>
-                        <th scope="col">Пн</th>
-                        <th scope="col">Вт</th>
-                        <th scope="col">Ср</th>
-                        <th scope="col">Чт</th>
-                        <th scope="col">Пт</th>
-                        <th scope="col">Сб</th>
-                        <th scope="col">Вс</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Model.SingleSchedule.doctors.fio</td>
-                        <td>@Model.SingleSchedule.doctors.position</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.mon</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.tue</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.wed</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.thu</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.fri</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.sat</td>
-                        <td class="text-center">@Model.SingleSchedule.doctors.schedule.sun</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <table class="table table-bordered table-hover ftco-animate">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th scope="col">ФИО</th>
+                            <th scope="col">Степень, Звание</th>
+                            <th scope="col">Пн</th>
+                            <th scope="col">Вт</th>
+                            <th scope="col">Ср</th>
+                            <th scope="col">Чт</th>
+                            <th scope="col">Пт</th>
+                            <th scope="col">Сб</th>
+                            <th scope="col">Вс</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.SingleSchedule.doctors.fio</td>
+                            <td>@Model.SingleSchedule.doctors.position</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.mon</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.tue</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.wed</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.thu</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.fri</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.sat</td>
+                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.sun</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Url.Content(Model.SingleSchedule.DoctorInfo.Photo)" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    @Html.Raw(@Model.SingleSchedule.DoctorInfo.Description)
+                </div>
+            </div>
         </div>
     </section>
 

@@ -1,4 +1,9 @@
-﻿using aspnetzabota.Content.Datamodel.Doctors;
+﻿using aspnetzabota.Common.Result;
+using aspnetzabota.Common.Result.ErrorCodes;
+using aspnetzabota.Content.Database.Entities;
+using aspnetzabota.Content.Database.Repository.DoctorInfo;
+using aspnetzabota.Content.Datamodel.Doctors;
+using AutoMapper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,8 +16,15 @@ namespace aspnetzabota.Content.Services.Schedule
 {
     internal class Schedule : ISchedule
     {
-        private static readonly Random random = new Random();
-        private IEnumerable<DoctorScheduleModel> RemoveNoReception(IEnumerable<DoctorScheduleModel> model)
+        private readonly Random random = new Random();
+        private readonly IDoctorInfoRepository _doctorInfoRepository;
+        private readonly IMapper _mapper;
+        public Schedule(IDoctorInfoRepository doctorInfoRepository, IMapper mapper)
+        {
+            _doctorInfoRepository = doctorInfoRepository;
+            _mapper = mapper;
+        }
+        private IEnumerable<DoctorSchedule> RemoveNoReception(IEnumerable<DoctorSchedule> model)
         {
             string symb = "-";
             string phrase = "нет приема";
@@ -35,17 +47,36 @@ namespace aspnetzabota.Content.Services.Schedule
             }
             return model;
         }
-        private async Task<IEnumerable<DoctorScheduleModel>> JsonSchedule()
+        private async Task<IEnumerable<DoctorSchedule>> JsonSchedule()
         {
                 using (StreamReader sr = new StreamReader("wwwroot/json/schedule.json"))
                 {
-                    return RemoveNoReception(JsonConvert.DeserializeObject<IEnumerable<DoctorScheduleModel>>(await sr.ReadToEndAsync())).OrderBy(c => c.category);
+                    return RemoveNoReception(JsonConvert
+                        .DeserializeObject<IEnumerable<DoctorSchedule>>(await sr.ReadToEndAsync()))
+                        .OrderBy(c => c.category);
                 }
         }
-
-        public async Task<IEnumerable<DoctorScheduleModel>> Get()
+        private async Task<IEnumerable<DoctorSchedule>> ScheduleAtDoctors(bool OnlyComplete = false)
         {
-            return await JsonSchedule();
+            var doctors = await GetDoctorsInfo();
+            var schedule = await JsonSchedule();
+            foreach (var doctor in doctors)
+            {
+                if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.doctors.id == doctor.DoctorId).doctors.fio))
+                    schedule.FirstOrDefault(c => c.doctors.id == doctor.DoctorId).DoctorInfo = doctor;
+            }
+            if (OnlyComplete)
+            {
+                return schedule.Where(x => x.DoctorInfo != null);
+            }
+            else
+            {
+                return schedule;
+            }
+        }
+        public async Task<IEnumerable<DoctorSchedule>> Get(bool OnlyComplete = false)
+        {
+            return await ScheduleAtDoctors(OnlyComplete);
         }
 
         public async Task<IEnumerable<string>> Posts()
@@ -54,28 +85,52 @@ namespace aspnetzabota.Content.Services.Schedule
             return schedule.Select(c => c.category).Distinct().ToList();
         }
 
-        public async Task<DoctorScheduleModel> Single(int id)
+        public async Task<DoctorSchedule> Single(int id)
         {
             var schedule = await Get();
-            return schedule.FirstOrDefault(c => c.doctors.id == id.ToString());
+            return schedule.FirstOrDefault(c => c.doctors.id == id);
         }
 
-        public async Task<IEnumerable<DoctorScheduleModel>> ScheduleFromSinglePost(int cat_id)
+        public async Task<IEnumerable<DoctorSchedule>> ScheduleFromSinglePost(int cat_id)
         {
             var schedule = await Get();
             return schedule.Where(c => c.cat_id == cat_id.ToString());
         }
 
-        public async Task<IEnumerable<DoctorScheduleModel>> Random(int Count)
+        public async Task<IEnumerable<DoctorSchedule>> Random(int Count)
         {
             var schedule = await Get();
             return schedule.OrderBy(x => random.Next()).Take(Count);
         }
 
-        public async Task<IEnumerable<DoctorScheduleModel>> GetPagedList(int pageNumber, int pageSize)
+        public async Task<IEnumerable<DoctorSchedule>> GetPagedList(int pageNumber, int pageSize)
+        {
+            var schedule = await ScheduleAtDoctors();
+            return await schedule.ToPagedListAsync(pageNumber, pageSize);
+        }
+        public async Task<IEnumerable<ZabotaDoctorInfo>> GetDoctorsInfo() 
+        {
+            var result = await _doctorInfoRepository.Get();
+            return _mapper.Map<IEnumerable<ZabotaDoctorInfo>>(result);
+        }
+        public async Task<ZabotaResult> AddDoctorInfo(ZabotaDoctorInfo model)
         {
             var schedule = await JsonSchedule();
-            return await schedule.ToPagedListAsync(pageNumber, pageSize);
+            if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.doctors.id == model.DoctorId).doctors.fio))
+            {
+                await _doctorInfoRepository.Add(model);
+                return new ZabotaResult();
+            }
+            else
+            {
+                return ZabotaErrorCodes.IdNotFound;
+            }
+        }
+        public async Task<ZabotaResult> DeleteDoctorInfo(int id)
+        {
+            await _doctorInfoRepository.Delete(id);
+
+            return new ZabotaResult();
         }
     }
 }

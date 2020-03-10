@@ -43,7 +43,11 @@
                     <div class="staff border shadow">
                         <div class="img-wrap d-flex align-items-stretch">
                             @{
-                                if (doctor.doctors.sex == "male")
+                                if (doctor.DoctorInfo != null)
+                                {
+                                    <div class="img align-self-stretch" style="background-image: url(@Url.Content(doctor.DoctorInfo.Photo));"></div>
+                                }
+                                else if (doctor.doctors.sex == "male")
                                 {
                                     <div class="img align-self-stretch" style="background-image: url(@Url.Content("images/staff/male.jpg"));"></div>
                                 }

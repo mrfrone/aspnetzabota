@@ -42,7 +42,6 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
             });
             return _appDBContext.SaveChangesAsync();
         }
-        // todo: take this delete method to all repositories
         public Task Delete(int id)
         {
             _appDBContext.LicensesPhoto

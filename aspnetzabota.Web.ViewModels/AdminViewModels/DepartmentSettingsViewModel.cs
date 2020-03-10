@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using aspnetzabota.Content.Datamodel.Department;
-using aspnetzabota.Content.Datamodel.Articles;
 using aspnetzabota.Content.Datamodel.Price;
 
 namespace aspnetzabota.Web.ViewModels

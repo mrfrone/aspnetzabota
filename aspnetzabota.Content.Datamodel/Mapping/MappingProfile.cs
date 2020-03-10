@@ -6,6 +6,7 @@ using aspnetzabota.Content.Datamodel.Articles;
 using aspnetzabota.Content.Datamodel.Review;
 using aspnetzabota.Content.Datamodel.Slider;
 using aspnetzabota.Content.Datamodel.Price;
+using aspnetzabota.Content.Database.Entities;
 
 namespace aspnetzabota.Content.Datamodel.Mapping
 {
@@ -21,13 +22,13 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.DepartmentPriceID, opts => opts.MapFrom(u => u.DepartmentPriceID))
                 .ForMember(u => u.Articles, opts => opts.MapFrom(u => u.Articles));
 
-            CreateMap<Database.Entities.Licenses, ZabotaLicenses>()
+            CreateMap<Licenses, ZabotaLicenses>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))
                 .ForMember(u => u.Photo, opts => opts.MapFrom(u => u.Photo));
 
-            CreateMap<Database.Entities.LicensesPhoto, ZabotaLicensesPhoto>()
+            CreateMap<LicensesPhoto, ZabotaLicensesPhoto>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.Path, opts => opts.MapFrom(u => u.Path));
@@ -57,17 +58,23 @@ namespace aspnetzabota.Content.Datamodel.Mapping
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.Image, opts => opts.MapFrom(u => u.Image));
 
-            CreateMap<Database.Entities.Category, ZabotaCategory>()
+            CreateMap<Category, ZabotaCategory>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.ID))
                 .ForMember(u => u.Name, opts => opts.MapFrom(u => u.Name))
                 .ForMember(u => u.News, opts => opts.MapFrom(u => u.news));
 
-            CreateMap<Database.Entities.PriceArticles, ZabotaPriceArticles>()
+            CreateMap<PriceArticles, ZabotaPriceArticles>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
                 .ForMember(u => u.PriceId, opts => opts.MapFrom(u => u.PriceId))
                 .ForMember(u => u.Article, opts => opts.MapFrom(u => u.Article));
+            CreateMap<DoctorInfo, ZabotaDoctorInfo>()
+                .IgnoreOther()
+                .ForMember(u => u.Id, opts => opts.MapFrom(u => u.Id))
+                .ForMember(u => u.Photo, opts => opts.MapFrom(u => u.Photo))
+                .ForMember(u => u.Description, opts => opts.MapFrom(u => u.Description))
+                .ForMember(u => u.DoctorId, opts => opts.MapFrom(u => u.DoctorId));
         }
     }
 }

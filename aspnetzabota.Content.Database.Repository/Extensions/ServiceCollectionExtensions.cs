@@ -7,6 +7,8 @@ using aspnetzabota.Content.Database.Repository.Slider;
 using Microsoft.Extensions.DependencyInjection;
 using aspnetzabota.Content.Database.Extensions;
 using aspnetzabota.Content.Database.Repository.PriceArticles;
+using aspnetzabota.Content.Database.Entities;
+using aspnetzabota.Content.Database.Repository.DoctorInfo;
 
 namespace aspnetzabota.Content.Repository.Extensions
 {
@@ -16,6 +18,7 @@ namespace aspnetzabota.Content.Repository.Extensions
         {
             services.AddContentDatabase(connectionString);
             services.AddScoped<IPriceArticlesRepository, PriceArticlesRepository>();
+            services.AddScoped<IDoctorInfoRepository, DoctorInfoRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<ISliderRepository, SliderRepository>();

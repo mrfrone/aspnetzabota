@@ -11,7 +11,7 @@ namespace aspnetzabota.Web.ViewModels
         public IEnumerable<ZabotaArticles> LastNews { get; set; }
         public IEnumerable<ZabotaSlider> Slider { get; set; }
         public IEnumerable<ZabotaReview> LastReviews { get; set; }
-        public IEnumerable<DoctorScheduleModel> Doctors { get; set; }
+        public IEnumerable<DoctorSchedule> Doctors { get; set; }
 
     }
 }

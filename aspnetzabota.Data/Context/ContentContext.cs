@@ -16,6 +16,7 @@ namespace aspnetzabota.Content.Database.Context
         public DbSet<Licenses> Licenses { get; set; }
         public DbSet<LicensesPhoto> LicensesPhoto { get; set; }
         public DbSet<PriceArticles> PriceArticles { get; set; }
+        public DbSet<DoctorInfo> Doctor { get; set; }
 
     }
 }

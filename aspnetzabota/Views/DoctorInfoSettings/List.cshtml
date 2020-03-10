@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model DoctorInfoSettingsViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Список привязанной к врачам информации</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark text-center">
+                                    <tr>
+                                        <th scope="col">ФИО</th>
+                                        <th scope="col">Описание</th>
+                                        <th scope="col">Фото</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var doctor in Model.Doctor)
+                                    {
+                                        <tr>
+                                            <td style="width:25%">@doctor.doctors.fio</td>
+                                            <td style="width:25%">@Html.Raw(doctor.DoctorInfo.Description)</td>
+                                            <td style="width: 15%"><img src="@Url.Content(doctor.DoctorInfo.Photo)" class="img-fluid"/></td>
+                                            <td class="text-center"><a href="#">Редактировать</a></td>
+                                            <td class="text-center"><a href="/admin/DoctorInfoSettings/DeleteDoctorInfo/?id=@doctor.DoctorInfo.Id">Удалить</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+    </div>
+</div>
