@@ -1,26 +1,46 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model DoctorInfoSettingsViewModel
+@model SliderSettingsViewModel
 <div class="contents-inner">
     <div class="row">
         <div class="col-md-12">
             <div class="section-content">
                 <div class="content-head">
-                    <h4 class="content-title">Добавить информацию о враче</h4><!-- /.content-title -->
+                    <h4 class="content-title">Список изображений</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark text-center">
+                                    <tr>
+                                        <th scope="col">Изображение</th>
+                                        <th scope="col">Удаление</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var slider in Model.Slider)
+                                    {
+                                        <tr>
+                                            <td class="w-75"><img src="@Url.Content(slider.Image)" class="img-fluid" /></td>
+                                            <td><a href="/admin/SliderSettings/DeleteSlider/?id=@slider.Id">Удалить</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Добавить изображение слайдера</h4><!-- /.content-title -->
                 </div><!-- /.content-head -->
                 <div class="content-details show">
                     <article class="post type-post">
-                        <div class="form-group">
-                            <label>ФИО</label>
-                            <select id="FIO" class="form-control select2">
-                                <option selected="selected" hidden disabled>Выберите врача...</option>
-                                @foreach (var doctor in Model.Doctor)
-                                {
-                                    <option value="@doctor.doctors.id">@doctor.doctors.fio</option>
-                                }
-                            </select>
-                        </div>
                         <div class=" row form-group">
                             <div class="col col-md-3"><label for="file-input" class=" form-control-label">Изображение</label></div>
                             <div class="col-12 col-md-9"><input type="file" id="fileInput" name="file" class="form-control-file" accept="image/jpeg,image/png"></div>
@@ -30,10 +50,8 @@
                                 <div class="entry-thumbnail mb-4"><span id="output"></span></div>
                             </div>
                         </div>
-                        <div id="editor">
-                        </div>
                         <div>
-                            <button id="payment-button" type="button" onclick="Add_DoctorInfo()" class="btn btn-lg btn-info btn-block">
+                            <button id="payment-button" type="button" onclick="Add_Slider()" class="btn btn-lg btn-info btn-block">
                                 <span id="payment-button-amount">Добавить</span>
                             </button>
                         </div>
@@ -44,43 +62,35 @@
     </div>
 </div>
 
-<!--Text Editor-->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
 <script type="text/javascript">
-    var quill = new Quill('#editor', {
-        theme: 'snow'
-    });
 
-    function Add_DoctorInfo() {
+    function Add_Slider() {
         //random name from img
         var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         console.log(r);
 
         //info model
-        var info = {};
-        info.Id = null;
-        info.DoctorId = $('#FIO').val();
-        info.Description = quill.root.innerHTML;
+        var slider = {};
+        slider.Id = null;
 
         //get img file
         var formData = new FormData();
-        var file = document.getElementById("fileInput").files[0];
+        file = document.getElementById("fileInput").files[0];
 
 
-        console.log(JSON.stringify(info));
+        console.log(JSON.stringify(slider));
 
-        if (info.DoctorId != null) {
+        if (file != null) {
             //file extension
             var fe = /(?:\.([^.]+))?$/;
             var ext = fe.exec(file.name)[1];
             formData.append("fileInput", file, r + "." + ext);
 
             //file extension to db
-            info.Photo = r + "." + ext;
+            slider.Image = r + "." + ext;
 
             $.ajax({
-                url: '/admin/DoctorInfoSettings/AddImage',
+                url: '/admin/SliderSettings/AddImage',
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -92,15 +102,15 @@
 
             $.ajax({
                 type: "POST",
-                url: "/admin/DoctorInfoSettings/Add",
-                data: JSON.stringify(info),
+                url: "/admin/SliderSettings/AddSlider",
+                data: JSON.stringify(slider),
                 contentType: "application/json",
                 dataType: "json"
             }).done(function (data) {
                 if (data) {
                     Swal.fire({
                         title: 'Отлично!',
-                        text: "Информация о враче добавлена успешно!",
+                        text: "Изображение добавлено успешно!",
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Ок'
@@ -113,7 +123,7 @@
                 else
                     Swal.fire(
                         'Упс...',
-                        'Ошибка при добавлении информации о враче',
+                        'Ошибка при добавлении изображения',
                         'error'
                     );
             }).fail(function (response) {
@@ -124,7 +134,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Упс...',
-                text: 'Заполнены не все поля!'
+                text: 'Изображение не выбрано!'
             });
         }
     }

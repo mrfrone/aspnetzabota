@@ -1,4 +1,5 @@
-﻿using aspnetzabota.Content.Database.Repository.Slider;
+﻿using aspnetzabota.Common.Result;
+using aspnetzabota.Content.Database.Repository.Slider;
 using aspnetzabota.Content.Datamodel.Slider;
 using AutoMapper;
 using System.Collections.Generic;
@@ -20,6 +21,18 @@ namespace aspnetzabota.Content.Services.Slider
         {
             var sliders = await _sliderRepository.Get();
             return _mapper.Map<IEnumerable<ZabotaSlider>>(sliders);
+        }
+        public async Task<ZabotaResult> AddSliderPhoto(ZabotaSlider model)
+        {
+            await _sliderRepository.Add(model);
+
+            return new ZabotaResult();
+        }
+        public async Task<ZabotaResult> DeleteSliderPhoto(int id)
+        {
+            await _sliderRepository.Delete(id);
+
+            return new ZabotaResult();
         }
     }
 }
