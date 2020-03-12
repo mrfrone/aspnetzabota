@@ -16,6 +16,7 @@ namespace aspnetzabota.Content.Services.Schedule
         Task<IEnumerable<DoctorSchedule>> GetPagedList(int pageNumber, int pageSize);
         Task<IEnumerable<ZabotaDoctorInfo>> GetDoctorsInfo();
         Task<ZabotaResult> AddDoctorInfo(ZabotaDoctorInfo model);
+        Task<ZabotaResult> UpdateDoctorInfo(ZabotaDoctorInfo model);
         Task<ZabotaResult> DeleteDoctorInfo(int id);
     }
 }

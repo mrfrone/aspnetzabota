@@ -25,13 +25,29 @@ namespace aspnetzabota.Content.Database.Repository.DoctorInfo
         }
         public Task Add(ZabotaDoctorInfo model)
         {
-            _appDBContext.Add(new Entities.DoctorInfo
-            {
-                Id = model.Id,
-                Photo = "~/images/staff/" + model.Photo,
-                Description = model.Description,
-                DoctorId = model.DoctorId
-            });
+            _appDBContext.Doctor
+                .Add(new Entities.DoctorInfo
+                {
+                    Id = model.Id,
+                    Photo = "~/images/staff/" + model.Photo,
+                    Description = model.Description,
+                    DoctorId = model.DoctorId
+                });
+            return _appDBContext.SaveChangesAsync();
+        }
+        public Task Update(ZabotaDoctorInfo model)
+        {
+            _appDBContext.Doctor
+                .AsQueryable()
+                .Where(x => x.Id == model.Id)
+                .Update(r => new Entities.DoctorInfo
+                {
+                    Id = model.Id,
+                    Description = model.Description,
+                    Photo = model.Photo,
+                    DoctorId = model.DoctorId
+                });
+
             return _appDBContext.SaveChangesAsync();
         }
         public Task Delete(int id)

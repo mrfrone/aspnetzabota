@@ -126,6 +126,12 @@ namespace aspnetzabota.Content.Services.Schedule
                 return ZabotaErrorCodes.IdNotFound;
             }
         }
+        public async Task<ZabotaResult> UpdateDoctorInfo(ZabotaDoctorInfo model)
+        {
+                await _doctorInfoRepository.Update(model);
+
+                return new ZabotaResult();
+        }
         public async Task<ZabotaResult> DeleteDoctorInfo(int id)
         {
             await _doctorInfoRepository.Delete(id);

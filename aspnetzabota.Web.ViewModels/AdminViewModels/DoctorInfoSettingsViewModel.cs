@@ -7,6 +7,7 @@ namespace aspnetzabota.Web.ViewModels
     public class DoctorInfoSettingsViewModel
     {
         public IEnumerable<DoctorSchedule> Doctor { get; set; }
+        public DoctorSchedule SingleDoctor { get; set; }
 
-    }
+}
 }

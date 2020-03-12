@@ -7,6 +7,7 @@ namespace aspnetzabota.Content.Database.Repository.DoctorInfo
     {
         Task<Entities.DoctorInfo[]> Get(bool trackChanges = false);
         Task Add(ZabotaDoctorInfo model);
+        Task Update(ZabotaDoctorInfo model);
         Task Delete(int id);
     }
 }

@@ -22,6 +22,7 @@ namespace aspnetzabota.Controllers
             _schedule = schedule;
             _upload = upload;
         }
+        #region Views
         public async Task<ViewResult> List()
         {
             var result = new DoctorInfoSettingsViewModel
@@ -38,6 +39,17 @@ namespace aspnetzabota.Controllers
             };
             return View(result);
         }
+        public async Task<ViewResult> UpdateDoctorInfo(int id)
+        {
+            var result = new DoctorInfoSettingsViewModel
+            {
+                SingleDoctor = await _schedule.Single(id)
+            };
+            return View(result);
+        }
+        #endregion
+
+        #region Methods
         [HttpPost]
         public async Task<IActionResult> AddImage()
         {
@@ -53,6 +65,13 @@ namespace aspnetzabota.Controllers
 
             return ZabotaResult(result.IsCorrect);
         }
+        [HttpPost]
+        public async Task<IActionResult> Update([FromBody] ZabotaDoctorInfo model)
+        {
+            var result = await _schedule.UpdateDoctorInfo(model);
+
+            return ZabotaResult(result.IsCorrect);
+        }
         [HttpGet]
         public async Task<IActionResult> DeleteDoctorInfo(int id)
         {
@@ -60,5 +79,6 @@ namespace aspnetzabota.Controllers
 
             return Redirect("/admin/DoctorInfoSettings/" + nameof(List));
         }
+        #endregion
     }
 }

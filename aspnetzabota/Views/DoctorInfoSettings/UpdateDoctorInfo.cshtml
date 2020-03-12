@@ -1,0 +1,164 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model DoctorInfoSettingsViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Добавить информацию о враче</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <article class="post type-post">
+                        <div class="form-group">
+                            <label>@Model.SingleDoctor.doctors.fio</label>
+                        </div>
+                        <div class=" row form-group">
+                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">Изображение</label></div>
+                            <div class="col-12 col-md-9"><input type="file" id="fileInput" name="file" class="form-control-file" accept="image/jpeg,image/png"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="entry-thumbnail mb-4"><img class="thumb" id="output" src="@Url.Content(Model.SingleDoctor.DoctorInfo.Photo)" title="doctor" /></div>
+                            </div>
+                        </div>
+                        <div id="editor">
+                            @Html.Raw(Model.SingleDoctor.DoctorInfo.Description)
+                        </div>
+                        <div>
+                            <button id="payment-button" type="button" onclick="Update_DoctorInfo()" class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">Обновить</span>
+                            </button>
+                        </div>
+                    </article><!-- /.post -->
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Text Editor-->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script type="text/javascript">
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    var info = {};
+    $(document).ready(function () {
+        info.Id = @Model.SingleDoctor.DoctorInfo.Id;
+        info.DoctorId = @Model.SingleDoctor.DoctorInfo.DoctorId;
+    });
+
+    function Update_DoctorInfo() {
+        //random name from img
+        var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        console.log(r);
+
+        //info model
+        info.Description = quill.root.innerHTML;
+
+        //get img file
+        var formData = new FormData();
+        var file = document.getElementById("fileInput").files[0];
+
+
+        console.log(JSON.stringify(info));
+
+            if (file == null) {
+                info.Photo = '@Model.SingleDoctor.DoctorInfo.Photo';
+            }
+            else {
+                //file extension
+                var fe = /(?:\.([^.]+))?$/;
+                var ext = fe.exec(file.name)[1];
+                formData.append("fileInput", file, r + "." + ext);
+
+                //file extension to db
+                info.Photo = '~/images/staff/' + r + "." + ext;
+
+                $.ajax({
+                    url: '/admin/DoctorInfoSettings/AddImage',
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function () {
+
+                    }
+                });
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/DoctorInfoSettings/Update",
+                data: JSON.stringify(info),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (data) {
+                if (data) {
+                    Swal.fire({
+                        title: 'Отлично!',
+                        text: "Информация о враче обновлена успешно!",
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок'
+                    }).then((result) => {
+                        if (result.value) {
+                            document.location.href = "../List";
+                        }
+                    });
+                }
+                else
+                    Swal.fire(
+                        'Упс...',
+                        'Ошибка при обновлении информации о враче',
+                        'error'
+                    );
+            }).fail(function (response) {
+                console.log('Error: ' + response);
+            });
+        }
+</script>
+
+<style>
+    .thumb {
+        height: 300px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+    }
+</style>
+
+<script type="text/javascript">
+    function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="thumb" id="output" src="', e.target.result, '" title="', theFile.name, '"/>'].join('');
+
+                    document.getElementById('output').replaceWith(span);
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+    }
+    document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
+</script>
