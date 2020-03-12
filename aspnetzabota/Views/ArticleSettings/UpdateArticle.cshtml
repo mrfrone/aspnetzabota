@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="section-content">
                 <div class="content-head">
-                    <h4 class="content-title">Добавление статьи</h4><!-- /.content-title -->
+                    <h4 class="content-title">Обновление статьи</h4><!-- /.content-title -->
                 </div><!-- /.content-head -->
                 <div class="content-details show">
                     <article class="post type-post">
@@ -42,14 +42,15 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="entry-thumbnail mb-4"><span id="output"></span></div>
+                                <div class="entry-thumbnail mb-4"><img class="thumb" id="output" src="@Url.Content(Model.SingleArticle.IMG)" title="preview" /></div>
                             </div>
                         </div>
                         <div id="editor">
+                            @Html.Raw(Model.SingleArticle.Description)
                         </div>
                         <div>
-                            <button id="payment-button" type="button" onclick="Add_Article()" class="btn btn-lg btn-info btn-block">
-                                <span id="payment-button-amount">Добавить</span>
+                            <button id="payment-button" type="button" onclick="Update_Article()" class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">Обновить</span>
                             </button>
                         </div>
                     </article><!-- /.post -->
@@ -98,18 +99,34 @@
         theme: 'snow'
     });
 
-    function Add_Article() {
+    var article = {};
+
+    $(document).ready(function () {
+        article.Id = @Model.SingleArticle.Id;
+
+        $('#Name').val('@Html.Raw(@Model.SingleArticle.Name)');
+        $('#Cat').val(@Model.SingleArticle.CategoryID)
+
+        @if(Model.SingleArticle.DepartmentId != null){
+
+            @:article.DepartmentId = @Model.SingleArticle.DepartmentId;
+            @:$('#Dep').val(@Model.SingleArticle.DepartmentId);
+        }
+
+        console.log(JSON.stringify(article));
+    });
+
+    function Update_Article() {
         //random name from img
         var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         console.log(r);
 
         //article model
-        var article = {};
-        article.Id = null;
         article.Name = $('#Name').val();
         article.Description = quill.root.innerHTML;
         article.CategoryID = $('#Cat').val();
         article.DepartmentId = $('#Dep').val();
+
 
         if (article.CategoryID != 3 && article.DepartmentId > 0)
         {
@@ -124,33 +141,36 @@
         //get img file
         var formData = new FormData();
         var file = document.getElementById("fileInput").files[0];
-        
 
         console.log(JSON.stringify(article));
 
-        if (article.Name != null && article.Description != null && article.CategoryID != null && file.name != null) {
-            //file extension
-            var fe = /(?:\.([^.]+))?$/;
-            var ext = fe.exec(file.name)[1];
-            formData.append("fileInput", file, r + "." + ext);
+        if (article.Name != null && article.Description != null && article.CategoryID != null) {
+            if (file == null) {
+                article.IMG = '@Model.SingleArticle.IMG';
+            }
+            else {
+                //file extension
+                var fe = /(?:\.([^.]+))?$/;
+                var ext = fe.exec(file.name)[1];
+                formData.append("fileInput", file, r + "." + ext);
 
-            //file extension to db
-            article.Img = r + "." + ext;
+                //file extension to db
+                article.IMG = "~/images/Articles/" + r + "." + ext;
 
-            $.ajax({
-                url: '/admin/ArticleSettings/addimage',
-                type: "POST",
-                data: formData,
+                $.ajax({
+                    url: '/admin/ArticleSettings/addimage',
+                    type: "POST",
+                    data: formData,
                     contentType: false,
                     processData: false,
                     success: function () {
-                        
+
                     }
                 });
-
+            }
                 $.ajax({
                     type: "POST",
-                    url: "/admin/ArticleSettings/add",
+                    url: "/admin/ArticleSettings/Update",
                     data: JSON.stringify(article),
                     contentType: "application/json",
                     dataType: "json"
@@ -158,20 +178,20 @@
                     if (data) {
                         Swal.fire({
                         title: 'Отлично!',
-                        text: "Статья добавлена успешно!",
+                        text: "Статья обновлена успешно!",
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Ок'
                     }).then((result) => {
                         if (result.value) {
-                            document.location.href = "List";
+                            document.location.href = "../List";
                         }
                     });    
                     }
                     else
                         Swal.fire(
                         'Упс...',
-                        'Ошибка при добавлении статьи',
+                        'Ошибка при обновлении статьи',
                         'error'
                     );
                 }).fail(function (response) {

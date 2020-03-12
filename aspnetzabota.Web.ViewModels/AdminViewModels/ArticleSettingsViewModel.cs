@@ -10,6 +10,7 @@ namespace aspnetzabota.Web.ViewModels
     {
         public IEnumerable<ZabotaCategory> Category { get; set; }
         public IEnumerable<ZabotaArticles> Articles { get; set; }
+        public ZabotaArticles SingleArticle { get; set; }
         public IEnumerable<ZabotaDepartment> Department { get; set; }
         public IEnumerable<ZabotaPrice> Price { get; set; }
         public IEnumerable<ZabotaPriceArticles> PriceArticles { get; set; }

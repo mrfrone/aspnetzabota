@@ -12,6 +12,7 @@ namespace aspnetzabota.Content.Services.Articles
         Task<IEnumerable<ZabotaArticles>> GetFromArticleCategory(int id, int pageNumber, int pageSize);
         Task<IEnumerable<ZabotaArticles>> GetPagedArticlesList(int pageNumber, int pageSize);
         Task<ZabotaResult> AddArticle(ZabotaArticles news);
+        Task<ZabotaResult> UpdateArticle(ZabotaArticles model);
         Task<ZabotaResult> DeleteArticleByID(int id);
         Task<IEnumerable<ZabotaArticles>> GetAllArticlesList();
     }

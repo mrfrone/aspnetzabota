@@ -11,6 +11,7 @@ namespace aspnetzabota.Content.Database.Repository.Articles
         Task<Entities.Articles[]> GetFromCategory(int id, bool trackChanges = false);
         Task<Entities.Articles[]> GetList(bool trackChanges = false);
         Task Add(ZabotaArticles model);
+        Task Update(ZabotaArticles model);
         Task Delete(int id);
     }
 }

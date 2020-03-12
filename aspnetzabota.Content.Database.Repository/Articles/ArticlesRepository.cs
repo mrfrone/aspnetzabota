@@ -5,6 +5,7 @@ using aspnetzabota.Common.EFCore.Extensions;
 using System.Threading.Tasks;
 using aspnetzabota.Content.Datamodel.Articles;
 using System;
+using Z.EntityFramework.Plus;
 
 namespace aspnetzabota.Content.Database.Repository.Articles
 {
@@ -59,11 +60,31 @@ namespace aspnetzabota.Content.Database.Repository.Articles
             });
             return _appDBContext.SaveChangesAsync();
         }
+        public Task Update(ZabotaArticles model)
+        {
+            _appDBContext.Articles
+                .AsQueryable()
+                .Where(x => x.Id == model.Id)
+                .Update(r => new Entities.Articles 
+                { 
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    Img = model.IMG,
+                    Date = model.Date,
+                    CategoryID = model.CategoryID,
+                    DepartmentId = model.DepartmentId
+                });
+
+            return _appDBContext.SaveChangesAsync();
+        }
         public Task Delete(int id)
         {
-            var article = new Entities.Articles { Id = id };
-            _appDBContext.Articles.Attach(article);
-            _appDBContext.Articles.Remove(article);
+            _appDBContext.Articles
+                .AsQueryable()
+                .Where(x => x.Id == id)
+                .Delete();
+
             return _appDBContext.SaveChangesAsync();
         }
 

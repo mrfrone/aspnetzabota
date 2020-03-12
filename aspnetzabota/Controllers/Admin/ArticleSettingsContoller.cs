@@ -78,6 +78,17 @@ namespace aspnetzabota.Controllers
 
             return View(result);
         }
+        public async Task<ViewResult> UpdateArticle(int id)
+        {
+            var result = new ArticleSettingsViewModel
+            {
+                SingleArticle = await _articles.GetSingleArticle(id),
+                Category = await _category.GetCategory(),
+                Department = await _department.GetDepartments()
+            };
+
+            return View(result);
+        }
         public async Task<ViewResult> AddPrice()
         {
             var result = new ArticleSettingsViewModel
@@ -113,6 +124,13 @@ namespace aspnetzabota.Controllers
             return ZabotaResult(result.IsCorrect);
         }
         [HttpPost]
+        public async Task<IActionResult> Update([FromBody] ZabotaArticles data)
+        {
+            var result = await _articles.UpdateArticle(data);
+
+            return ZabotaResult(result.IsCorrect);
+        }
+        [HttpPost]
         public async Task<IActionResult> AddImage()
         {
             IFormFile image = Request.Form.Files["fileInput"];
@@ -124,14 +142,14 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> DeleteArticle(int id)
         {
             await _articles.DeleteArticleByID(id);
-            return Redirect("/admin/articles/"+nameof(List));
+            return Redirect("/admin/articlesettings/"+nameof(List));
 
         }
         [HttpGet]
         public async Task<IActionResult> DeletePriceArticle(int id)
         {
             await _price.DeletePriceArticle(id);
-            return Redirect("/admin/articles/" + nameof(PriceList));
+            return Redirect("/admin/articlesettings/" + nameof(PriceList));
         }
         [HttpPost]
         public async Task<IActionResult> AddLink([FromBody] ZabotaPriceArticles data)

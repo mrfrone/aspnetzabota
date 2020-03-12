@@ -61,6 +61,7 @@ namespace aspnetzabota.Content.Database.Repository.Review
         public Task Delete(int id)
         {
             _appDBContext.Reviews
+                .AsQueryable()
                 .Where(r => r.Id == id)
                 .Delete();
             return _appDBContext.SaveChangesAsync();
@@ -68,6 +69,7 @@ namespace aspnetzabota.Content.Database.Repository.Review
         public Task Moderate(int id)
         {
             _appDBContext.Reviews
+                .AsQueryable()
                 .Where(r => r.Id == id)
                 .Update(r => new Entities.Review { IsModerated = true });
 

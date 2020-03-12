@@ -50,6 +50,13 @@ namespace aspnetzabota.Content.Services.Articles
 
             return new ZabotaResult();
         }
+        public async Task<ZabotaResult> UpdateArticle(ZabotaArticles model)
+        {
+            model.Date = DateTimeOffset.UtcNow;
+            await _newsRepository.Update(model);
+
+            return new ZabotaResult();
+        }
         public async Task<ZabotaResult> DeleteArticleByID(int id)
         {
             await _newsRepository.Delete(id);
