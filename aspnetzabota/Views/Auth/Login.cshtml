@@ -107,13 +107,13 @@
                 if (data.result) {
                     Swal.fire({
                         title: 'Отлично!',
-                        text: "Связь успешно добавлена!",
+                        text: "Авторизация успешна!",
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Ок'
                     }).then((result) => {
                         if (result.value) {
-                            document.location.href = "../articles/list";
+                            document.location.href = "../ArticleSettings/list";
                         }
                     });
                     

@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model AddPriceArticlesViewModel
+@model ArticleSettingsViewModel
 <div class="contents-inner">
     <div class="row">
         <div class="col-md-12">
@@ -70,7 +70,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/admin/articles/addlink",
+                    url: "/admin/ArticleSettings/addlink",
                     data: JSON.stringify(PriceArticle),
                     contentType: "application/json",
                     dataType: "json"

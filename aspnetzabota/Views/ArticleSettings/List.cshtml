@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model ArticlesListViewModel
+@model ArticleSettingsViewModel
     <div class="contents-inner">
         <div class="row">
             <div class="col-md-12">
@@ -32,8 +32,8 @@
                                     <h4 class="content-title">@article.Name</h4><!-- /.content-title -->
                                     <div class="corner-content float-right">
                                         <a href="#"><i class="fa fa-refresh"></i> Редактировать</a> |
-                                        <a href="/News/Single/?id=@article.Id"><i class="fa fa-angle-up"></i> Перейти</a> |
-                                        <a href="/admin/Articles/DeleteArticle/?id=@article.Id"><i class="fa fa-close"></i> Удалить</a>
+                                        <a href="/Articles/Single/?id=@article.Id"><i class="fa fa-angle-up"></i> Перейти</a> |
+                                        <a href="/admin/ArticleSettings/DeleteArticle/?id=@article.Id"><i class="fa fa-close"></i> Удалить</a>
                                     </div><!-- /.corner-content -->
                                 </div><!-- /.content-head -->
 

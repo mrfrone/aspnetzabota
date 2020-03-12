@@ -37,6 +37,7 @@
                     </tbody>
                 </table>
             </div>
+            @if (Model.SingleSchedule.DoctorInfo != null) {
             <div class="row">
                 <div class="col-md-4">
                     <img src="@Url.Content(Model.SingleSchedule.DoctorInfo.Photo)" class="img-fluid">
@@ -45,6 +46,7 @@
                     @Html.Raw(@Model.SingleSchedule.DoctorInfo.Description)
                 </div>
             </div>
+            }
         </div>
     </section>
 

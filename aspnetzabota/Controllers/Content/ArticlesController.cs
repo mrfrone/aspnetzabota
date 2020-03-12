@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace aspnetzabota.Controllers
 {
-    public class NewsController : Controller
+    public class ArticlesController : Controller
     {
         private readonly IArticles _articles;
         private readonly ICategory _category;
 
-        public NewsController(IArticles articles, ICategory category)
+        public ArticlesController(IArticles articles, ICategory category)
         {
             _articles = articles;
             _category = category;
         }
         public async Task<ViewResult> All()
         {
-            var result = new NewsViewModel
+            var result = new ArticlesViewModel
             {
-                News = await _articles.GetPagedArticlesList(1, 6),
+                Articles = await _articles.GetPagedArticlesList(1, 6),
                 Category = await _category.GetCategory(),
                 PaginationOptions = PaginationStyle.PagedListOptions,
                 PagingMethod = nameof(GetAllPaged)
@@ -31,30 +31,30 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> GetByCategoryPaged(int id, int? page)
         {
             var pageNumber = page ?? 1;
-            var result = new NewsViewModel
+            var result = new ArticlesViewModel
             {
-                News = await _articles.GetFromArticleCategory(id, pageNumber, 6),
+                Articles = await _articles.GetFromArticleCategory(id, pageNumber, 6),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetByCategoryPaged)
             };
-            return PartialView("PagingNews", result);
+            return PartialView("PagingArticles", result);
         }
         public async Task<IActionResult> GetAllPaged(int? page)
         {
             var pageNumber = page ?? 1;
-            var result = new NewsViewModel
+            var result = new ArticlesViewModel
             {
-                News = await _articles.GetPagedArticlesList(pageNumber, 6),
+                Articles = await _articles.GetPagedArticlesList(pageNumber, 6),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
                 PagingMethod = nameof(GetAllPaged)
             };
-            return PartialView("PagingNews", result);
+            return PartialView("PagingArticles", result);
         }
         public async Task<ViewResult> Single(int id)
         {
-            var result = new NewsViewModel 
+            var result = new ArticlesViewModel
             {
-                SingleNews = await _articles.GetSingleArticle(id)
+                SingleArticle = await _articles.GetSingleArticle(id)
             };
             return View(result);
         }

@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_AdminLayout";
 }
-@model PriceArticlesListViewModel
+@model ArticleSettingsViewModel
 <div class="contents-inner">
     <div class="row">
         <div class="col-md-12">
@@ -29,7 +29,7 @@
                                                 @article.PriceId
                                             </td>
                                             <td>
-                                                <a href="/admin/articles/DeletePriceArticle/?id=@article.Id">Удалить</a>
+                                                <a href="/admin/ArticleSettings/DeletePriceArticle/?id=@article.Id">Удалить</a>
                                             </td>
                                         </tr>
                                     }

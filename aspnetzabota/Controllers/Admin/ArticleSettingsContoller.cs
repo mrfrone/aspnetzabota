@@ -17,14 +17,14 @@ namespace aspnetzabota.Controllers
 {
     [Route("admin/[controller]/[action]")]
     [Authorize]
-    public class ArticlesController : BaseController
+    public class ArticleSettingsController : BaseController
     {
         private readonly IUpload _upload;
         private readonly ICategory _category;
         private readonly IArticles _articles;
         private readonly IDepartment _department;
         private readonly IPrice _price;
-        public ArticlesController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPrice price)
+        public ArticleSettingsController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPrice price)
         {
             _category = category;
             _upload = upload;
@@ -36,7 +36,7 @@ namespace aspnetzabota.Controllers
         #region Views
         public async Task<ViewResult> List()
         {
-            var result = new ArticlesListViewModel 
+            var result = new ArticleSettingsViewModel 
             {
                 Articles = await _articles.GetPagedArticlesList(1, 6),
                 Category = await _category.GetCategory(),
@@ -49,7 +49,7 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> GetByCategoryPaged(int id, int? page)
         {
             var pageNumber = page ?? 1;
-            var result = new ArticlesListViewModel
+            var result = new ArticleSettingsViewModel
             {
                 Articles = await _articles.GetFromArticleCategory(id, pageNumber, 6),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
@@ -60,7 +60,7 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> GetAllPaged(int? page)
         {
             var pageNumber = page ?? 1;
-            var result = new ArticlesListViewModel
+            var result = new ArticleSettingsViewModel
             {
                 Articles = await _articles.GetPagedArticlesList(pageNumber, 6),
                 PaginationOptions = PaginationStyle.PagedListOptionsAjax,
@@ -70,7 +70,7 @@ namespace aspnetzabota.Controllers
         }
         public async Task<ViewResult> AddArticles()
         {
-            var result = new AddArticleViewModel 
+            var result = new ArticleSettingsViewModel
             {
                 Category = await _category.GetCategory(),
                 Department = await _department.GetDepartments()
@@ -80,7 +80,7 @@ namespace aspnetzabota.Controllers
         }
         public async Task<ViewResult> AddPrice()
         {
-            var result = new AddPriceArticlesViewModel
+            var result = new ArticleSettingsViewModel
             {
                 Articles = await _articles.GetAllArticlesList()
             };
@@ -88,7 +88,7 @@ namespace aspnetzabota.Controllers
         }
         public async Task<ViewResult> PriceHelp()
         {
-            var result = new PriceHelpViewModel
+            var result = new ArticleSettingsViewModel
             {
                 Price = await _price.Get()
             };
@@ -96,7 +96,7 @@ namespace aspnetzabota.Controllers
         }
         public async Task<ViewResult> PriceList()
         {
-            var result = new PriceArticlesListViewModel
+            var result = new ArticleSettingsViewModel
             {
                 PriceArticles =  await _price.GetPriceArticles()
             };
