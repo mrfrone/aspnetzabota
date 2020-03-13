@@ -34,9 +34,9 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddImage()
         {
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/Slider");
+            await _upload.UploadImage(image, "images/Slider");
 
-            return ZabotaResult(result.IsCorrect);
+            return ZabotaResult("");
         }
         [HttpPost]
         public async Task<IActionResult> AddSlider([FromBody] ZabotaSlider model)

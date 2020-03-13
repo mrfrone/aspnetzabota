@@ -23,6 +23,13 @@ namespace aspnetzabota.Content.Database.Repository.DoctorInfo
                 .HasTracking(trackChanges)
                 .ToArrayAsync();
         }
+        public async Task<Entities.DoctorInfo> GetSingle(int id, bool trackChanges = false)
+        {
+            return await _appDBContext
+                .Doctor
+                .HasTracking(trackChanges)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
         public Task Add(ZabotaDoctorInfo model)
         {
             _appDBContext.Doctor

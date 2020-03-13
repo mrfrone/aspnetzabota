@@ -64,9 +64,9 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddImage()
         {
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/Licenses");
+            await _upload.UploadImage(image, "images/Licenses");
 
-            return ZabotaResult(result.IsCorrect);
+            return ZabotaResult("");
         }
         [HttpGet]
         public async Task<IActionResult> DeleteLicense(int id)

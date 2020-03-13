@@ -6,6 +6,7 @@ namespace aspnetzabota.Content.Services.Upload
 {
     public interface IUpload
     {
-        Task<ZabotaResult> UploadImage(IFormFile image, string path);
+        Task UploadImage(IFormFile image, string path);
+        void DeleteImage(string path);
     }
 }

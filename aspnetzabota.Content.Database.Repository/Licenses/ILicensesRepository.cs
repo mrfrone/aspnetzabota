@@ -6,6 +6,8 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
     public interface ILicensesRepository
     {
         Task<Entities.Licenses[]> Get(bool trackChanges = false);
+        Task<Entities.Licenses> GetSingleLicense(int id, bool trackChanges = false);
+        Task<Entities.LicensesPhoto> GetSinglePhoto(int id, bool trackChanges = false);
         Task Add(ZabotaLicenses license);
         Task AddPhoto(ZabotaLicensesPhoto photo);
         Task Delete(int id);

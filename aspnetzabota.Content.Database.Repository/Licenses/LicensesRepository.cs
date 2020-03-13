@@ -24,6 +24,21 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
                 .Include(u => u.Photo)
                 .ToArrayAsync(); 
         }
+        public async Task<Entities.Licenses> GetSingleLicense(int id, bool trackChanges = false)
+        {
+            return await _appDBContext
+                .Licenses
+                .HasTracking(trackChanges)
+                .Include(u =>u.Photo)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<Entities.LicensesPhoto> GetSinglePhoto(int id, bool trackChanges = false)
+        {
+            return await _appDBContext
+                .LicensesPhoto
+                .HasTracking(trackChanges)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
         public Task Add(ZabotaLicenses model)
         {
             _appDBContext.Licenses.Add(new Entities.Licenses

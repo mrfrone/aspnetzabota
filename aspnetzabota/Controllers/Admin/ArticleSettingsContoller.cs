@@ -134,9 +134,9 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddImage()
         {
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/Articles");
+            await _upload.UploadImage(image, "images/Articles");
 
-            return ZabotaResult(result.IsCorrect);
+            return ZabotaResult("");
         }
         [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)

@@ -3,6 +3,7 @@ using aspnetzabota.Common.Result.ErrorCodes;
 using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Database.Repository.DoctorInfo;
 using aspnetzabota.Content.Datamodel.Doctors;
+using aspnetzabota.Content.Services.Upload;
 using AutoMapper;
 using Newtonsoft.Json;
 using System;
@@ -19,10 +20,12 @@ namespace aspnetzabota.Content.Services.Schedule
         private readonly Random random = new Random();
         private readonly IDoctorInfoRepository _doctorInfoRepository;
         private readonly IMapper _mapper;
-        public Schedule(IDoctorInfoRepository doctorInfoRepository, IMapper mapper)
+        private readonly IUpload _upload;
+        public Schedule(IDoctorInfoRepository doctorInfoRepository, IMapper mapper, IUpload upload)
         {
             _doctorInfoRepository = doctorInfoRepository;
             _mapper = mapper;
+            _upload = upload;
         }
         private IEnumerable<DoctorSchedule> RemoveNoReception(IEnumerable<DoctorSchedule> model)
         {
@@ -134,6 +137,9 @@ namespace aspnetzabota.Content.Services.Schedule
         }
         public async Task<ZabotaResult> DeleteDoctorInfo(int id)
         {
+            var result = await _doctorInfoRepository.GetSingle(id);
+            _upload.DeleteImage(result.Photo);
+
             await _doctorInfoRepository.Delete(id);
 
             return new ZabotaResult();

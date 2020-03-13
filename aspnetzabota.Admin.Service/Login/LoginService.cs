@@ -39,8 +39,8 @@ namespace aspnetzabota.Admin.Services.Login
             if (identity == null)
                 return ZabotaErrorCodes.UserNotFound;
 
-            //var hashed = _passwordHashCalculator.Calc(form.Password);
-            if (identity.Password != form.Password)
+            var hashed = _passwordHashCalculator.Calc(form.Password);
+            if (identity.Password != hashed)
                 return ZabotaErrorCodes.WrongPassword;
 
             // TODO: expiration date
