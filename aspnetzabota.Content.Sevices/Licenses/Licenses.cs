@@ -1,7 +1,7 @@
 ﻿using aspnetzabota.Common.Result;
+using aspnetzabota.Common.Upload;
 using aspnetzabota.Content.Database.Repository.Licenses;
 using aspnetzabota.Content.Datamodel.License;
-using aspnetzabota.Content.Services.Upload;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;

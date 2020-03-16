@@ -5,8 +5,8 @@ using aspnetzabota.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using aspnetzabota.Content.Services.Slider;
 using Microsoft.AspNetCore.Http;
-using aspnetzabota.Content.Services.Upload;
 using aspnetzabota.Content.Datamodel.Slider;
+using aspnetzabota.Common.Upload;
 
 namespace aspnetzabota.Controllers
 {

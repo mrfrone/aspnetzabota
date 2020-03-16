@@ -17,6 +17,7 @@ using aspnetzabota.Common.EFCore.Entities;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Web.Common.Filters;
+using aspnetzabota.Common.Upload.Extensions;
 
 namespace aspnetzabota
 {
@@ -47,6 +48,7 @@ namespace aspnetzabota
             services.AddAdminServices(Configuration.GetConnectionString("PostgreSQL"));
             services.AddContentServices(Configuration.GetConnectionString("PostgreSQL"));
             services.AddPasswordHashing();
+            services.AddUpload();
             services.AddScoped<IIdentityRequestStorage, IdentityRequestStorage>();
 
 

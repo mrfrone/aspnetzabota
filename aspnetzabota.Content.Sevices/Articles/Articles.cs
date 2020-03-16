@@ -7,8 +7,7 @@ using aspnetzabota.Content.Database.Repository.Articles;
 using aspnetzabota.Common.Result;
 using System;
 using System.Linq;
-using aspnetzabota.Content.Services.Upload;
-using aspnetzabota.Common.Result.ErrorCodes;
+using aspnetzabota.Common.Upload;
 
 namespace aspnetzabota.Content.Services.Articles
 {

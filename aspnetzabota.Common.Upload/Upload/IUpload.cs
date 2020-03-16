@@ -1,8 +1,7 @@
-﻿using aspnetzabota.Common.Result;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace aspnetzabota.Content.Services.Upload
+namespace aspnetzabota.Common.Upload
 {
     public interface IUpload
     {

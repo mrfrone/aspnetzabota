@@ -6,12 +6,12 @@ using aspnetzabota.Content.Services.Category;
 using System.Threading.Tasks;
 using aspnetzabota.Content.Datamodel.Articles;
 using Microsoft.AspNetCore.Http;
-using aspnetzabota.Content.Services.Upload;
 using aspnetzabota.Content.Services.Articles;
 using aspnetzabota.Web.Style;
 using aspnetzabota.Content.Services.Department;
 using aspnetzabota.Content.Datamodel.Price;
 using aspnetzabota.Content.Services.Price;
+using aspnetzabota.Common.Upload;
 
 namespace aspnetzabota.Controllers
 {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace aspnetzabota.Content.Services.Upload
+namespace aspnetzabota.Common.Upload
 {
     internal class Upload : IUpload
     {

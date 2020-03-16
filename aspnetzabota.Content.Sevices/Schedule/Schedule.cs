@@ -1,9 +1,9 @@
 ﻿using aspnetzabota.Common.Result;
 using aspnetzabota.Common.Result.ErrorCodes;
+using aspnetzabota.Common.Upload;
 using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Database.Repository.DoctorInfo;
 using aspnetzabota.Content.Datamodel.Doctors;
-using aspnetzabota.Content.Services.Upload;
 using AutoMapper;
 using Newtonsoft.Json;
 using System;

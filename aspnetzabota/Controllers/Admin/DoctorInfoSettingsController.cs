@@ -5,9 +5,8 @@ using aspnetzabota.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using aspnetzabota.Content.Services.Schedule;
 using aspnetzabota.Content.Database.Entities;
-using aspnetzabota.Content.Services.Upload;
 using Microsoft.AspNetCore.Http;
-using System;
+using aspnetzabota.Common.Upload;
 
 namespace aspnetzabota.Controllers
 {

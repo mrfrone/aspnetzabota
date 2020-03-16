@@ -1,7 +1,7 @@
 ﻿using aspnetzabota.Common.Result;
+using aspnetzabota.Common.Upload;
 using aspnetzabota.Content.Database.Repository.Slider;
 using aspnetzabota.Content.Datamodel.Slider;
-using aspnetzabota.Content.Services.Upload;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;

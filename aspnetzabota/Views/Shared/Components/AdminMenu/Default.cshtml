@@ -1,23 +1,21 @@
 ﻿@model AdminMenuViewModel
 <header class="top-header media">
     <div class="top-left mr-3">
-        <a class="navbar-brand" href="/"><img src="~/admin/images/logo.png" alt="Zabota"></a><!-- /.navbar-brand -->
+        <a class="navbar-brand mt-2" href="/"><img src="~/admin/images/logo.png" alt="Zabota"></a><!-- /.navbar-brand -->
     </div><!-- /.top-left -->
 
     <div class="top-right media-body">
         <div class="left-content float-left">
-            <button class="sidenav-toggle mr-2"><i class="fa fa-bars"></i></button><!-- /.sidenav-toggle -->
+            <button class="sidenav-toggle mr-2 mt-4"><i class="fa fa-bars"></i></button><!-- /.sidenav-toggle -->
         </div><!-- /.left-content -->
 
         <div class="right-content float-right">
             <div class="dropdown user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="~/admin/images/avatar/1.jpg" class="rounded-circle float-left mr-2" alt="User Image">
-                    <span class="status"></span>
                     <h4 class="name">@Model.Identity.Result.Login</h4>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-user"></i> Профиль</a></li>
                     <li><a href="~/admin/auth/logout"><i class="fa fa-power-off"></i>Выйти</a></li>
                 </ul>
             </div>

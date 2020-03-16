@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using aspnetzabota.Web.Common;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using aspnetzabota.Content.Services.Upload;
+using aspnetzabota.Common.Upload;
 
 namespace aspnetzabota.Controllers
 {
