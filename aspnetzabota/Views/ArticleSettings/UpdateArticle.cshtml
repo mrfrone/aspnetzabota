@@ -160,7 +160,7 @@
                 var OldPhoto = '@Model.SingleArticle.IMG';
 
                 $.ajax({
-                    url: '/admin/ArticleSettings/DeleteImage',
+                    url: '/api/Files/DeleteImage',
                     type: "POST",
                     data: JSON.stringify(OldPhoto),
                     contentType: "application/json",

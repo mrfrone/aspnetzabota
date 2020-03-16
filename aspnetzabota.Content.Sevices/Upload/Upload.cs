@@ -1,9 +1,7 @@
-﻿using aspnetzabota.Common.Result;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
-using aspnetzabota.Common.Result.ErrorCodes;
 
 namespace aspnetzabota.Content.Services.Upload
 {
