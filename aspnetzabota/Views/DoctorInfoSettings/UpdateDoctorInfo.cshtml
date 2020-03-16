@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="section-content">
                 <div class="content-head">
-                    <h4 class="content-title">Добавить информацию о враче</h4><!-- /.content-title -->
+                    <h4 class="content-title">Изменить информацию о враче</h4><!-- /.content-title -->
                 </div><!-- /.content-head -->
                 <div class="content-details show">
                     <article class="post type-post">
@@ -79,6 +79,19 @@
                 //file extension to db
                 info.Photo = '~/images/staff/' + r + "." + ext;
 
+                var OldPhoto = '@Model.SingleDoctor.DoctorInfo.Photo';
+
+                $.ajax({
+                    url: '/admin/DoctorInfoSettings/DeleteImage',
+                    type: "POST",
+                    data: JSON.stringify(OldPhoto),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function () {
+
+                    }
+                });
+
                 $.ajax({
                     url: '/admin/DoctorInfoSettings/AddImage',
                     type: "POST",
@@ -91,10 +104,10 @@
                 });
             }
 
-            $.ajax({
-                type: "POST",
-                url: "/admin/DoctorInfoSettings/Update",
-                data: JSON.stringify(info),
+        $.ajax({
+            type: "POST",
+            url: "/admin/DoctorInfoSettings/Update",
+            data: JSON.stringify(info),
                 contentType: "application/json",
                 dataType: "json"
             }).done(function (data) {

@@ -157,6 +157,19 @@
                 //file extension to db
                 article.IMG = "~/images/Articles/" + r + "." + ext;
 
+                var OldPhoto = '@Model.SingleArticle.IMG';
+
+                $.ajax({
+                    url: '/admin/ArticleSettings/DeleteImage',
+                    type: "POST",
+                    data: JSON.stringify(OldPhoto),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function () {
+
+                    }
+                });
+
                 $.ajax({
                     url: '/admin/ArticleSettings/addimage',
                     type: "POST",

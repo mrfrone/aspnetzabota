@@ -7,6 +7,7 @@ using aspnetzabota.Content.Services.Schedule;
 using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Services.Upload;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace aspnetzabota.Controllers
 {
@@ -53,8 +54,16 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage()
         {
+            
             IFormFile image = Request.Form.Files["fileInput"];
             await _upload.UploadImage(image, "images/staff");
+
+            return ZabotaResult("");
+        }
+        [HttpPost]
+        public IActionResult DeleteImage([FromBody] string path)
+        {
+            _upload.DeleteImage(path);
 
             return ZabotaResult("");
         }

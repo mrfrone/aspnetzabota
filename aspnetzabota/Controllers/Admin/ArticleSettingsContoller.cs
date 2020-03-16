@@ -138,6 +138,13 @@ namespace aspnetzabota.Controllers
 
             return ZabotaResult("");
         }
+        [HttpPost]
+        public IActionResult DeleteImage([FromBody] string path)
+        {
+            _upload.DeleteImage(path);
+
+            return ZabotaResult("");
+        }
         [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)
         {
