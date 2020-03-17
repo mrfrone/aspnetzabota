@@ -2,64 +2,65 @@
     Layout = "_AdminLayout";
 }
 @model ArticleSettingsViewModel
-    <div class="contents-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>Категории статей</label>
-                    <select class="form-control select2" onchange="getbycat(this.value)">
-                        <option value="" selected disabled hidden>Выберите категорию...</option>
-                        <option value="all">Все</option>
-                        @foreach (var category in Model.Category)
-                        {
-                            <option value="@category.Id">@category.Name</option>
-                        }
-                    </select>
-                </div>
-            </div>
-            <div id="fromCat">
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "fromCat" }))
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach (var article in Model.Articles)
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Категории статей</label>
+                <select class="form-control select2" onchange="getbycat(this.value)">
+                    <option value="" selected disabled hidden>Выберите категорию...</option>
+                    <option value="all">Все</option>
+                    @foreach (var category in Model.Category)
                     {
-                        <div class="col-md-6">
-                            <div class="section-content">
-                                <div class="content-head">
-                                    <h4 class="content-title">@article.Name</h4><!-- /.content-title -->
-                                    <div class="corner-content float-right">
-                                        <a href="/admin/ArticleSettings/UpdateArticle/?id=@article.Id"><i class="fa fa-refresh"></i> Редактировать</a> |
-                                        <a href="/Articles/Single/?id=@article.Id"><i class="fa fa-angle-up"></i> Перейти</a> |
-                                        <a href="/admin/ArticleSettings/DeleteArticle/?id=@article.Id"><i class="fa fa-close"></i> Удалить</a>
-                                    </div><!-- /.corner-content -->
-                                </div><!-- /.content-head -->
-
-                                <div class="content-details show">
-                                    <article class="post type-post">
-                                        <div class="entry-thumbnail mb-4"><img src="@Url.Content(article.IMG)" alt="Zabota"></div><!-- /.entry-thimbnail -->
-                                        <div class="entry-content">
-                                            <div class="entry-meta mt-2 mb-3">
-                                                <span class="time">@article.Date.ToString("dd") @article.Date.ToString("MMMM") @article.Date.ToString("yyyy")</span>
-                                            </div><!-- /.entry-meta -->
-                                        </div><!-- /.entry-content -->
-                                    </article><!-- /.post -->
-                                </div><!-- /.content-details -->
-                            </div>
-                        </div>
+                        <option value="@category.Id">@category.Name</option>
                     }
-                </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "fromCat" }))
-                        </div>
-                    </div>
+                </select>
+            </div>
+        </div>
+        <div id="fromCat">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "fromCat" }))
                 </div>
             </div>
-        </div><!-- /.contents-inner -->
+            <div class="row">
+                @foreach (var article in Model.Articles)
+                {
+                    <div class="col-md-6">
+                        <div class="section-content">
+                            <div class="content-head">
+                                <h4 class="content-title">@article.Name</h4><!-- /.content-title -->
+                                <div class="corner-content float-right">
+                                    <a href="/admin/ArticleSettings/UpdateArticle/?id=@article.Id"><i class="fa fa-refresh"></i> Редактировать</a> |
+                                    <a href="/Articles/Single/?id=@article.Id"><i class="fa fa-angle-up"></i> Перейти</a> |
+                                    <a href="/admin/ArticleSettings/DeleteArticle/?id=@article.Id"><i class="fa fa-close"></i> Удалить</a>
+                                </div><!-- /.corner-content -->
+                            </div><!-- /.content-head -->
 
+                            <div class="content-details show">
+                                <article class="post type-post">
+                                    <div class="entry-thumbnail mb-4"><img src="@Url.Content(article.IMG)" alt="Zabota"></div><!-- /.entry-thimbnail -->
+                                    <div class="entry-content">
+                                        <div class="entry-meta mt-2 mb-3">
+                                            <span class="time">@article.Date.ToString("dd") @article.Date.ToString("MMMM") @article.Date.ToString("yyyy")</span>
+                                        </div><!-- /.entry-meta -->
+                                    </div><!-- /.entry-content -->
+                                </article><!-- /.post -->
+                            </div><!-- /.content-details -->
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.PagedListPager((IPagedList)Model.Articles, page => Url.Action(Model.PagingMethod, new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(Model.PaginationOptions, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "fromCat" }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.contents-inner -->
+@section Scripts
+{
     <script type="text/javascript">
         function getbycat(val)
                 {
@@ -85,3 +86,4 @@
                     }
                 }
     </script>
+    }

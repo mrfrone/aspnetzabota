@@ -43,93 +43,130 @@
         </div>
     </div>
 </div>
+@section CSSConnections
+{
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+}
+@section JSConnections
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+}
+@section Scripts{
+    <script type="text/javascript">
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
 
-<!--Text Editor-->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        function Add_DoctorInfo() {
+            //random name from img
+            var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            console.log(r);
 
-<script type="text/javascript">
-    var quill = new Quill('#editor', {
-        theme: 'snow'
-    });
+            //info model
+            var info = {};
+            info.Id = null;
+            info.DoctorId = $('#FIO').val();
+            info.Description = quill.root.innerHTML;
 
-    function Add_DoctorInfo() {
-        //random name from img
-        var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        console.log(r);
-
-        //info model
-        var info = {};
-        info.Id = null;
-        info.DoctorId = $('#FIO').val();
-        info.Description = quill.root.innerHTML;
-
-        //get img file
-        var formData = new FormData();
-        var file = document.getElementById("fileInput").files[0];
+            //get img file
+            var formData = new FormData();
+            var file = document.getElementById("fileInput").files[0];
 
 
-        console.log(JSON.stringify(info));
+            console.log(JSON.stringify(info));
 
-        if (info.DoctorId != null) {
-            //file extension
-            var fe = /(?:\.([^.]+))?$/;
-            var ext = fe.exec(file.name)[1];
-            formData.append("fileInput", file, r + "." + ext);
+            if (info.DoctorId != null) {
+                //file extension
+                var fe = /(?:\.([^.]+))?$/;
+                var ext = fe.exec(file.name)[1];
+                formData.append("fileInput", file, r + "." + ext);
 
-            //file extension to db
-            info.Photo = r + "." + ext;
+                //file extension to db
+                info.Photo = r + "." + ext;
 
-            $.ajax({
-                url: '/admin/DoctorInfoSettings/AddImage',
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function () {
+                $.ajax({
+                    url: '/admin/DoctorInfoSettings/AddImage',
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function () {
 
-                }
-            });
+                    }
+                });
 
-            $.ajax({
-                type: "POST",
-                url: "/admin/DoctorInfoSettings/Add",
-                data: JSON.stringify(info),
-                contentType: "application/json",
-                dataType: "json"
-            }).done(function (data) {
-                if (data) {
-                    Swal.fire({
-                        title: 'Отлично!',
-                        text: "Информация о враче добавлена успешно!",
-                        icon: 'success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Ок'
-                    }).then((result) => {
-                        if (result.value) {
-                            document.location.href = "List";
-                        }
-                    });
-                }
-                else
-                    Swal.fire(
-                        'Упс...',
-                        'Ошибка при добавлении информации о враче',
-                        'error'
-                    );
-            }).fail(function (response) {
-                console.log('Error: ' + response);
-            });
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/DoctorInfoSettings/Add",
+                    data: JSON.stringify(info),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data) {
+                        Swal.fire({
+                            title: 'Отлично!',
+                            text: "Информация о враче добавлена успешно!",
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок'
+                        }).then((result) => {
+                            if (result.value) {
+                                document.location.href = "List";
+                            }
+                        });
+                    }
+                    else
+                        Swal.fire(
+                            'Упс...',
+                            'Ошибка при добавлении информации о враче',
+                            'error'
+                        );
+                }).fail(function (response) {
+                    console.log('Error: ' + response);
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Заполнены не все поля!'
+                });
+            }
         }
-        else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Упс...',
-                text: 'Заполнены не все поля!'
-            });
-        }
-    }
-</script>
+    </script>
+    <script type="text/javascript">
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
 
+            // Loop through the FileList and render image files as thumbnails.
+            for (var i = 0, f; f = files[i]; i++) {
+
+                // Only process image files.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var span = document.createElement('span');
+                        span.innerHTML = ['<img class="thumb" id="output" src="', e.target.result, '" title="', theFile.name, '"/>'].join('');
+
+                        document.getElementById('output').replaceWith(span);
+                    };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }
+        }
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
+    </script>
+}
 <style>
     .thumb {
         height: 300px;
@@ -137,35 +174,3 @@
         margin: 10px 5px 0 0;
     }
 </style>
-
-<script type="text/javascript">
-    function handleFileSelect(evt) {
-        var files = evt.target.files; // FileList object
-
-        // Loop through the FileList and render image files as thumbnails.
-        for (var i = 0, f; f = files[i]; i++) {
-
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-                continue;
-            }
-
-            var reader = new FileReader();
-
-            // Closure to capture the file information.
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    // Render thumbnail.
-                    var span = document.createElement('span');
-                    span.innerHTML = ['<img class="thumb" id="output" src="', e.target.result, '" title="', theFile.name, '"/>'].join('');
-
-                    document.getElementById('output').replaceWith(span);
-                };
-            })(f);
-
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
-        }
-    }
-    document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
-</script>

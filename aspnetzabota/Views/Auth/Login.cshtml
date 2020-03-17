@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Диагностический центр "Забота"</title>
-    <meta name="description" content="Hi5Dash - HTML5 Admin Template By Jewel Theme">
+    <meta name="description" content="Забота">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,8 +37,6 @@
 </head>
 
 <body>
-
-
     <div class="admin-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="row">
@@ -82,62 +80,64 @@
     <script src="~/admin/assets/js/jquery-3.2.1.slim.min.js"></script>
     <script src="~/admin/assets/js/plugins.js"></script>
     <script src="~/admin/assets/js/main.js"></script>
+
+    <script type="text/javascript">
+
+        function Ajax_Login() {
+
+            var logform = {};
+            logform.Login = $('#log').val();
+            logform.Password = $('#pass').val();
+
+            console.log(JSON.stringify(logform));
+
+            if (logform.Login && logform.Password) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/auth/loginPost",
+                    data: JSON.stringify(logform),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data.result) {
+                        Swal.fire({
+                            title: 'Отлично!',
+                            text: "Авторизация успешна!",
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок'
+                        }).then((result) => {
+                            if (result.value) {
+                                document.location.href = "../ArticleSettings/list";
+                            }
+                        });
+
+                    }
+
+                    else
+                        Swal.fire(
+                            'Упс...',
+                            'Данные введены неправильно!',
+                            'error'
+                        );
+                }).fail(function () {
+                    console.log('Error');
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Заполнены не все поля!'
+                })
+            }
+        }
+    </script>
+    <!--alerts-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>
 
 
-<script type="text/javascript">
 
-    function Ajax_Login() {
-
-        var logform = {};
-        logform.Login = $('#log').val();
-        logform.Password = $('#pass').val();
-
-        console.log(JSON.stringify(logform));
-
-        if (logform.Login && logform.Password) {
-            $.ajax({
-                type: "POST",
-                url: "/admin/auth/loginPost",
-                data: JSON.stringify(logform),
-                contentType: "application/json",
-                dataType: "json"
-            }).done(function (data) {
-                if (data.result) {
-                    Swal.fire({
-                        title: 'Отлично!',
-                        text: "Авторизация успешна!",
-                        icon: 'success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Ок'
-                    }).then((result) => {
-                        if (result.value) {
-                            document.location.href = "../ArticleSettings/list";
-                        }
-                    });
-                    
-                }
-
-                else
-                    Swal.fire(
-                        'Упс...',
-                        'Данные введены неправильно!',
-                        'error'
-                    );
-            }).fail(function () {
-                console.log('Error');
-            });
-        }
-        else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Упс...',
-                text: 'Заполнены не все поля!'
-                })
-        }
-    }
-</script>
-<!--alerts-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 

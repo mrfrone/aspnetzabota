@@ -27,18 +27,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var article in Model.Articles) 
+                                    @foreach (var article in Model.Articles)
                                     {
-                                    <tr>
-                                        <td>@article.Name</td>
-                                        <td>
-                                            <div class="radio">
-                                                <label class="form-check-label ">
-                                                    <input type="radio" id="radio" name="radios" value="@article.Id" class="form-check-input">Выбрать
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>@article.Name</td>
+                                            <td>
+                                                <div class="radio">
+                                                    <label class="form-check-label ">
+                                                        <input type="radio" id="radio" name="radios" value="@article.Id" class="form-check-input">Выбрать
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -50,23 +50,28 @@
                         </div>
                     </div>
                 </div><!-- /.content-details -->
-                    </div>
+            </div>
         </div>
     </div>
 </div><!-- /.contents-inner -->
+@section JSConnections
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+}
+@section Scripts
+{
+    <script type="text/javascript">
 
-<script type="text/javascript">
+        function Add_PriceArticle() {
 
-    function Add_PriceArticle() {
+            var PriceArticle = {};
+            PriceArticle.Id = null;
+            PriceArticle.PriceId = $('#PriceId').val();
+            PriceArticle.ArticleId = $('#radio').val();
 
-        var PriceArticle = {};
-        PriceArticle.Id = null;
-        PriceArticle.PriceId = $('#PriceId').val();
-        PriceArticle.ArticleId = $('#radio').val();
+            console.log(JSON.stringify(PriceArticle));
 
-        console.log(JSON.stringify(PriceArticle));
-
-        if (PriceArticle.PriceId != null && PriceArticle.ArticleId != null) {
+            if (PriceArticle.PriceId != null && PriceArticle.ArticleId != null) {
 
                 $.ajax({
                     type: "POST",
@@ -90,10 +95,10 @@
                     }
                     else
                         Swal.fire(
-                        'Упс...',
-                        'Ошибка при добавлении связи!',
-                        'error'
-                    );
+                            'Упс...',
+                            'Ошибка при добавлении связи!',
+                            'error'
+                        );
                 }).fail(function (response) {
                     console.log('Error: ' + response);
                     Swal.fire(
@@ -105,10 +110,11 @@
             }
             else {
                 Swal.fire({
-                  icon: 'error',
-                  title: 'Упс...',
-                  text: 'Заполнены не все поля!'
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Заполнены не все поля!'
                 });
             }
         }
-</script>
+    </script>
+}

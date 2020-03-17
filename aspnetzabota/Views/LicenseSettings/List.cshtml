@@ -2,57 +2,59 @@
     Layout = "_AdminLayout";
 }
 @model LicenseSettingsViewModel
-    <div class="contents-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-content">
-                    <div class="content-head">
-                        <h4 class="content-title">Список лицензий</h4><!-- /.content-title -->
-                    </div><!-- /.content-head -->
-                    <div class="content-details show">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                @foreach (var license in Model.Licenses)
-                                {
-                                    <div class="card">
-                                        <div class="card-header" id="@("heading"+license.Id)">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse"+license.Id)" aria-expanded="false" aria-controls="@("collapse"+license.Id)">
-                                                    @license.Name
-                                                </button>
-                                                <a class="right-content" href="/admin/licensesettings/deletelicense/?id=@license.Id">Удалить</a>
-                                            </h5>
-                                        </div>
-                                        <div id="@("collapse"+license.Id)" class="collapse" aria-labelledby="@("heading"+license.Id)" data-parent="#accordionExample">
-                                            <div class="row">
-                                                @foreach (var photo in license.Photo)
-                                                {
-                                                    <div class="col-lg-6 col-md-6 col-6 thumb d-flex justify-content-center">
-                                                        <div class="hovereffect w-75">
-                                                            <img class="img w-100" src="@Url.Content(photo.Path)" alt="">
-                                                            <div class="overlay">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <a data-fancybox="@("gallery"+license.Id)" class="info mb-1" href="@Url.Content(photo.Path)">Просмотреть</a>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                        <a class="info mt-1" href="/admin/licensesettings/deletephoto/?id=@photo.Id">Удалить</a>
-                                                                    </div>
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Список лицензий</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @foreach (var license in Model.Licenses)
+                            {
+                                <div class="card">
+                                    <div class="card-header" id="@("heading"+license.Id)">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse"+license.Id)" aria-expanded="false" aria-controls="@("collapse"+license.Id)">
+                                                @license.Name
+                                            </button>
+                                            <a class="right-content" href="/admin/licensesettings/deletelicense/?id=@license.Id">Удалить</a>
+                                        </h5>
+                                    </div>
+                                    <div id="@("collapse"+license.Id)" class="collapse" aria-labelledby="@("heading"+license.Id)" data-parent="#accordionExample">
+                                        <div class="row">
+                                            @foreach (var photo in license.Photo)
+                                            {
+                                                <div class="col-lg-6 col-md-6 col-6 thumb d-flex justify-content-center">
+                                                    <div class="hovereffect w-75">
+                                                        <img class="img w-100" src="@Url.Content(photo.Path)" alt="">
+                                                        <div class="overlay">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <a data-fancybox="@("gallery"+license.Id)" class="info mb-1" href="@Url.Content(photo.Path)">Просмотреть</a>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <a class="info mt-1" href="/admin/licensesettings/deletephoto/?id=@photo.Id">Удалить</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                }
-                                            </div>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
-                                }
-                            </div>
+                                </div>
+                            }
                         </div>
-                    </div><!-- /.contents-inner -->
-                </div>
+                    </div>
+                </div><!-- /.contents-inner -->
             </div>
         </div>
     </div>
+</div>
+@section JSConnections{
+    <script src="~/js/jquery.fancybox.min.js"></script>
+}
 
-    
