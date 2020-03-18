@@ -67,7 +67,7 @@
                                 <p>
                                     Вы уже авторизованы.
                                 </p>
-                                <a href="/admin/articles/list" class="btn btn-primary btn-flat mb-3 mt-3">Админ-панель</a>
+                                <a href="/admin/ArticleSettings/list" class="btn btn-primary btn-flat mb-3 mt-3">Админ-панель</a>
                                 <a href="/" class="btn btn-primary btn-flat mb-3 mt-3">На главную</a>
                             }
                         </div>
@@ -99,7 +99,7 @@
                     contentType: "application/json",
                     dataType: "json"
                 }).done(function (data) {
-                    if (data.result) {
+                    if (data) {
                         Swal.fire({
                             title: 'Отлично!',
                             text: "Авторизация успешна!",

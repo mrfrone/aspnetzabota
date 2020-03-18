@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model IdentitySettingsViewModel
+<div class="contents-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Список пользователей</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark text-center">
+                                    <tr>
+                                        <th scope="col">Логин</th>
+                                        <th scope="col">Удаление</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var identity in Model.Identities)
+                                    {
+                                        <tr>
+                                            <td class="w-75">@identity.Login</td>
+                                            @if (identity.Id != Model.CurrentIdentity.Id)
+                                            {
+                                                <td><a href="/admin/IdentitySettings/DeleteIdentity/?id=@identity.Id">Удалить</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td>Текущий пользователь</td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="section-content">
+                <div class="content-head">
+                    <h4 class="content-title">Добавить пользователя</h4><!-- /.content-title -->
+                </div><!-- /.content-head -->
+                <div class="content-details show">
+                    <article class="post type-post">
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Логин</label>
+                            <input type="text" id="Login" placeholder="Логин" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Пароль</label>
+                            <input type="password" id="Pass" placeholder="Пароль" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Подтверждение пароля</label>
+                            <input type="password" id="PassConf" placeholder="Подтверждение пароля" class="form-control">
+                        </div>
+                        <div>
+                            <button id="payment-button" type="button" onclick="Add_Identity()" class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">Добавить</span>
+                            </button>
+                        </div>
+                    </article><!-- /.post -->
+                </div><!-- /.contents-inner -->
+            </div>
+        </div>
+    </div>
+</div>
+@section JSConnections
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+}
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function Add_Identity() {
+            //identity model
+            var identity = {};
+            identity.Login = $('#Login').val();
+            identity.Password = $('#Pass').val();
+            var passconf = $('#PassConf').val();
+
+
+            console.log(JSON.stringify(identity));
+
+            if (identity.Password != passconf)
+            {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Пароли не совпадают!'
+                });
+
+                return;
+            }
+
+            if (identity.Login != null && identity.Password != null && passconf != null) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/IdentitySettings/AddIdentity",
+                    data: JSON.stringify(identity),
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (data) {
+                        Swal.fire({
+                            title: 'Отлично!',
+                            text: "Пользователь добавлен успешно!",
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок'
+                        }).then((result) => {
+                            if (result.value) {
+                                document.location.href = "List";
+                            }
+                        });
+                    }
+                    else
+                        Swal.fire(
+                            'Упс...',
+                            'Ошибка при добавлении пользователя',
+                            'error'
+                        );
+                }).fail(function (response) {
+                    console.log('Error: ' + response);
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Заполнены не все поля!'
+                });
+            }
+        }
+    </script>
+}

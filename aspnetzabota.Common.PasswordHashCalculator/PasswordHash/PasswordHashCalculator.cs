@@ -11,13 +11,13 @@ namespace aspnetzabota.Common.PasswordService.PasswordHash
 
         public PasswordHashCalculator(IOptionsMonitor<PasswordHashingSettings> settings)
         {
-            this._settings = settings;
+            _settings = settings;
         }
 
         public string Calc(string src)
         {
             Encoding unicode = Encoding.Unicode;
-            byte[] bytes1 = unicode.GetBytes(this.Salt);
+            byte[] bytes1 = unicode.GetBytes(Salt);
             using (Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(src, bytes1))
             {
                 byte[] bytes2 = rfc2898DeriveBytes.GetBytes(60);
@@ -29,7 +29,7 @@ namespace aspnetzabota.Common.PasswordService.PasswordHash
         {
             get
             {
-                return this._settings.CurrentValue.Salt;
+                return _settings.CurrentValue.Salt;
             }
         }
     }

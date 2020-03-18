@@ -15,7 +15,8 @@
         CannotFindIdentityByTokenId = 1000010,
         CannotFindUserProfileByIdentityId = 1000011,
         FileIsEmpty = 1000012,
-        IdNotFound = 1000013
+        IdNotFound = 1000013,
+        UserExists = 1000014
     }
 
     public static class ErrorCodesExtensions

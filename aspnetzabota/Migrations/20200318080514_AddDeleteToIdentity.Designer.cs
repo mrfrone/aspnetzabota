@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspnetzabota.Admin.Database.Context;
@@ -9,9 +10,10 @@ using aspnetzabota.Admin.Database.Context;
 namespace aspnetzabota.Web.Migrations
 {
     [DbContext(typeof(AdminContext))]
-    partial class AdminContextModelSnapshot : ModelSnapshot
+    [Migration("20200318080514_AddDeleteToIdentity")]
+    partial class AddDeleteToIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +26,11 @@ namespace aspnetzabota.Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTimeOffset?>("Deleted");
+                    b.Property<DateTimeOffset>("Deleted");
 
-                    b.Property<int?>("DeletedById");
+                    b.Property<int>("DeletedById");
 
-                    b.Property<bool?>("IsDeleted");
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Login");
 
