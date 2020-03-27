@@ -8,7 +8,6 @@
     <ProjectReference Include="..\aspnetzabota.Admin.Database.Repository\aspnetzabota.Admin.Database.Repository.csproj" />
     <ProjectReference Include="..\aspnetzabota.Admin.Datamodel\aspnetzabota.Admin.Datamodel.csproj" />
     <ProjectReference Include="..\aspnetzabota.Common.PasswordHashCalculator\aspnetzabota.Common.PasswordService.csproj" />
-    <ProjectReference Include="..\aspnetzabota.Common.Result\aspnetzabota.Common.Result.csproj" />
   </ItemGroup>
 
 </Project>

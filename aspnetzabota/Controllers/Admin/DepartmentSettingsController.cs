@@ -35,7 +35,7 @@ namespace aspnetzabota.Controllers
         {
             var result = await _department.AddDepartment(model);
 
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpGet]
         public async Task<IActionResult> DeleteDepartment(int id)

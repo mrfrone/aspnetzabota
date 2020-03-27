@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aspnetzabota.Admin.Datamodel\aspnetzabota.Admin.Datamodel.csproj" />
-    <ProjectReference Include="..\aspnetzabota.Common.Result\aspnetzabota.Common.Result.csproj" />
   </ItemGroup>
 
 </Project>

@@ -22,8 +22,9 @@ namespace aspnetzabota.Web.Common
 
             var identity = await _identityService.GetIdentityByTokenId(tokenId);
 
-            if (identity.IsCorrect)
-                Current = identity.Result;
+            if (identity != null)
+                Current = identity;
+
             return Current;
         }
     }

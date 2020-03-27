@@ -2,8 +2,6 @@
 using AutoMapper;
 using aspnetzabota.Admin.Database.Repository.Identities;
 using aspnetzabota.Admin.Datamodel.Identities;
-using aspnetzabota.Common.Result;
-using aspnetzabota.Common.Result.ErrorCodes;
 using System.Collections.Generic;
 using aspnetzabota.Admin.Forms.Login;
 
@@ -24,25 +22,25 @@ namespace aspnetzabota.Admin.Services.Identities
             var result = await _identitiesRepository.Get();
             return _mapper.Map<IEnumerable<ZabotaIdentity>>(result);
         }
-        public async Task<ZabotaResult<ZabotaIdentity>> GetIdentityByTokenId(int id)
+        public async Task<ZabotaIdentity> GetIdentityByTokenId(int id)
         {
             var model = await _identitiesRepository.IdentityByTokenId(id);
             if (model == null)
-                return ZabotaErrorCodes.CannotFindIdentityByTokenId;
+                return null;
 
             var mappedModel = _mapper.Map<Database.Entities.Identities, ZabotaIdentity>(model);
-            return new ZabotaResult<ZabotaIdentity>(mappedModel);
+            return mappedModel;
         }
-        public async Task<ZabotaResult> AddIdentity(LoginForm form) 
+        public async Task<bool> AddIdentity(LoginForm form) 
         {
             var model = await _identitiesRepository.IdentityByLogin(form.Login);
             if (model != null)
-                return ZabotaErrorCodes.UserExists;
+                return false;
 
             await _identitiesRepository.Add(form);
-            return new ZabotaResult();
+            return true;
         }
-        public async Task<ZabotaResult> DeleteIdentity(int id, int actorId) 
+        public async Task<bool> DeleteIdentity(int id, int actorId) 
         {
             var result = await _identitiesRepository.Delete(id, actorId);
 

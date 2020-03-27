@@ -27,10 +27,5 @@ namespace aspnetzabota.Web.Common
                 return service.Current;
             }
         }
-
-        protected IActionResult ZabotaResult<T>(T result)
-        {
-            return Json(result);
-        }
     }
 }

@@ -1,8 +1,5 @@
-﻿using aspnetzabota.Common.Result;
-using aspnetzabota.Content.Datamodel.Review;
-using System;
+﻿using aspnetzabota.Content.Datamodel.Review;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace aspnetzabota.Content.Services.Review
@@ -11,9 +8,9 @@ namespace aspnetzabota.Content.Services.Review
     {
         Task<IEnumerable<ZabotaReview>> RandomReviews(int Count);
         Task<IEnumerable<ZabotaReview>> GetPagedReviewsList(int pageNumber, int pageSize, bool Moderated = false);
-        Task<ZabotaResult> Add(ZabotaReview review);
-        Task<ZabotaResult> ModerateReview(int id);
-        Task<ZabotaResult> DeleteReview(int id);
+        Task<bool> Add(ZabotaReview review);
+        Task<bool> ModerateReview(int id);
+        Task<bool> DeleteReview(int id);
 
         }
 }

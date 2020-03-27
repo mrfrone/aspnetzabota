@@ -1,5 +1,4 @@
-﻿using aspnetzabota.Common.Result;
-using aspnetzabota.Content.Datamodel.Articles;
+﻿using aspnetzabota.Content.Datamodel.Articles;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,9 +10,9 @@ namespace aspnetzabota.Content.Services.Articles
         Task<ZabotaArticles> GetSingleArticle(int id);
         Task<IEnumerable<ZabotaArticles>> GetFromArticleCategory(int id, int pageNumber, int pageSize);
         Task<IEnumerable<ZabotaArticles>> GetPagedArticlesList(int pageNumber, int pageSize);
-        Task<ZabotaResult> AddArticle(ZabotaArticles news);
-        Task<ZabotaResult> UpdateArticle(ZabotaArticles model);
-        Task<ZabotaResult> DeleteArticleByID(int id);
+        Task<bool> AddArticle(ZabotaArticles news);
+        Task<bool> UpdateArticle(ZabotaArticles model);
+        Task<bool> DeleteArticleByID(int id);
         Task<IEnumerable<ZabotaArticles>> GetAllArticlesList();
     }
 }

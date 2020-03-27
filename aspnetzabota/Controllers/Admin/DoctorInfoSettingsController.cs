@@ -57,21 +57,21 @@ namespace aspnetzabota.Controllers
             IFormFile image = Request.Form.Files["fileInput"];
             await _upload.UploadImage(image, "images/staff");
 
-            return ZabotaResult("");
+            return Json("");
         }
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] ZabotaDoctorInfo model)
         {
             var result = await _schedule.AddDoctorInfo(model);
 
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] ZabotaDoctorInfo model)
         {
             var result = await _schedule.UpdateDoctorInfo(model);
 
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpGet]
         public async Task<IActionResult> DeleteDoctorInfo(int id)

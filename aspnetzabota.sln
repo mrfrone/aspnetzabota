@@ -39,15 +39,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Common.Passwor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Common.Datamodel", "aspnetzabota.Common.Datamodel\aspnetzabota.Common.Datamodel.csproj", "{C45A62E1-8246-43DA-B4D6-3782160B6D37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Common.Result", "aspnetzabota.Common.Result\aspnetzabota.Common.Result.csproj", "{46720DAB-04ED-40C3-B970-65A2CF7FD7FF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Common.AutoMapper", "aspnetzabota.Common.AutoMapper\aspnetzabota.Common.AutoMapper.csproj", "{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Web.Common", "aspnetzabota.Web.Common\aspnetzabota.Web.Common.csproj", "{58F92B1E-2C74-4DCE-B366-1C968832C707}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Content.Datamodel", "aspnetzabota.Content.Datamodel\aspnetzabota.Content.Datamodel.csproj", "{538A5234-B776-4BD0-8E1D-AC2A60D6D5FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetzabota.Common.Upload", "aspnetzabota.Common.Upload\aspnetzabota.Common.Upload.csproj", "{CC024DD2-CA55-485A-9800-DF62F59866EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetzabota.Common.Upload", "aspnetzabota.Common.Upload\aspnetzabota.Common.Upload.csproj", "{CC024DD2-CA55-485A-9800-DF62F59866EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,10 +109,6 @@ Global
 		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C45A62E1-8246-43DA-B4D6-3782160B6D37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46720DAB-04ED-40C3-B970-65A2CF7FD7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46720DAB-04ED-40C3-B970-65A2CF7FD7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46720DAB-04ED-40C3-B970-65A2CF7FD7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46720DAB-04ED-40C3-B970-65A2CF7FD7FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -150,7 +144,6 @@ Global
 		{7A3DAD9F-383A-4068-B18C-009C474F1634} = {D1B133A2-852D-47E3-9707-D0FD67A0B95B}
 		{562B8AB2-4665-47D6-B255-4CFB9337D5FC} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 		{C45A62E1-8246-43DA-B4D6-3782160B6D37} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
-		{46720DAB-04ED-40C3-B970-65A2CF7FD7FF} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 		{7A129EB0-5BBF-4FF4-8A6C-84146B6D63D1} = {E1C2A2AC-E047-49EC-B8EE-729B0FDAD109}
 		{58F92B1E-2C74-4DCE-B366-1C968832C707} = {708E8DD6-9BBC-4404-A46C-0A1B0E98009C}
 		{538A5234-B776-4BD0-8E1D-AC2A60D6D5FB} = {5A726B7C-B400-4766-86DD-1B7E827A98F2}

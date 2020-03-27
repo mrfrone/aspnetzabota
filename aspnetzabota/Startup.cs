@@ -13,7 +13,6 @@ using Microsoft.IdentityModel.Tokens;
 using aspnetzabota.Common.Datamodel.PasswordHashing;
 using aspnetzabota.Common.AutoMapper.Extensions;
 using aspnetzabota.Web.Common;
-using aspnetzabota.Common.EFCore.Entities;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Web.Common.Filters;
@@ -104,7 +103,7 @@ namespace aspnetzabota
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();

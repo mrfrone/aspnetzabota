@@ -40,7 +40,7 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddReview([FromBody] ZabotaReview data)
         {
             await _reviews.Add(data);
-            return ZabotaResult(true);
+            return Json(true);
         }
     }
 }

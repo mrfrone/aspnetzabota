@@ -1,6 +1,4 @@
-﻿using aspnetzabota.Common.Result;
-using aspnetzabota.Common.Result.ErrorCodes;
-using aspnetzabota.Common.Upload;
+﻿using aspnetzabota.Common.Upload;
 using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Database.Repository.DoctorInfo;
 using aspnetzabota.Content.Datamodel.Doctors;
@@ -116,33 +114,33 @@ namespace aspnetzabota.Content.Services.Schedule
             var result = await _doctorInfoRepository.Get();
             return _mapper.Map<IEnumerable<ZabotaDoctorInfo>>(result);
         }
-        public async Task<ZabotaResult> AddDoctorInfo(ZabotaDoctorInfo model)
+        public async Task<bool> AddDoctorInfo(ZabotaDoctorInfo model)
         {
             var schedule = await JsonSchedule();
             if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.doctors.id == model.DoctorId).doctors.fio))
             {
                 await _doctorInfoRepository.Add(model);
-                return new ZabotaResult();
+                return true;
             }
             else
             {
-                return ZabotaErrorCodes.IdNotFound;
+                return false;
             }
         }
-        public async Task<ZabotaResult> UpdateDoctorInfo(ZabotaDoctorInfo model)
+        public async Task<bool> UpdateDoctorInfo(ZabotaDoctorInfo model)
         {
                 await _doctorInfoRepository.Update(model);
 
-                return new ZabotaResult();
+                return true;
         }
-        public async Task<ZabotaResult> DeleteDoctorInfo(int id)
+        public async Task<bool> DeleteDoctorInfo(int id)
         {
             var result = await _doctorInfoRepository.GetSingle(id);
             _upload.DeleteImage(result.Photo);
 
             await _doctorInfoRepository.Delete(id);
 
-            return new ZabotaResult();
+            return true;
         }
     }
 }

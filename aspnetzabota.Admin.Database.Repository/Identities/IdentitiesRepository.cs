@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using aspnetzabota.Common.PasswordService.PasswordHash;
 using System;
-using aspnetzabota.Common.Result.ErrorCodes;
-using aspnetzabota.Common.Result;
 using Z.EntityFramework.Plus;
 
 namespace aspnetzabota.Admin.Database.Repository.Identities
@@ -17,7 +15,6 @@ namespace aspnetzabota.Admin.Database.Repository.Identities
         private readonly AdminContext _ac;
         private readonly ITokensRepository _tokensRepository;
         private readonly IPasswordHashCalculator _passwordHashCalculator;
-        private object actorId;
 
         public IdentitiesRepository(AdminContext ac, ITokensRepository tokensRepository, IPasswordHashCalculator passwordHashCalculator)
         {
@@ -68,11 +65,11 @@ namespace aspnetzabota.Admin.Database.Repository.Identities
 
             return _ac.SaveChangesAsync();
         }
-        public async Task<ZabotaResult> Delete(int identityId, int actorId)
+        public async Task<bool> Delete(int identityId, int actorId)
         {
             var identity = await _ac.Identities.FirstOrDefaultAsync(u => u.Id == identityId && u.IsDeleted != true);
             if (identity == null)
-                return ZabotaErrorCodes.CannotFindUserProfileByIdentityId;
+                return false;
 
             _ac.Identities
                 .AsQueryable()
@@ -85,7 +82,7 @@ namespace aspnetzabota.Admin.Database.Repository.Identities
                 });
 
             _ac.SaveChanges();
-            return new ZabotaResult();
+            return true;
         }
 
     }

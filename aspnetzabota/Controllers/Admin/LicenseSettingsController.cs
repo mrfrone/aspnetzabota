@@ -45,13 +45,13 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddLicense([FromBody] ZabotaLicenses data)
         {
             var result = await _licenses.AddLicense(data);
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpPost]
         public async Task<IActionResult> AddPhoto([FromBody] ZabotaLicensesPhoto data)
         {
             var result = await _licenses.AddPhoto(data);
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpPost]
         public async Task<IActionResult> AddImage()
@@ -59,7 +59,7 @@ namespace aspnetzabota.Controllers
             IFormFile image = Request.Form.Files["fileInput"];
             await _upload.UploadImage(image, "images/Licenses");
 
-            return ZabotaResult("");
+            return Json("");
         }
         [HttpGet]
         public async Task<IActionResult> DeleteLicense(int id)

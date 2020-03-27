@@ -1,5 +1,4 @@
-﻿using aspnetzabota.Common.Result;
-using aspnetzabota.Content.Database.Entities;
+﻿using aspnetzabota.Content.Database.Entities;
 using aspnetzabota.Content.Datamodel.Doctors;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,8 +14,8 @@ namespace aspnetzabota.Content.Services.Schedule
         Task<IEnumerable<DoctorSchedule>> Random(int Count);
         Task<IEnumerable<DoctorSchedule>> GetPagedList(int pageNumber, int pageSize);
         Task<IEnumerable<ZabotaDoctorInfo>> GetDoctorsInfo();
-        Task<ZabotaResult> AddDoctorInfo(ZabotaDoctorInfo model);
-        Task<ZabotaResult> UpdateDoctorInfo(ZabotaDoctorInfo model);
-        Task<ZabotaResult> DeleteDoctorInfo(int id);
+        Task<bool> AddDoctorInfo(ZabotaDoctorInfo model);
+        Task<bool> UpdateDoctorInfo(ZabotaDoctorInfo model);
+        Task<bool> DeleteDoctorInfo(int id);
     }
 }

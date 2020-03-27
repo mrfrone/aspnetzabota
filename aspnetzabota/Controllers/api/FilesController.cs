@@ -19,7 +19,7 @@ namespace aspnetzabota.Controllers
         {
             _upload.DeleteImage(path);
 
-            return ZabotaResult("");
+            return Json("");
         }
     }
 }

@@ -3,10 +3,8 @@ using aspnetzabota.Admin.Services.Login;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using aspnetzabota.Web.Common;
-using aspnetzabota.Web.Common.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using System.Net;
 
 namespace aspnetzabota.Controllers
 {
@@ -25,8 +23,6 @@ namespace aspnetzabota.Controllers
         {
             return View();
         }
-
-        [ValidModelState]
         [AllowAnonymous]
         public async Task<IActionResult> LoginPost([FromBody]LoginForm form)
         {
@@ -36,11 +32,15 @@ namespace aspnetzabota.Controllers
                 Password = form.Password
             });
 
-            if (result.IsCorrect)
-                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", result.Result.Token);
-            
-
-            return ZabotaResult(result.IsCorrect);
+            if (result != null)
+            {
+                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", result.Token);
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
         }
         public async Task<IActionResult> Logout()
         {
@@ -51,10 +51,10 @@ namespace aspnetzabota.Controllers
             };
             var result = await _loginService.Logout(form);
 
-            if (result.IsCorrect)
+            if (result)
                 HttpContext.Response.Cookies.Delete(".AspNetCore.Application.Id");
 
-            return Redirect("/admin/auth/login");
+                return Redirect("/admin/auth/login");
         }
     }
 }

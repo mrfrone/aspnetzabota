@@ -21,7 +21,7 @@ namespace aspnetzabota.Web.Components
             {
                 Identity = _identityService.GetIdentityByTokenId(CurrentTokenId).Result
             };
-            if(result.Identity.IsCorrect)
+            if(result.Identity != null)
                 return View(result);
             else
                 return View(HttpStatusCode.Unauthorized);

@@ -121,14 +121,14 @@ namespace aspnetzabota.Controllers
         {
             var result = await _articles.AddArticle(data);
 
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] ZabotaArticles data)
         {
             var result = await _articles.UpdateArticle(data);
 
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpPost]
         public async Task<IActionResult> AddImage()
@@ -136,26 +136,27 @@ namespace aspnetzabota.Controllers
             IFormFile image = Request.Form.Files["fileInput"];
             await _upload.UploadImage(image, "images/Articles");
 
-            return ZabotaResult("");
+            return Json("");
         }
         [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)
         {
             await _articles.DeleteArticleByID(id);
-            return Redirect("/admin/articlesettings/"+nameof(List));
 
+            return Redirect("/admin/articlesettings/"+nameof(List));
         }
         [HttpGet]
         public async Task<IActionResult> DeletePriceArticle(int id)
         {
             await _price.DeletePriceArticle(id);
+
             return Redirect("/admin/articlesettings/" + nameof(PriceList));
         }
         [HttpPost]
         public async Task<IActionResult> AddLink([FromBody] ZabotaPriceArticles data)
         {
             var result = await _price.AddPriceArticle(data);
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         #endregion
     }

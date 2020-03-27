@@ -36,14 +36,14 @@ namespace aspnetzabota.Controllers
             IFormFile image = Request.Form.Files["fileInput"];
             await _upload.UploadImage(image, "images/Slider");
 
-            return ZabotaResult("");
+            return Json("");
         }
         [HttpPost]
         public async Task<IActionResult> AddSlider([FromBody] ZabotaSlider model)
         {
             var result = await _slider.AddSliderPhoto(model);
 
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpGet]
         public async Task<IActionResult> DeleteSlider(int id)

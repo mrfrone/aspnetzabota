@@ -6,9 +6,7 @@ using System;
 using aspnetzabota.Content.Datamodel.Price;
 using AutoMapper;
 using System.Threading.Tasks;
-using aspnetzabota.Common.Result;
 using aspnetzabota.Content.Database.Repository.PriceArticles;
-using aspnetzabota.Common.Result.ErrorCodes;
 
 namespace aspnetzabota.Content.Services.Price
 {
@@ -80,17 +78,17 @@ namespace aspnetzabota.Content.Services.Price
             var price = await JsonPrice();
             return price.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
-        public async Task<ZabotaResult> AddPriceArticle(ZabotaPriceArticles model)
+        public async Task<bool> AddPriceArticle(ZabotaPriceArticles model)
         {
             var price = await JsonPrice();
             if (!String.IsNullOrEmpty(price.FirstOrDefault(c => c.Id == model.PriceId).Name))
             {
                 await _priceArticles.Add(model);
-                return new ZabotaResult();
+                return true;
             }
             else
             {
-                return ZabotaErrorCodes.IdNotFound;
+                return false;
             }
         }
         public async Task<IEnumerable<ZabotaPriceArticles>> GetPriceArticles()

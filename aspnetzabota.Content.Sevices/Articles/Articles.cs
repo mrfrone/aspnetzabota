@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using aspnetzabota.Content.Datamodel.Articles;
 using aspnetzabota.Content.Database.Repository.Articles;
-using aspnetzabota.Common.Result;
 using System;
 using System.Linq;
 using aspnetzabota.Common.Upload;
@@ -47,27 +46,27 @@ namespace aspnetzabota.Content.Services.Articles
             var result = await _articlesRepository.GetList();
             return _mapper.Map<IEnumerable<ZabotaArticles>>(result).Where(a => a.CategoryID == 3);
         }
-        public async Task<ZabotaResult> AddArticle(ZabotaArticles model)
+        public async Task<bool> AddArticle(ZabotaArticles model)
         {
             await _articlesRepository.Add(model);
 
-            return new ZabotaResult();
+            return true;
         }
-        public async Task<ZabotaResult> UpdateArticle(ZabotaArticles model)
+        public async Task<bool> UpdateArticle(ZabotaArticles model)
         {
             model.Date = DateTimeOffset.UtcNow;
             await _articlesRepository.Update(model);
 
-            return new ZabotaResult();
+            return true;
         }
-        public async Task<ZabotaResult> DeleteArticleByID(int id)
+        public async Task<bool> DeleteArticleByID(int id)
         {
             var result = await _articlesRepository.GetSingle(id);
             _upload.DeleteImage(result.Img);
 
             await _articlesRepository.Delete(id);
 
-            return new ZabotaResult();
+            return true;
         }
     }
 }

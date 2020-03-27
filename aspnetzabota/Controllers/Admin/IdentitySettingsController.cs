@@ -30,7 +30,7 @@ namespace aspnetzabota.Controllers
         public async Task<IActionResult> AddIdentity([FromBody] LoginForm form)
         {
             var result = await _identityService.AddIdentity(form);
-            return ZabotaResult(result.IsCorrect);
+            return Json(result);
         }
         [HttpGet]
         public async Task<IActionResult> DeleteIdentity(int id)

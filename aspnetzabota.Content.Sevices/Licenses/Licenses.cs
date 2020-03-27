@@ -1,5 +1,4 @@
-﻿using aspnetzabota.Common.Result;
-using aspnetzabota.Common.Upload;
+﻿using aspnetzabota.Common.Upload;
 using aspnetzabota.Content.Database.Repository.Licenses;
 using aspnetzabota.Content.Datamodel.License;
 using AutoMapper;
@@ -25,17 +24,17 @@ namespace aspnetzabota.Content.Services.Licenses
             var result = await _licensesRepository.Get();
             return _mapper.Map<IEnumerable<ZabotaLicenses>>(result);
         }
-        public async Task<ZabotaResult> AddLicense(ZabotaLicenses model)
+        public async Task<bool> AddLicense(ZabotaLicenses model)
         {
             await _licensesRepository.Add(model);
-            return new ZabotaResult();
+            return true;
         }
-        public async Task<ZabotaResult> AddPhoto(ZabotaLicensesPhoto model)
+        public async Task<bool> AddPhoto(ZabotaLicensesPhoto model)
         {
             await _licensesRepository.AddPhoto(model);
-            return new ZabotaResult();
+            return true;
         }
-        public async Task<ZabotaResult> DeleteLicense(int id)
+        public async Task<bool> DeleteLicense(int id)
         {
             var result = await _licensesRepository.GetSingleLicense(id);
             var mapped = _mapper.Map<ZabotaLicenses>(result);
@@ -45,15 +44,15 @@ namespace aspnetzabota.Content.Services.Licenses
             }
             
             await _licensesRepository.Delete(id);
-            return new ZabotaResult();
+            return true;
         }
-        public async Task<ZabotaResult> DeletePhoto(int id)
+        public async Task<bool> DeletePhoto(int id)
         {
             var result = await _licensesRepository.GetSinglePhoto(id);
             _upload.DeleteImage(result.Path);
 
             await _licensesRepository.DeletePhoto(id);
-            return new ZabotaResult();
+            return true;
         }
     }
 }

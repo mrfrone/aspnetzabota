@@ -1,5 +1,4 @@
 ﻿using aspnetzabota.Admin.Forms.Login;
-using aspnetzabota.Common.Result;
 using System.Threading.Tasks;
 
 namespace aspnetzabota.Admin.Database.Repository.Identities
@@ -12,6 +11,6 @@ namespace aspnetzabota.Admin.Database.Repository.Identities
         Task<Entities.Identities> GetByLoginAndPassword(LoginForm form);
         Task<bool> IdentityExistsAsync(int identityId);
         Task Add(LoginForm form);
-        Task<ZabotaResult> Delete(int identityId, int actorId);
+        Task<bool> Delete(int identityId, int actorId);
     }
 }
