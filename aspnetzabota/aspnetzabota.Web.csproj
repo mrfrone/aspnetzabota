@@ -28,10 +28,8 @@
     <ProjectReference Include="..\aspnetzabota.Common.AutoMapper\aspnetzabota.Common.AutoMapper.csproj" />
     <ProjectReference Include="..\aspnetzabota.Common.PasswordHashCalculator\aspnetzabota.Common.PasswordService.csproj" />
     <ProjectReference Include="..\aspnetzabota.Common.Upload\aspnetzabota.Common.Upload.csproj" />
-    <ProjectReference Include="..\aspnetzabota.Content.Database.Repository\aspnetzabota.Content.Database.Repository.csproj" />
     <ProjectReference Include="..\aspnetzabota.Content.Datamodel\aspnetzabota.Content.Datamodel.csproj" />
     <ProjectReference Include="..\aspnetzabota.Content.Sevices\aspnetzabota.Content.Services.csproj" />
-    <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Content.Database.csproj" />
     <ProjectReference Include="..\aspnetzabota.Web.Common\aspnetzabota.Web.Common.csproj" />
     <ProjectReference Include="..\aspnetzabota.Web.Style\aspnetzabota.Web.Style.csproj" />
     <ProjectReference Include="..\aspnetzabota.Web.ViewModels\aspnetzabota.Web.ViewModels.csproj" />
