@@ -117,6 +117,14 @@ namespace aspnetzabota.Controllers
 
         #region Methods
         [HttpPost]
+        public async Task<IActionResult> AddImage()
+        {
+            IFormFile image = Request.Form.Files["fileInput"];
+            var result = await _upload.UploadImage(image, "images/Articles");
+
+            return Json(result);
+        }
+        [HttpPost]
         public async Task<IActionResult> Add([FromBody] ZabotaArticles data)
         {
             var result = await _articles.AddArticle(data);
@@ -129,14 +137,6 @@ namespace aspnetzabota.Controllers
             var result = await _articles.UpdateArticle(data);
 
             return Json(result);
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddImage()
-        {
-            IFormFile image = Request.Form.Files["fileInput"];
-            await _upload.UploadImage(image, "images/Articles");
-
-            return Json("");
         }
         [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)

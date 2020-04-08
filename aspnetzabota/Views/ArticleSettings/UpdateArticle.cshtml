@@ -123,10 +123,6 @@
     });
 
     function Update_Article() {
-        //random name from img
-        var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        console.log(r);
-
         //article model
         article.Name = $('#Name').val();
         article.Description = quill.root.innerHTML;
@@ -148,20 +144,13 @@
         var formData = new FormData();
         var file = document.getElementById("fileInput").files[0];
 
-        console.log(JSON.stringify(article));
-
         if (article.Name != null && article.Description != null && article.CategoryID != null) {
             if (file == null) {
                 article.IMG = '@Model.SingleArticle.IMG';
+                Update_ArticleDB(article);
             }
             else {
-                //file extension
-                var fe = /(?:\.([^.]+))?$/;
-                var ext = fe.exec(file.name)[1];
-                formData.append("fileInput", file, r + "." + ext);
-
-                //file extension to db
-                article.IMG = "~/images/Articles/" + r + "." + ext;
+                formData.append("fileInput", file);
 
                 var OldPhoto = '@Model.SingleArticle.IMG';
 
@@ -183,11 +172,25 @@
                     contentType: false,
                     processData: false,
                     success: function () {
-
                     }
+                }).done(function (data) {
+                    article.IMG = "~/images/Articles/" + data;
+                     Update_ArticleDB(article);
                 });
             }
-                $.ajax({
+                
+            }
+            else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Упс...',
+                  text: 'Заполнены не все поля!'
+                });
+            }
+        }
+        function Update_ArticleDB(article)
+        {
+            $.ajax({
                     type: "POST",
                     url: "/admin/ArticleSettings/Update",
                     data: JSON.stringify(article),
@@ -216,14 +219,6 @@
                 }).fail(function (response) {
                     console.log('Error: ' + response);
                 });
-            }
-            else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Упс...',
-                  text: 'Заполнены не все поля!'
-                });
-            }
         }
     </script>
 }

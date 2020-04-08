@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\Articles\Новая папка\**" />
+    <Content Remove="wwwroot\images\Articles\Новая папка\**" />
+    <EmbeddedResource Remove="wwwroot\images\Articles\Новая папка\**" />
+    <None Remove="wwwroot\images\Articles\Новая папка\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
@@ -31,7 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\Articles\" />
+    <Folder Include="wwwroot\images\Licenses\" />
+    <Folder Include="wwwroot\images\Slider\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

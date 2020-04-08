@@ -62,10 +62,6 @@
     });
 
     function Update_DoctorInfo() {
-        //random name from img
-        var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        console.log(r);
-
         //info model
         info.Description = quill.root.innerHTML;
 
@@ -73,20 +69,12 @@
         var formData = new FormData();
         var file = document.getElementById("fileInput").files[0];
 
-
-        console.log(JSON.stringify(info));
-
             if (file == null) {
                 info.Photo = '@Model.SingleDoctor.DoctorInfo.Photo';
+                Update_DoctorInfoDB(info);
             }
             else {
-                //file extension
-                var fe = /(?:\.([^.]+))?$/;
-                var ext = fe.exec(file.name)[1];
-                formData.append("fileInput", file, r + "." + ext);
-
-                //file extension to db
-                info.Photo = '~/images/staff/' + r + "." + ext;
+                formData.append("fileInput", file);
 
                 var OldPhoto = '@Model.SingleDoctor.DoctorInfo.Photo';
 
@@ -97,7 +85,6 @@
                     contentType: "application/json",
                     dataType: "json",
                     success: function () {
-
                     }
                 });
 
@@ -108,12 +95,15 @@
                     contentType: false,
                     processData: false,
                     success: function () {
-
                     }
+                }).done(function (data) {
+                    info.Photo = '~/images/staff/' + data;
+                    Update_DoctorInfoDB(info);
                 });
             }
-
-        $.ajax({
+        }
+        function Update_DoctorInfoDB(info) {
+            $.ajax({
             type: "POST",
             url: "/admin/DoctorInfoSettings/Update",
             data: JSON.stringify(info),

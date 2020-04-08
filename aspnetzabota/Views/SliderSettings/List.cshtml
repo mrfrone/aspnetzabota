@@ -70,11 +70,7 @@
     <script type="text/javascript">
 
         function Add_Slider() {
-            //random name from img
-            var r = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            console.log(r);
-
-            //info model
+            //slider model
             var slider = {};
             slider.Id = null;
 
@@ -82,18 +78,9 @@
             var formData = new FormData();
             file = document.getElementById("fileInput").files[0];
 
-
-            console.log(JSON.stringify(slider));
-
             if (file != null) {
-                //file extension
-                var fe = /(?:\.([^.]+))?$/;
-                var ext = fe.exec(file.name)[1];
-                formData.append("fileInput", file, r + "." + ext);
-
-                //file extension to db
-                slider.Image = r + "." + ext;
-
+                formData.append("fileInput", file);
+              
                 $.ajax({
                     url: '/admin/SliderSettings/AddImage',
                     type: "POST",
@@ -101,11 +88,23 @@
                     contentType: false,
                     processData: false,
                     success: function () {
-
                     }
+                }).done(function (data) {
+                    slider.Image = data;
+                    Add_SliderDB(slider);
                 });
-
-                $.ajax({
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Упс...',
+                    text: 'Изображение не выбрано!'
+                });
+            }
+        }
+        function Add_SliderDB(slider)
+        {
+            $.ajax({
                     type: "POST",
                     url: "/admin/SliderSettings/AddSlider",
                     data: JSON.stringify(slider),
@@ -134,14 +133,6 @@
                 }).fail(function (response) {
                     console.log('Error: ' + response);
                 });
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Упс...',
-                    text: 'Изображение не выбрано!'
-                });
-            }
         }
     </script>
 

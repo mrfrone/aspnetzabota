@@ -55,9 +55,9 @@ namespace aspnetzabota.Controllers
         {
 
             IFormFile image = Request.Form.Files["fileInput"];
-            await _upload.UploadImage(image, "images/staff");
+            var result = await _upload.UploadImage(image, "images/staff");
 
-            return Json("");
+            return Json(result);
         }
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] ZabotaDoctorInfo model)

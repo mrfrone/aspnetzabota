@@ -12,12 +12,17 @@ namespace aspnetzabota.Common.Upload
         {
             _hostingEnvironment = hostingEnvironment;
         }
-        public async Task UploadImage(IFormFile image, string path)
+        public async Task<string> UploadImage(IFormFile image, string path)
         {
-                using (var fileStream = new FileStream(Path.Combine(_hostingEnvironment.WebRootPath, path, image.FileName), FileMode.Create))
+            var extension = Path.GetExtension(image.FileName);
+            var filename = Path.ChangeExtension(Path.GetRandomFileName(), extension);
+
+                using (var fileStream = new FileStream(Path.Combine(_hostingEnvironment.WebRootPath, path, filename), FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }
+
+            return filename;
         }
         public void DeleteImage(string path)
         {
