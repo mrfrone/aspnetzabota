@@ -31,20 +31,20 @@ namespace aspnetzabota.Content.Services.Schedule
             string phrase = "нет приема";
             foreach (var mod in model)
             {
-                if (mod.doctors.schedule.mon == phrase)
-                    mod.doctors.schedule.mon = symb;
-                if (mod.doctors.schedule.tue == phrase)
-                    mod.doctors.schedule.tue = symb;
-                if (mod.doctors.schedule.wed == phrase)
-                    mod.doctors.schedule.wed = symb;
-                if (mod.doctors.schedule.thu == phrase)
-                    mod.doctors.schedule.thu = symb;
-                if (mod.doctors.schedule.fri == phrase)
-                    mod.doctors.schedule.fri = symb;
-                if (mod.doctors.schedule.sat == phrase)
-                    mod.doctors.schedule.sat = symb;
-                if (mod.doctors.schedule.sun == phrase)
-                    mod.doctors.schedule.sun = symb;
+                if (mod.Doctor.Schedule.Monday == phrase)
+                    mod.Doctor.Schedule.Monday = symb;
+                if (mod.Doctor.Schedule.Tuesday == phrase)
+                    mod.Doctor.Schedule.Tuesday = symb;
+                if (mod.Doctor.Schedule.Wednesday == phrase)
+                    mod.Doctor.Schedule.Wednesday = symb;
+                if (mod.Doctor.Schedule.Thursday == phrase)
+                    mod.Doctor.Schedule.Thursday = symb;
+                if (mod.Doctor.Schedule.Friday == phrase)
+                    mod.Doctor.Schedule.Friday = symb;
+                if (mod.Doctor.Schedule.Saturday == phrase)
+                    mod.Doctor.Schedule.Saturday = symb;
+                if (mod.Doctor.Schedule.Sunday == phrase)
+                    mod.Doctor.Schedule.Sunday = symb;
             }
             return model;
         }
@@ -54,7 +54,7 @@ namespace aspnetzabota.Content.Services.Schedule
                 {
                     return RemoveNoReception(JsonConvert
                         .DeserializeObject<IEnumerable<DoctorSchedule>>(await sr.ReadToEndAsync()))
-                        .OrderBy(c => c.category);
+                        .OrderBy(c => c.CategoryName);
                 }
         }
         private async Task<IEnumerable<DoctorSchedule>> ScheduleAtDoctors(bool OnlyComplete = false)
@@ -63,8 +63,8 @@ namespace aspnetzabota.Content.Services.Schedule
             var schedule = await JsonSchedule();
             foreach (var doctor in doctors)
             {
-                if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.doctors.id == doctor.DoctorId).doctors.fio))
-                    schedule.FirstOrDefault(c => c.doctors.id == doctor.DoctorId).DoctorInfo = doctor;
+                if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.Doctor.Id == doctor.DoctorId).Doctor.Name))
+                    schedule.FirstOrDefault(c => c.Doctor.Id == doctor.DoctorId).DoctorInfo = doctor;
             }
             if (OnlyComplete)
             {
@@ -83,19 +83,19 @@ namespace aspnetzabota.Content.Services.Schedule
         public async Task<IEnumerable<string>> Posts()
         {
             var schedule = await Get();
-            return schedule.Select(c => c.category).Distinct().ToList();
+            return schedule.Select(c => c.CategoryName).Distinct().ToList();
         }
 
         public async Task<DoctorSchedule> Single(int id)
         {
             var schedule = await Get();
-            return schedule.FirstOrDefault(c => c.doctors.id == id);
+            return schedule.FirstOrDefault(c => c.Doctor.Id == id);
         }
 
         public async Task<IEnumerable<DoctorSchedule>> ScheduleFromSinglePost(int cat_id)
         {
             var schedule = await Get();
-            return schedule.Where(c => c.cat_id == cat_id.ToString());
+            return schedule.Where(c => c.CategoryID == cat_id.ToString());
         }
 
         public async Task<IEnumerable<DoctorSchedule>> Random(int Count)
@@ -117,7 +117,7 @@ namespace aspnetzabota.Content.Services.Schedule
         public async Task<bool> AddDoctorInfo(ZabotaDoctorInfo model)
         {
             var schedule = await JsonSchedule();
-            if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.doctors.id == model.DoctorId).doctors.fio))
+            if (!String.IsNullOrEmpty(schedule.FirstOrDefault(c => c.Doctor.Id == model.DoctorId).Doctor.Name))
             {
                 await _doctorInfoRepository.Add(model);
                 return true;

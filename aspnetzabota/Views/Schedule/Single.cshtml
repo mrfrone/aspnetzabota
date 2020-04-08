@@ -4,7 +4,7 @@
             <div class="row justify-content-center mb-1 pb-2">
                 <div class="col-md-8 text-center heading-section ftco-animate">
                     <h2 class="mb-4">Расписание</h2>
-                    <span class="subheading">@Model.SingleSchedule.doctors.fio, <a href="/Schedule/Doctor/@Model.SingleSchedule.cat_id">@Model.SingleSchedule.category</a></span>
+                    <span class="subheading">@Model.SingleSchedule.Doctor.Name, <a href="/Schedule/Doctor/@Model.SingleSchedule.CategoryID">@Model.SingleSchedule.CategoryName</a></span>
                 </div>
             </div>
             <div class="row">
@@ -24,15 +24,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>@Model.SingleSchedule.doctors.fio</td>
-                            <td>@Model.SingleSchedule.doctors.position</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.mon</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.tue</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.wed</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.thu</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.fri</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.sat</td>
-                            <td class="text-center">@Model.SingleSchedule.doctors.schedule.sun</td>
+                            <td>@Model.SingleSchedule.Doctor.Name</td>
+                            <td>@Model.SingleSchedule.Doctor.Position</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Monday</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Tuesday</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Wednesday</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Thursday</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Friday</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Saturday</td>
+                            <td class="text-center">@Model.SingleSchedule.Doctor.Schedule.Sunday</td>
                         </tr>
                     </tbody>
                 </table>

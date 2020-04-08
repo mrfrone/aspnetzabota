@@ -30,19 +30,19 @@
                             <tr>
                                 <td class="text-center" scope="col" colspan="9"><b>@post</b></td>
                             </tr>
-                            foreach (var schedule in Model.Schedule.Where(c => c.category == post))
+                            foreach (var schedule in Model.Schedule.Where(c => c.CategoryName == post))
                             {
                                 <tr>
-                                    <td><a href="/Schedule/Single/@schedule.doctors.id">@schedule.doctors.fio</a></td>
-                                    <td>@schedule.doctors.position</td>
-                                    <td class="text-center">@schedule.doctors.schedule.mon</td>
-                                    <td class="text-center">@schedule.doctors.schedule.tue</td>
-                                    <td class="text-center">@schedule.doctors.schedule.wed</td>
-                                    <td class="text-center">@schedule.doctors.schedule.thu</td>
-                                    <td class="text-center">@schedule.doctors.schedule.fri</td>
-                                    <td class="text-center">@schedule.doctors.schedule.sat</td>
-                                    <td class="text-center">@schedule.doctors.schedule.sun</td>
-                                </tr>
+                                    <td><a href="/Schedule/Single/@schedule.Doctor.Id">@schedule.Doctor.Name</a></td>
+                                    <td>@schedule.Doctor.Position</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Monday</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Tuesday</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Wednesday</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Thursday</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Friday</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Saturday</td>
+                                    <td class="text-center">@schedule.Doctor.Schedule.Sunday</td>
+                                 </tr>
                             }
                         }
                     }

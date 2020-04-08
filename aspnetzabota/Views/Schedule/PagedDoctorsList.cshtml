@@ -12,7 +12,7 @@
                                 {
                                     <div class="img align-self-stretch" style="background-image: url(@Url.Content(doctor.DoctorInfo.Photo));"></div>
                                 }
-                                else if (doctor.doctors.sex == "male")
+                                else if (doctor.Doctor.Sex == "male")
                                 {
                                     <div class="img align-self-stretch" style="background-image: url(@Url.Content("~/images/staff/male.jpg"));"></div>
                                 }
@@ -23,9 +23,9 @@
                             }
                         </div>
                         <div class="text pt-3 text-center pb-3">
-                            <h3><a href="/Schedule/Single/@doctor.doctors.id">@doctor.doctors.fio</a></h3>
-                            <a href="/Schedule/Doctor/@doctor.cat_id"><span class="position">@doctor.category</span></a>
-                               @doctor.doctors.position
+                            <h3><a href="/Schedule/Single/@doctor.Doctor.Id">@doctor.Doctor.Name</a></h3>
+                            <a href="/Schedule/Doctor/@doctor.CategoryID"><span class="position">@doctor.CategoryName</span></a>
+                               @doctor.Doctor.Position
                         </div>
                     </div>
                 </div>

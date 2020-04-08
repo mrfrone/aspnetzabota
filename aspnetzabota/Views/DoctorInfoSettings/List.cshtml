@@ -26,10 +26,10 @@
                                     @foreach (var doctor in Model.Doctor)
                                     {
                                         <tr>
-                                            <td style="width:25%">@doctor.doctors.fio</td>
+                                            <td style="width:25%">@doctor.Doctor.Name</td>
                                             <td style="width:25%">@Html.Raw(doctor.DoctorInfo.Description)</td>
                                             <td style="width: 15%"><img src="@Url.Content(doctor.DoctorInfo.Photo)" class="img-fluid"/></td>
-                                            <td class="text-center"><a href="/admin/DoctorInfoSettings/UpdateDoctorInfo/?id=@doctor.doctors.id">Редактировать</a></td>
+                                            <td class="text-center"><a href="/admin/DoctorInfoSettings/UpdateDoctorInfo/?id=@doctor.Doctor.Id">Редактировать</a></td>
                                             <td class="text-center"><a href="/admin/DoctorInfoSettings/DeleteDoctorInfo/?id=@doctor.DoctorInfo.Id">Удалить</a></td>
                                         </tr>
                                     }

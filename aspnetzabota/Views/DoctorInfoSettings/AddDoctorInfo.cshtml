@@ -17,7 +17,7 @@
                                 <option selected="selected" hidden disabled>Выберите врача...</option>
                                 @foreach (var doctor in Model.Doctor)
                                 {
-                                    <option value="@doctor.doctors.id">@doctor.doctors.fio</option>
+                                    <option value="@doctor.Doctor.Id">@doctor.Doctor.Name</option>
                                 }
                             </select>
                         </div>

@@ -1,13 +1,28 @@
-﻿namespace aspnetzabota.Content.Datamodel.Doctors
+﻿using Newtonsoft.Json;
+
+namespace aspnetzabota.Content.Datamodel.Doctors
 {
-    public class schedule
+    public class Schedule
     {
-        public string mon { get; set; }
-        public string tue { get; set; }
-        public string wed { get; set; }
-        public string thu { get; set; }
-        public string fri { get; set; }
-        public string sat { get; set; }
-        public string sun { get; set; }
+        [JsonProperty("mon")]
+        public string Monday { get; set; }
+
+        [JsonProperty("tue")]
+        public string Tuesday { get; set; }
+
+        [JsonProperty("wed")]
+        public string Wednesday { get; set; }
+
+        [JsonProperty("thu")]
+        public string Thursday { get; set; }
+
+        [JsonProperty("fri")]
+        public string Friday { get; set; }
+
+        [JsonProperty("sat")]
+        public string Saturday { get; set; }
+
+        [JsonProperty("sun")]
+        public string Sunday { get; set; }
     }
 }
