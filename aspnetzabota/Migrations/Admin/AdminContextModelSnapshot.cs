@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspnetzabota.Admin.Database.Context;
 
-namespace aspnetzabota.Web.Migrations
+namespace aspnetzabota.Web.Migrations.Admin
 {
     [DbContext(typeof(AdminContext))]
     partial class AdminContextModelSnapshot : ModelSnapshot

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace aspnetzabota.Web.Migrations.Content
+namespace aspnetzabota.Web.Migrations
 {
-    public partial class NewDatabase : Migration
+    public partial class NewWorkspace : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,15 +27,28 @@ namespace aspnetzabota.Web.Migrations.Content
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(nullable: true),
                     ShortName = table.Column<string>(nullable: true),
-                    Img = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     DepartmentPriceID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Doctor",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Photo = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Doctor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +73,8 @@ namespace aspnetzabota.Web.Migrations.Content
                     Author = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTimeOffset>(nullable: false)
+                    Date = table.Column<DateTimeOffset>(nullable: false),
+                    IsModerated = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,7 +105,7 @@ namespace aspnetzabota.Web.Migrations.Content
                     Img = table.Column<string>(nullable: true),
                     Date = table.Column<DateTimeOffset>(nullable: false),
                     CategoryID = table.Column<int>(nullable: false),
-                    DepartmentId = table.Column<int>(nullable: false)
+                    DepartmentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,7 +121,7 @@ namespace aspnetzabota.Web.Migrations.Content
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +131,7 @@ namespace aspnetzabota.Web.Migrations.Content
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Path = table.Column<string>(nullable: true),
-                    LicensesId = table.Column<int>(nullable: true)
+                    LicensesId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,6 +140,26 @@ namespace aspnetzabota.Web.Migrations.Content
                         name: "FK_LicensesPhoto_Licenses_LicensesId",
                         column: x => x.LicensesId,
                         principalTable: "Licenses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PriceArticles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    PriceId = table.Column<int>(nullable: true),
+                    ArticleId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PriceArticles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PriceArticles_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -144,15 +178,23 @@ namespace aspnetzabota.Web.Migrations.Content
                 name: "IX_LicensesPhoto_LicensesId",
                 table: "LicensesPhoto",
                 column: "LicensesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PriceArticles_ArticleId",
+                table: "PriceArticles",
+                column: "ArticleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Articles");
+                name: "Doctor");
 
             migrationBuilder.DropTable(
                 name: "LicensesPhoto");
+
+            migrationBuilder.DropTable(
+                name: "PriceArticles");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
@@ -161,13 +203,16 @@ namespace aspnetzabota.Web.Migrations.Content
                 name: "Sliders");
 
             migrationBuilder.DropTable(
+                name: "Licenses");
+
+            migrationBuilder.DropTable(
+                name: "Articles");
+
+            migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Departments");
-
-            migrationBuilder.DropTable(
-                name: "Licenses");
         }
     }
 }

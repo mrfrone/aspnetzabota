@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspnetzabota.Admin.Database.Context;
 
-namespace aspnetzabota.Web.Migrations
+namespace aspnetzabota.Web.Migrations.Admin
 {
     [DbContext(typeof(AdminContext))]
-    [Migration("20191230070800_Auth")]
-    partial class Auth
+    [Migration("20200408114420_NewWorkspace")]
+    partial class NewWorkspace
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,12 @@ namespace aspnetzabota.Web.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTimeOffset?>("Deleted");
+
+                    b.Property<int?>("DeletedById");
+
+                    b.Property<bool?>("IsDeleted");
 
                     b.Property<string>("Login");
 

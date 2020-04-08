@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace aspnetzabota.Web.Migrations
+namespace aspnetzabota.Web.Migrations.Admin
 {
-    public partial class Auth : Migration
+    public partial class NewWorkspace : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,10 @@ namespace aspnetzabota.Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Login = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true),
+                    DeletedById = table.Column<int>(nullable: true),
+                    Deleted = table.Column<DateTimeOffset>(nullable: true)
                 },
                 constraints: table =>
                 {

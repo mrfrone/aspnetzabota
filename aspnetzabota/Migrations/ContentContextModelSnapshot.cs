@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspnetzabota.Content.Database.Context;
 
-namespace aspnetzabota.Web.Migrations.Content
+namespace aspnetzabota.Web.Migrations
 {
     [DbContext(typeof(ContentContext))]
     partial class ContentContextModelSnapshot : ModelSnapshot

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspnetzabota.Content.Database.Context;
 
-namespace aspnetzabota.Web.Migrations.Content
+namespace aspnetzabota.Web.Migrations
 {
     [DbContext(typeof(ContentContext))]
-    [Migration("20200220133919_AddPriceArticles")]
-    partial class AddPriceArticles
+    [Migration("20200408113924_NewWorkspace")]
+    partial class NewWorkspace
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,15 +69,27 @@ namespace aspnetzabota.Web.Migrations.Content
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Img");
-
-                    b.Property<string>("Name");
-
                     b.Property<string>("ShortName");
 
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("aspnetzabota.Content.Database.Entities.DoctorInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("DoctorId");
+
+                    b.Property<string>("Photo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Doctor");
                 });
 
             modelBuilder.Entity("aspnetzabota.Content.Database.Entities.Licenses", b =>
@@ -97,7 +109,7 @@ namespace aspnetzabota.Web.Migrations.Content
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("LicensesId");
+                    b.Property<int>("LicensesId");
 
                     b.Property<string>("Path");
 
@@ -135,6 +147,8 @@ namespace aspnetzabota.Web.Migrations.Content
 
                     b.Property<string>("Email");
 
+                    b.Property<bool>("IsModerated");
+
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
@@ -170,7 +184,8 @@ namespace aspnetzabota.Web.Migrations.Content
                 {
                     b.HasOne("aspnetzabota.Content.Database.Entities.Licenses")
                         .WithMany("Photo")
-                        .HasForeignKey("LicensesId");
+                        .HasForeignKey("LicensesId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("aspnetzabota.Content.Database.Entities.PriceArticles", b =>

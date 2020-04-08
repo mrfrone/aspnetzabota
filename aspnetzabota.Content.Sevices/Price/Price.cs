@@ -65,17 +65,17 @@ namespace aspnetzabota.Content.Services.Price
         }
         public async Task<IEnumerable<ZabotaPrice>> FromGroup(int id) 
         {
-            var price = await JsonPrice();
+            var price = await PriceAtArticles();
             return price.Where(c => c.GroupCode == id); 
         }
         public async Task<IEnumerable<ZabotaPrice>> FromDepartment(string id) 
         {
-            var price = await JsonPrice();
+            var price = await PriceAtArticles();
             return price.Where(c => c.DepartName == id); 
         }
         public async Task<IEnumerable<ZabotaPrice>> FromSearch(string line)
         {
-            var price = await JsonPrice();
+            var price = await PriceAtArticles();
             return price.Where(c => c.Name.IndexOf(line, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
         public async Task<bool> AddPriceArticle(ZabotaPriceArticles model)
