@@ -1,4 +1,5 @@
 ﻿using aspnetzabota.Common.EFCore.Extensions;
+using aspnetzabota.Common.Upload.UploadPath;
 using aspnetzabota.Content.Database.Context;
 using aspnetzabota.Content.Datamodel.License;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
     internal class LicensesRepository : ILicensesRepository
     {
         private readonly ContentContext _appDBContext;
+        private readonly IUploadPath _uploadPath;
 
-        public LicensesRepository(ContentContext appDBContext)
+        public LicensesRepository(ContentContext appDBContext, IUploadPath uploadPath)
         {
             _appDBContext = appDBContext;
+            _uploadPath = uploadPath;
         }
         public async Task<Entities.Licenses[]> Get(bool trackChanges = false) 
         { 
@@ -50,9 +53,11 @@ namespace aspnetzabota.Content.Database.Repository.Licenses
         }
         public Task AddPhoto(ZabotaLicensesPhoto model)
         {
+            var path = _uploadPath.GetPath();
+
             _appDBContext.LicensesPhoto.Add(new Entities.LicensesPhoto
             {
-                Path = "~/images/Licenses/" + model.Path,
+                Path = "~/" + path.BaseImagePath + "/" + path.Licenses + "/" + model.Path,
                 LicensesId = model.LicensesId
             });
             return _appDBContext.SaveChangesAsync();

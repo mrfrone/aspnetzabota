@@ -7,6 +7,7 @@ using aspnetzabota.Content.Services.Slider;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Content.Datamodel.Slider;
 using aspnetzabota.Common.Upload;
+using aspnetzabota.Common.Upload.UploadPath;
 
 namespace aspnetzabota.Controllers
 {
@@ -16,11 +17,13 @@ namespace aspnetzabota.Controllers
     {
         private readonly ISlider _slider;
         private readonly IUpload _upload;
+        private readonly IUploadPath _uploadPath;
 
-        public SliderSettingsController(ISlider slider, IUpload upload)
+        public SliderSettingsController(ISlider slider, IUpload upload, IUploadPath uploadPath)
         {
             _slider = slider;
             _upload = upload;
+            _uploadPath = uploadPath;
         }
         public async Task<ViewResult> List()
         {
@@ -33,8 +36,10 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage()
         {
+            var path = _uploadPath.GetPath();
+
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/Slider");
+            var result = await _upload.UploadImage(image, path.BaseImagePath + "/" + path.Slider);
 
             return Json(result);
         }

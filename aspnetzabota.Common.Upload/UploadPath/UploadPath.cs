@@ -6,11 +6,11 @@
         {
             return new Path
             {
-                BaseImagePath = "~/images/",
-                Articles = "Articles/",
-                Licenses = "Licenses/",
-                Slider = "Slider/",
-                Staff = "staff/"
+                BaseImagePath = "images",
+                Articles = "Articles",
+                Licenses = "Licenses",
+                Slider = "Slider",
+                Staff = "staff"
             }; 
         }
     }

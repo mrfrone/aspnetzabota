@@ -1,4 +1,5 @@
 ﻿using aspnetzabota.Common.EFCore.Extensions;
+using aspnetzabota.Common.Upload.UploadPath;
 using aspnetzabota.Content.Database.Context;
 using aspnetzabota.Content.Database.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace aspnetzabota.Content.Database.Repository.DoctorInfo
     internal class DoctorInfoRepository : IDoctorInfoRepository
     {
         private readonly ContentContext _appDBContext;
+        private readonly IUploadPath _uploadPath;
 
-        public DoctorInfoRepository(ContentContext appDBContext)
+        public DoctorInfoRepository(ContentContext appDBContext, IUploadPath uploadPath)
         {
             _appDBContext = appDBContext;
+            _uploadPath = uploadPath;
         }
         public async Task<Entities.DoctorInfo[]> Get(bool trackChanges = false) 
         {
@@ -32,11 +35,13 @@ namespace aspnetzabota.Content.Database.Repository.DoctorInfo
         }
         public Task Add(ZabotaDoctorInfo model)
         {
+            var path = _uploadPath.GetPath();
+
             _appDBContext.Doctor
                 .Add(new Entities.DoctorInfo
                 {
                     Id = model.Id,
-                    Photo = "~/images/staff/" + model.Photo,
+                    Photo = "~/" + path.BaseImagePath + "/" + path.Staff + "/" + model.Photo,
                     Description = model.Description,
                     DoctorId = model.DoctorId
                 });

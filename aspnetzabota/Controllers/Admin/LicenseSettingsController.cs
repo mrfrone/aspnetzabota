@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using aspnetzabota.Content.Services.Licenses;
 using aspnetzabota.Content.Datamodel.License;
 using aspnetzabota.Common.Upload;
+using aspnetzabota.Common.Upload.UploadPath;
 
 namespace aspnetzabota.Controllers
 {
@@ -16,10 +17,13 @@ namespace aspnetzabota.Controllers
     {
         private readonly IUpload _upload;
         private readonly ILicenses _licenses;
-        public LicenseSettingsController(IUpload upload, ILicenses licenses)
+        private readonly IUploadPath _uploadPath;
+
+        public LicenseSettingsController(IUpload upload, ILicenses licenses, IUploadPath uploadPath)
         {
             _upload = upload;
             _licenses = licenses;
+            _uploadPath = uploadPath;
         }
         #region Views
         public async Task<ViewResult> List()
@@ -56,8 +60,10 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage()
         {
+            var path = _uploadPath.GetPath();
+
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/Licenses");
+            var result = await _upload.UploadImage(image, path.BaseImagePath + "/" + path.Licenses);
 
             return Json(result);
         }

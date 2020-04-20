@@ -12,6 +12,7 @@ using aspnetzabota.Content.Services.Department;
 using aspnetzabota.Content.Datamodel.Price;
 using aspnetzabota.Content.Services.Price;
 using aspnetzabota.Common.Upload;
+using aspnetzabota.Common.Upload.UploadPath;
 
 namespace aspnetzabota.Controllers
 {
@@ -20,14 +21,16 @@ namespace aspnetzabota.Controllers
     public class ArticleSettingsController : BaseController
     {
         private readonly IUpload _upload;
+        private readonly IUploadPath _uploadPath;
         private readonly ICategory _category;
         private readonly IArticles _articles;
         private readonly IDepartment _department;
         private readonly IPrice _price;
-        public ArticleSettingsController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPrice price)
+        public ArticleSettingsController(ICategory category, IUpload upload, IArticles articles, IDepartment department, IPrice price, IUploadPath uploadPath)
         {
             _category = category;
             _upload = upload;
+            _uploadPath = uploadPath;
             _articles = articles;
             _department = department;
             _price = price;
@@ -119,8 +122,10 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage()
         {
+            var path = _uploadPath.GetPath();
+
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/Articles");
+            var result = await _upload.UploadImage(image, path.BaseImagePath + "/" + path.Articles);
 
             return Json(result);
         }

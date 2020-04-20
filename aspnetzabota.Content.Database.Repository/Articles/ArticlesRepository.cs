@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using aspnetzabota.Content.Datamodel.Articles;
 using System;
 using Z.EntityFramework.Plus;
+using aspnetzabota.Common.Upload.UploadPath;
 
 namespace aspnetzabota.Content.Database.Repository.Articles
 {
     internal class ArticlesRepository : IArticlesRepository
     {
         private readonly ContentContext _appDBContext;
+        private readonly IUploadPath _uploadPath;
 
-        public ArticlesRepository(ContentContext appDBContext)
+        public ArticlesRepository(ContentContext appDBContext, IUploadPath uploadPath)
         {
-            this._appDBContext = appDBContext;
+            _appDBContext = appDBContext;
+            _uploadPath = uploadPath;
+
         }
         public async Task<Entities.Articles[]> GetLast(int Count, bool trackChanges = false)
         {
@@ -49,11 +53,13 @@ namespace aspnetzabota.Content.Database.Repository.Articles
         }
         public Task Add(ZabotaArticles model)
         {
+            var path = _uploadPath.GetPath();
+
             _appDBContext.Articles.Add(new Entities.Articles
             {
                 Name = model.Name,
                 Description = model.Description,
-                Img = "~/images/Articles/" + model.IMG,
+                Img = "~/" + path.BaseImagePath + "/" + path.Articles + "/" + model.IMG,
                 Date = DateTimeOffset.UtcNow,
                 CategoryID = model.CategoryID,
                 DepartmentId = model.DepartmentId

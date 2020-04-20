@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aspnetzabota.Common.EFCore\aspnetzabota.Common.EFCore.csproj" />
+    <ProjectReference Include="..\aspnetzabota.Common.Upload\aspnetzabota.Common.Upload.csproj" />
     <ProjectReference Include="..\aspnetzabota.Content.Datamodel\aspnetzabota.Content.Datamodel.csproj" />
     <ProjectReference Include="..\aspnetzabota.Data\aspnetzabota.Content.Database.csproj" />
   </ItemGroup>

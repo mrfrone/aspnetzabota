@@ -7,6 +7,7 @@ using aspnetzabota.Content.Services.Schedule;
 using aspnetzabota.Content.Database.Entities;
 using Microsoft.AspNetCore.Http;
 using aspnetzabota.Common.Upload;
+using aspnetzabota.Common.Upload.UploadPath;
 
 namespace aspnetzabota.Controllers
 {
@@ -16,11 +17,13 @@ namespace aspnetzabota.Controllers
     {
         private readonly ISchedule _schedule;
         private readonly IUpload _upload;
+        private readonly IUploadPath _uploadPath;
 
-        public DoctorInfoSettingsController(ISchedule schedule, IUpload upload)
+        public DoctorInfoSettingsController(ISchedule schedule, IUpload upload, IUploadPath uploadPath)
         {
             _schedule = schedule;
             _upload = upload;
+            _uploadPath = uploadPath;
         }
         #region Views
         public async Task<ViewResult> List()
@@ -53,9 +56,10 @@ namespace aspnetzabota.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage()
         {
+            var path = _uploadPath.GetPath();
 
             IFormFile image = Request.Form.Files["fileInput"];
-            var result = await _upload.UploadImage(image, "images/staff");
+            var result = await _upload.UploadImage(image, path.BaseImagePath + "/" + path.Staff);
 
             return Json(result);
         }
